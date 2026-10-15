@@ -2,6 +2,9 @@
 
 `docs/MATHEMATICAL_PRINCIPLES.html` 是正式、持续维护的工程原理正文。它与需求基线、实现和证据一起演进，不能用本文件或页面排版完整来替代模型验收。
 
+可手动调用 `$mathematical-principles update` 或 `check` 接续本流程；可复用技能源码与跨项目用法见 [技能说明](../skills/mathematical-principles/README.md)。
+本文件保留本项目的具体约定，通用技能优先复用这里的刷新器和已有产物。
+
 ## 文件责任与依赖
 
 | 文件 | 作用 | 维护方式 |

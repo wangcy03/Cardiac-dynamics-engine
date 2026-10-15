@@ -1,0 +1,7 @@
+{
+  "total_tokens": null,
+  "duration_ms": null,
+  "total_duration_seconds": null,
+  "observed_completion_utc": "2026-10-15T11:40:13.277040+00:00",
+  "availability": "Native agent notifications did not expose duration or token counters; no estimates substituted."
+}

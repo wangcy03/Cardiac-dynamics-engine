@@ -1,0 +1,243 @@
+{
+  "metadata": {
+    "skill_name": "mathematical-principles",
+    "skill_path": "skills/mathematical-principles",
+    "executor_model": "native agents; inherited model, exact ID not independently recorded",
+    "analyzer_model": "native independent graders and main integration agent",
+    "timestamp": "2026-10-15T11:51:51.402281+00:00",
+    "evals_run": [
+      1,
+      2
+    ],
+    "runs_per_configuration": 1,
+    "aggregation": "Counts-only manual assembly per skill-creator schema; calculate_stats reused for observed pass rates only.",
+    "unavailable_metrics": [
+      "total_tokens",
+      "duration_ms",
+      "time_seconds",
+      "tool_calls"
+    ]
+  },
+  "runs": [
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "pass_rate": 1.0
+      },
+      "expectations": [
+        {
+          "text": "主文档可离线阅读，存在有效 MathML、非空 LaTeX 注解及可展开的 LaTeX 源，不依赖远程公式脚本。",
+          "passed": true,
+          "evidence": "project/docs/MATHEMATICAL_PRINCIPLES.html:68-110 共 8 个 MathML 块；评分者逐块用 XML 解析成功，8/8 含非空 application/x-tex 注解，并逐式保留 details/summary/pre 的 LaTeX 源。只读 HTML/CSS 核对：0 script、0 外部 href/src、无 @import/url(...)、本地链接和锚点无缺失；190 行说明内联离线依赖。浏览器视觉效果仍未验证。"
+        },
+        {
+          "text": "从能量平衡正确连接到 thermal.py，并说明 R/C/输入功率/温度单位及 tau=RC=20 s。",
+          "passed": true,
+          "evidence": "HTML:37-48 定义 P 流入为正、Qout 流出为正，以及 R=2 K/W、C=10 J/K、T/环境温度为 K、P 为 W；65-87 从 dU/dt=P-Qout、dU/dt=C dT/dt、Qout=(T-Ta)/R 得到与 thermal.py:11-12 一致的导数，量纲为 K/s。98-104 给 tau=RC=20 s 和条件解析稳态 303.15 K；47、104、131 行明确 INPUT_POWER_W 未被函数引用，声明不会自动驱动 power_w，非默认输入或运行证据。"
+        },
+        {
+          "text": "没有运行轨迹或实验时保持未运行/未验证，不伪造波形或通过结论。",
+          "passed": true,
+          "evidence": "HTML:19、26-33、104、109、141-143、150-181 区分解析性质、静态阅读和运行/实验；原状态保持 software_gates=NOT_RUN、numerical_validation=NOT_RUN、measurements=NOT_PROVIDED，历史命令/身份/初值/观察窗仍缺失。唯一 SVG:51-61 是控制体与热流正方向示意，title/desc/图注均不称轨迹。run_notes 与浏览器报告明确未观察渲染，没有伪造曲线、误差或模型 PASS。"
+        },
+        {
+          "text": "输入 thermal.py、PROJECT.md 和 verification.json 的原始字节保持不变。",
+          "passed": true,
+          "evidence": "评分者对 project/ 三输入与 evals/fixtures/create-thermal/ 逐字节比较，3/3 相同。SHA-256：PROJECT.md=83429d1cf41d4b37255e252c560c02564fd847707bcef0826602ff8e67fa02bb；thermal.py=54da0e3e5bd2d09278eab49a9f70c22268c9134172551a6bda3df34fce77421a；artifacts/verification.json=ba21c4fd931f0387e49fc8cc421f7e527718533e5c3929326dd6ad7ac8c083ff。与 run_notes 中身份表一致。"
+        },
+        {
+          "text": "维护说明区分人工正文和自动证据，给出以后 update/check 的可执行路径或明确步骤。",
+          "passed": true,
+          "evidence": "PRINCIPLES_MAINTENANCE.md 第 1-4 节明确 HTML 人工正文、同次维护的 MathML/LaTeX、唯一自动证据标记和独立审阅身份；给出 python tools/refresh_principles_evidence.py --write / --check 和离线检查命令、退出码及输入变更的复核步骤。静态阅读刷新器:17-29、32-70、123-176 确认仅读三个输入，先验证 schema/标记/审阅 SHA，再仅替换证据区及派生快照，--check 不写入，不导入或调用模型。"
+        }
+      ],
+      "notes": [
+        "本评分限于 id=1 单状态热模型产物；只读检查了 HTML、维护说明、run_notes、刷新器源码、输入字节与已有 JSON 报告，没有执行模型、刷新器、浏览器、联网或全量测试。",
+        "评测套件仅有两个合成案例：新建单状态热模型文档，以及更新输运器文档。它们不覆盖真实工程的多状态耦合、复杂本构、完整数值或实验验证、长期维护和多人协作；不能从本次得分推断真实心脏引擎适用性或技能普遍收益。",
+        "本案例两边同为 5/5；不同的公式数量、机制图和工具复杂度不属于额外得分项，不人为制造技能优势。",
+        "未提供独立完整执行 transcript；run_notes.md 作为执行者记录读取。评分中的结构、公式、输入保全和工具边界另由只读源码/字节检查支撑；完整历史过程仍不能由交付文件穷尽证明。",
+        "timing.json 中 token 与时长均为 null，照录原字段，不填估计值；没有 metrics.json，未合成 execution_metrics。"
+      ]
+    },
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "pass_rate": 1.0
+      },
+      "expectations": [
+        {
+          "text": "当前 CFL 上限、公式与 transport.py 一致为 0.4，保留指定人工说明与现有章节锚点。",
+          "passed": true,
+          "evidence": "outputs/project/docs/MATHEMATICAL_PRINCIPLES.html:27、35–45、53：正文和 MathML/LaTeX 均给出当前 0 ≤ ν = aΔt/Δx ≤ 0.4、Δt ≤ 0.4Δx/a；更新式 u_i^{n+1} = (1−ν)u_i^n + νu_{i−1}^n 与 transport.py:9–11 相符。第 26 行人工段落原文逐字保留，原有 model、evidence、project-note 三个锚点均保留且 ID 唯一。第 45 行是在已声明 [0, 0.4] 范围内说明非负加权平均，没有错误声称 0.4 为理论凸组合最大边界；该代数理论范围为 [0, 1]，当前 0.4 是更严实现合约。"
+        },
+        {
+          "text": "明确软件 PASS 与数值 FAIL，展示 0.08 相对固定 0.05 的失败，而非改记录或放宽阈值。",
+          "passed": true,
+          "evidence": "outputs/project/docs/MATHEMATICAL_PRINCIPLES.html:63–66 分列 software_gates = PASS、numerical_validation = FAIL_DECLARED_CHECKS、maximum_error = 0.08、maximum_error_limit = 0.05，并写明误差大于限值、差额 0.03、未调整阈值；第 55、60 行明确当前 0.4 没有新运行。原 verification.json 字节与 0.05 固定阈值均未改。"
+        },
+        {
+          "text": "arrival_A 缺失、arrival_B 有限差值与拓扑不匹配分别呈现，不补造事件或把子集当总体通过。",
+          "passed": true,
+          "evidence": "outputs/project/docs/MATHEMATICAL_PRINCIPLES.html:67、72–75 分别显示 event_topology_match = false、arrival_A = null / MISSING、arrival_B = 0.0003 s = 0.3 ms；明确 arrival_B 仅一个有限差值、未记录阈值/配对/正负定义，不能判定事件通过；缺失不以零值、固定延时或另一事件替代。"
+        },
+        {
+          "text": "保留旧运行的全零源码哈希，明确它与当前源码身份不同，不回填成当前源码。",
+          "passed": true,
+          "evidence": "outputs/project/docs/MATHEMATICAL_PRINCIPLES.html:78–86 同列 64 个零的历史 transport.py SHA-256 与当前 c5e368c983a405f9f551a1a279a52863e5715c439600cff9914cad54a74d7cef，标记 DIFFERENT；明确旧记录的 CFL 为 NOT_RECORDED，不能推定使用 0.5 或 0.4，当前文件哈希不能回填历史身份或验收本次改动。"
+        },
+        {
+          "text": "输入 transport.py、PROJECT.md 和 verification.json 原始字节保持不变。",
+          "passed": true,
+          "evidence": "评分时用 read_bytes 逐字节比较 outputs/project 与 evals/fixtures/update-transport 的三项输入，均完全一致；SHA-256：transport.py = c5e368c983a405f9f551a1a279a52863e5715c439600cff9914cad54a74d7cef；PROJECT.md = 780d8ba9ba75d099a57331d29ce141298a68c006c17cc72893c8da5e90f40459；artifacts/verification.json = 9f37de4a1f7b323fe7929fe712886bdc9fd2572c03d546e0b7a34a4803f3e987。"
+        },
+        {
+          "text": "离线公式结构有效，维护说明可重复更新/检查并保留历史与缺失。",
+          "passed": true,
+          "evidence": "outputs/project/docs/MATHEMATICAL_PRINCIPLES.html 的 4 个 MathML 块均通过只读 XML 解析，各有非空 application/x-tex 注解和紧邻 details/pre 源且文本匹配；9 个链接/锚点均存在，0 个 script，无远程资源/CSS URL。docs/PRINCIPLES_MAINTENANCE.md 的“文件责任与输入契约”“刷新与只读检查”给出 python tools/refresh_principles_evidence.py --write 与 --check，说明只替换唯一证据区、AST 读取常量、不执行模型、保留历史哈希及 null/NOT_RECORDED。实际脚本具备上述边界；run_notes.md 记载 freshness 退出 0 与 document_check.json 的 PASS_STATIC_ONLY，并明确浏览器/数值 NOT_RUN。"
+        }
+      ],
+      "notes": [
+        "本评分只读检查实际 HTML、维护说明、格式化器、run_notes 和原始输入字节；没有运行模型、调用 transport.step、联网或使用浏览器，也没有执行格式化器或改动任何输入。",
+        "可离线读取与公式结构 PASS 依据原生 MathML 可解析、非空 LaTeX 注解、相邻可展开源匹配、存在的本地链接和无远程依赖；未做浏览器渲染、无障碍或全阅读器视觉验收。XML 可解析也不单独证明数学等价，数学结论另作人工核对。",
+        "完整执行工具转录未提供，操作过程主要由 run_notes 自述支持；不把自述扩展为对未见执行历史的独立审计。维护脚本的未来异常输入、动态刷新及失效路径未运行，本次结论限定于所给合成夹具。",
+        "未提供 metrics.json；执行工具调用数、步骤数、错误数、token 和时长均未记录，不估算、不以评分器自身检查替代执行者计数。timing.json 原有 null 与完成时刻照录，完成时刻不用于推算时长。",
+        "两份产物在当前六条 expectation 上均为 6/6；这个有界案例未显示技能相对无技能的通过率优势。",
+        "有技能文档未单列理论凸组合的完整 [0, 1] 区间，但其非负加权平均陈述限定在当前 [0, 0.4] 合约内，数学上正确；不因未要求的扩展范围说明制造通过率差异。"
+      ]
+    },
+    {
+      "eval_id": 1,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "pass_rate": 1.0
+      },
+      "expectations": [
+        {
+          "text": "主文档可离线阅读，存在有效 MathML、非空 LaTeX 注解及可展开的 LaTeX 源，不依赖远程公式脚本。",
+          "passed": true,
+          "evidence": "project/docs/MATHEMATICAL_PRINCIPLES.html:100-143 共 6 个 MathML 块；评分者逐块用 XML 解析成功，6/6 含非空 application/x-tex 注解，每式有 details/summary/pre 的 LaTeX 与文字备用。只读 HTML/CSS 核对：0 script、0 外部 href/src、无 @import/url(...)、本地链接和锚点无缺失；239 行说明内嵌离线公式与样式。浏览器视觉效果仍未验证。"
+        },
+        {
+          "text": "从能量平衡正确连接到 thermal.py，并说明 R/C/输入功率/温度单位及 tau=RC=20 s。",
+          "passed": true,
+          "evidence": "HTML:83-93 列明 R=2 K/W、C=10 J/K、温度 K、功率 W=J/s、返回 K/s；99-120 由恒热容内能、向外为正的热阻功率和输入减输出推得与 thermal.py:11-12 一致的导数。136-152 得 tau=RC=20 s 及恒功率条件下 303.15 K；93、151-152、164 行明确 INPUT_POWER_W 未被函数读取、不是默认值，必须由调用者持续显式传入 5 W，稳态仅为无轨迹/测量支持的解析预测。"
+        },
+        {
+          "text": "没有运行轨迹或实验时保持未运行/未验证，不伪造波形或通过结论。",
+          "passed": true,
+          "evidence": "HTML:48、144、150-154、168、170、175-190、220-222 明确解析结论不是运行或测试结果，软件/数值仍 NOT_RUN，测量 NOT_PROVIDED，未补初温、加热轨迹或误差。未发现任何波形/实验图；无 SVG、canvas、img 或绘图脚本。run_notes 明确未运行模型、未浏览器实看；文档工具静态检查与模型验证通过保持分开。"
+        },
+        {
+          "text": "输入 thermal.py、PROJECT.md 和 verification.json 的原始字节保持不变。",
+          "passed": true,
+          "evidence": "评分者对 project/ 三输入与 evals/fixtures/create-thermal/ 逐字节比较，3/3 相同。SHA-256：PROJECT.md=83429d1cf41d4b37255e252c560c02564fd847707bcef0826602ff8e67fa02bb；thermal.py=54da0e3e5bd2d09278eab49a9f70c22268c9134172551a6bda3df34fce77421a；artifacts/verification.json=ba21c4fd931f0387e49fc8cc421f7e527718533e5c3929326dd6ad7ac8c083ff。与 run_notes 中身份表一致。"
+        },
+        {
+          "text": "维护说明区分人工正文和自动证据，给出以后 update/check 的可执行路径或明确步骤。",
+          "passed": true,
+          "evidence": "PRINCIPLES_MAINTENANCE.md 的维护源表将正文第 1-6 节、人工证据解释、BEGIN/END GENERATED EVIDENCE 区与 principles_binding.json 分开；给出 python tools/refresh_principles.py refresh / check、输入改动的摘要复核和人工锚点更新步骤。静态阅读刷新器:14-19、26-78、109-158 确认只读三个输入作 AST/JSON/SHA 投影，refresh 只替换唯一标记区而不更新审阅锚点；check 对照证据、身份和本地结构，未导入或调用模型。私有标记名称符合其维护工具契约。"
+        }
+      ],
+      "notes": [
+        "本评分限于 id=1 单状态热模型产物；只读检查了 HTML、维护说明、run_notes、刷新器源码、输入字节与已有 JSON 报告，没有执行模型、刷新器、浏览器、联网或全量测试。",
+        "评测套件仅有两个合成案例：新建单状态热模型文档，以及更新输运器文档。它们不覆盖真实工程的多状态耦合、复杂本构、完整数值或实验验证、长期维护和多人协作；不能从本次得分推断真实心脏引擎适用性或技能普遍收益。",
+        "本案例两边同为 5/5；不同的公式数量、机制图和工具复杂度不属于额外得分项，不人为制造技能优势。",
+        "未提供独立完整执行 transcript；run_notes.md 作为执行者记录读取。评分中的结构、公式、输入保全和工具边界另由只读源码/字节检查支撑；完整历史过程仍不能由交付文件穷尽证明。",
+        "timing.json 中 token 与时长均为 null，照录原字段，不填估计值；没有 metrics.json，未合成 execution_metrics。",
+        "outputs/generic_checker_initial.json 的 MARKER_PAIR_INVALID 源于旧通用 checker 只识别技能自有标记，未识别对照产物 BEGIN/END GENERATED EVIDENCE；按父任务已确认的修复边界处理，不作为文档失败。评分者已直接核对该产物的唯一标记对与其刷新器契约。"
+      ]
+    },
+    {
+      "eval_id": 2,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "pass_rate": 1.0
+      },
+      "expectations": [
+        {
+          "text": "当前 CFL 上限、公式与 transport.py 一致为 0.4，保留指定人工说明与现有章节锚点。",
+          "passed": true,
+          "evidence": "outputs/project/docs/MATHEMATICAL_PRINCIPLES.html:34–47：MathML/LaTeX 给出更新式与当前 0 ≤ ν = aΔt/Δx ≤ 0.4、Δt ≤ 0.4Δx/a，代码表对应 CFL_MAX = 0.4 与 transport.py 的守卫/周期左邻更新；第 41 行明确理论凸组合范围 0 ≤ ν ≤ 1，并说明 0.4 为当前更严格实现上限。第 26 行人工段落原文逐字保留，原有 model、evidence、project-note 三个锚点均保留且 ID 唯一。"
+        },
+        {
+          "text": "明确软件 PASS 与数值 FAIL，展示 0.08 相对固定 0.05 的失败，而非改记录或放宽阈值。",
+          "passed": true,
+          "evidence": "outputs/project/docs/MATHEMATICAL_PRINCIPLES.html:55、64–68 分别显示旧软件门 PASS、数值门 FAIL_DECLARED_CHECKS、0.08 / 0.05 超过限值、差额 0.03、比值 1.6，明确“软件门 PASS 不等于数值通过”；第 73、75–76 行不把这些旧结果归属当前 0.4。原 verification.json 字节与 0.05 固定阈值均未改。"
+        },
+        {
+          "text": "arrival_A 缺失、arrival_B 有限差值与拓扑不匹配分别呈现，不补造事件或把子集当总体通过。",
+          "passed": true,
+          "evidence": "outputs/project/docs/MATHEMATICAL_PRINCIPLES.html:69–71、76 分别呈现 arrival_A = null、arrival_B = 0.0003 s = 0.3 ms = 300 μs 和拓扑 false；说明 arrival_A 不填零、不推造时间，arrival_B 没有事件差阈值、不能判定通过，有限子集不能建立全部事件通过结论。"
+        },
+        {
+          "text": "保留旧运行的全零源码哈希，明确它与当前源码身份不同，不回填成当前源码。",
+          "passed": true,
+          "evidence": "outputs/project/docs/MATHEMATICAL_PRINCIPLES.html:60–63、75 分列原记录 64 个零哈希与当前 c5e368c983a405f9f551a1a279a52863e5715c439600cff9914cad54a74d7cef，标记 MISMATCH；明确旧记录误差、软件门和事件结果不能归属于当前 CFL = 0.4 的实现，当前误差与前后变化未知。"
+        },
+        {
+          "text": "输入 transport.py、PROJECT.md 和 verification.json 原始字节保持不变。",
+          "passed": true,
+          "evidence": "评分时用 read_bytes 逐字节比较 outputs/project 与 evals/fixtures/update-transport 的三项输入，均完全一致；SHA-256：transport.py = c5e368c983a405f9f551a1a279a52863e5715c439600cff9914cad54a74d7cef；PROJECT.md = 780d8ba9ba75d099a57331d29ce141298a68c006c17cc72893c8da5e90f40459；artifacts/verification.json = 9f37de4a1f7b323fe7929fe712886bdc9fd2572c03d546e0b7a34a4803f3e987。"
+        },
+        {
+          "text": "离线公式结构有效，维护说明可重复更新/检查并保留历史与缺失。",
+          "passed": true,
+          "evidence": "outputs/project/docs/MATHEMATICAL_PRINCIPLES.html 的 3 个 MathML 块均通过只读 XML 解析，各有非空 application/x-tex 注解和紧邻 details/pre 源且文本匹配；8 个链接/锚点均存在，0 个 script，无远程资源/CSS URL。裸 math 紧邻 details 是有效结构，不要求额外 equation 容器。docs/PRINCIPLES_MAINTENANCE.md 的“更新流程”“自动区边界和失败处理”给出 python tools/refresh_principles_evidence.py 与 --check，明确只替换唯一证据区、AST 读取、不执行模型，保留历史/缺失且新证据不得回写旧记录。实际脚本提供这两个命令；run_notes.md 记录 freshness 退出 0 和只读静态检查，并明确浏览器/数值 NOT_RUN。"
+        }
+      ],
+      "notes": [
+        "本评分只读检查实际 HTML、维护说明、格式化器、run_notes 和原始输入字节；没有运行模型、调用 transport.step、联网或使用浏览器，也没有执行格式化器或改动任何输入。",
+        "可离线读取与公式结构 PASS 依据原生 MathML 可解析、非空 LaTeX 注解、相邻可展开源匹配、存在的本地链接和无远程依赖；未做浏览器渲染、无障碍或全阅读器视觉验收。XML 可解析也不单独证明数学等价，数学结论另作人工核对。",
+        "完整执行工具转录未提供，操作过程主要由 run_notes 自述支持；不把自述扩展为对未见执行历史的独立审计。维护脚本的未来异常输入、动态刷新及失效路径未运行，本次结论限定于所给合成夹具。",
+        "未提供 metrics.json；执行工具调用数、步骤数、错误数、token 和时长均未记录，不估算、不以评分器自身检查替代执行者计数。timing.json 原有 null 与完成时刻照录，完成时刻不用于推算时长。",
+        "两份产物在当前六条 expectation 上均为 6/6；这个有界案例未显示技能相对无技能的通过率优势。",
+        "outputs/generic_checker_initial.json 是根代理在旧检查器上的兼容性误报，裸 math 与 details 结构已直接核验有效；它不是执行者的检查结论，不据此扣分。"
+      ]
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.00"
+    }
+  },
+  "notes": [
+    "Two synthetic cases, one execution per case and configuration; with skill and baseline both satisfy all 11 expectations. No measured quality advantage is established.",
+    "Token counts, durations and tool-call counters were not exposed by native execution notifications. Unknown metrics are omitted from summaries, not substituted with zero or output length.",
+    "Independent grading checks actual formulas, units, preserved failures/missing events, historical identity, input bytes and offline structure. This does not establish browser rendering, numerical validity, clinical validation or generalization to complex projects.",
+    "Compatibility fixes address false positives on pre-existing custom evidence markers and adjacent MathML/LaTeX foldouts; prior diagnostics were retained outside executor outputs and did not lower baseline grades."
+  ]
+}

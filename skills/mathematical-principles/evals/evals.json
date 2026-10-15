@@ -1,0 +1,41 @@
+{
+  "skill_name": "mathematical-principles",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "给这个单状态热模型写一份可持续维护的正式数理原理文档：从能量守恒解释到代码，公式用 LaTeX，HTML 离线可读。输入只有 PROJECT.md、thermal.py 和 artifacts/verification.json；没有实验或运行轨迹。给出主文档与以后更新办法，不运行模型，不联网，不改源代码或原始记录。",
+      "expected_output": "离线 HTML、正确的能量平衡及单位/时间常数/代码映射、无伪造实验或运行通过、维护说明。",
+      "files": [
+        "evals/fixtures/create-thermal/PROJECT.md",
+        "evals/fixtures/create-thermal/thermal.py",
+        "evals/fixtures/create-thermal/artifacts/verification.json"
+      ],
+      "expectations": [
+        "主文档可离线阅读，存在有效 MathML、非空 LaTeX 注解及可展开的 LaTeX 源，不依赖远程公式脚本。",
+        "从能量平衡正确连接到 thermal.py，并说明 R/C/输入功率/温度单位及 tau=RC=20 s。",
+        "没有运行轨迹或实验时保持未运行/未验证，不伪造波形或通过结论。",
+        "输入 thermal.py、PROJECT.md 和 verification.json 的原始字节保持不变。",
+        "维护说明区分人工正文和自动证据，给出以后 update/check 的可执行路径或明确步骤。"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "这个输运器刚把 CFL 上限改成 0.4，请同步现有数理原理 HTML 和维护说明。依据 transport.py 与原始 verification.json，保留人工说明；说明当前误差、事件缺失和身份差异。公式用 LaTeX、可离线阅读。不要运行模型、改记录或阈值，不要把软件通过当作数值通过。",
+      "expected_output": "更新 CFL 与推导，保留指定人工段落；显示失败、缺事件、拓扑不匹配及历史源码哈希差异；原始记录不变。",
+      "files": [
+        "evals/fixtures/update-transport/PROJECT.md",
+        "evals/fixtures/update-transport/transport.py",
+        "evals/fixtures/update-transport/artifacts/verification.json",
+        "evals/fixtures/update-transport/docs/MATHEMATICAL_PRINCIPLES.html"
+      ],
+      "expectations": [
+        "当前 CFL 上限、公式与 transport.py 一致为 0.4，保留指定人工说明与现有章节锚点。",
+        "明确软件 PASS 与数值 FAIL，展示 0.08 相对固定 0.05 的失败，而非改记录或放宽阈值。",
+        "arrival_A 缺失、arrival_B 有限差值与拓扑不匹配分别呈现，不补造事件或把子集当总体通过。",
+        "保留旧运行的全零源码哈希，明确它与当前源码身份不同，不回填成当前源码。",
+        "输入 transport.py、PROJECT.md 和 verification.json 原始字节保持不变。",
+        "离线公式结构有效，维护说明可重复更新/检查并保留历史与缺失。"
+      ]
+    }
+  ]
+}

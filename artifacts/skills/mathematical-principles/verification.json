@@ -1,0 +1,134 @@
+{
+  "schema": "mathematical-principles-skill-verification/v1",
+  "created_utc": "2026-10-15T11:51:51.455694+00:00",
+  "scope": "Reusable skill and confirmed viewer proposal; no viewer implementation or model changes.",
+  "observed_checks": [
+    {
+      "command": "python -m unittest discover -s skills/mathematical-principles/evals -p test_*.py",
+      "status": "PASS",
+      "exit_code": 0,
+      "tests": 22,
+      "record": "Observed in main task; supersedes initial 16-test run, not added to it."
+    },
+    {
+      "command": "python <skill-creator>/scripts/quick_validate.py skills/mathematical-principles",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "command": "python -m ruff check skills/mathematical-principles",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "command": "python -m compileall -q skills/mathematical-principles",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "command": "python -m tools.update_principles_evidence --check --export-diagrams",
+      "status": "CURRENT",
+      "exit_code": 0
+    }
+  ],
+  "paired_synthetic_evaluations": [
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "status": "PASS_STATIC_ONLY",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0,
+      "checks": {
+        "local_links": 21,
+        "anchors": 10,
+        "mathml": 8,
+        "inline_svg": 1,
+        "stylesheets": 0
+      }
+    },
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "status": "PASS_STATIC_ONLY",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0,
+      "checks": {
+        "local_links": 9,
+        "anchors": 3,
+        "mathml": 4,
+        "inline_svg": 0,
+        "stylesheets": 0
+      }
+    },
+    {
+      "eval_id": 1,
+      "configuration": "without_skill",
+      "status": "PASS_STATIC_ONLY",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 2,
+      "checks": {
+        "local_links": 15,
+        "anchors": 9,
+        "mathml": 6,
+        "inline_svg": 0,
+        "stylesheets": 0
+      }
+    },
+    {
+      "eval_id": 2,
+      "configuration": "without_skill",
+      "status": "PASS_STATIC_ONLY",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 1,
+      "checks": {
+        "local_links": 8,
+        "anchors": 4,
+        "mathml": 3,
+        "inline_svg": 0,
+        "stylesheets": 0
+      }
+    }
+  ],
+  "installation": {
+    "status": "INSTALLED_BYTE_IDENTICAL",
+    "files": 15,
+    "record": "installation.json"
+  },
+  "existing_formal_document": {
+    "status": "PASS_STATIC_ONLY",
+    "checks": {
+      "local_links": 100,
+      "anchors": 26,
+      "mathml": 19,
+      "inline_svg": 4,
+      "stylesheets": 0
+    },
+    "errors": 0,
+    "warnings": 12,
+    "warning_scope": "One pre-existing unmarked manual body and eleven annotation/foldout text differences; textual comparison does not prove or disprove mathematical equivalence. Original document bytes preserved.",
+    "sha256": "59786edd757640fcd43730052945acf044d25d7fbb752381654121506f2560b0"
+  },
+  "existing_engine_evidence": {
+    "record": "artifacts/verification_summary.json",
+    "sha256": "5d62a7489ff934ba075d5bc0e958a6b8fbfc5e31112cb9d44db15e44e1a78c7a",
+    "record_finished_utc": "2026-10-15T10:42:30.149577+00:00",
+    "source_hashes_matched": 29,
+    "core_tests_and_solvers_this_task": "NOT_RERUN; original recorded 121-test/six-gate evidence retained, source bytes unchanged.",
+    "numerical_error_change": "UNCHANGED; no model, input, threshold or raw numerical artifact modified."
+  },
+  "browser": {
+    "status": "NOT_RUN_BROWSER_POLICY",
+    "reason": "Specified local file tab rejected by browser URL policy; no alternative server, browser or indirect execution used."
+  },
+  "limits": [
+    "Two synthetic cases, one execution per case and configuration; with skill and baseline both satisfy all 11 expectations. No measured quality advantage is established.",
+    "Token counts, durations and tool-call counters were not exposed by native execution notifications. Unknown metrics are omitted from summaries, not substituted with zero or output length.",
+    "Independent grading checks actual formulas, units, preserved failures/missing events, historical identity, input bytes and offline structure. This does not establish browser rendering, numerical validity, clinical validation or generalization to complex projects.",
+    "Compatibility fixes address false positives on pre-existing custom evidence markers and adjacent MathML/LaTeX foldouts; prior diagnostics were retained outside executor outputs and did not lower baseline grades.",
+    "Fixed three-view viewer is a confirmed plan only; implementation has not begun."
+  ]
+}

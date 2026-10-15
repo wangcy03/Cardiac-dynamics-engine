@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "status": "PASS_STATIC_ONLY",
+  "root": "D:\\codehub2026\\04_heart_engine_r2\\skills\\mathematical-principles-workspace\\iteration-1\\eval-2-update-transport\\with_skill\\run-1\\outputs\\project",
+  "document": "docs/MATHEMATICAL_PRINCIPLES.html",
+  "checks": {
+    "local_links": 9,
+    "anchors": 3,
+    "mathml": 4,
+    "inline_svg": 0,
+    "stylesheets": 0
+  },
+  "errors": [],
+  "warnings": [],
+  "inputs_sha256_at_check": {
+    "docs/MATHEMATICAL_PRINCIPLES.html": "881b1430fdbd8ac640e35c87b57c62a7aa69993fe8f00f5713d56b5b67c5b3f9"
+  },
+  "external_navigation_not_fetched": [],
+  "browser_rendering": "NOT_RUN_BY_STATIC_CHECKER",
+  "freshness_and_run_identity": "NOT_ASSESSED_BY_STATIC_CHECKER",
+  "numerical_validation": "NOT_RUN_BY_STATIC_CHECKER",
+  "domain_or_clinical_validation": "NOT_ASSESSED",
+  "scope": "Read-only offline structural checks; not mathematical equivalence, a sanitizer, browser rendering, or model acceptance."
+}

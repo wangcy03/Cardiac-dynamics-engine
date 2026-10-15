@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>均匀网格输运器数理原理</title></head><body>
+<main><h1>均匀网格输运器数理原理</h1>
+<section id="model"><h2>模型与人工说明</h2>
+<p id="project-note">这段人工说明必须保留：本模型是均匀网格上的教学输运器，尚无实测标定。</p>
+<p>速度 a = 2 m/s，采用周期边界，一阶迎风与 Euler 时间推进。当前 CFL 上限为 0.5。</p>
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>ν</mi><mo>≤</mo><mn>0.5</mn></mrow><annotation encoding="application/x-tex">\nu=\frac{a\Delta t}{\Delta x}\le0.5</annotation></semantics></math>
+<details><summary>LaTeX 源码</summary><pre>\nu=\frac{a\Delta t}{\Delta x}\le0.5</pre></details>
+<p>实现见 <a href="../transport.py">transport.py</a>。</p></section>
+<section id="evidence"><h2>运行记录</h2>
+<!-- PRINCIPLES_EVIDENCE_START -->
+<p>旧说明：数值检查 PASS；事件差均小于阈值。</p>
+<!-- PRINCIPLES_EVIDENCE_END -->
+</section></main></body></html>

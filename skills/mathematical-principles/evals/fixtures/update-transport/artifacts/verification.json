@@ -1,0 +1,19 @@
+{
+  "schema": "skill-eval-fixture/v1",
+  "scope": "SYNTHETIC_DOCUMENTATION_FIXTURE_NOT_REAL_EXPERIMENT",
+  "source_sha256": {
+    "transport.py": "0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "software_gates": "PASS",
+  "numerical_validation": "FAIL_DECLARED_CHECKS",
+  "maximum_error": 0.08,
+  "events": {
+    "arrival_A": null,
+    "arrival_B": 0.0003
+  },
+  "event_topology_match": false,
+  "clinical_validation": "NOT_APPLICABLE",
+  "maximum_error_limit": 0.05,
+  "error_units": "dimensionless",
+  "event_difference_units": "s"
+}

@@ -1,0 +1,7 @@
+{
+  "schema": "skill-eval-fixture/v1",
+  "scope": "SYNTHETIC_DOCUMENTATION_FIXTURE_NOT_REAL_EXPERIMENT",
+  "software_gates": "NOT_RUN",
+  "numerical_validation": "NOT_RUN",
+  "measurements": "NOT_PROVIDED"
+}

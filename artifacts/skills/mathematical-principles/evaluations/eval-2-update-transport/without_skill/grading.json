@@ -1,0 +1,107 @@
+{
+  "expectations": [
+    {
+      "text": "当前 CFL 上限、公式与 transport.py 一致为 0.4，保留指定人工说明与现有章节锚点。",
+      "passed": true,
+      "evidence": "outputs/project/docs/MATHEMATICAL_PRINCIPLES.html:34–47：MathML/LaTeX 给出更新式与当前 0 ≤ ν = aΔt/Δx ≤ 0.4、Δt ≤ 0.4Δx/a，代码表对应 CFL_MAX = 0.4 与 transport.py 的守卫/周期左邻更新；第 41 行明确理论凸组合范围 0 ≤ ν ≤ 1，并说明 0.4 为当前更严格实现上限。第 26 行人工段落原文逐字保留，原有 model、evidence、project-note 三个锚点均保留且 ID 唯一。"
+    },
+    {
+      "text": "明确软件 PASS 与数值 FAIL，展示 0.08 相对固定 0.05 的失败，而非改记录或放宽阈值。",
+      "passed": true,
+      "evidence": "outputs/project/docs/MATHEMATICAL_PRINCIPLES.html:55、64–68 分别显示旧软件门 PASS、数值门 FAIL_DECLARED_CHECKS、0.08 / 0.05 超过限值、差额 0.03、比值 1.6，明确“软件门 PASS 不等于数值通过”；第 73、75–76 行不把这些旧结果归属当前 0.4。原 verification.json 字节与 0.05 固定阈值均未改。"
+    },
+    {
+      "text": "arrival_A 缺失、arrival_B 有限差值与拓扑不匹配分别呈现，不补造事件或把子集当总体通过。",
+      "passed": true,
+      "evidence": "outputs/project/docs/MATHEMATICAL_PRINCIPLES.html:69–71、76 分别呈现 arrival_A = null、arrival_B = 0.0003 s = 0.3 ms = 300 μs 和拓扑 false；说明 arrival_A 不填零、不推造时间，arrival_B 没有事件差阈值、不能判定通过，有限子集不能建立全部事件通过结论。"
+    },
+    {
+      "text": "保留旧运行的全零源码哈希，明确它与当前源码身份不同，不回填成当前源码。",
+      "passed": true,
+      "evidence": "outputs/project/docs/MATHEMATICAL_PRINCIPLES.html:60–63、75 分列原记录 64 个零哈希与当前 c5e368c983a405f9f551a1a279a52863e5715c439600cff9914cad54a74d7cef，标记 MISMATCH；明确旧记录误差、软件门和事件结果不能归属于当前 CFL = 0.4 的实现，当前误差与前后变化未知。"
+    },
+    {
+      "text": "输入 transport.py、PROJECT.md 和 verification.json 原始字节保持不变。",
+      "passed": true,
+      "evidence": "评分时用 read_bytes 逐字节比较 outputs/project 与 evals/fixtures/update-transport 的三项输入，均完全一致；SHA-256：transport.py = c5e368c983a405f9f551a1a279a52863e5715c439600cff9914cad54a74d7cef；PROJECT.md = 780d8ba9ba75d099a57331d29ce141298a68c006c17cc72893c8da5e90f40459；artifacts/verification.json = 9f37de4a1f7b323fe7929fe712886bdc9fd2572c03d546e0b7a34a4803f3e987。"
+    },
+    {
+      "text": "离线公式结构有效，维护说明可重复更新/检查并保留历史与缺失。",
+      "passed": true,
+      "evidence": "outputs/project/docs/MATHEMATICAL_PRINCIPLES.html 的 3 个 MathML 块均通过只读 XML 解析，各有非空 application/x-tex 注解和紧邻 details/pre 源且文本匹配；8 个链接/锚点均存在，0 个 script，无远程资源/CSS URL。裸 math 紧邻 details 是有效结构，不要求额外 equation 容器。docs/PRINCIPLES_MAINTENANCE.md 的“更新流程”“自动区边界和失败处理”给出 python tools/refresh_principles_evidence.py 与 --check，明确只替换唯一证据区、AST 读取、不执行模型，保留历史/缺失且新证据不得回写旧记录。实际脚本提供这两个命令；run_notes.md 记录 freshness 退出 0 和只读静态检查，并明确浏览器/数值 NOT_RUN。"
+    }
+  ],
+  "summary": {
+    "passed": 6,
+    "failed": 0,
+    "total": 6,
+    "pass_rate": 1.0
+  },
+  "execution_metrics": null,
+  "timing": {
+    "total_tokens": null,
+    "duration_ms": null,
+    "total_duration_seconds": null,
+    "observed_completion_utc": "2026-10-15T11:39:18.913592+00:00",
+    "availability": "Native agent notifications did not expose duration or token counters; no estimates substituted."
+  },
+  "claims": [
+    {
+      "claim": "CFL 0.4 是当前实现合约，旧记录不证明本次改动的数值通过或误差改善。",
+      "type": "factual",
+      "verified": true,
+      "evidence": "outputs/project/docs/MATHEMATICAL_PRINCIPLES.html:34–47：MathML/LaTeX 给出更新式与当前 0 ≤ ν = aΔt/Δx ≤ 0.4、Δt ≤ 0.4Δx/a，代码表对应 CFL_MAX = 0.4 与 transport.py 的守卫/周期左邻更新；第 41 行明确理论凸组合范围 0 ≤ ν ≤ 1，并说明 0.4 为当前更严格实现上限。第 26 行人工段落原文逐字保留，原有 model、evidence、project-note 三个锚点均保留且 ID 唯一。 outputs/project/docs/MATHEMATICAL_PRINCIPLES.html:60–63、75 分列原记录 64 个零哈希与当前 c5e368c983a405f9f551a1a279a52863e5715c439600cff9914cad54a74d7cef，标记 MISMATCH；明确旧记录误差、软件门和事件结果不能归属于当前 CFL = 0.4 的实现，当前误差与前后变化未知。"
+    },
+    {
+      "claim": "原始最大误差 0.08 超过固定限值 0.05；软件 PASS 不覆盖数值 FAIL。",
+      "type": "factual",
+      "verified": true,
+      "evidence": "outputs/project/docs/MATHEMATICAL_PRINCIPLES.html:55、64–68 分别显示旧软件门 PASS、数值门 FAIL_DECLARED_CHECKS、0.08 / 0.05 超过限值、差额 0.03、比值 1.6，明确“软件门 PASS 不等于数值通过”；第 73、75–76 行不把这些旧结果归属当前 0.4。原 verification.json 字节与 0.05 固定阈值均未改。"
+    },
+    {
+      "claim": "格式化器通过源码字节与 AST 读取常量，不导入或调用 transport 模型，写模式仅替换证据标记内部。",
+      "type": "process",
+      "verified": true,
+      "evidence": "只读审查 outputs/project/tools/refresh_principles_evidence.py：读取 transport.py 的 read_bytes、ast.parse/常量提取，未 import transport 或调用 step；写入拼接保留标记外旧文本，--check 在写调用前返回。该结论针对脚本实现，不等于对未提供的完整执行历史作独立审计。"
+    },
+    {
+      "claim": "本轮文档静态/freshness 结果不等于模型或浏览器已经验证。",
+      "type": "quality",
+      "verified": true,
+      "evidence": "outputs/run_notes.md 的限制段与 docs/PRINCIPLES_MAINTENANCE.md 明确模型、数值及浏览器未运行；HTML 同样限制当前运行证据与误差归属。"
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [
+      "未提供当前源码身份的运行证据，误差变化、收敛性与完整事件验证未知。",
+      "未提供原始执行转录或 metrics；只保留 run_notes 自述与 timing 中未记录状态。"
+    ],
+    "needs_review": [
+      "后续若需要视觉验收，仍需获允许的浏览器渲染核验；本轮没有做此验证。"
+    ],
+    "workarounds": [
+      "原生 MathML 配对可展开 LaTeX，所有阅读资源本地可用。"
+    ]
+  },
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "当前 CFL 上限、公式与 transport.py 一致为 0.4，保留指定人工说明与现有章节锚点。",
+        "reason": "断言现在重点核对当前 0.4 合约；可显式要求区分一阶迎风理论凸组合范围 [0, 1] 与实现采用的更严 [0, 0.4]，以拦截把工程上限误称理论极限的错误。两份当前产物均未作这种错误声明。"
+      },
+      {
+        "assertion": "离线公式结构有效，维护说明可重复更新/检查并保留历史与缺失。",
+        "reason": "本例只能核对当前固定记录和更新/检查路径，未检验未来缺字段、非有限事件、单位错误或标记损坏时的维护行为。可另用隔离副本的异常夹具检查明确保留 NOT_RECORDED/缺失并在坏输入时拒写，避免只凭当前产物通过就推断通用维护健壮性。"
+      }
+    ],
+    "overall": "当前断言覆盖失败、事件、身份和原始字节，具有实际区分度；本次两边均满足，不支持技能通过率优势结论。"
+  },
+  "notes": [
+    "本评分只读检查实际 HTML、维护说明、格式化器、run_notes 和原始输入字节；没有运行模型、调用 transport.step、联网或使用浏览器，也没有执行格式化器或改动任何输入。",
+    "可离线读取与公式结构 PASS 依据原生 MathML 可解析、非空 LaTeX 注解、相邻可展开源匹配、存在的本地链接和无远程依赖；未做浏览器渲染、无障碍或全阅读器视觉验收。XML 可解析也不单独证明数学等价，数学结论另作人工核对。",
+    "完整执行工具转录未提供，操作过程主要由 run_notes 自述支持；不把自述扩展为对未见执行历史的独立审计。维护脚本的未来异常输入、动态刷新及失效路径未运行，本次结论限定于所给合成夹具。",
+    "未提供 metrics.json；执行工具调用数、步骤数、错误数、token 和时长均未记录，不估算、不以评分器自身检查替代执行者计数。timing.json 原有 null 与完成时刻照录，完成时刻不用于推算时长。",
+    "两份产物在当前六条 expectation 上均为 6/6；这个有界案例未显示技能相对无技能的通过率优势。",
+    "outputs/generic_checker_initial.json 是根代理在旧检查器上的兼容性误报，裸 math 与 details 结构已直接核验有效；它不是执行者的检查结论，不据此扣分。"
+  ]
+}

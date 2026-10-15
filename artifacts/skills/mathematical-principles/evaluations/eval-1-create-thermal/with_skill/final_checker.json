@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "status": "PASS_STATIC_ONLY",
+  "root": "D:\\codehub2026\\04_heart_engine_r2\\skills\\mathematical-principles-workspace\\iteration-1\\eval-1-create-thermal\\with_skill\\run-1\\outputs\\project",
+  "document": "docs/MATHEMATICAL_PRINCIPLES.html",
+  "checks": {
+    "local_links": 21,
+    "anchors": 10,
+    "mathml": 8,
+    "inline_svg": 1,
+    "stylesheets": 0
+  },
+  "errors": [],
+  "warnings": [],
+  "inputs_sha256_at_check": {
+    "docs/MATHEMATICAL_PRINCIPLES.html": "50dbf70e828793449c5b57a3ac74e6f4cefec77f7aa796cbe687a11d44c6bd17"
+  },
+  "external_navigation_not_fetched": [],
+  "browser_rendering": "NOT_RUN_BY_STATIC_CHECKER",
+  "freshness_and_run_identity": "NOT_ASSESSED_BY_STATIC_CHECKER",
+  "numerical_validation": "NOT_RUN_BY_STATIC_CHECKER",
+  "domain_or_clinical_validation": "NOT_ASSESSED",
+  "scope": "Read-only offline structural checks; not mathematical equivalence, a sanitizer, browser rendering, or model acceptance."
+}

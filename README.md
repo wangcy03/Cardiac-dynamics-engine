@@ -15,6 +15,8 @@
 | [B00 报告](docs/tasks/B00_REPORT.md) / [B01 报告](docs/tasks/B01_REPORT.md) | 冻结复现、数值差异、固定门槛与适用域 |
 | [交付说明](docs/DELIVERY_NOTES.md) | 本轮修改、实际检查、提交顺序与未覆盖风险 |
 | [开发入口](START_HERE.md) / [工作规则](AGENTS.md) | 后续接手约定与验收要求 |
+| [数理文档技能](skills/mathematical-principles/README.md) / [验证记录](artifacts/skills/mathematical-principles/README.md) | 手动创建、局部更新或只读检查数理文档；可用于其他项目 |
+| [固定迭代观察器方案](docs/proposals/ITERATION_VIEWER_PLAN.md) | 已确认心脏/时序、独立 1D、迭代比较三页范围，尚未开始实现 |
 
 克隆后用本地浏览器打开上述 HTML。正文和观察器均可离线使用；GitHub 文件页仅显示 HTML 源文件。
 公式与示意图静态检查已通过，本轮实际浏览器渲染因安全策略限制为 `NOT_RUN_BROWSER_POLICY`。

@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="待完善的数理原理文档：第一性原理、实现、真实证据与适用域。">
+<title>项目名称 · 数理原理（待完善模板）</title>
+<style>
+:root{color-scheme:light;--paper:#f5f5f5;--card:#fff;--ink:#2d3142;--muted:#4f5d75;--accent:#bf4520;--link:#2855a0;--rule:#d4d7de;--tint:#fff0e8;--sans:"Noto Sans SC","Microsoft YaHei",system-ui,sans-serif;--mono:Consolas,ui-monospace,monospace}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.8 var(--sans)}header,main,footer{max-width:1180px;margin:auto;padding:32px 40px}header{padding-top:52px}h1{font-size:38px;line-height:1.4;margin:12px 0}h2{font-size:26px;line-height:1.5;margin:48px 0 16px;scroll-margin-top:20px}h3{font-size:20px}a{color:var(--link);text-underline-offset:3px}a:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:4px}.skip{position:absolute;left:8px;top:-100px;background:var(--card);padding:8px}.skip:focus{top:8px}nav{display:flex;flex-wrap:wrap;gap:8px 24px;padding:18px 0;border-block:1px solid var(--rule);margin-top:24px}.lead{font-size:20px;max-width:920px}.notice{background:var(--tint);border-left:4px solid var(--accent);padding:12px 20px}.muted,figcaption{color:var(--muted);font-size:14px}.status{font-family:var(--mono);font-size:13px}.table-scroll,.figure-slot{max-width:100%;overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;vertical-align:top;border-bottom:1px solid var(--rule);padding:10px 12px}th{background:#e9ebef}code,pre{font-family:var(--mono);font-size:.87em}code{overflow-wrap:anywhere}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:var(--card);padding:16px;border:1px solid var(--rule);border-radius:6px}.equation{padding:20px 24px;background:var(--card);border:1px solid var(--rule);border-radius:6px;overflow-x:auto}.equation math{font-size:1.2em}.equation>p{font-size:14px}.equation details{border-top:1px solid var(--rule);margin-top:16px;padding-top:8px}summary{cursor:pointer}figure{margin:24px 0}.figure-slot{border:1px dashed var(--muted);padding:20px;background:var(--card)}footer{border-top:1px solid var(--rule);margin-top:40px;font-size:14px}.evidence-generated{padding:18px;border:1px solid var(--rule);background:var(--card)}li{margin:6px 0}@media(max-width:720px){header,main,footer{padding:24px 18px}h1{font-size:30px}h2{font-size:23px}.lead{font-size:18px}body{font-size:16px}.equation{padding:16px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}@media print{body{background:#fff;font-size:11pt}header,main,footer{max-width:none;padding:12px 0}nav{display:none}h2{break-after:avoid}.equation,figure,tr{break-inside:avoid}a{color:inherit}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">跳到正文</a>
+<header>
+<p class="status">LIVING MATHEMATICAL REFERENCE / TEMPLATE_NOT_IMPLEMENTATION</p>
+<h1>项目名称：从机制到计算结果</h1>
+<p class="lead">待填写：用两三句话说明系统计算什么，以及读者如何沿物理机制、方程、实现与证据理解结果。</p>
+<p class="notice"><strong>这是待完善的起始模板。</strong>示例公式只演示写法，不声明项目已经实现某个模型；当前没有运行证据，不能据此宣称验证完成。</p>
+<nav aria-label="文档目录">
+<a href="#scope">用途与范围</a><a href="#system">状态与边界</a><a href="#principles">第一性原理</a><a href="#numerics">数值与因果</a><a href="#mapping">实现映射</a><a href="#evidence">真实证据</a><a href="#maintenance">维护</a>
+</nav>
+</header>
+<main id="main">
+<!-- PRINCIPLES_NARRATIVE_START -->
+<section id="scope" aria-labelledby="scope-heading">
+<h2 id="scope-heading">1. 用途、当前能力与适用域</h2>
+<p>待填写：项目要回答的问题、目标读者、已确认路线、当前可运行切片与未完成部分。说明哪些量是模型内部真值，哪些是实际可交付观测。</p>
+<div class="table-scroll"><table>
+<caption>能力与证据范围（需用真实项目事实替换）</caption>
+<thead><tr><th scope="col">对象</th><th scope="col">当前状态</th><th scope="col">边界</th></tr></thead>
+<tbody><tr><th scope="row">模型/模块</th><td>NOT_RECORDED</td><td>尚未填写项目事实</td></tr><tr><th scope="row">适用性</th><td>NOT_VALIDATED</td><td>静态文档不提供模型或领域验证</td></tr></tbody>
+</table></div>
+</section>
+<section id="system" aria-labelledby="system-heading">
+<h2 id="system-heading">2. 控制体、状态、输入与边界</h2>
+<p>待填写：什么量会积累，通过哪些路径交换，有哪些外部源/汇；给出初值、边界条件、符号和正方向。</p>
+<div class="table-scroll"><table>
+<caption>符号与单位（未填写）</caption>
+<thead><tr><th scope="col">符号</th><th scope="col">物理含义</th><th scope="col">单位与正方向</th><th scope="col">来源</th></tr></thead>
+<tbody><tr><td>待填写</td><td>状态、交换量与参数分别列出</td><td>采用项目真实单位</td><td>规格、代码或明确假设</td></tr></tbody>
+</table></div>
+<figure>
+<div class="figure-slot"><p>架构/控制体图待建立。先从实际模块与交换量提炼，再生成带可访问标题和说明的 SVG；本模板没有预设项目架构。</p></div>
+<figcaption>待填写图题：区分当前实现与规划，标清箭头方向及交换量。</figcaption>
+</figure>
+</section>
+<section id="principles" aria-labelledby="principles-heading">
+<h2 id="principles-heading">3. 从基本定律到闭合方程</h2>
+<p>先解释机制，再给方程。对每条式子标明基本定律、经验闭合或工程假设，并说明量纲、本构域、参数来源与失效条件。</p>
+<div class="equation" id="equation-writing-example" data-equation="writing-example">
+<h3>写作示例：存量的平衡关系</h3>
+<p><strong>以下为通用写作示例，未与任何项目实现对应。</strong>若一个系统存在存量 S，其变化可能由流入、流出与内部源决定。只有确认项目对象和适用条件后，才能替换为正式方程。</p>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML" aria-label="存量 S 的时间变化率等于流入减流出加内部源">
+<semantics><mrow><mfrac><mrow><mi>d</mi><mi>S</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><msub><mi>F</mi><mtext>in</mtext></msub><mo>−</mo><msub><mi>F</mi><mtext>out</mtext></msub><mo>+</mo><mi>G</mi></mrow><annotation encoding="application/x-tex">\frac{dS}{dt}=F_{\mathrm{in}}-F_{\mathrm{out}}+G</annotation></semantics>
+</math>
+<p>若 S 的单位为 U，则三个右端项均需为 U/时间。U 只是单位占位符，不代表已选定热学、电路或流体的单位。尚未定义实际本构、初态或边界。</p>
+<details><summary>展开 LaTeX 源码</summary><pre>\frac{dS}{dt}=F_{\mathrm{in}}-F_{\mathrm{out}}+G</pre></details>
+</div>
+<p>待补充：内部交换的抵消、能量/耗散账本、闭合关系，以及每项假设如何影响结果解释。</p>
+</section>
+<section id="numerics" aria-labelledby="numerics-heading">
+<h2 id="numerics-heading">4. 离散、事件与实时因果</h2>
+<p>待填写：实际空间/时间离散、重建、阶段时刻、权重、稳定约束、边界求解，以及真正进入更新的通量/源项。</p>
+<p>待填写：物理事件、检测事件、时间戳、样本交付、决策、命令与动作的区别。若不涉及实时控制，说明适用的输入/输出采样含义。</p>
+<figure>
+<div class="figure-slot"><p>时序图待建立；不先规定事件顺序、固定延迟或未来信息可见性。</p></div>
+<figcaption>图中时刻、阶段和信息边界应来自项目事实。</figcaption>
+</figure>
+<p class="notice">失败判据未记录。应列出本构域、非有限值、稳定约束、守恒/残差、求解收敛与原子失败行为；不通过隐藏截断或重置得到表面正常结果。</p>
+</section>
+<section id="mapping" aria-labelledby="mapping-heading">
+<h2 id="mapping-heading">5. 从方程追溯到代码与检查</h2>
+<div class="table-scroll"><table>
+<caption>实现与证据映射（未填写）</caption>
+<thead><tr><th scope="col">方程/对象</th><th scope="col">代码与单位</th><th scope="col">失败判据</th><th scope="col">覆盖证据</th></tr></thead>
+<tbody><tr><td>待填写</td><td>真实路径与符号</td><td>可观察条件与已定门槛</td><td>NOT_RECORDED</td></tr></tbody>
+</table></div>
+<p>记录实施了什么、为什么、如何检验，以及仍未覆盖的风险；测试通过与领域适用性分开。</p>
+</section>
+<!-- PRINCIPLES_NARRATIVE_END -->
+<section id="evidence" aria-labelledby="evidence-heading">
+<h2 id="evidence-heading">6. 实际运行证据与差异</h2>
+<!-- PRINCIPLES_EVIDENCE_START -->
+<div class="evidence-generated">
+<p class="notice"><strong>NOT_FOUND：尚未提供运行证据。</strong>没有真实导出时保持缺失，不生成曲线、指标、源身份或通过结论。</p>
+<p>自动区域只由明确的项目适配器消费真实导出。填写路径、原始字节 SHA-256、命令/退出码、配置与时间窗、单位、误差定义和失败/缺失项。</p>
+<p>历史运行记录的源码身份与本次读取的源码身份分别展示。当前文件的哈希不能被补写为历史运行身份。</p>
+<div class="table-scroll"><table>
+<caption>验证类别分别记录</caption>
+<thead><tr><th scope="col">类别</th><th scope="col">状态</th><th scope="col">证据</th></tr></thead>
+<tbody><tr><th scope="row">离线静态检查</th><td>NOT_RUN</td><td>尚未执行检查器</td></tr><tr><th scope="row">浏览器渲染</th><td>NOT_RUN</td><td>需要实际查看并记录</td></tr><tr><th scope="row">软件/数值验证</th><td>NOT_RUN</td><td>文档刷新不运行求解器</td></tr><tr><th scope="row">领域适用性</th><td>NOT_VALIDATED</td><td>需相应的独立证据</td></tr></tbody>
+</table></div>
+</div>
+<!-- PRINCIPLES_EVIDENCE_END -->
+</section>
+<section id="maintenance" aria-labelledby="maintenance-heading">
+<h2 id="maintenance-heading">7. 如何随迭代维护</h2>
+<ol>
+<li>读本轮规格与变更，列影响的机制、方程、单位、边界、数值阶段和证据。</li>
+<li>局部维护人工正文、MathML/LaTeX、代码映射和图；保留历史失败与旧资产。</li>
+<li>优先复用项目刷新器；没有适配器时先明确字段与写入边界，不猜测任意 JSON 的含义。</li>
+<li>刷新后做 freshness、离线静态检查和允许的浏览器检查；未运行项如实记录。</li>
+<li>按项目要求完成相应测试；软件、数值、物理和临床等结论分别表述。</li>
+</ol>
+<p>待填写：项目的维护命令、来源文献、图表派生关系和固定观察器入口。外部学术导航链接可保留，正文显示不依赖网络资源。</p>
+</section>
+</main>
+<footer>
+<p>维护状态：待完善模板。本文不含真实波形、项目架构、已校准参数或模型验收结论。</p>
+</footer>
+</body>
+</html>

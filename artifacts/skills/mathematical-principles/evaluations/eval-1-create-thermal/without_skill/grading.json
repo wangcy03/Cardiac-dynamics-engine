@@ -1,0 +1,101 @@
+{
+  "expectations": [
+    {
+      "text": "主文档可离线阅读，存在有效 MathML、非空 LaTeX 注解及可展开的 LaTeX 源，不依赖远程公式脚本。",
+      "passed": true,
+      "evidence": "project/docs/MATHEMATICAL_PRINCIPLES.html:100-143 共 6 个 MathML 块；评分者逐块用 XML 解析成功，6/6 含非空 application/x-tex 注解，每式有 details/summary/pre 的 LaTeX 与文字备用。只读 HTML/CSS 核对：0 script、0 外部 href/src、无 @import/url(...)、本地链接和锚点无缺失；239 行说明内嵌离线公式与样式。浏览器视觉效果仍未验证。"
+    },
+    {
+      "text": "从能量平衡正确连接到 thermal.py，并说明 R/C/输入功率/温度单位及 tau=RC=20 s。",
+      "passed": true,
+      "evidence": "HTML:83-93 列明 R=2 K/W、C=10 J/K、温度 K、功率 W=J/s、返回 K/s；99-120 由恒热容内能、向外为正的热阻功率和输入减输出推得与 thermal.py:11-12 一致的导数。136-152 得 tau=RC=20 s 及恒功率条件下 303.15 K；93、151-152、164 行明确 INPUT_POWER_W 未被函数读取、不是默认值，必须由调用者持续显式传入 5 W，稳态仅为无轨迹/测量支持的解析预测。"
+    },
+    {
+      "text": "没有运行轨迹或实验时保持未运行/未验证，不伪造波形或通过结论。",
+      "passed": true,
+      "evidence": "HTML:48、144、150-154、168、170、175-190、220-222 明确解析结论不是运行或测试结果，软件/数值仍 NOT_RUN，测量 NOT_PROVIDED，未补初温、加热轨迹或误差。未发现任何波形/实验图；无 SVG、canvas、img 或绘图脚本。run_notes 明确未运行模型、未浏览器实看；文档工具静态检查与模型验证通过保持分开。"
+    },
+    {
+      "text": "输入 thermal.py、PROJECT.md 和 verification.json 的原始字节保持不变。",
+      "passed": true,
+      "evidence": "评分者对 project/ 三输入与 evals/fixtures/create-thermal/ 逐字节比较，3/3 相同。SHA-256：PROJECT.md=83429d1cf41d4b37255e252c560c02564fd847707bcef0826602ff8e67fa02bb；thermal.py=54da0e3e5bd2d09278eab49a9f70c22268c9134172551a6bda3df34fce77421a；artifacts/verification.json=ba21c4fd931f0387e49fc8cc421f7e527718533e5c3929326dd6ad7ac8c083ff。与 run_notes 中身份表一致。"
+    },
+    {
+      "text": "维护说明区分人工正文和自动证据，给出以后 update/check 的可执行路径或明确步骤。",
+      "passed": true,
+      "evidence": "PRINCIPLES_MAINTENANCE.md 的维护源表将正文第 1-6 节、人工证据解释、BEGIN/END GENERATED EVIDENCE 区与 principles_binding.json 分开；给出 python tools/refresh_principles.py refresh / check、输入改动的摘要复核和人工锚点更新步骤。静态阅读刷新器:14-19、26-78、109-158 确认只读三个输入作 AST/JSON/SHA 投影，refresh 只替换唯一标记区而不更新审阅锚点；check 对照证据、身份和本地结构，未导入或调用模型。私有标记名称符合其维护工具契约。"
+    }
+  ],
+  "summary": {
+    "passed": 5,
+    "failed": 0,
+    "total": 5,
+    "pass_rate": 1.0
+  },
+  "timing": {
+    "total_tokens": null,
+    "duration_ms": null,
+    "total_duration_seconds": null,
+    "observed_completion_utc": "2026-10-15T11:40:13.277040+00:00",
+    "availability": "Native agent notifications did not expose duration or token counters; no estimates substituted."
+  },
+  "claims": [
+    {
+      "claim": "能量守恒符号、热阻/热容单位与源码一致，tau=20 s。",
+      "type": "factual",
+      "verified": true,
+      "evidence": "HTML:83-93 列明 R=2 K/W、C=10 J/K、温度 K、功率 W=J/s、返回 K/s；99-120 由恒热容内能、向外为正的热阻功率和输入减输出推得与 thermal.py:11-12 一致的导数。136-152 得 tau=RC=20 s 及恒功率条件下 303.15 K；93、151-152、164 行明确 INPUT_POWER_W 未被函数读取、不是默认值，必须由调用者持续显式传入 5 W，稳态仅为无轨迹/测量支持的解析预测。"
+    },
+    {
+      "claim": "303.15 K 是持续显式输入 5 W 下的条件解析稳态；INPUT_POWER_W 不自动作为函数输入。",
+      "type": "factual",
+      "verified": true,
+      "evidence": "独立 AST 静态核对 thermal.py：temperature_rate 的两个参数均无默认值，函数体未读取 INPUT_POWER_W；相应 HTML 条件说明见第 2 条 expectation 的证据。未执行模型。"
+    },
+    {
+      "claim": "刷新器仅格式化既有静态证据，不执行热模型或更改原记录。",
+      "type": "process",
+      "verified": true,
+      "evidence": "PRINCIPLES_MAINTENANCE.md 的维护源表将正文第 1-6 节、人工证据解释、BEGIN/END GENERATED EVIDENCE 区与 principles_binding.json 分开；给出 python tools/refresh_principles.py refresh / check、输入改动的摘要复核和人工锚点更新步骤。静态阅读刷新器:14-19、26-78、109-158 确认只读三个输入作 AST/JSON/SHA 投影，refresh 只替换唯一标记区而不更新审阅锚点；check 对照证据、身份和本地结构，未导入或调用模型。私有标记名称符合其维护工具契约。 此处验证的是交付工具的静态代码路径；实际执行历史仅由 run_notes 记载。"
+    },
+    {
+      "claim": "三个交付输入副本与原夹具字节一致。",
+      "type": "quality",
+      "verified": true,
+      "evidence": "评分者对 project/ 三输入与 evals/fixtures/create-thermal/ 逐字节比较，3/3 相同。SHA-256：PROJECT.md=83429d1cf41d4b37255e252c560c02564fd847707bcef0826602ff8e67fa02bb；thermal.py=54da0e3e5bd2d09278eab49a9f70c22268c9134172551a6bda3df34fce77421a；artifacts/verification.json=ba21c4fd931f0387e49fc8cc421f7e527718533e5c3929326dd6ad7ac8c083ff。与 run_notes 中身份表一致。"
+    },
+    {
+      "claim": "交付 HTML 具备离线公式结构。",
+      "type": "quality",
+      "verified": true,
+      "evidence": "project/docs/MATHEMATICAL_PRINCIPLES.html:100-143 共 6 个 MathML 块；评分者逐块用 XML 解析成功，6/6 含非空 application/x-tex 注解，每式有 details/summary/pre 的 LaTeX 与文字备用。只读 HTML/CSS 核对：0 script、0 外部 href/src、无 @import/url(...)、本地链接和锚点无缺失；239 行说明内嵌离线公式与样式。浏览器视觉效果仍未验证。 静态有效性不等于浏览器显示质量。"
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [
+      "未发现 user_notes.md；完整读取了 run_notes.md。无真实轨迹、测量、数值误差或模型运行证据。",
+      "浏览器渲染与窄屏视觉表现未验证。"
+    ],
+    "needs_review": [
+      "在允许的环境中实际离线打开文档，核对公式与排版；该未运行项不改变本次静态结构评分。"
+    ],
+    "workarounds": []
+  },
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "从能量平衡正确连接到 thermal.py，并说明 R/C/输入功率/温度单位及 tau=RC=20 s。",
+        "reason": "可明确加入 INPUT_POWER_W 未被函数引用、两个实参均无默认值，以及 303.15 K 仅在实际持续传入 5 W 时作为解析结果。两份产物此次均正确处理，但现有条目未明确覆盖把声明常量误作实际运行输入这一回归。"
+      }
+    ],
+    "overall": "五条 expectation 覆盖本案例的核心交付，两个副本都以实质内容满足。仅有两个小型合成案例，且本案例无技能对照也全通过；该结果不足以证明技能收益或真实工程泛化能力。"
+  },
+  "notes": [
+    "本评分限于 id=1 单状态热模型产物；只读检查了 HTML、维护说明、run_notes、刷新器源码、输入字节与已有 JSON 报告，没有执行模型、刷新器、浏览器、联网或全量测试。",
+    "评测套件仅有两个合成案例：新建单状态热模型文档，以及更新输运器文档。它们不覆盖真实工程的多状态耦合、复杂本构、完整数值或实验验证、长期维护和多人协作；不能从本次得分推断真实心脏引擎适用性或技能普遍收益。",
+    "本案例两边同为 5/5；不同的公式数量、机制图和工具复杂度不属于额外得分项，不人为制造技能优势。",
+    "未提供独立完整执行 transcript；run_notes.md 作为执行者记录读取。评分中的结构、公式、输入保全和工具边界另由只读源码/字节检查支撑；完整历史过程仍不能由交付文件穷尽证明。",
+    "timing.json 中 token 与时长均为 null，照录原字段，不填估计值；没有 metrics.json，未合成 execution_metrics。",
+    "outputs/generic_checker_initial.json 的 MARKER_PAIR_INVALID 源于旧通用 checker 只识别技能自有标记，未识别对照产物 BEGIN/END GENERATED EVIDENCE；按父任务已确认的修复边界处理，不作为文档失败。评分者已直接核对该产物的唯一标记对与其刷新器契约。"
+  ]
+}

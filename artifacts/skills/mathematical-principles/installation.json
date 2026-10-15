@@ -1,0 +1,27 @@
+{
+  "schema": "skill-installation/v1",
+  "skill_name": "mathematical-principles",
+  "installed_utc": "2026-10-15T11:46:33.221027+00:00",
+  "repository_source": "skills/mathematical-principles",
+  "personal_target": "C:\\Users\\02210027\\.agents\\skills\\mathematical-principles",
+  "status": "INSTALLED_BYTE_IDENTICAL",
+  "file_count": 15,
+  "source_and_installed_sha256": {
+    "README.md": "1d77a1c2f953b4addfc30dbb4b9d3e441f52d068b91fae08e1ac5a02a46ed1cb",
+    "SKILL.md": "ea517d9c2a34affed3e486107835ff8136cfa0be4ec65dd13620d5c6a367d731",
+    "assets/principles-template.html": "eed9c5c5779133130ed33fc4f9780ddf57ebc8bd756c3523b091e2c70bb2c5d6",
+    "evals/evals.json": "1892cccd66f6a70040687e50e4c5497060127e33d0a25c571eeac3b9d90646b0",
+    "evals/test_check_document.py": "bbc206120c5896aedbd304ab4927248b0b24d0e769084c18a67b95d719d7b668",
+    "references/heart-engine.md": "6d3ae2f7a0b31dd33ffdeb711cbfc598b7bfc9c114a3b3975afaa51a799a896e",
+    "references/workflow.md": "9b43f4aafa61bc6985a118fabcc36141c0520522cfab2e8abf38eb70419dd26b",
+    "scripts/check_document.py": "cf55f97524a5c9a13e627c686de011b547021188719f014564c9b65d63979607",
+    "evals/fixtures/create-thermal/PROJECT.md": "83429d1cf41d4b37255e252c560c02564fd847707bcef0826602ff8e67fa02bb",
+    "evals/fixtures/create-thermal/thermal.py": "54da0e3e5bd2d09278eab49a9f70c22268c9134172551a6bda3df34fce77421a",
+    "evals/fixtures/update-transport/PROJECT.md": "780d8ba9ba75d099a57331d29ce141298a68c006c17cc72893c8da5e90f40459",
+    "evals/fixtures/update-transport/transport.py": "c5e368c983a405f9f551a1a279a52863e5715c439600cff9914cad54a74d7cef",
+    "evals/fixtures/create-thermal/artifacts/verification.json": "ba21c4fd931f0387e49fc8cc421f7e527718533e5c3929326dd6ad7ac8c083ff",
+    "evals/fixtures/update-transport/artifacts/verification.json": "9f37de4a1f7b323fe7929fe712886bdc9fd2572c03d546e0b7a34a4803f3e987",
+    "evals/fixtures/update-transport/docs/MATHEMATICAL_PRINCIPLES.html": "17dc952b4e9b3ba1f8d65cd8894fa976e0196180ff4f133f16f388c4640aaafc"
+  },
+  "validation_scope": "Installation byte equality and offline structural tooling; no model or clinical acceptance."
+}

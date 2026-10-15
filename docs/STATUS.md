@@ -24,6 +24,11 @@
 - 正式 `MATHEMATICAL_PRINCIPLES.html` 已含 19 组离线 MathML/LaTeX、框架与时序图、
   真实 CSV 压力图和原型观察器链接；按 `PRINCIPLES_MAINTENANCE.md` 持续维护。
   静态图表/公式检查已过；浏览器 file: 协议被策略拒绝，实际渲染为 NOT_RUN_BROWSER_POLICY。
+- 数理文档流程已封装为可手动调用的 `mathematical-principles` 技能，版本源在
+  `../skills/mathematical-principles/`；22 项静态工具回归与两个合成项目对照记录见
+  `../artifacts/skills/mathematical-principles/README.md`。未改模型或重跑上述心脏数值门。
+- 固定迭代观察器已确认心脏/时序、独立 1D、迭代比较三页范围；
+  `proposals/ITERATION_VIEWER_PLAN.md` 是待实施方案，当前观察器代码和数据未改。
 - Git 已初始化，分步保留原始导入、B00、独立核心与最终证据；origin 指向
   `https://github.com/wangcy03/Cardiac-dynamics-engine.git`。推送/上游状态以 Git 为准，CI 以远端实际运行为准。
 
