@@ -24,7 +24,8 @@
 - 正式 `MATHEMATICAL_PRINCIPLES.html` 已含 19 组离线 MathML/LaTeX、框架与时序图、
   真实 CSV 压力图和原型观察器链接；按 `PRINCIPLES_MAINTENANCE.md` 持续维护。
   静态图表/公式检查已过；浏览器 file: 协议被策略拒绝，实际渲染为 NOT_RUN_BROWSER_POLICY。
-- Git 已初始化，分步保留原始导入、B00、独立核心与最终证据，未配置/推送远程仓库。
+- Git 已初始化，分步保留原始导入、B00、独立核心与最终证据；origin 指向
+  `https://github.com/wangcy03/Cardiac-dynamics-engine.git`。推送/上游状态以 Git 为准，CI 以远端实际运行为准。
 
 最终质量门读取 `../artifacts/verification_summary.json`，B01 数值读取
 `../artifacts/arterial1d/benchmark_summary.json`，范围与未覆盖项见 `tasks/B01_REPORT.md`。
