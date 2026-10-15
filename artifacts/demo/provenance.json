@@ -1,0 +1,112 @@
+{
+  "version": "0.2.0",
+  "kind": "ENGINEERING_SIMULATION_NOT_CLINICAL",
+  "warmup_s": 18,
+  "note": "Fixed warmup is NOT proof of periodic steady state.",
+  "model_config": {
+    "e_lv": 2.1,
+    "e_rv": 0.5,
+    "r_systemic": 1.1,
+    "r_pulmonary": 0.09,
+    "c_root": 0.22,
+    "c_descending": 0.85,
+    "r_link": 0.08,
+    "l_link": 0.0007,
+    "tau_rise": 0.05,
+    "tau_relax": 0.035,
+    "tau_recovery": 0.6,
+    "balloon_capacity": 40.0,
+    "balloon_enabled": true
+  },
+  "engine_config": {
+    "step_us": 250,
+    "seed": 20261015,
+    "command_latency_us": 5000
+  },
+  "controller": "ThresholdDemoController; causal, uncalibrated, not optimized",
+  "sensors": [
+    {
+      "channel_id": "ECG_II",
+      "site": "ecg_ii",
+      "units": "mV",
+      "period_us": 1000,
+      "phase_us": 0,
+      "tau_us": 0.0,
+      "latency_us": 0,
+      "noise_std": 0.0,
+      "gain": 1.0,
+      "offset": 0.0,
+      "clock_offset_us": 0,
+      "drift_ppm": 0.0,
+      "expose_source_time": true,
+      "drop_every": 0
+    },
+    {
+      "channel_id": "AP_TIP_SOLID",
+      "site": "p_descending",
+      "units": "mmHg",
+      "period_us": 1000,
+      "phase_us": 0,
+      "tau_us": 1000,
+      "latency_us": 1000,
+      "noise_std": 0.0,
+      "gain": 1.0,
+      "offset": 0.0,
+      "clock_offset_us": 0,
+      "drift_ppm": 0.0,
+      "expose_source_time": true,
+      "drop_every": 0
+    },
+    {
+      "channel_id": "AP_FIBER",
+      "site": "p_descending",
+      "units": "mmHg",
+      "period_us": 1000,
+      "phase_us": 0,
+      "tau_us": 500,
+      "latency_us": 2000,
+      "noise_std": 0.0,
+      "gain": 1.0,
+      "offset": 0.0,
+      "clock_offset_us": 0,
+      "drift_ppm": 0.0,
+      "expose_source_time": true,
+      "drop_every": 0
+    },
+    {
+      "channel_id": "AP_MONITOR",
+      "site": "p_root",
+      "units": "mmHg",
+      "period_us": 4000,
+      "phase_us": 0,
+      "tau_us": 8000,
+      "latency_us": 20000,
+      "noise_std": 0.0,
+      "gain": 1.0,
+      "offset": 0.0,
+      "clock_offset_us": 0,
+      "drift_ppm": 0.0,
+      "expose_source_time": false,
+      "drop_every": 0
+    }
+  ],
+  "model_source_sha256": "08aa745151b3d9ba142de79718ce15ab6bfb48938a84b21ad34858153699cb3f",
+  "metrics": {
+    "baseline": {
+      "max_mass_error_mL": 3.637978807091713e-11,
+      "root_min_mmHg": 65.93563735188125,
+      "root_max_mmHg": 123.24425719888352,
+      "max_balloon_mL": 0.0,
+      "net_aortic_volume_mL": 282.55713477803624,
+      "lv_net_external_work_mmHg_mL": 36277.182384593725
+    },
+    "assisted": {
+      "max_mass_error_mL": 5.184119800105691e-11,
+      "root_min_mmHg": 65.9380330731172,
+      "root_max_mmHg": 135.83411442876314,
+      "max_balloon_mL": 39.9999606926025,
+      "net_aortic_volume_mL": 277.4386246115695,
+      "lv_net_external_work_mmHg_mL": 36617.40080942298
+    }
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "revision": "r1",
+  "kind": "ENGINEERING_REFERENCE_NOT_A_DEVICE_CALIBRATION",
+  "executable_engine_available": false,
+  "purpose": "Describe the first signal-chain and command-contract harness; physiological coefficients still require calibration.",
+  "simulation": {
+    "time_unit": "s",
+    "reported_timing_unit": "ms",
+    "initial_max_step_s": 0.00025,
+    "step_policy": "CFL_AND_STIFFNESS_AND_EVENT_CONVERGENCE_LIMITED",
+    "random_seed": 20261015,
+    "controller_clock": "harness_clock",
+    "future_truth_visible_to_controller": false,
+    "controller_latency_model": {
+      "status": "UNMEASURED",
+      "kind": "CONFIGURABLE_NOT_ASSUMED_ZERO"
+    }
+  },
+  "topology_profiles": {
+    "same_site_chain_isolation": {
+      "AP_TIP_SOLID": "TEST_SITE_A",
+      "AP_FIBER": "TEST_SITE_A",
+      "AP_MONITOR": "TEST_SITE_A"
+    },
+    "multi_site_propagation": {
+      "AP_TIP_SOLID": "DESCENDING_AORTA_NEAR_BALLOON_TIP",
+      "AP_FIBER": "DESCENDING_AORTA_NEAR_BALLOON_TIP",
+      "AP_MONITOR": "RADIAL_ARTERY"
+    },
+    "profile_note": "All sites are engineering scenarios, not confirmed device anatomy; profiles must be explicit per run."
+  },
+  "channels": [
+    {
+      "id": "ECG_II",
+      "kind": "ECG",
+      "unit": "mV",
+      "sampling_hz": 1000,
+      "source": "shared_electrical_state",
+      "lead": "II",
+      "enabled": true,
+      "status": "ENGINEERING_REFERENCE",
+      "calibrated_device_profile": null
+    },
+    {
+      "id": "AP_TIP_SOLID",
+      "kind": "PRESSURE",
+      "unit": "mmHg",
+      "sampling_hz": 1000,
+      "enabled": true,
+      "status": "ENGINEERING_REFERENCE",
+      "instrument_response": "IDENTITY_ONLY_FOR_BASELINE_HARNESS",
+      "calibrated_device_profile": null
+    },
+    {
+      "id": "AP_FIBER",
+      "kind": "PRESSURE",
+      "unit": "mmHg",
+      "sampling_hz": 1000,
+      "enabled": true,
+      "status": "ENGINEERING_REFERENCE",
+      "instrument_response": "IDENTITY_ONLY_FOR_BASELINE_HARNESS",
+      "calibrated_device_profile": null
+    },
+    {
+      "id": "AP_MONITOR",
+      "kind": "PRESSURE",
+      "unit": "mmHg",
+      "sampling_hz": 250,
+      "enabled": true,
+      "status": "SYNTHETIC_STRESS_PROFILE_NOT_ACTUAL_MONITOR",
+      "transport_delay_s": 0.04,
+      "batch_duration_s": 0.02,
+      "source_timestamp_exposed": false,
+      "calibrated_device_profile": null
+    }
+  ],
+  "lead_expansion": {
+    "required_final_leads": [
+      "I",
+      "II",
+      "III",
+      "aVR",
+      "aVL",
+      "aVF",
+      "V1",
+      "V2",
+      "V3",
+      "V4",
+      "V5",
+      "V6"
+    ],
+    "initial_scope_leads": [
+      "II"
+    ],
+    "note": "The list is a scope contract, not a claim that any engine is already implemented. Unimplemented leads remain unavailable, not copies or zero signals."
+  },
+  "command_adapter": {
+    "actions": [
+      "INFLATE",
+      "DEFLATE",
+      "CANCEL_PENDING"
+    ],
+    "timestamp_fields": [
+      "t_issued",
+      "t_execute"
+    ],
+    "cancel_started_action": "REJECT_CANCEL_USE_EXPLICIT_REVERSE_COMMAND",
+    "late_command_policy": "REJECT_IN_REFERENCE_ADAPTER",
+    "idempotency": "DUPLICATE_ID_MUST_NOT_REPEAT_ACTION",
+    "device_policy_calibrated": false
+  },
+  "clinical_risk_thresholds": null,
+  "effect_sweep": {
+    "offset_unit": "ms",
+    "offsets": [
+      -20,
+      -10,
+      -5,
+      0,
+      5,
+      10,
+      20
+    ],
+    "sweep_shape": [
+      7,
+      7
+    ],
+    "counterfactual_snapshot_required": true,
+    "single_weighted_score": false
+  },
+  "blocking_for_quantitative_validation": [
+    "anatomical_site_calibration",
+    "actual_sensor_transfer_functions",
+    "actual_monitor_interface_and_clock",
+    "actuator_volume_and_load_response",
+    "independent_physiological_reference_data",
+    "approved_effect_and_risk_thresholds"
+  ],
+  "unblocked_work": [
+    "clock_and_signal_contracts",
+    "causality_tests",
+    "analytic_component_tests",
+    "conservation_design",
+    "reference_solver_benchmarks"
+  ]
+}

@@ -1,0 +1,396 @@
+{
+  "revision": "r2 implementation trace",
+  "execution_status": "PARTIAL_NOT_A_COMPLETE_R1_ACCEPTANCE",
+  "tests": [
+    {
+      "id": "T01",
+      "milestone": "M0",
+      "requirements": [
+        "REQ-07",
+        "REQ-08"
+      ],
+      "name": "未来事件隔离",
+      "method": "保持分叉点前历史相同，只改未来激活。",
+      "acceptance": "分叉前样本、命令及状态在声明容差内相同。",
+      "execution_status": "PASS_PROTOTYPE",
+      "evidence_or_gap": "test_future_electrical_event_cannot_change_prefix"
+    },
+    {
+      "id": "T02",
+      "milestone": "M0",
+      "requirements": [
+        "REQ-07",
+        "REQ-08"
+      ],
+      "name": "未知源时间隔离",
+      "method": "模拟不提供源时间的外部通道。",
+      "acceptance": "算法收到未知值，而非评估器真实源时间或自动补偿。",
+      "execution_status": "PASS_PROTOTYPE",
+      "evidence_or_gap": "test_unknown_source_clock_not_leaked"
+    },
+    {
+      "id": "T03",
+      "milestone": "M0",
+      "requirements": [
+        "REQ-01",
+        "REQ-06"
+      ],
+      "name": "同位同链路一致",
+      "method": "两个通道同位置、同滤波、同采样相位且无噪声。",
+      "acceptance": "观测在数值容差内一致。",
+      "execution_status": "PASS_PROTOTYPE",
+      "evidence_or_gap": "test_same_site_same_chain_identical"
+    },
+    {
+      "id": "T04",
+      "milestone": "M0",
+      "requirements": [
+        "REQ-01",
+        "REQ-06"
+      ],
+      "name": "同位不同仪器",
+      "method": "相同真压，改变一条因果滤波／传输链。",
+      "acceptance": "局部真值不变；观测与该声明传递函数一致。",
+      "execution_status": "PARTIAL",
+      "evidence_or_gap": "test_different_chain_does_not_change_truth; test_filter_constant_input_has_exact_known_response; only first-order filter"
+    },
+    {
+      "id": "T05",
+      "milestone": "M0",
+      "requirements": [
+        "REQ-07",
+        "REQ-21"
+      ],
+      "name": "异步采样和批交付",
+      "method": "交错采样、缓存分块、延迟与漂移。",
+      "acceptance": "算法不得提前收到样本；误差可由已记录时钟与延迟复核。",
+      "execution_status": "PARTIAL",
+      "evidence_or_gap": "test_no_delivery_before_available; test_clock_drift_changes_sampling_grid_and_stamp; no monitor batching/jitter"
+    },
+    {
+      "id": "T06",
+      "milestone": "M0",
+      "requirements": [
+        "REQ-03",
+        "REQ-09"
+      ],
+      "name": "重复迟到与取消",
+      "method": "重复 ID、过去时刻、撤销未开始／已开始动作。",
+      "acceptance": "遵循显式适配器策略；已发生球囊状态不倒退或瞬时清空。",
+      "execution_status": "PASS_PROTOTYPE",
+      "evidence_or_gap": "pending/started cancel, duplicate, late, reverse command tests"
+    },
+    {
+      "id": "T07",
+      "milestone": "M0",
+      "requirements": [
+        "REQ-15"
+      ],
+      "name": "全状态快照",
+      "method": "有滤波器、队列、节律恢复与随机噪声时保存恢复。",
+      "acceptance": "相同平台复现一致；跨平台满足另列数值容差。",
+      "execution_status": "PASS_IN_PROCESS_ONLY",
+      "evidence_or_gap": "test_snapshot_restores_all_rng_queue_filter_state; test_snapshot_preserves_started_motion_and_pending_reverse"
+    },
+    {
+      "id": "T08",
+      "milestone": "M0",
+      "requirements": [
+        "REQ-13",
+        "REQ-21"
+      ],
+      "name": "时间语义与调度",
+      "method": "采样、交付、推理和命令同刻／异刻边界。",
+      "acceptance": "时间顺序确定，无负延迟或倒因果事件。",
+      "execution_status": "PARTIAL",
+      "evidence_or_gap": "test_same_timestamp_last_command_wins_deterministically; no real controller compute latency calibration"
+    },
+    {
+      "id": "T09",
+      "milestone": "M1",
+      "requirements": [
+        "REQ-13",
+        "REQ-14"
+      ],
+      "name": "解析被动元件",
+      "method": "RC/RLC 阶跃／自由衰减与解析解比较。",
+      "acceptance": "通过单元特定误差阈值；被动系统不产生净能量。",
+      "execution_status": "PARTIAL",
+      "evidence_or_gap": "RC/RL exact tests + independent Radau; no full analytic RLC/energy network audit"
+    },
+    {
+      "id": "T10",
+      "milestone": "M1",
+      "requirements": [
+        "REQ-06",
+        "REQ-13"
+      ],
+      "name": "独立传播基准",
+      "method": "直管传播、分叉、终端反射参考方案。",
+      "acceptance": "联合网格收敛；分叉收支与波到达均符合基准容差。",
+      "execution_status": "NOT_IMPLEMENTED",
+      "evidence_or_gap": "B01/B04"
+    },
+    {
+      "id": "T11",
+      "milestone": "M1",
+      "requirements": [
+        "REQ-09",
+        "REQ-10"
+      ],
+      "name": "循环血容量守恒",
+      "method": "逐步统计全循环，随后 M2 加入球囊占据修正。",
+      "acceptance": "没有系统性漂移；残差随数值细化收敛。",
+      "execution_status": "PASS_PROTOTYPE",
+      "evidence_or_gap": "test_closed_loop_mass_conserved_without_pacing; test_paced_closed_loop_stays_continuous_and_conservative"
+    },
+    {
+      "id": "T12",
+      "milestone": "M1",
+      "requirements": [
+        "REQ-12"
+      ],
+      "name": "瓣膜事件分离",
+      "method": "检查压差反向、流量零交叉与有效开口关闭。",
+      "acceptance": "事件由状态产生，各时间分别记录；未发生保持缺失。",
+      "execution_status": "PARTIAL",
+      "evidence_or_gap": "DP reversal/QAO zero/effective gate events, no independent leaflet truth or acoustic model"
+    },
+    {
+      "id": "T13",
+      "milestone": "M1",
+      "requirements": [
+        "REQ-12",
+        "REQ-19"
+      ],
+      "name": "无切迹情形",
+      "method": "改变波传播／阻尼但保持合法生理状态。",
+      "acceptance": "允许无局部切迹，不凭固定相位补峰。",
+      "execution_status": "PARTIAL",
+      "evidence_or_gap": "no fabricated notch; no implemented clinical notch detection validator"
+    },
+    {
+      "id": "T14",
+      "milestone": "M1",
+      "requirements": [
+        "REQ-13",
+        "REQ-14"
+      ],
+      "name": "联合数值收敛",
+      "method": "至少三档时间与空间分辨率，增加独立求解对照。",
+      "acceptance": "可匹配事件差≤0.5ms、主要压力差≤0.5mmHg；这不是生理精度。",
+      "execution_status": "PARTIAL_TIME_ONLY",
+      "evidence_or_gap": "artifacts/numerical_check.json; test_against_independent_radau; no 1D spatial checks"
+    },
+    {
+      "id": "T15",
+      "milestone": "M1",
+      "requirements": [
+        "REQ-09",
+        "REQ-24"
+      ],
+      "name": "非周期机械记忆",
+      "method": "提前激活与恢复间期变化，不复制周期解。",
+      "acceptance": "容积／张力恢复保持连续；结构检查通过不等于病理已验证。",
+      "execution_status": "PARTIAL_STRUCTURE_ONLY",
+      "evidence_or_gap": "test_nonperiodic_stimulus_does_not_reset_volume; test_mechanical_recovery_changes_short_interval_drive"
+    },
+    {
+      "id": "T16",
+      "milestone": "M1",
+      "requirements": [
+        "REQ-18",
+        "REQ-19",
+        "REQ-23"
+      ],
+      "name": "独立无辅助生理验证",
+      "method": "独立 ECG/LV/AoP/流量数据，验证参数锁定。",
+      "acceptance": "声明域内时序／波形联合评估，独立参考缺失则 NOT_VALIDATED。",
+      "execution_status": "BLOCKED_DATA",
+      "evidence_or_gap": "independent physiological records not acquired/validated"
+    },
+    {
+      "id": "T17",
+      "milestone": "M2",
+      "requirements": [
+        "REQ-10"
+      ],
+      "name": "球囊净血量零新增",
+      "method": "完整充放气循环及关闭心脏主动源的隔离试验。",
+      "acceptance": "排挤源只改变血液分配，总血量正确；能量含外部做功。",
+      "execution_status": "PARTIAL_MASS_ONLY",
+      "evidence_or_gap": "test_balloon_displaces_does_not_inject_blood; no full energy account"
+    },
+    {
+      "id": "T18",
+      "milestone": "M2",
+      "requirements": [
+        "REQ-10"
+      ],
+      "name": "保持充盈阻塞",
+      "method": "固定高占据容积，dVb/dt=0。",
+      "acceptance": "仍有几何引起的过血阻力变化，不只有瞬态源效应。",
+      "execution_status": "PASS_SURROGATE_ONLY",
+      "evidence_or_gap": "test_balloon_displaces_does_not_inject_blood; obstruction state factor, not validated geometry"
+    },
+    {
+      "id": "T19",
+      "milestone": "M2",
+      "requirements": [
+        "REQ-01",
+        "REQ-06",
+        "REQ-10"
+      ],
+      "name": "双向传播与多测点",
+      "method": "规定 Vb(t)，在近端、根部、远端与支路观察。",
+      "acceptance": "源波双向传播和分叉符合守恒网络，不对根部作简单平移。",
+      "execution_status": "NOT_IMPLEMENTED",
+      "evidence_or_gap": "single RLC link does not meet 1D propagation requirement"
+    },
+    {
+      "id": "T20",
+      "milestone": "M2",
+      "requirements": [
+        "REQ-11",
+        "REQ-23"
+      ],
+      "name": "负荷相关动作台架",
+      "method": "不同局部压力下同步命令、气压、实际 Vb。",
+      "acceptance": "动作／容积误差与数据一致；未校准时不作真实动作精度结论。",
+      "execution_status": "BLOCKED_DATA",
+      "evidence_or_gap": "test_balloon_load_influences_motion checks structure only"
+    },
+    {
+      "id": "T21",
+      "milestone": "M2",
+      "requirements": [
+        "REQ-11",
+        "REQ-19"
+      ],
+      "name": "未完成动作",
+      "method": "慢充气、残余容积、迟到放气。",
+      "acceptance": "压力／流量连续响应，保留残余状态与未完成标志。",
+      "execution_status": "PARTIAL",
+      "evidence_or_gap": "command reversal state retained; timeout/failure policies missing"
+    },
+    {
+      "id": "T22",
+      "milestone": "M3",
+      "requirements": [
+        "REQ-16",
+        "REQ-17"
+      ],
+      "name": "二维效果扫描",
+      "method": "单轴与 7×7 充放气扰动，配对初态与外生历史。",
+      "acceptance": "输出效果与误差曲面，未冻结效果阈值时不宣称安全可接受域。",
+      "execution_status": "NOT_IMPLEMENTED",
+      "evidence_or_gap": "B07 7x7 sweep"
+    },
+    {
+      "id": "T23",
+      "milestone": "M3",
+      "requirements": [
+        "REQ-17",
+        "REQ-25"
+      ],
+      "name": "参考答案移动检查",
+      "method": "比较实际与反事实 AC、自己的及共同积分时间窗。",
+      "acceptance": "不把动作诱发的事件提前或 SV 降低计作虚假改善。",
+      "execution_status": "PARTIAL",
+      "evidence_or_gap": "shared snapshot demonstration; common DPTI window/effect metrics not complete"
+    },
+    {
+      "id": "T24",
+      "milestone": "M3",
+      "requirements": [
+        "REQ-01",
+        "REQ-22"
+      ],
+      "name": "通道选路和融合归属",
+      "method": "同位／异位切换，加未知延迟与质量差异。",
+      "acceptance": "引擎不暗中换路或泄露校准；算法行为独立记录。",
+      "execution_status": "PARTIAL",
+      "evidence_or_gap": "engine outputs configured channels, does not silently select; no real selector integration"
+    },
+    {
+      "id": "T25",
+      "milestone": "M3",
+      "requirements": [
+        "REQ-05",
+        "REQ-19"
+      ],
+      "name": "常规清洁工况 5ms 目标",
+      "method": "基线稳定节律、已校准链路，按事件／动作分别计时。",
+      "acceptance": "暂以 P95绝对误差≤5ms为工程目标；同时报告尾部、缺失率与参考不确定度。",
+      "execution_status": "NOT_RUN",
+      "evidence_or_gap": "See target task; no full acceptance evidence in this release"
+    },
+    {
+      "id": "T26",
+      "milestone": "M3",
+      "requirements": [
+        "REQ-16",
+        "REQ-17",
+        "REQ-19"
+      ],
+      "name": "五毫秒效果可辨性",
+      "method": "比较 ±5ms 差异与数值及参数扰动。",
+      "acceptance": "若效果差小于不确定度则报告不可区分，不硬排策略名次。",
+      "execution_status": "NOT_RUN",
+      "evidence_or_gap": "See target task; no full acceptance evidence in this release"
+    },
+    {
+      "id": "T27",
+      "milestone": "M4",
+      "requirements": [
+        "REQ-02",
+        "REQ-24"
+      ],
+      "name": "ECG 观察与激活隔离",
+      "method": "固定命令时只反相／滤波 II 导联，然后闭环重复。",
+      "acceptance": "开环心脏状态不变；闭环变化仅由算法动作反馈解释。",
+      "execution_status": "NOT_RUN",
+      "evidence_or_gap": "See target task; no full acceptance evidence in this release"
+    },
+    {
+      "id": "T28",
+      "milestone": "M4",
+      "requirements": [
+        "REQ-09",
+        "REQ-19"
+      ],
+      "name": "PVC／AF／起搏扩展",
+      "method": "按场景逐步增加并标记校准状态。",
+      "acceptance": "无按搏重置，工程故障与生理适用域分开；未知模型不算通过。",
+      "execution_status": "NOT_RUN",
+      "evidence_or_gap": "See target task; no full acceptance evidence in this release"
+    },
+    {
+      "id": "T29",
+      "milestone": "M4",
+      "requirements": [
+        "REQ-19",
+        "REQ-25"
+      ],
+      "name": "质量下降与算法弃权",
+      "method": "丢样、过期 AP、高 T 低 R、无可靠脉搏。",
+      "acceptance": "分开统计未观测、误检和弃权；不以成功样本过滤结果。",
+      "execution_status": "NOT_RUN",
+      "evidence_or_gap": "See target task; no full acceptance evidence in this release"
+    },
+    {
+      "id": "T30",
+      "milestone": "M0",
+      "requirements": [
+        "REQ-04",
+        "REQ-20",
+        "REQ-23"
+      ],
+      "name": "文档和旧资产保留",
+      "method": "对旧研究、HTML和临床样本进行版本检查。",
+      "acceptance": "旧文件不被覆盖；新核心未完成时不把文档检查标成生理验证。",
+      "execution_status": "NOT_RUN",
+      "evidence_or_gap": "See target task; no full acceptance evidence in this release"
+    }
+  ]
+}

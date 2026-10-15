@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wiggers 完整教学图 · v2.1 修复版</title>
+<style>
+:root{color-scheme:dark;--bg:#091121;--panel:#111b32;--line:#283851;--muted:#a4b7d1;--text:#e9f1ff;--accent:#7dd3fc;--ecg:#74d4ff;--lap:#d89cff;--lvp:#ff9eb1;--aop:#92efb1;--flow:#ffd36b;--vol:#ffb76b;--jvp:#7fe8d7;--side:39%}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif;height:100vh;height:100dvh;display:flex;flex-direction:column;overflow:hidden}button,input,select{font:inherit}button,select{color:var(--text);background:#18243c;border:1px solid #35455d;border-radius:7px}button{cursor:pointer;padding:5px 10px}button:hover{border-color:#7ea3c2;background:#20324e}button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:3px}button[aria-pressed=true]{background:#173d56;border-color:#76c8f5;color:#d9f3ff}input[type=checkbox],input[type=range]{accent-color:#75c5f5}input[type=checkbox]{width:15px;height:15px;cursor:pointer}select{padding:4px 8px}header{display:flex;justify-content:space-between;align-items:center;padding:10px 18px;border-bottom:1px solid var(--line);gap:16px;flex-shrink:0}h1{font-size:21px;letter-spacing:.3px;margin:0;line-height:1.4}h2{font-size:16px;margin:0 0 9px}h3{font-size:14px;margin:0 0 6px}p{margin:5px 0 10px}.muted,.small{color:var(--muted);font-size:12px}.version{font-size:11px;color:#bcddf6;border:1px solid #37506d;background:#142941;border-radius:5px;padding:2px 6px;vertical-align:middle;margin-left:8px}.mode{white-space:nowrap;font-size:12px;color:#adc2d9}main{display:grid;grid-template-columns:minmax(0,1fr) 8px minmax(350px,var(--side));flex:1;min-height:0;padding:10px 12px;gap:5px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;min-height:0;overflow:hidden}.chart-panel{display:flex;flex-direction:column}.chart-toolbar{padding:10px 12px 8px;border-bottom:1px solid var(--line);flex-shrink:0}.toolbar-top{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-bottom:7px}.toolbar-top h2{margin:0;font-size:15px}.compact{font-size:12px}.topics{display:flex;gap:5px;flex-wrap:wrap}.topics button{font-size:12px;padding:3px 8px}.topic-bar{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-top:7px}.topic-bar label{font-size:12px;display:flex;align-items:center;gap:6px}.plot-scroll{flex:1;min-height:0;overflow:auto;position:relative;background:#0b1529}.plot-scroll svg{display:block;width:100%;touch-action:pan-x pan-y}.plot-footer{padding:8px 12px;border-top:1px solid var(--line);flex-shrink:0}.curve-controls{display:flex;gap:5px 13px;flex-wrap:wrap;align-items:center}.curve-controls label{display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer;white-space:nowrap}.curve-controls label[data-off=true]{opacity:.5}.sw{display:inline-block;width:11px;height:3px;border-radius:3px;background:var(--c)}.plot-caption{font-size:11px;color:var(--muted);margin-top:5px;line-height:1.4}.splitter{cursor:col-resize;position:relative;align-self:stretch;border-radius:5px;touch-action:none}.splitter::after{content:"";position:absolute;top:45%;bottom:45%;width:3px;left:3px;background:#405774;border-radius:3px}.splitter:hover,.splitter:focus-visible{background:#243751}.reading-panel{display:flex;flex-direction:column}.reading-top{border-bottom:1px solid var(--line);padding:10px 12px 0;flex-shrink:0}.reading-title{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:9px}.reading-title h2{margin:0;font-size:15px}.tabs{display:flex;gap:3px;overflow-x:auto}.tabs button{border:0;border-radius:6px 6px 0 0;padding:7px 10px;white-space:nowrap;background:transparent;font-size:13px}.tabs button[aria-selected=true]{color:var(--accent);background:#1b2e47;box-shadow:inset 0 -2px 0 var(--accent)}.reader{min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;flex:1;scrollbar-gutter:stable;padding:12px}.tab-content[hidden]{display:none!important}.block,.note,.card{padding:12px;border:1px solid #2b3b54;border-radius:9px;background:#101a2e;margin-bottom:11px;overflow-wrap:anywhere}.block:last-child{margin-bottom:0}.note{font-size:13px;line-height:1.8}.note> b:first-child{color:#d4e9ff}.small{line-height:1.6}.highlight,.em{color:#8fe1ff}.mini-nav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}.mini-nav button{font-size:12px;padding:3px 8px}.overview-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}.metric{border:1px solid #2c3e59;border-radius:7px;padding:8px;background:#0e182a;font-size:12px}.metric strong{display:block;color:var(--accent);font-size:17px}.source{font-size:10px;color:#93aac7;background:#1a2941;border-radius:4px;padding:2px 5px;white-space:nowrap}.content-title{display:flex;align-items:center;justify-content:space-between;margin:15px 0 9px;gap:8px}.content-title h2{margin:0}details{margin:10px 0;border:1px solid #2b3b54;border-radius:8px;background:#101a2e}summary{padding:10px 12px;font-size:13px;cursor:pointer;color:#d4e7ff}details>.inner{padding:0 10px 10px}.topic-card{border-left:3px solid #71b9e8;background:#13243a}.topic-card .hint{font-size:12px;color:#90b1cd;margin-top:8px}.quick-events{display:flex;flex-wrap:wrap;gap:6px}.quick-events button{font-size:12px}.param-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.control{border:1px solid #2b3b54;border-radius:8px;padding:9px}.control label{display:flex;align-items:center;justify-content:space-between;font-size:12px;gap:5px}.control label span:last-child{color:#a5dffe;white-space:nowrap}.control input{width:100%;margin:9px 0 4px}.check{display:flex;align-items:flex-start;gap:8px;padding:7px 0;font-size:13px}.check input{margin-top:4px;flex-shrink:0}.equation,pre{white-space:pre-wrap;background:#0a1324;border:1px solid #2b3b54;border-radius:7px;padding:10px;font:12px/1.7 ui-monospace,Consolas,monospace;color:#c7e2f6;overflow-wrap:anywhere}.warning{color:#dfbb77;border-color:#6f5736;background:#262317;font-size:12px}.searchbar{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;align-items:center}.searchbar input{min-width:80px;flex:1;color:var(--text);background:#0d1728;border:1px solid #394c67;border-radius:6px;padding:7px 9px}.searchbar select{font-size:12px;max-width:100%}.term-card{padding:10px 11px;border:1px solid #2a3b55;background:#0e192c;border-radius:8px;margin-bottom:8px}.term-card h3{display:flex;align-items:center;justify-content:space-between;gap:7px}.term-card h3 button{padding:1px 4px;background:none;border-color:transparent;text-align:left;color:#bce6ff}.term-card dl{display:grid;grid-template-columns:65px 1fr;gap:4px 8px;margin:5px 0 0;font-size:12px}.term-card dt{color:#99b0cd}.term-card dd{margin:0;color:#e1ebfa}.table-scroll{overflow:auto}.terms-table{min-width:730px}table{width:100%;border-collapse:collapse;font-size:12px}th,td{text-align:left;vertical-align:top;border-bottom:1px solid #2d3d56;padding:8px 7px}th{color:#bcd1eb;background:#14233a;position:sticky;top:0}.summary-table td:nth-child(2){white-space:nowrap}.summary-table{overflow:auto}.teaching-note{font-size:11px;color:#b5a888;padding:5px 8px;border-top:1px solid var(--line);background:#151b28}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}footer{font-size:11px;color:#8fa7c3;padding:0 15px 6px;display:flex;justify-content:space-between;gap:8px}.tooltip{position:fixed;pointer-events:none;z-index:9;max-width:300px;background:#11243e;border:1px solid #547391;color:#e9f4ff;border-radius:8px;padding:8px 11px;font-size:12px;box-shadow:0 5px 20px #0008}.chart-event,.phase-band{cursor:pointer}svg text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif}.empty{padding:30px;color:var(--muted)}
+@media(min-width:961px) and (max-height:850px){.plot-caption{display:none}.chart-toolbar{padding:8px 12px 6px}.teaching-note{font-size:10px;padding:4px 7px}.plot-footer{padding:7px 10px}}
+@media(max-width:960px){header{padding:8px 12px}h1{font-size:17px}.mode{display:none}main{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(245px,52%) minmax(0,1fr);gap:9px;padding:7px}.splitter{display:none}.chart-toolbar{padding:6px 10px}.toolbar-top{margin-bottom:4px}.topics button{padding:1px 6px;font-size:11px}.topic-bar{margin-top:4px}.plot-footer{padding:4px 8px}.plot-caption{display:none}.curve-controls{gap:1px 8px}.curve-controls label{font-size:11px}.reading-top{padding:7px 10px 0}.reading-title{display:none}.tabs button{padding:5px 10px}.reader{padding:10px}footer{display:none}.teaching-note{font-size:10px;padding:3px 7px}.param-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:550px){.toolbar-top h2{font-size:12px}.toolbar-top button{font-size:11px;padding:3px 5px}.topic-bar .small{display:none}.topic-bar select{font-size:11px;padding:1px 4px}.topic-bar label{font-size:11px}.reading-top{padding-top:4px}.tabs button{font-size:12px}.version{font-size:9px}.overview-grid{grid-template-columns:1fr 1fr}.param-grid{grid-template-columns:1fr}.topics{gap:3px}main{grid-template-rows:minmax(250px,51%) minmax(0,1fr)}}
+</style>
+</head>
+<body>
+<header><div><h1>Wiggers 完整教学图<span class="version">v2.1 · 交互修复</span></h1><div class="small">电活动 · 压力 · 流量 · 容积 · 瓣膜 · 心音</div></div><div class="mode">教学波形合成 · 本版未启用物理模式</div></header>
+<main id="workspace">
+<section class="panel chart-panel" aria-label="同步波形和显示控制">
+ <div class="chart-toolbar">
+  <div class="toolbar-top"><h2>学习主题高亮</h2><div><button id="clearHighlight" class="compact" type="button">取消高亮</button> <button id="restoreView" class="compact" type="button">恢复显示</button></div></div>
+  <div id="topicBtns" class="topics" role="group" aria-label="点击主题高亮，再点一次取消"></div>
+  <div class="topic-bar"><span class="small" id="selectionStatus">全部主题 · 点击可聚焦，再点取消</span><label>标记<select id="annotationMode"><option value="all">全部显示</option><option value="focus">仅当前主题</option><option value="none">全部隐藏</option></select></label><label>图形<select id="chartSize"><option value="fit">适配屏幕</option><option value="large">放大查看</option></select></label></div>
+ </div>
+ <div id="plotScroll" class="plot-scroll"><svg id="chart" role="img" aria-label="共用时间轴的分轨 Wiggers 教学波形"></svg></div>
+ <div class="plot-footer"><div class="curve-controls" id="curveControls" role="group" aria-label="波形显示和隐藏"></div><div class="plot-caption">勾选控制整条波形显示；主题按钮只负责高亮。点图中事件查看说明，拖动中间分隔条调整阅读宽度。</div></div>
+ <div class="teaching-note">相对 R 峰计时；标记为旧版预设位置，非自动检测结果。仍使用原合成方程，不能作为定量生理仿真。</div>
+</section>
+<div id="splitter" class="splitter" role="separator" aria-label="调整图与文字区宽度" aria-orientation="vertical" tabindex="0" aria-valuemin="25" aria-valuemax="65" aria-valuenow="39"></div>
+<aside class="panel reading-panel" aria-label="完整教学内容">
+ <div class="reading-top"><div class="reading-title"><h2>完整教学内容</h2><span class="small">文字独立滚动 · 图保持在屏幕内</span></div><nav class="tabs" role="tablist"><button id="tab-learn" data-tab="learn" role="tab" aria-selected="true" aria-controls="pane-learn">学习正文</button><button id="tab-terms" data-tab="terms" role="tab" aria-selected="false" aria-controls="pane-terms">完整术语表</button><button id="tab-params" data-tab="params" role="tab" aria-selected="false" aria-controls="pane-params">参数与选项</button><button id="tab-model" data-tab="model" role="tab" aria-selected="false" aria-controls="pane-model">模型与方程</button></nav></div>
+ <div class="reader" id="reader">
+  <section class="tab-content" id="pane-learn" role="tabpanel" aria-labelledby="tab-learn">
+   <div class="mini-nav"><button data-anchor="section-times">关键时点</button><button data-anchor="section-phases">阶段与机理</button><button data-anchor="section-p2">P2 对照</button><button data-anchor="section-early">早期版补充</button></div>
+   <div class="note topic-card" id="topicExplain"></div>
+   <div class="block"><h2>看图顺序建议</h2><div id="studyOrder" class="note-text"></div></div>
+   <div class="content-title" id="section-times"><h2>当前参数下的关键时点</h2><span class="source">相对 R 峰</span></div>
+   <div class="overview-grid" id="coreMetrics"></div><div class="note warning" id="timingWarning" style="margin-top:10px"></div>
+   <details><summary>展开早期版完整时点表（10 项）</summary><div class="inner summary-table" id="summary"></div></details>
+   <div class="content-title" id="section-phases"><h2>阶段与物理过程</h2><span class="source">Wiggers 原版完整正文</span></div><div id="phaseExplain"></div>
+   <div class="content-title" id="section-p2"><h2>两个 P2 的区别</h2><span class="source">原版解释</span></div><div class="note" id="p2Compare"></div><div class="note" id="p2CheckExplain"></div><div class="note" id="p2Long"></div>
+   <div class="content-title" id="section-early"><h2>完整物理过程：从电到机械</h2><span class="source">早期教学版完整正文</span></div><div id="phaseEarly"></div>
+   <div class="block"><h2>常见术语速览</h2><div class="quick-events" id="earlyEvents"></div><div class="small" id="earlyEventExplain" style="margin-top:8px">点击术语可在图上定位，并显示其原版解释。</div></div>
+   <details><summary>教学页概述（原版）</summary><div class="inner" id="originalIntro"></div></details>
+  </section>
+  <section class="tab-content" id="pane-terms" role="tabpanel" aria-labelledby="tab-terms" hidden>
+   <div class="block"><h2>术语、时序、解释与物理过程总表</h2><div class="small">恢复 Wiggers 原版 24 条及早期教学版 21 条。两版各自的说明均保留；可按来源筛选。</div></div>
+   <div class="searchbar"><input type="search" id="termSearch" placeholder="搜索：P2、PEP、射血…" aria-label="搜索术语"><select id="termSource" aria-label="术语来源"><option value="all">两版全部</option><option value="main">Wiggers 原版</option><option value="early">早期教学版</option></select><button id="termFormat" class="compact" aria-pressed="false">切换为表格</button></div>
+   <div id="termCount" class="small" style="margin-bottom:8px"></div><div id="termList"></div>
+  </section>
+  <section class="tab-content" id="pane-params" role="tabpanel" aria-labelledby="tab-params" hidden>
+   <div class="block"><h2>交互参数</h2><div class="small">保留原版所有参数及其解释。高亮、标记隐藏和波形显示不会改动这些数值。</div></div>
+   <div class="param-grid" id="params"></div>
+   <div class="block" style="margin-top:12px"><h2>原版教学选项</h2><label class="check"><input type="checkbox" id="showPressP2" checked><span>增强主动脉压力波 P2 / augmentation peak<br><span class="small">这是原版形态选项，会改变合成主动脉曲线；不是单纯隐藏文字标记。</span></span></label><label class="check"><input type="checkbox" id="showS2Split" checked><span>显示第二心音分裂 A2 / P2<br><span class="small">只影响心音轨的肺动脉瓣成分，不控制压力波 P2。</span></span></label><label class="check"><input type="checkbox" id="showJVP"><span>附加显示 JVP a/c/v 波<br><span class="small">与下方图例的 JVP 显示状态同步。</span></span></label></div>
+   <div class="note"><b>三个控制互不代替</b><br>主题按钮：高亮相关波形、事件和标记，再次点击取消。<br>“标记”选项：控制文字、圆点、引线和事件参考线。<br>下方图例复选框：显示或隐藏整条波形及其局部标记。<br>“恢复显示”：恢复常规七条波形、全部标记并取消高亮；不重置生理参数或 P2 形态选项。</div>
+  </section>
+  <section class="tab-content" id="pane-model" role="tabpanel" aria-labelledby="tab-model" hidden>
+   <div class="note warning"><b>本次范围：界面修复，模型未升级</b><br>以下保留此前模型说明。后台仍沿用 v2 的 Gaussian / sigmoid 合成方程；本次没有联立求解压力、容积、流量，也没有启用物理模式。旧版事件时间是预设的，不保证与合成曲线的极值、拐点或物理阈值一致。</div>
+   <div id="modelCurrent"></div><div id="modelFuture"></div>
+   <div class="note"><b>时序数据检查</b><br><span id="modelTimingCheck"></span><br>本次保留原数值，只对不一致的位置提示，不把无效时段绘成正常阶段。</div>
+   <div class="note"><b>实际使用的基本函数</b><pre>G(t; A, μ, σ) = A · exp(−(t−μ)² / (2σ²))
+S(x) = 1 / (1 + exp(−x))
+ECG(t) = GP(t) − GQ(t) + GR(t) − GS(t) + GT(t)
+
+P_Ao(t) = 基线 + 射血过渡 + P1 高斯项
+        + 可选 P2 高斯项 + 切迹与回弹项</pre>具体实现保存在本 HTML 的 computeModel() 内。波形值与显示坐标分离，改变布局或高亮不会修改波形值。</div>
+  </section>
+ </div>
+</aside>
+</main>
+<footer><span>完整正文与两版术语保留 · 可离线使用</span><span id="footerStatus">界面修复版 / 原合成模型</span></footer>
+<div class="tooltip" id="tooltip" hidden></div><div id="liveStatus" class="sr-only" aria-live="polite"></div>
+<script>
+const CONTENT = {"intro": "\n    这是在你前一版基础上的进一步扩展版。它把一个心动周期中最常见的几类信息同步放到一起：<b>ECG、左房压力（a/c/v 波）、左心室压力、主动脉根部压力、主动脉流量、左心室容积、心音，以及阶段划分</b>。目的是帮助你把“电活动、瓣膜事件、压力、流量、容积、心音、反射波”统一到一张时间图里理解。<b>统一仍以 R 波峰为 0 ms</b>。\n  ", "phaseW": "<div class=\"note\"><b>1. 心房收缩（P 波之后）</b><br>心房去极后发生机械收缩，推动最后一部分血液进入左室，左房压形成 <b>a 波</b>，左室容积轻度升高，形成舒张末充盈。</div>\n    <div class=\"note\" style=\"margin-top:10px;\"><b>2. QRS → 二尖瓣关闭 → 等容收缩</b><br>心室去极后，左室开始发力，左室压迅速上升。左室压一旦高于左房压，二尖瓣关闭（MC），出现 S1。此时主动脉瓣尚未打开，室内容积不变，所以称“等容收缩”。左房压此时可见 <b>c 波</b>。</div>\n    <div class=\"note\" style=\"margin-top:10px;\"><b>3. 主动脉瓣开放 → 射血期</b><br>左室压超过主动脉压后，主动脉瓣开放（AO），血液射入主动脉。主动脉流量迅速升高，左室容积下降，主动脉压上升并形成收缩峰。早期常见 P1；若反射波提前返回或血管较硬，晚收缩可能出现压力波 P2。</div>\n    <div class=\"note\" style=\"margin-top:10px;\"><b>4. 主动脉瓣关闭 → 重搏切迹 → 等容舒张</b><br>左室收缩衰减，室压低于主动脉压，主动脉瓣关闭（AC），在主动脉压曲线上形成重搏切迹。其附近对应第二心音中的 A2。随后两瓣都关闭，左室压迅速下降但容积不变，进入等容舒张期。</div>\n    <div class=\"note\" style=\"margin-top:10px;\"><b>5. 二尖瓣开放 → 快速充盈 → 舒张中期</b><br>当左室压低于左房压，二尖瓣开放（MO），左房血快速流入左室，左室容积明显回升，左房压中的 <b>v 波</b> 在开瓣后释放并下降。随后进入舒张中期（diastasis），充盈放慢。</div>\n    <div class=\"note\" style=\"margin-top:10px;\"><b>6. T 波与舒张开始</b><br>T 波反映心室复极。电学复极并不等于机械舒张瞬时开始，但它通常处在收缩末到舒张早期的关键过渡时段，是联系电与机械的重要标志。</div>", "phaseA": "<div class=\"note\"><b>1. 心房去极与心房收缩（P 波附近）</b><br>窦房结激动后，心房肌去极形成 P 波。机械上，心房收缩略滞后于电活动，推动血液从左房进入左室，形成舒张末期“最后一脚”充盈，左室容积轻度上升，左室压也可有轻微抬升。</div>\n    <div class=\"note\" style=\"margin-top:10px;\"><b>2. 心室去极（QRS）→ 等容收缩期</b><br>QRS 代表心室快速去极。去极后心肌开始收缩，但主动脉瓣尚未打开；先是左室压快速上升，超过左房压后二尖瓣关闭，出现 S1。此时二尖瓣和主动脉瓣都关闭，容积不变，所以叫“等容收缩”。</div>\n    <div class=\"note\" style=\"margin-top:10px;\"><b>3. 主动脉瓣开放 → 射血期</b><br>当左室压超过主动脉压，主动脉瓣开放，血液被射入主动脉根部。主动脉压迅速上升。早期射血量大、流速高，形成压力的快速上升段及常见的第一个收缩峰 P1。之后血流减速、反射波回传、血管顺应性共同塑造晚收缩形态，有时出现第二收缩峰 P2。</div>\n    <div class=\"note\" style=\"margin-top:10px;\"><b>4. 主动脉瓣关闭 → 重搏切迹 → 等容舒张</b><br>随着左室收缩衰减，室压低于主动脉压，主动脉瓣关闭。关闭瞬间，主动脉根部压力曲线常出现一个小切迹（重搏切迹、incisura），之后可见轻度回弹形成重搏波。此时进入等容舒张：两瓣膜关闭，左室压快速下降，容积暂时不变，对应 S2。</div>\n    <div class=\"note\" style=\"margin-top:10px;\"><b>5. 二尖瓣开放 → 快速充盈 → 舒张中期</b><br>当左室压低于左房压，二尖瓣开放，左室快速充盈，容积明显上升。之后随着房室压差减小，进入舒张中期（diastasis），充盈速度放慢。若心率加快，这一段通常最先被压缩缩短。</div>\n    <div class=\"note\" style=\"margin-top:10px;\"><b>6. T 波的意义</b><br>T 波是心室复极，说明电学上心室开始恢复。它与机械舒张并非完全同步，但通常出现在射血后半段到舒张早期附近，因此常把它看作收缩接近结束、舒张将开始的电学标志。</div>", "p2Long": "\n<b>关于你问的 P2：</b><br/>\n          在很多教学图里，<span class=\"em\">P2</span> 并不总是明显。因为它常来自 <b>晚收缩期压力增高</b>，成因包括：① 外周反射波回传；② 主动脉和大动脉顺应性变化；③ 左室晚期射血/减速特征。年轻、血管顺应性好的人，波反射较弱，可能只见一个圆钝的收缩峰，P2 很不突出；而在年龄增大、外周阻力升高、动脉僵硬、反射波提前回来的情况下，P2 会更明显。\n        ", "studyOrder": "先看 ECG 与瓣膜事件；再看左室压与主动脉压；然后看流量与容积；最后把 a/c/v 波和心音分裂加进来。这样最容易形成完整的因果链。", "controls": ["<div class=\"control\">\n<label><span>心率 HR</span><span id=\"hrVal\"></span></label>\n<input id=\"hr\" max=\"120\" min=\"45\" type=\"range\" value=\"72\"/>\n<div class=\"small\">决定 RR 间期。心率增快时，舒张中期（diastasis）最先被压缩。</div>\n</div>", "<div class=\"control\">\n<label><span>PR 间期</span><span id=\"prVal\"></span></label>\n<input id=\"pr\" max=\"240\" min=\"100\" type=\"range\" value=\"160\"/>\n<div class=\"small\">从心房去极开始到心室去极开始，反映房室传导时间。</div>\n</div>", "<div class=\"control\">\n<label><span>QRS 时限</span><span id=\"qrsVal\"></span></label>\n<input id=\"qrs\" max=\"160\" min=\"70\" type=\"range\" value=\"95\"/>\n<div class=\"small\">心室快速去极时长。</div>\n</div>", "<div class=\"control\">\n<label><span>射血前期 PEP</span><span id=\"pepVal\"></span></label>\n<input id=\"pep\" max=\"120\" min=\"40\" type=\"range\" value=\"60\"/>\n<div class=\"small\">从 QRS 起点到主动脉瓣开放，包含电-机械延迟与等容收缩期。</div>\n</div>", "<div class=\"control\">\n<label><span>左室射血时间 LVET</span><span id=\"lvetVal\"></span></label>\n<input id=\"lvet\" max=\"360\" min=\"180\" type=\"range\" value=\"290\"/>\n<div class=\"small\">从主动脉瓣开放到关闭。</div>\n</div>", "<div class=\"control\">\n<label><span>等容舒张期 IVRT</span><span id=\"ivrtVal\"></span></label>\n<input id=\"ivrt\" max=\"140\" min=\"40\" type=\"range\" value=\"80\"/>\n<div class=\"small\">从主动脉瓣关闭到二尖瓣开放。</div>\n</div>"], "p2CheckExplain": "\n      注意：这里故意把两个容易混淆的 “P2” 都放进来：<br/>\n      ① <b>主动脉压力波形 P2</b> = 第二收缩峰 / 增强峰；<br/>\n      ② <b>S2 的 P2</b> = 肺动脉瓣关闭音，是第二心音分裂中的肺动脉瓣成分。<br/>\n      它们不是一回事。\n    ", "modelCurrent": "<div class=\"block\">\n<h2>关于后台波形方程</h2>\n<div class=\"note\">\n        当前页面使用的是 <b>简化数学波形模拟</b>，不是严格求解完整血流动力学偏微分方程，也不是完整的 lumped-parameter 生理仿真器。核心思路是：\n      </div>\n<div class=\"equation\" style=\"margin-top:8px;\">\nECG ≈ 多个 Gaussian 波包叠加（P / Q / R / S / T）\n\npressure / volume / flow ≈ logistic(sigmoid) 过渡 + Gaussian 局部峰/切迹\n\n例如：\nAoP(t) = baseline_runoff(t)\n       + early_ejection_rise(t)\n       + P1_gaussian(t)\n       + optional_P2_gaussian(t)\n       + incisura(t)\n       + dicrotic_rebound(t)\n      </div>\n<div class=\"note\" style=\"margin-top:8px;\">\n        也就是说，这一版的目标是 <b>教学可视化与时序关系清晰</b>，不是精确到病人生理参数反演的物理仿真。\n      </div>\n</div>", "modelFuture": "<div class=\"block\">\n<h2>进一步说明：如果改成更“物理”的模型，可以怎么做？</h2>\n<div class=\"tabs\">\n<span class=\"tab\">time-varying elastance</span>\n<span class=\"tab\">valve state logic</span>\n<span class=\"tab\">Windkessel arterial model</span>\n<span class=\"tab\">atrial / ventricular compliance</span>\n<span class=\"tab\">flow continuity</span>\n</div>\n<div class=\"note\" style=\"margin-top:10px;\">\n      更物理一点的版本，通常会这样建模：左室用 <b>时变弹性模型 E(t)</b>，令 <b>P_lv(t)=E(t)·(V_lv(t)-V0)</b>；瓣膜用“开/关状态逻辑”，当压差跨过阈值时决定是否开放；主动脉与外周血管可用 <b>2 元或 3 元 Windkessel 模型</b> 表达压力-流量-阻力-顺应性关系。这样会更接近真实生理，也更适合做设备算法验证，但页面实现和参数管理会复杂得多。\n      </div>\n</div>"};
+const TOPICS = [
+  {id:'ecg', label:'ECG：P / QRS / T', desc:'看电活动的起点。P 波代表心房去极，QRS 代表心室快速去极，T 波代表心室复极。后续所有机械事件都要理解为“稍微滞后于电活动”。'},
+  {id:'valves', label:'瓣膜事件：MC / AO / AC / MO', desc:'看机械开关。MC=二尖瓣关闭，AO=主动脉瓣开放，AC=主动脉瓣关闭，MO=二尖瓣开放。一个心动周期最重要的四个门槛点。'},
+  {id:'lap', label:'左房压：a / c / v 波', desc:'a 波来自心房收缩；c 波多与二尖瓣关闭后向左房侧鼓起及等容收缩期相关；v 波是心室收缩期间左房持续充盈形成的峰。'},
+  {id:'press', label:'压力波：左室压与主动脉压', desc:'左室压先升高，超过主动脉压后开始射血。主动脉压在主动脉瓣关闭处形成重搏切迹。收缩期可有 P1/P2 形态变化。'},
+  {id:'flow', label:'流量与容积', desc:'主动脉流量在主动脉瓣开放后迅速上升，再逐渐下降。左室容积在射血期下降，在舒张充盈期回升。'},
+  {id:'sounds', label:'心音：S1 / S2 / A2 / P2', desc:'S1 主要对应房室瓣关闭。S2 主要对应半月瓣关闭，其中 A2 来自主动脉瓣，P2 来自肺动脉瓣。分裂是心音概念。'},
+  {id:'p2', label:'两个 P2 的区别', desc:'主动脉压力波 P2 = 第二收缩峰/增强峰；心音 P2 = 第二心音的肺动脉瓣成分。它们时相接近收缩末，但含义完全不同。'}
+];
+const EARLY_EVENTS = [
+  {id:'P', label:'P 波', tip:'心房去极，随后引发心房收缩'},
+  {id:'QRS', label:'QRS', tip:'心室快速去极；R 波为本图零点'},
+  {id:'T', label:'T 波', tip:'心室复极，机械舒张开始占主导'},
+  {id:'MC', label:'二尖瓣关闭', tip:'左室压超过左房压，S1 产生'},
+  {id:'AO', label:'主动脉瓣开放', tip:'左室压超过主动脉压，开始射血'},
+  {id:'P1', label:'P1', tip:'第一收缩峰，常更接近早期射血峰'},
+  {id:'P2', label:'P2', tip:'第二收缩峰/晚收缩峰，可能不明显'},
+  {id:'INC', label:'重搏切迹', tip:'主动脉瓣关闭后压力短暂切迹'},
+  {id:'MO', label:'二尖瓣开放', tip:'左室压低于左房压，开始充盈'},
+  {id:'AS', label:'心房收缩', tip:'舒张末期“补一脚”充盈'}
+];
+function restoredRows(d){
+ const {qrsOn,qTime,sTime,pPeak,pStart,tPeak,tEnd,mc,ao,ac,mo,RR,atrialStart,atrialEnd,p1,p2,a2,s2p2,rapidFillEnd,diastasisEnd,showPressP2,showS2Split}=d;
+ const aoOpen=ao,notch=ac,showP2=showPressP2,diaMin=ao-15,dpdtAo=ao+55;
+ const main = [
+    ['ECG','P 波',`${Math.round(pPeak)} ms 左右`,'心房去极','心房激动后引起心房收缩，为舒张末充盈做准备。'],
+    ['ECG','PR 间期',`${Math.round(pStart)} ~ ${Math.round(qrsOn)} ms`,'房室传导时间','包含房内传导、AV 结延迟和希浦系统传导。'],
+    ['ECG','QRS',`${Math.round(qrsOn)} ~ ${Math.round(sTime)} ms`,'心室快速去极','机械收缩紧随其后，但略有延迟。'],
+    ['ECG','T 波',`${Math.round(tPeak)} ms 左右`,'心室复极','是收缩末-舒张早期的重要电学标志。'],
+    ['瓣膜','MC（二尖瓣关闭）',`${mc} ms`,'S1 主要对应事件','左室压超过左房压，房室瓣关闭，进入等容收缩。'],
+    ['瓣膜','AO（主动脉瓣开放）',`${Math.round(ao)} ms`,'射血开始','左室压超过主动脉压，开始前向射血。'],
+    ['瓣膜','AC（主动脉瓣关闭）',`${Math.round(ac)} ms`,'对应重搏切迹与 A2','左室压低于主动脉压，半月瓣关闭。'],
+    ['瓣膜','MO（二尖瓣开放）',`${Math.round(mo)} ms`,'充盈开始','左室压低于左房压，开始快速充盈。'],
+    ['左房压','a 波',`${Math.round((atrialStart+atrialEnd)/2)} ms 左右`,'心房收缩波','心房主动收缩导致左房压短暂升高。'],
+    ['左房压','c 波',`${Math.round(mc+18)} ms 左右`,'等容收缩早期小波','可理解为房室瓣关闭后向房侧轻度鼓起/相关压力影响。'],
+    ['左房压','v 波',`${Math.round(mo-28)} ms 左右`,'房室瓣关闭期间左房充盈波','心室收缩时肺静脉回流继续进入左房，左房压逐渐升高。'],
+    ['压力','左室压',`QRS 后迅速上升`,'机械收缩直接指标','等容收缩期快速上升，射血后下降。'],
+    ['压力','主动脉压',`AO 后上升，AC 处切迹`,'后负荷与射血结果的体现','由前向射血与血管系统特性共同塑形。'],
+    ['压力','P1',`${Math.round(p1)} ms`,'第一收缩峰','更接近早期射血主峰。'],
+    ['压力','压力波 P2',showPressP2?`${Math.round(p2)} ms`:'常可不明显','第二收缩峰 / augmentation peak','与晚收缩增强、反射波提前、动脉僵硬度增加等相关。'],
+    ['压力','重搏切迹',`${Math.round(ac)} ms`,'瓣膜关闭切迹','主动脉瓣关闭及局部流体力学回弹所致。'],
+    ['流量','主动脉流量峰',`${Math.round(ao+78)} ms`,'射血流量最大点','流量先升后降，通常略早于压力晚期形态变化。'],
+    ['容积','EDV',`${Math.round(ao-10)} ms 左右`,'舒张末容积','射血前左室容积最大。'],
+    ['容积','ESV',`${Math.round(ac+5)} ms 左右`,'收缩末容积','射血结束后左室剩余容积。'],
+    ['心音','S1',`${Math.round(mc+4)} ms`,'第一心音','主要由房室瓣关闭和周围结构振动产生。'],
+    ['心音','S2',`${Math.round(a2)} ms 左右`,'第二心音','主要由半月瓣关闭产生，包含 A2 和 P2 成分。'],
+    ['心音','A2',`${Math.round(a2)} ms`,'主动脉瓣关闭音','通常比肺动脉瓣关闭音稍早。'],
+    ['心音','P2（心音）',showS2Split?`${Math.round(s2p2)} ms`:'可隐藏','肺动脉瓣关闭音','是 S2 的肺动脉瓣成分，不是压力波 P2。'],
+    ['静脉脉搏','JVP a/c/v（可选）',`与心房机械事件近似同步`,'右心侧静脉脉搏教学对应','帮助类比理解心房活动、三尖瓣影响与静脉回流时相。']
+  ];
+ const early = [
+    ['ECG','P 波',`${Math.round(pPeak)} ms 左右`,'心房去极','激动自窦房结传播至心房，随后出现心房机械收缩，舒张末充盈增强。'],
+    ['ECG','PR 间期',`${Math.round(pStart)} ~ ${Math.round(qrsOn)} ms`,'房室传导时间','包含房内传导、AV 结延迟、His-Purkinje 传导。AV 结延迟保证心房先完成充盈。'],
+    ['ECG','Q 波',`${Math.round(qTime)} ms`,'室间隔早期去极的一部分','为 QRS 复合体最早负向偏转之一。'],
+    ['ECG','R 波','0 ms','室去极主峰、统一零点','最常用的时间基准，因为识别稳定、峰值明显。'],
+    ['ECG','S 波',`${Math.round(sTime)} ms`,'室去极末段的一部分','QRS 结束后心室大部已完成去极，机械收缩继续发展。'],
+    ['ECG','T 波',`${Math.round(tPeak)} ms 左右`,'心室复极','心肌复极并开始进入机械舒张占主导的阶段。'],
+    ['机械','心房收缩',`${Math.round((atrialStart+atrialEnd)/2)} ms 左右`,'舒张末辅助充盈','左房压略升，左室容积和压力轻度上升，形成“atrial kick”。'],
+    ['机械','等容收缩期 IVCT',`${mc} ~ ${Math.round(aoOpen)} ms`,'瓣膜全闭但室压快速升高','二尖瓣已关、主动脉瓣未开，容积不变，压力快速爬升。'],
+    ['机械','射血前期 PEP',`${Math.round(qrsOn)} ~ ${Math.round(aoOpen)} ms`,'从 QRS 起点到主动脉瓣开放','包含电-机械延迟与等容收缩，是评价收缩性能的常用时段。'],
+    ['机械','快速射血期',`${Math.round(aoOpen)} ~ ${Math.round(aoOpen+120)} ms`,'早期高流速射血','主动脉压快速升高，流速和加速度较高，常形成 P1。'],
+    ['机械','减速射血期',`${Math.round(aoOpen+120)} ~ ${Math.round(notch)} ms`,'晚期射血','左室仍在排血，但流速下降；P2 若存在常出现在这一带。'],
+    ['压力','舒张压最低点',`${Math.round(diaMin)} ms 左右`,'射血前后主动脉压低谷','反映舒张期 runoff 后的最低压力水平，接近新一轮射血开始。'],
+    ['压力','P1',`${Math.round(p1)} ms`,'第一收缩峰','多与早期射血和前向压力波主峰相关。'],
+    ['压力','P2', showP2?`${Math.round(p2)} ms`:'可很不明显','第二收缩峰 / augmentation peak','通常与晚期压力增强有关，可由反射波提前返回、动脉顺应性下降等增强。不是第二心音的 P2。'],
+    ['压力','重搏切迹 Incisura',`${Math.round(notch)} ms`,'主动脉瓣关闭所致小切迹','前向流终止、瓣膜关闭及局部反弹造成短暂切迹。'],
+    ['压力','重搏波 Dicrotic wave',`${Math.round(notch+20)} ms 左右`,'切迹后的轻度回升','常被看作切迹之后的回弹/振荡表现。'],
+    ['机械','等容舒张期 IVRT',`${Math.round(notch)} ~ ${Math.round(mo)} ms`,'室压快速下降、容积不变','主动脉瓣已关、二尖瓣未开，两瓣均闭，左室快速松弛。'],
+    ['机械','快速充盈期',`${Math.round(mo)} ~ ${Math.round(rapidFillEnd)} ms`,'二尖瓣开后快速进血','左室容积迅速增加，是早期舒张充盈的主阶段。'],
+    ['机械','舒张中期 / diastasis',`${Math.round(rapidFillEnd)} ~ ${Math.round(diastasisEnd)} ms`,'慢充盈阶段','房室压差小，血流慢而平稳；心动过速时这一段明显缩短。'],
+    ['心音','S1',`${mc} ms 左右`,'第一心音','主要来自房室瓣关闭与相关结构振动。'],
+    ['心音','S2',`${Math.round(notch)} ms 左右`,'第二心音','主要来自半月瓣关闭；A2 与主动脉瓣关闭最相关。']
+  ];
+return {main,early};
+}
+function restoredSummary(d){
+ const {qrsOn,qTime,sTime,pPeak,pStart,tPeak,tEnd,mc,ao,ac,mo,RR,atrialStart,atrialEnd,p1,p2,a2,s2p2,rapidFillEnd,diastasisEnd,showPressP2,showS2Split}=d;
+ const aoOpen=ao,notch=ac,showP2=showPressP2,diaMin=ao-15,dpdtAo=ao+55;
+return `<table>
+      <tr><td><span class="em">QRS 起点</span></td><td>${Math.round(qrsOn)} ms</td><td>室去极开始</td></tr>
+      <tr><td><span class="em">二尖瓣关闭（S1）</span></td><td>${mc} ms</td><td>左室压 > 左房压，进入等容收缩</td></tr>
+      <tr><td><span class="em">主动脉瓣开放</span></td><td>${Math.round(aoOpen)} ms</td><td>左室压 > 主动脉压，开始射血</td></tr>
+      <tr><td><span class="em">舒张压最低点 / 上升前低谷</span></td><td>${Math.round(diaMin)} ms</td><td>射血前后附近的主动脉压低值</td></tr>
+      <tr><td><span class="em">主动脉压力上升最快段</span></td><td>约 ${Math.round(dpdtAo)} ms</td><td>对应早期快速射血</td></tr>
+      <tr><td><span class="em">P1</span></td><td>${Math.round(p1)} ms</td><td>第一收缩峰，通常与早期射血相关</td></tr>
+      <tr><td><span class="em">${showP2?'P2':'P2（已弱化）'}</span></td><td>${showP2?Math.round(p2)+' ms':'常可不明显'}</td><td>晚收缩第二峰/增强峰</td></tr>
+      <tr><td><span class="em">重搏切迹（S2）</span></td><td>${Math.round(notch)} ms</td><td>主动脉瓣关闭，进入等容舒张</td></tr>
+      <tr><td><span class="em">二尖瓣开放</span></td><td>${Math.round(mo)} ms</td><td>左室压 < 左房压，开始快速充盈</td></tr>
+      <tr><td><span class="em">下一搏 R 波</span></td><td>${Math.round(RR)} ms</td><td>RR 间期结束</td></tr>
+    </table>`;
+}
+function computeModel(p,options){
+ const HR=+p.hr,RR=60000/HR,PR=+p.pr,QRS=+p.qrs,PEP=+p.pep,LVET=+p.lvet,IVRT=+p.ivrt;
+ const {showPressP2,showS2Split}=options;
+ const qrsOn=-QRS*0.35,qTime=-QRS*0.22,sTime=QRS*0.20;
+ const pPeak=qrsOn-PR*0.55,pStart=pPeak-40,pEnd=pPeak+34,tPeak=290,tEnd=360;
+ const mc=30,ao=qrsOn+PEP,ac=ao+LVET,mo=ac+IVRT;
+ const rapidFillEnd=mo+110,diastasisEnd=RR-180,atrialStart=pStart+35,atrialEnd=mc-15;
+ const p1=ao+76,p2=ao+190,a2=ac+3,s2p2=ac+32,flowPk=ao+78;
+ const tMin=-260,tMax=Math.max(980,RR+120);
+ const out={ecg:[],la:[],lv:[],ao:[],flow:[],vol:[],hs:[],jvp:[]};
+ for(let t=tMin;t<=tMax;t+=2){
+    const ecg = gauss(t,pPeak,15,0.40)-gauss(t,qTime,5,0.20)+gauss(t,0,6,1.20)-gauss(t,sTime,6,0.30)+gauss(t,tPeak,36,0.52);
+    out.ecg.push([t,ecg]);
+
+    let la=7;
+    la += gauss(t,(atrialStart+atrialEnd)/2,15,2.6);
+    la += gauss(t,mc+18,14,1.5);
+    la += gauss(t,mo-30,32,3.7);
+    la -= gauss(t,mo+18,22,1.8);
+    la -= gauss(t,mc+48,20,0.9);
+    out.la.push([t,la]);
+
+    let lvp=8;
+    lvp += 5*(sigmoid((t-atrialStart)/11)-sigmoid((t-atrialEnd)/11));
+    lvp += 116*(sigmoid((t-mc)/10)-sigmoid((t-ac)/31));
+    lvp -= 10*(sigmoid((t-ac)/18)-sigmoid((t-mo)/18));
+    lvp = clamp(lvp,4,140);
+    out.lv.push([t,lvp]);
+
+    let aop=82-0.017*(t+20);
+    if(t>ao){
+      aop += 40*(sigmoid((t-(ao+18))/11)-sigmoid((t-(ao+145))/35));
+      aop += 9*gauss(t,p1,34,1);
+      if(showPressP2) aop += 14*gauss(t,p2,46,1);
+    }
+    if(t>ac){ aop += -6*gauss(t,ac+4,6,1)+4*gauss(t,ac+18,14,1); }
+    aop=clamp(aop,48,140);
+    out.ao.push([t,aop]);
+
+    let flow=0;
+    if(t>ao && t<ac){
+      flow += 0.95*(sigmoid((t-(ao+18))/10)-sigmoid((t-(ac-20))/18));
+      flow *= Math.exp(-Math.max(0,t-(ao+75))/420);
+      flow += 0.08*gauss(t,ao+55,24,1);
+    }
+    out.flow.push([t,clamp(flow,0,1.2)]);
+
+    let vol=118;
+    vol += 10*(sigmoid((t-atrialStart)/10)-sigmoid((t-atrialEnd)/10));
+    vol -= 64*(sigmoid((t-(ao+25))/20)-sigmoid((t-(ac-18))/28));
+    vol += 38*(sigmoid((t-(mo+24))/20)-sigmoid((t-(rapidFillEnd))/32));
+    vol += 16*(sigmoid((t-(rapidFillEnd+30))/30)-sigmoid((t-(diastasisEnd))/45));
+    out.vol.push([t,clamp(vol,48,135)]);
+
+    let jvp=6;
+    jvp += gauss(t,(atrialStart+atrialEnd)/2,14,2.2);
+    jvp += gauss(t,mc+16,14,1.3);
+    jvp += gauss(t,mo-28,33,3.4);
+    jvp -= gauss(t,mc+55,26,1.4);
+    jvp -= gauss(t,mo+18,22,1.7);
+    out.jvp.push([t,jvp]);
+ }
+ return {HR,RR,PR,QRS,PEP,LVET,IVRT,qrsOn,qTime,sTime,pPeak,pStart,pEnd,tPeak,tEnd,mc,ao,ac,mo,rapidFillEnd,diastasisEnd,atrialStart,atrialEnd,p1,p2,a2,s2p2,flowPk,tMin,tMax,showPressP2,showS2Split,out};
+}
+
+'use strict';
+const $ = id => document.getElementById(id);
+const gauss=(x,mu,s,a)=>a*Math.exp(-.5*((x-mu)/s)**2);
+const sigmoid=x=>1/(1+Math.exp(-x));
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt=n=>Number.isFinite(n)?(Math.round(n*10)/10).toLocaleString('zh-CN',{maximumFractionDigits:1}):'—';
+const ROWS=[
+ {id:'ecg',name:'ECG',unit:'a.u.',color:'#74d4ff',range:[-.5,1.4],ticks:[0,1.2]},
+ {id:'la',name:'左房压力',unit:'mmHg',color:'#d89cff',range:[0,16],ticks:[0,8,16]},
+ {id:'lv',name:'左室压力',unit:'mmHg',color:'#ff9eb1',range:[0,150],ticks:[0,75,150]},
+ {id:'ao',name:'主动脉压力',unit:'mmHg',color:'#92efb1',range:[40,145],ticks:[40,80,120]},
+ {id:'flow',name:'主动脉流量',unit:'相对值',color:'#ffd36b',range:[0,1.15],ticks:[0,.5,1]},
+ {id:'vol',name:'左室容积',unit:'mL',color:'#ffb76b',range:[40,140],ticks:[40,90,140]},
+ {id:'hs',name:'心音',unit:'a.u.',color:'#eef5ff',range:[-1.2,1.2],ticks:[0]},
+ {id:'jvp',name:'JVP',unit:'教学相对值',color:'#7fe8d7',range:[0,14],ticks:[0,7,14]}
+];
+const MAP={
+ ecg:{rows:['ecg'],events:['P','Q','R','S','T'],intervals:['PR']},
+ valves:{rows:['la','lv','ao','flow','vol','hs'],events:['MC','AO','AC','MO','S1','A2'],intervals:['PEP','LVET','IVRT']},
+ lap:{rows:['la','jvp'],events:['a','c','v','ja','jc','jv','jx','jy'],intervals:[]},
+ press:{rows:['lv','ao'],events:['AO','AC','P1','P2w','diaMin','dpdt'],intervals:['LVET']},
+ flow:{rows:['flow','vol'],events:['flowpk','EDV','ESV','AO','AC','MO','AS'],intervals:['LVET']},
+ sounds:{rows:['hs'],events:['S1','A2','P2hs','AC'],intervals:[]},
+ p2:{rows:['ao','hs'],events:['P1','P2w','A2','P2hs'],intervals:[]}
+};
+const SHORT={ecg:'ECG',valves:'瓣膜事件',lap:'左房 a/c/v',press:'压力波',flow:'流量与容积',sounds:'心音',p2:'P2 对照'};
+const state={topic:null,event:null,range:null,tab:'learn',annotation:'all',chartSize:'fit',visible:Object.fromEntries(ROWS.map(r=>[r.id,r.id!=='jvp'])),table:false};
+let current=null,allTerms=[],events=[],scheduled=false;
+function setTab(id){
+ state.tab=id;
+ document.querySelectorAll('[data-tab]').forEach(b=>{const on=b.dataset.tab===id;b.setAttribute('aria-selected',String(on));b.tabIndex=on?0:-1;});
+ document.querySelectorAll('.tab-content').forEach(p=>p.hidden=p.id!=='pane-'+id);
+ $('reader').scrollTop=0;
+}
+function rowOn(id){return !state.topic||MAP[state.topic].rows.includes(id);}
+function eventOn(id){return !state.topic||MAP[state.topic].events.includes(id)||state.event===id;}
+function showAnnotation(id, row){
+ if(state.annotation==='none'||(row&&!state.visible[row]))return false;
+ return state.annotation!=='focus'||!state.topic||eventOn(id);
+}
+function setTopic(id){
+ state.topic=state.topic===id?null:id;state.event=null;state.range=null;
+ updateTheme();renderChart();
+}
+function restoreDisplay(){
+ state.topic=null;state.event=null;state.range=null;state.annotation='all';$('annotationMode').value='all';
+ ROWS.forEach(r=>state.visible[r.id]=r.id!=='jvp');$('showJVP').checked=false;
+ syncCurveControls();updateTheme();renderChart();announce('已恢复常规七条波形与全部标记，参数未改变。');
+}
+function announce(text){$('liveStatus').textContent=text;}
+function getEvents(d){
+ const e=(id,row,time,label,topic,desc)=>({id,row,time,label,topic,desc});
+ const list=[
+ e('P','ecg',d.pPeak,'P','ecg','心房去极，随后引发心房收缩。'),e('Q','ecg',d.qTime,'Q','ecg','QRS 复合体中的 Q 波。'),e('R','ecg',0,'R','ecg','本图统一的时间零点。'),e('S','ecg',d.sTime,'S','ecg','QRS 复合体中的 S 波。'),e('T','ecg',d.tPeak,'T','ecg','心室复极。'),
+ e('a','la',(d.atrialStart+d.atrialEnd)/2,'a','lap','心房收缩波。'),e('c','la',d.mc+18,'c','lap','等容收缩早期小波。'),e('v','la',d.mo-30,'v','lap','房室瓣关闭期间左房充盈波。'),
+ e('MC','lv',d.mc,'MC','valves','二尖瓣关闭，进入等容收缩。'),e('MO','lv',d.mo,'MO','valves','二尖瓣开放，开始快速充盈。'),
+ e('AO','ao',d.ao,'AO','valves','主动脉瓣开放，射血开始。'),e('P1','ao',d.p1,'P1','press','压力波的第一收缩峰，旧版预设标记。'),
+ e('AC','ao',d.ac,'AC / 切迹','valves','主动脉瓣关闭与重搏切迹附近的旧版预设标记。'),
+ e('flowpk','flow',d.flowPk,'流量峰','flow','射血流量峰的旧版预设标记。'),
+ e('EDV','vol',d.ao-10,'EDV','flow','舒张末容积标记。'),e('ESV','vol',d.ac+5,'ESV','flow','收缩末容积标记。'),
+ e('S1','hs',d.mc+4,'S1','sounds','第一心音，主要对应房室瓣关闭。'),e('A2','hs',d.a2,'A2','sounds','第二心音的主动脉瓣成分。'),
+ e('ja','jvp',(d.atrialStart+d.atrialEnd)/2,'a','lap','JVP 的教学性 a 波。'),e('jc','jvp',d.mc+16,'c','lap','JVP 的教学性 c 波。'),e('jv','jvp',d.mo-28,'v','lap','JVP 的教学性 v 波。'),e('jx','jvp',d.mc+55,'x','lap','JVP 的教学性 x 下降。'),e('jy','jvp',d.mo+18,'y','lap','JVP 的教学性 y 下降。')
+ ];
+ if(d.showPressP2)list.push(e('P2w','ao',d.p2,'P2（压力）','p2','第二收缩峰 / augmentation peak，不是肺动脉瓣关闭音。'));
+ if(d.showS2Split)list.push(e('P2hs','hs',d.s2p2,'P2（心音）','sounds','第二心音的肺动脉瓣成分，不是压力波的 P2。'));
+ if(state.event==='AS')list.push(e('AS','vol',(d.atrialStart+d.atrialEnd)/2,'心房收缩','flow','心房收缩，舒张末期辅助充盈。'));
+ if(state.event==='diaMin')list.push(e('diaMin','ao',d.ao-15,'舒张低谷','press','早期教学版中的射血前压力低谷预设位置。'));
+ if(state.event==='dpdt')list.push(e('dpdt','ao',d.ao+55,'上升最快段','press','早期教学版中的压力上升最快段预设位置。'));
+ return list;
+}
+function chooseEvent(id){
+ const ev=events.find(e=>e.id===id);
+ if(ev){state.topic=ev.topic;state.event=id;state.range=null;}
+ else{const map={QRS:'ecg',P2:'p2',INC:'valves',AS:'ecg'};state.topic=map[id]||'press';state.event=id==='INC'?'AC':id==='P2'?'P2w':id;}
+ updateTheme();renderChart();setTab('learn');
+}
+function updateTheme(){
+ if(current)events=getEvents(current);
+ $('topicBtns').querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.topic===state.topic)));
+ const topic=TOPICS.find(t=>t.id===state.topic);
+ const ev=events.find(e=>e.id===state.event);
+ let hidden=topic?MAP[state.topic].rows.filter(r=>r!=='jvp'&&!state.visible[r]):[];
+ $('selectionStatus').textContent=topic?'当前：'+SHORT[topic.id]+' · 再点取消':'全部主题 · 点击可聚焦，再点取消';
+ const explanation=topic?'<b>'+esc(topic.label)+'</b><br>'+esc(topic.desc):'<b>使用方法</b><br>点击图上方的主题，相关波形与事件一起高亮；再次点击同一主题，恢复全部主题。下方复选框单独控制波形显示，不会被高亮按钮自动改动。';
+ $('topicExplain').innerHTML=explanation+(ev?'<div class="hint"><b>选中：'+esc(ev.label)+' / R '+fmt(ev.time)+' ms</b><br>'+esc(ev.desc)+'</div>':'')+(hidden.length?'<div class="hint">当前主题的 '+hidden.map(id=>ROWS.find(r=>r.id===id).name).join('、')+' 已手动隐藏。可在图例重新勾选，或点击“恢复显示”。</div>':'')+(state.annotation==='none'?'<div class="hint">事件标记已全部隐藏；高亮仍会作用于波形。可用上方“标记”选项恢复。</div>':'');
+}
+function syncCurveControls(){
+ ROWS.forEach(r=>{const c=$('visible-'+r.id);c.checked=state.visible[r.id];c.closest('label').dataset.off=String(!state.visible[r.id]);});
+ $('showJVP').checked=state.visible.jvp;
+}
+function sampleAt(data,t){if(!data||!data.length)return 0;let i=clamp(Math.round((t-data[0][0])/2),0,data.length-1);return data[i][1];}
+function text(x,y,value,options={}){return `<text x="${x.toFixed(2)}" y="${y.toFixed(2)}" font-size="${options.size||11}" fill="${options.fill||'#dceafb'}" text-anchor="${options.anchor||'start'}" ${options.extra||''}>${esc(value)}</text>`;}
+function labelWidth(s){return [...s].reduce((n,c)=>n+(c.charCodeAt(0)>255?11:6.4),0)+10;}
+function layoutLabels(items,left,right){
+ const labels=items.map(it=>({...it,w:labelWidth(it.label)})).sort((a,b)=>a.x-b.x);
+ let previous=left-6;
+ for(const it of labels){it.left=Math.max(left,Math.min(right-it.w,it.x-it.w/2),previous+6);previous=it.left+it.w;}
+ let next=right+6;
+ for(let i=labels.length-1;i>=0;i--){const it=labels[i];it.left=Math.min(it.left,next-it.w-6);next=it.left;}
+ return labels;
+}
+function renderChart(){
+ if(!current)return;
+ const d=current,svg=$('chart'),scroller=$('plotScroll');
+ const rows=ROWS.filter(r=>state.visible[r.id]);
+ const width=Math.max(440,Math.floor(scroller.clientWidth));
+ const minH=90+rows.length*53;
+ const height=state.chartSize==='large'?Math.max(scroller.clientHeight,100+rows.length*108):Math.max(scroller.clientHeight,window.innerWidth>960?300:minH);
+ svg.setAttribute('viewBox',`0 0 ${width} ${height}`);svg.style.width=width+'px';svg.style.height=height+'px';
+ const L=105,R=width-18,T=48,B=height-37,gap=4;
+ const X=t=>L+(t-d.tMin)/(d.tMax-d.tMin)*(R-L);
+ const rh=rows.length?(B-T-gap*(rows.length-1))/rows.length:0;
+ let defs='',html='';
+ const phaseList=[
+ {name:'心房收缩',short:'房缩',a:d.atrialStart,b:d.atrialEnd,c:'#d89cff',topic:'ecg',anchor:0},
+ {name:'等容收缩',short:'等容缩',a:d.mc,b:d.ao,c:'#ff9eb1',topic:'valves',anchor:1},
+ {name:'快速射血',short:'快射',a:d.ao,b:d.ao+120,c:'#92efb1',topic:'flow',anchor:2},
+ {name:'减速射血',short:'慢射',a:d.ao+120,b:d.ac,c:'#92efb1',topic:'flow',anchor:2},
+ {name:'等容舒张',short:'等容舒',a:d.ac,b:d.mo,c:'#b4a3ff',topic:'valves',anchor:3},
+ {name:'快速充盈',short:'快充',a:d.mo,b:d.rapidFillEnd,c:'#ffd36b',topic:'flow',anchor:4},
+ {name:'舒张中期',short:'缓充',a:d.rapidFillEnd,b:d.diastasisEnd,c:'#ffc078',topic:'flow',anchor:4}
+ ];
+ if(state.annotation!=='none'){
+  phaseList.forEach((ph,i)=>{
+   if(ph.b<=ph.a)return;
+   const x0=clamp(X(ph.a),L,R),x1=clamp(X(ph.b),L,R);
+   html+=`<g class="phase-band" data-phase="${i}" data-annotation="phase"><title>${esc(ph.name)} · ${fmt(ph.a)} 至 ${fmt(ph.b)} ms；点击定位正文</title><rect x="${x0}" y="5" width="${Math.max(0,x1-x0)}" height="18" rx="2" fill="${ph.c}" opacity=".18"/>`;
+   if(x1-x0>ph.short.length*11+6)html+=text((x0+x1)/2,18,ph.short,{anchor:'middle',size:10,fill:'#bbd0e7'});
+   html+='</g>';
+  });
+ }
+ const tickStep=(R-L)<550?200:100;
+ const ticks=[];for(let t=Math.ceil(d.tMin/tickStep)*tickStep;t<=d.tMax;t+=tickStep)ticks.push(t);
+ rows.forEach((row,index)=>{
+  const top=T+index*(rh+gap),bottom=top+rh,pTop=top+22,pBottom=bottom-8;
+  const Y=v=>pBottom-(v-row.range[0])/(row.range[1]-row.range[0])*(pBottom-pTop);
+  const clip='clip-'+row.id;
+  defs+=`<clipPath id="${clip}"><rect x="${L}" y="${pTop-2}" width="${R-L}" height="${pBottom-pTop+4}"/></clipPath>`;
+  html+=`<g data-row="${row.id}"><rect x="0" y="${top}" width="${width}" height="${rh}" fill="${index%2?'#101c32':'#0d182c'}"/><line x1="0" x2="${width}" y1="${bottom+2}" y2="${bottom+2}" stroke="#25344a"/>`;
+  html+=text(9,top+16,row.name,{size:11,fill:row.color,extra:'font-weight="600"'})+text(9,top+31,row.unit,{size:10,fill:'#93abc7'});
+  const tickValues=(pBottom-pTop<32&&row.ticks.length>2)?[row.ticks[0],row.ticks[row.ticks.length-1]]:row.ticks;
+  tickValues.forEach(value=>{const yy=Y(value);html+=`<line x1="${L}" x2="${R}" y1="${yy}" y2="${yy}" stroke="#31415a" stroke-width=".7" stroke-dasharray="${value===0?'':'2 5'}" opacity=".6"/>`+text(L-9,yy+3,fmt(value),{size:10,fill:'#9fb5cf',anchor:'end'});});
+  ticks.forEach(t=>html+=`<line x1="${X(t)}" x2="${X(t)}" y1="${pTop}" y2="${pBottom}" stroke="#2b3a50" stroke-width=".6" stroke-dasharray="2 5"/>`);
+  if(state.range){const [a,b]=state.range;html+=`<rect x="${X(a)}" y="${top}" width="${Math.max(0,X(b)-X(a))}" height="${rh}" fill="#71bee8" opacity=".08"/>`;}
+  const ro=rowOn(row.id)?1:.3;
+  html+=`<g data-wave="${row.id}" opacity="${ro}" clip-path="url(#${clip})">`;
+  if(row.id!=='hs'){
+   const path=d.out[row.id].map((p,i)=>(i?'L':'M')+X(p[0]).toFixed(2)+','+Y(p[1]).toFixed(2)).join(' ');
+   html+=`<path data-wave-path="${row.id}" d="${path}" stroke="${row.color}" stroke-width="${rowOn(row.id)&&state.topic?2.5:2}" fill="none" stroke-linejoin="round"/>`;
+  }else{
+   const soundData=[['S1',d.mc+4,1],['A2',d.a2,.86],...(d.showS2Split?[['P2hs',d.s2p2,.67]]:[])];
+   soundData.forEach(([id,t,amp])=>{
+    const xx=X(t),s=Math.min(1,(R-L)/800);
+    const pts=[[-14,0],[-10,-amp*.4],[-6,amp*.75],[-2,-amp],[2,amp],[6,-amp*.75],[10,amp*.45],[14,0]];
+    const path=pts.map((p,i)=>(i?'L':'M')+(xx+p[0]*s).toFixed(2)+','+Y(p[1]).toFixed(2)).join(' ');
+    html+=`<path data-sound="${id}" d="${path}" fill="none" stroke="${row.color}" stroke-width="1.7"/>`;
+   });
+  }
+  html+='</g>';
+  const local=events.filter(ev=>ev.row===row.id&&showAnnotation(ev.id,row.id)).map(ev=>({...ev,x:X(ev.time)}));
+  const placed=layoutLabels(local,L+3,R-2);
+  placed.forEach(ev=>{
+   const on=eventOn(ev.id),op=on?1:.22;
+   const cy=row.id==='hs'?Y(0):Y(sampleAt(d.out[row.id],ev.time));
+   const lx=ev.left+ev.w/2,ly=top+13;
+   html+=`<g class="chart-event" data-event="${ev.id}" data-annotation="event" opacity="${op}" tabindex="0" role="button" aria-label="${esc(ev.label+'，相对 R 峰 '+fmt(ev.time)+' 毫秒')}"><title>${esc(ev.label)} · ${fmt(ev.time)} ms\n${esc(ev.desc)}</title><line x1="${lx}" y1="${ly+3}" x2="${ev.x}" y2="${cy}" stroke="${row.color}" stroke-width=".8" opacity=".6"/><circle cx="${ev.x}" cy="${cy}" r="${state.event===ev.id?4:2.6}" fill="${row.color}" stroke="#0a1425" stroke-width=".8"/><rect x="${ev.left}" y="${ly-10}" width="${ev.w}" height="14" rx="3" fill="#0e1b2f" opacity=".93"/>${text(lx,ly,ev.label,{anchor:'middle',size:10.5,fill:row.color})}</g>`;
+  });
+  html+='</g>';
+ });
+ // A shared zero/selected-event guide is separate from local labels, but obeys the same visibility state.
+ const guideIds=state.topic==='valves'?['MC','AO','AC','MO']:['R',...(state.event?[state.event]:[])];
+ const guides=events.filter(e=>guideIds.includes(e.id)&&showAnnotation(e.id,e.row));
+ guides.forEach(e=>{
+  html+=`<g data-guide="${e.id}" data-annotation="guide" opacity="${eventOn(e.id)?'.6':'.16'}"><line x1="${X(e.time)}" x2="${X(e.time)}" y1="27" y2="${B}" stroke="${e.id==='R'?'#74d4ff':'#bddcf5'}" stroke-width="1" stroke-dasharray="${e.id==='R'?'3 3':'5 5'}"/></g>`;
+ });
+ if(state.annotation!=='none'){
+  const upper=events.filter(e=>['R','MC','AO','AC','MO'].includes(e.id)&&showAnnotation(e.id,e.row)).map(e=>({...e,x:X(e.time),label:e.id}));
+  layoutLabels(upper,L+2,R-2).forEach(e=>{
+   const lx=e.left+e.w/2;
+   html+=`<g data-top-event="${e.id}" data-event="${e.id}" class="chart-event" data-annotation="label" opacity="${eventOn(e.id)?1:.22}"><title>${esc(e.desc)} ${fmt(e.time)} ms</title><line x1="${X(e.time)}" y1="45" x2="${lx}" y2="40" stroke="#708dab" stroke-width=".8"/>${text(lx,37,e.label,{anchor:'middle',size:10,fill:'#b9d4ee'})}</g>`;
+  });
+ }
+ // Timing brackets occupy their own footer line, never another physiological track.
+ if(state.annotation!=='none'){
+  const intervals=[{id:'PR',a:d.pStart,b:d.qrsOn,rows:['ecg']},{id:'PEP',a:d.qrsOn,b:d.ao,rows:['lv']},{id:'LVET',a:d.ao,b:d.ac,rows:['ao','flow']},{id:'IVRT',a:d.ac,b:d.mo,rows:['lv','ao']}];
+  intervals.forEach(iv=>{
+   const on=!state.topic||MAP[state.topic].intervals.includes(iv.id);
+   if(!iv.rows.some(r=>state.visible[r])||(state.annotation==='focus'&&state.topic&&!on))return;
+   const y=B+8,x0=X(iv.a),x1=X(iv.b);
+   html+=`<g data-interval="${iv.id}" data-annotation="interval" opacity="${on?.9:.16}"><title>${iv.id}：${fmt(iv.b-iv.a)} ms（旧版图示端点）</title><path d="M${x0},${y-3}V${y}H${x1}V${y-3}" fill="none" stroke="#b4cce5" stroke-width="1"/>`;
+   if(x1-x0>22)html+=text((x0+x1)/2,y+11,iv.id,{size:9,fill:'#a8c1dc',anchor:'middle'});
+   html+='</g>';
+  });
+ }
+ ticks.forEach(t=>html+=text(X(t),height-9,String(t),{size:10,fill:'#a7bfda',anchor:'middle'}));
+ html+=text(9,height-10,'R 峰 = 0 ms',{size:10,fill:'#a9c3dd'});
+ if(!rows.length)html+=text(width/2,height/2,'所有波形已隐藏；勾选下方图例或点击“恢复显示”。',{size:13,fill:'#b7cce0',anchor:'middle'});
+ svg.innerHTML='<defs>'+defs+'</defs>'+html;
+ svg.querySelectorAll('[data-event]').forEach(el=>{
+  el.addEventListener('click',()=>chooseEvent(el.dataset.event));
+  el.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();chooseEvent(el.dataset.event);}});
+ });
+ svg.querySelectorAll('[data-phase]').forEach(el=>el.addEventListener('click',()=>{
+  const ph=phaseList[+el.dataset.phase];state.topic=ph.topic;state.event=null;state.range=[ph.a,ph.b];updateTheme();renderChart();setTab('learn');
+  const note=$('phaseExplain').children[ph.anchor];if(note)$('reader').scrollTop=note.offsetTop-$('pane-learn').offsetTop-8;
+ }));
+ $('footerStatus').textContent=`${rows.length} 条波形可见 · ${state.topic?SHORT[state.topic]:'全部主题'} · R 峰零点`;
+ window.__wiggersDebug={model:d,visible:{...state.visible},topic:state.topic,event:state.event,annotation:state.annotation,rows:rows.map(r=>r.id),dimensions:{width,height,L,R,T,B,rh},events:events.map(e=>({...e}))};
+}
+function updateModel(){
+ const p=Object.fromEntries(['hr','pr','qrs','pep','lvet','ivrt'].map(id=>[id,+$(id).value]));
+ const options={showPressP2:$('showPressP2').checked,showS2Split:$('showS2Split').checked};
+ current=computeModel(p,options);events=getEvents(current);
+ for(const [id,value]of Object.entries(p))$(id+'Val').textContent=value+(id==='hr'?' bpm':' ms');
+ const d=current;
+ $('coreMetrics').innerHTML=[['QRS 起点',d.qrsOn],['AO / 主动脉瓣开放',d.ao],['AC / 重搏切迹',d.ac],['MO / 二尖瓣开放',d.mo],['RR 间期',d.RR],['P1（压力）',d.p1],['A2（心音）',d.a2],['P2（心音）',d.showS2Split?d.s2p2:null]].map(([label,value])=>'<div class="metric">'+esc(label)+'<strong>'+ (value===null?'已隐藏':fmt(value)+' <small>ms</small>')+'</strong></div>').join('');
+ $('p2Compare').innerHTML='<b>压力波 P2</b>：'+(d.showPressP2?fmt(d.p2)+' ms 左右':'可不明显')+'，表示晚收缩压力增强。<br><br><b>心音 P2</b>：'+(d.showS2Split?fmt(d.s2p2)+' ms 左右':'已隐藏')+'，表示肺动脉瓣关闭音。<br><br>前者是<b>压力波形形态学</b>，后者是<b>心音分裂</b>概念。';
+ $('summary').innerHTML=restoredSummary(d);
+ const issues=[];
+ if(d.ao<=d.mc)issues.push(`旧版预设 AO=${fmt(d.ao)} ms 早于/等于 MC=${fmt(d.mc)} ms，等容收缩时段不一致`);
+ if(d.diastasisEnd<=d.rapidFillEnd)issues.push('旧版预设的舒张中期端点倒置');
+ const msg=issues.length?issues.join('；')+'。本次保留原参数与合成方程，只提示，不绘制倒置的阶段色带。':'当前预设阶段的先后顺序检查通过；这不等于波形已满足血流动力学方程。';
+ $('timingWarning').textContent=msg;$('timingWarning').hidden=!issues.length;$('modelTimingCheck').textContent=msg;
+ const rows=restoredRows(d);
+ allTerms=[...rows.main.map(r=>({r,source:'main'})),...rows.early.map(r=>({r,source:'early'}))];
+ renderTerms();updateTheme();renderChart();
+}
+function renderTerms(){
+ const query=$('termSearch').value.trim().toLowerCase(),source=$('termSource').value;
+ const filtered=allTerms.filter(item=>(source==='all'||source===item.source)&&(!query||item.r.join(' ').toLowerCase().includes(query)));
+ $('termCount').textContent=`显示 ${filtered.length} / ${allTerms.length} 条；每条保留类别、术语、时间、解释与物理过程。`;
+ $('termFormat').textContent=state.table?'切换为卡片':'切换为表格';$('termFormat').setAttribute('aria-pressed',String(state.table));
+ const sourceName=s=>s==='main'?'Wiggers 原版':'早期教学版';
+ if(state.table){
+  $('termList').innerHTML='<div class="table-scroll"><table class="terms-table"><thead><tr><th>类别</th><th>术语 / 来源</th><th>相对 R 波位置</th><th>解释</th><th>背后的物理过程</th></tr></thead><tbody>'+filtered.map(({r,source})=>'<tr><td>'+esc(r[0])+'</td><td><b>'+esc(r[1])+'</b><br><span class="source">'+sourceName(source)+'</span></td><td>'+esc(r[2])+'</td><td>'+esc(r[3])+'</td><td>'+esc(r[4])+'</td></tr>').join('')+'</tbody></table></div>';
+ }else{
+  $('termList').innerHTML=filtered.map(({r,source})=>'<article class="term-card"><h3><button data-term="'+esc(r[1])+'">'+esc(r[1])+'</button><span class="source">'+sourceName(source)+'</span></h3><dl><dt>类别</dt><dd>'+esc(r[0])+'</dd><dt>相对 R 波</dt><dd>'+esc(r[2])+'</dd><dt>解释</dt><dd>'+esc(r[3])+'</dd><dt>物理过程</dt><dd>'+esc(r[4])+'</dd></dl></article>').join('')||'<div class="note">未找到匹配项；清空关键词可恢复全部内容。</div>';
+  $('termList').querySelectorAll('[data-term]').forEach(b=>b.addEventListener('click',()=>{
+   const name=b.dataset.term;let topic='press';
+   if(/心音|S1|S2|A2/.test(name))topic='sounds';else if(name.includes('P2'))topic='p2';else if(/瓣|PEP|IVRT|IVCT/.test(name))topic='valves';else if(/容积|EDV|ESV|充盈|流量/.test(name))topic='flow';else if(/^[acv] 波|JVP/.test(name))topic='lap';else if(/^[PQRST] 波|QRS|PR/.test(name))topic='ecg';
+   state.topic=topic;state.event=null;state.range=null;updateTheme();renderChart();
+  }));
+ }
+}
+function init(){
+ $('params').innerHTML=CONTENT.controls.join('');
+ for(const [id,key]of [['phaseExplain','phaseW'],['phaseEarly','phaseA'],['p2Long','p2Long'],['studyOrder','studyOrder'],['p2CheckExplain','p2CheckExplain'],['modelCurrent','modelCurrent'],['modelFuture','modelFuture'],['originalIntro','intro']])$(id).innerHTML=CONTENT[key];
+ $('topicBtns').innerHTML=TOPICS.map(t=>'<button type="button" data-topic="'+t.id+'" aria-pressed="false" title="'+esc(t.desc)+'">'+SHORT[t.id]+'</button>').join('');
+ $('topicBtns').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>setTopic(b.dataset.topic)));
+ $('curveControls').innerHTML=ROWS.map(r=>'<label data-off="'+String(!state.visible[r.id])+'"><input id="visible-'+r.id+'" type="checkbox" '+(state.visible[r.id]?'checked':'')+' aria-label="显示'+r.name+'"><i class="sw" style="--c:'+r.color+'"></i>'+r.name+'</label>').join('');
+ ROWS.forEach(r=>$('visible-'+r.id).addEventListener('change',e=>{state.visible[r.id]=e.target.checked;syncCurveControls();updateTheme();renderChart();}));
+ $('showJVP').addEventListener('change',e=>{state.visible.jvp=e.target.checked;syncCurveControls();updateTheme();renderChart();});
+ ['hr','pr','qrs','pep','lvet','ivrt'].forEach(id=>$(id).addEventListener('input',updateModel));
+ ['showPressP2','showS2Split'].forEach(id=>$(id).addEventListener('change',updateModel));
+ $('annotationMode').addEventListener('change',e=>{state.annotation=e.target.value;updateTheme();renderChart();});
+ $('chartSize').addEventListener('change',e=>{state.chartSize=e.target.value;renderChart();});
+ $('clearHighlight').addEventListener('click',()=>{state.topic=null;state.event=null;state.range=null;updateTheme();renderChart();});
+ $('restoreView').addEventListener('click',restoreDisplay);
+ $('termSearch').addEventListener('input',renderTerms);$('termSource').addEventListener('change',renderTerms);
+ $('termFormat').addEventListener('click',()=>{state.table=!state.table;renderTerms();});
+ document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>setTab(b.dataset.tab)));
+ document.querySelector('.tabs').addEventListener('keydown',e=>{
+  if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;
+  const tabs=[...document.querySelectorAll('[data-tab]')];let i=tabs.findIndex(b=>b.dataset.tab===state.tab);
+  i=e.key==='Home'?0:e.key==='End'?tabs.length-1:(i+(e.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length;
+  e.preventDefault();setTab(tabs[i].dataset.tab);tabs[i].focus();
+ });
+ document.querySelectorAll('[data-anchor]').forEach(b=>b.addEventListener('click',()=>{const node=$(b.dataset.anchor);$('reader').scrollTop=node.offsetTop-$('pane-learn').offsetTop;}));
+ $('earlyEvents').innerHTML=EARLY_EVENTS.map(e=>'<button data-early="'+e.id+'" title="'+esc(e.tip)+'">'+esc(e.label)+'</button>').join('');
+ $('earlyEvents').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{
+  const e=EARLY_EVENTS.find(e=>e.id===b.dataset.early);$('earlyEventExplain').textContent=e.label+'：'+e.tip;
+  const map={P:'ecg',QRS:'ecg',T:'ecg',MC:'valves',AO:'valves',P1:'press',P2:'p2',INC:'valves',MO:'valves',AS:'flow'};
+  const target={INC:'AC',P2:'P2w'}[e.id]||e.id;
+  if(state.event===target){state.topic=null;state.event=null;}else{state.topic=map[e.id];state.event=target;}
+  state.range=null;updateTheme();renderChart();
+ }));
+ // Resizing changes only chart coordinates; model arrays remain untouched.
+ new ResizeObserver(()=>{if(scheduled)return;scheduled=true;requestAnimationFrame(()=>{scheduled=false;renderChart();});}).observe($('plotScroll'));
+ const splitter=$('splitter');
+ function setSide(percent){const p=clamp(percent,25,65);document.documentElement.style.setProperty('--side',p+'%');splitter.setAttribute('aria-valuenow',String(Math.round(p)));}
+ splitter.addEventListener('pointerdown',e=>{splitter.setPointerCapture(e.pointerId);document.body.style.userSelect='none';});
+ splitter.addEventListener('pointermove',e=>{if(!splitter.hasPointerCapture(e.pointerId))return;const rect=$('workspace').getBoundingClientRect();setSide((rect.right-e.clientX)/rect.width*100);});
+ splitter.addEventListener('pointerup',e=>{if(splitter.hasPointerCapture(e.pointerId))splitter.releasePointerCapture(e.pointerId);document.body.style.userSelect='';});
+ splitter.addEventListener('pointercancel',()=>document.body.style.userSelect='');
+ splitter.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home'].includes(e.key))return;e.preventDefault();setSide(e.key==='Home'?39:+splitter.getAttribute('aria-valuenow')+(e.key==='ArrowLeft'?2:-2));});
+ updateModel();syncCurveControls();
+}
+init();
+
+</script>
+</body></html>

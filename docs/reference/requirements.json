@@ -1,0 +1,173 @@
+{
+  "revision": "r1",
+  "date": "2026-10-15",
+  "implementation_status": "NOT_IMPLEMENTED",
+  "requirements": [
+    {
+      "id": "REQ-01",
+      "status": "CONFIRMED",
+      "text": "多通道 AP：头端固态、光纤、外部监护仪；共享同一循环状态。",
+      "origin": "用户本轮决定 1"
+    },
+    {
+      "id": "REQ-02",
+      "status": "CONFIRMED",
+      "text": "ECG 最终十二导联直接输入，首期 II 导联。",
+      "origin": "用户本轮决定 1"
+    },
+    {
+      "id": "REQ-03",
+      "status": "CONFIRMED",
+      "text": "待测算法输出带时间戳充／放气命令。",
+      "origin": "用户本轮决定 2"
+    },
+    {
+      "id": "REQ-04",
+      "status": "CONFIRMED",
+      "text": "首版研发／软件在环，预留硬件在环；不是注册证明。",
+      "origin": "用户本轮决定 3"
+    },
+    {
+      "id": "REQ-05",
+      "status": "CONFIRMED",
+      "text": "约 5 ms 作为首期工程误差量级目标，需以辅助效果检验。",
+      "origin": "用户本轮决定 4"
+    },
+    {
+      "id": "REQ-06",
+      "status": "ENGINEERING_DEFAULT",
+      "text": "传感器技术、位置、测量链、时钟和接口独立配置。",
+      "origin": "r1 §3"
+    },
+    {
+      "id": "REQ-07",
+      "status": "ENGINEERING_DEFAULT",
+      "text": "算法只能读取已经可用的样本和实际接口允许的元数据。",
+      "origin": "r1 §4"
+    },
+    {
+      "id": "REQ-08",
+      "status": "ENGINEERING_DEFAULT",
+      "text": "源时间未知则对算法保留未知；评估器真值隔离。",
+      "origin": "r1 §4"
+    },
+    {
+      "id": "REQ-09",
+      "status": "ENGINEERING_DEFAULT",
+      "text": "模型连续状态贯穿心搏、取消命令和节律变化。",
+      "origin": "r0/r1"
+    },
+    {
+      "id": "REQ-10",
+      "status": "ENGINEERING_DEFAULT",
+      "text": "球囊容积排挤和局部阻塞共同进入守恒网络，不增加净血量。",
+      "origin": "r0/r1"
+    },
+    {
+      "id": "REQ-11",
+      "status": "ENGINEERING_DEFAULT",
+      "text": "负荷相关执行器驱动实际球囊状态，不能将命令直接变为压力峰。",
+      "origin": "r0/r1"
+    },
+    {
+      "id": "REQ-12",
+      "status": "ENGINEERING_DEFAULT",
+      "text": "各物理事件分别检测；不通过固定延时回填缺失事件。",
+      "origin": "r0/r1"
+    },
+    {
+      "id": "REQ-13",
+      "status": "ENGINEERING_DEFAULT",
+      "text": "主要事件数值差预算 0.5 ms，联合时间／空间收敛后才可宣称。",
+      "origin": "r1 §2"
+    },
+    {
+      "id": "REQ-14",
+      "status": "ENGINEERING_DEFAULT",
+      "text": "主要压力数值差预算 0.5 mmHg，不能平移后再比较。",
+      "origin": "r1 §2"
+    },
+    {
+      "id": "REQ-15",
+      "status": "ENGINEERING_DEFAULT",
+      "text": "同版本／配置／种子与完整快照支持可复现运行与分叉。",
+      "origin": "r1 §4"
+    },
+    {
+      "id": "REQ-16",
+      "status": "ENGINEERING_DEFAULT",
+      "text": "充／放气独立及联合进行 ±5/±10/±20 ms 效果扫描。",
+      "origin": "r1 §2/7"
+    },
+    {
+      "id": "REQ-17",
+      "status": "ENGINEERING_DEFAULT",
+      "text": "效果必须联合观察压力支持、LV 负担、前向输出和阻塞代理。",
+      "origin": "r1 §7"
+    },
+    {
+      "id": "REQ-18",
+      "status": "ENGINEERING_DEFAULT",
+      "text": "测试集按独立受试者／动物或工况划分，验证参数冻结。",
+      "origin": "r0/r1"
+    },
+    {
+      "id": "REQ-19",
+      "status": "ENGINEERING_DEFAULT",
+      "text": "每项性能报告适用域、缺失率、误检漏检及不确定度。",
+      "origin": "r1 §8"
+    },
+    {
+      "id": "REQ-20",
+      "status": "ENGINEERING_DEFAULT",
+      "text": "旧教学页面与原文保留，新显示仅消费新核心输出。",
+      "origin": "用户此前要求与 r1 §5"
+    },
+    {
+      "id": "REQ-21",
+      "status": "ENGINEERING_DEFAULT",
+      "text": "采样 1 kHz、求解步长上限起点 0.25 ms 仅为工程参考。",
+      "origin": "r1 §2"
+    },
+    {
+      "id": "REQ-22",
+      "status": "ENGINEERING_DEFAULT",
+      "text": "多通道选路／融合属于被测算法，不由引擎隐式优化。",
+      "origin": "r1 §3"
+    },
+    {
+      "id": "REQ-23",
+      "status": "ENGINEERING_DEFAULT",
+      "text": "信号链、软件、无辅助生理、球囊干预分别验证，不跨级宣称。",
+      "origin": "r0/r1"
+    },
+    {
+      "id": "REQ-24",
+      "status": "ENGINEERING_DEFAULT",
+      "text": "纯测量扰动与电机械病理变化分开建模，闭环间接影响另计。",
+      "origin": "r1 §3"
+    },
+    {
+      "id": "REQ-25",
+      "status": "ENGINEERING_DEFAULT",
+      "text": "风险阈值或效果容差未批准时，不输出临床安全／有效性合格判定。",
+      "origin": "r1 §2/7/9"
+    }
+  ],
+  "timing_targets": {
+    "user_target_scale_ms": 5,
+    "nominal_clean_case_candidate_abs_error_p95_ms": 5,
+    "candidate_statistical_gate_status": "ENGINEERING_DEFAULT_NOT_CLINICAL_STANDARD",
+    "numerical_event_difference_ms": 0.5,
+    "numerical_pressure_difference_mmHg": 0.5,
+    "reference_sensor_sampling_hz": 1000,
+    "initial_max_solver_step_ms": 0.25,
+    "solver_step_rule": "Reduce for CFL, stiffness, and event convergence; selection alone is not proof.",
+    "not_guaranteed": [
+      "all_patient_accuracy",
+      "all_sensor_latency_less_than_5ms",
+      "clinical_safety_window",
+      "5ms_balloon_fill_time"
+    ]
+  }
+}

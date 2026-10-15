@@ -1,0 +1,17 @@
+{
+  "engine": "system Chromium via set_content",
+  "viewports": [
+    "1440x900",
+    "390x844"
+  ],
+  "javascript_errors": [],
+  "checks": [
+    "baseline 7 paths",
+    "assisted+reference 14 paths",
+    "overlay off 7 paths",
+    "window switch",
+    "mobile render"
+  ],
+  "status": "PASS",
+  "note": "file:// navigation blocked by local browser policy; rendered supplied HTML directly"
+}

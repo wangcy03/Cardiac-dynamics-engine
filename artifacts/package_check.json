@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "zip_unpacked": true,
+  "manifest_verified": true,
+  "unpacked_pytest": "...................................................                      [100%]\n51 passed in 4.90s",
+  "tested_python_source_fingerprint": "97560aff4b9b97bae3382b532c65832af76b15da4724243754c86c391dbf4fdf",
+  "note": "Archive rebuilt only to add this report; Python source fingerprint unchanged."
+}

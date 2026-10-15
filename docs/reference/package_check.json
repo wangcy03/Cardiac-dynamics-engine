@@ -1,0 +1,130 @@
+{
+  "scope": "DOCUMENT_PACKAGE_ONLY_NOT_ENGINE_TESTING",
+  "json_parsed": true,
+  "requirement_count": 25,
+  "planned_test_count": 30,
+  "confirmed_user_decisions": 5,
+  "all_test_statuses": "NOT_RUN",
+  "cross_reference_and_coverage_check": "PASS",
+  "requirements_coverage": {
+    "REQ-01": [
+      "T03",
+      "T04",
+      "T19",
+      "T24"
+    ],
+    "REQ-02": [
+      "T27"
+    ],
+    "REQ-03": [
+      "T06"
+    ],
+    "REQ-04": [
+      "T30"
+    ],
+    "REQ-05": [
+      "T25"
+    ],
+    "REQ-06": [
+      "T03",
+      "T04",
+      "T10",
+      "T19"
+    ],
+    "REQ-07": [
+      "T01",
+      "T02",
+      "T05"
+    ],
+    "REQ-08": [
+      "T01",
+      "T02"
+    ],
+    "REQ-09": [
+      "T06",
+      "T11",
+      "T15",
+      "T28"
+    ],
+    "REQ-10": [
+      "T11",
+      "T17",
+      "T18",
+      "T19"
+    ],
+    "REQ-11": [
+      "T20",
+      "T21"
+    ],
+    "REQ-12": [
+      "T12",
+      "T13"
+    ],
+    "REQ-13": [
+      "T08",
+      "T09",
+      "T10",
+      "T14"
+    ],
+    "REQ-14": [
+      "T09",
+      "T14"
+    ],
+    "REQ-15": [
+      "T07"
+    ],
+    "REQ-16": [
+      "T22",
+      "T26"
+    ],
+    "REQ-17": [
+      "T22",
+      "T23",
+      "T26"
+    ],
+    "REQ-18": [
+      "T16"
+    ],
+    "REQ-19": [
+      "T13",
+      "T16",
+      "T21",
+      "T25",
+      "T26",
+      "T28",
+      "T29"
+    ],
+    "REQ-20": [
+      "T30"
+    ],
+    "REQ-21": [
+      "T05",
+      "T08"
+    ],
+    "REQ-22": [
+      "T24"
+    ],
+    "REQ-23": [
+      "T16",
+      "T20",
+      "T30"
+    ],
+    "REQ-24": [
+      "T15",
+      "T27"
+    ],
+    "REQ-25": [
+      "T23",
+      "T29"
+    ]
+  },
+  "r0_byte_identical": true,
+  "r0_sha256": {
+    "IABP_Physics_Engine_Design_r0.md": "0ae71956b744385799776129de14638f918ece0b0a28ce5b265adc49eab11783",
+    "CONTEXT.md": "a817a4264a7aba43f42b972116dd13ecb3c9e96da42a2899ed22953b781277a7",
+    "baseline_sha256.txt": "331fc5de4254876651dbe81b4d0a8da773a57454579946f9f3a7eb9da74e8c90"
+  },
+  "physical_solver_executed": false,
+  "physiological_validation_completed": false,
+  "html_files_modified": false
+}
