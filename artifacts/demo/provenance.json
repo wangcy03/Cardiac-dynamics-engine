@@ -93,20 +93,20 @@
   "model_source_sha256": "08aa745151b3d9ba142de79718ce15ab6bfb48938a84b21ad34858153699cb3f",
   "metrics": {
     "baseline": {
-      "max_mass_error_mL": 3.637978807091713e-11,
-      "root_min_mmHg": 65.93563735188125,
-      "root_max_mmHg": 123.24425719888352,
+      "max_mass_error_mL": 3.54702933691442e-11,
+      "root_min_mmHg": 65.9356373518812,
+      "root_max_mmHg": 123.24425719888339,
       "max_balloon_mL": 0.0,
-      "net_aortic_volume_mL": 282.55713477803624,
-      "lv_net_external_work_mmHg_mL": 36277.182384593725
+      "net_aortic_volume_mL": 282.557134778036,
+      "lv_net_external_work_mmHg_mL": 36277.18238459368
     },
     "assisted": {
       "max_mass_error_mL": 5.184119800105691e-11,
       "root_min_mmHg": 65.9380330731172,
       "root_max_mmHg": 135.83411442876314,
       "max_balloon_mL": 39.9999606926025,
-      "net_aortic_volume_mL": 277.4386246115695,
-      "lv_net_external_work_mmHg_mL": 36617.40080942298
+      "net_aortic_volume_mL": 277.43862461156937,
+      "lv_net_external_work_mmHg_mL": 36617.40080942296
     }
   }
 }

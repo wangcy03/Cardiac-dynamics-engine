@@ -1,0 +1,58 @@
+{
+  "release": "r2 / 0.2.0",
+  "python": "3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+  "gates": {
+    "compile": {
+      "status": "PASS",
+      "command": [
+        "/opt/pyvenv/bin/python",
+        "-m",
+        "compileall",
+        "-q",
+        "iabp",
+        "tools",
+        "examples"
+      ]
+    },
+    "pytest": {
+      "status": "PASS",
+      "command": [
+        "/opt/pyvenv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "--junitxml=artifacts/pytest.xml"
+      ]
+    },
+    "numerical": {
+      "status": "PASS",
+      "command": [
+        "/opt/pyvenv/bin/python",
+        "-m",
+        "tools.numerical_check"
+      ]
+    },
+    "ruff": {
+      "status": "NOT_RUN",
+      "reason": "tool unavailable; install dev dependencies in target environment"
+    },
+    "mypy": {
+      "status": "NOT_RUN",
+      "reason": "tool unavailable; install dev dependencies in target environment"
+    }
+  },
+  "pytest_counts": {
+    "tests": 51,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "physiological_validation": "NOT_VALIDATED",
+  "spatial_convergence": "NOT_IMPLEMENTED",
+  "actuator_calibration": "NOT_VALIDATED",
+  "real_algorithm_integration": "NOT_IMPLEMENTED",
+  "github_ci": "NOT_RUN",
+  "windows_execution": "NOT_RUN",
+  "clinical_5ms_claim": "NOT_ESTABLISHED"
+}

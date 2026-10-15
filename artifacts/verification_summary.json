@@ -1,12 +1,12 @@
 {
   "release": "r2 / 0.2.0",
-  "python": "3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]",
-  "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+  "python": "3.12.9 | packaged by Anaconda, Inc. | (main, Feb  6 2025, 18:49:16) [MSC v.1929 64 bit (AMD64)]",
+  "platform": "Windows-10-10.0.19045-SP0",
   "gates": {
     "compile": {
       "status": "PASS",
       "command": [
-        "/opt/pyvenv/bin/python",
+        "D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe",
         "-m",
         "compileall",
         "-q",
@@ -18,7 +18,7 @@
     "pytest": {
       "status": "PASS",
       "command": [
-        "/opt/pyvenv/bin/python",
+        "D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe",
         "-m",
         "pytest",
         "-q",
@@ -28,18 +28,32 @@
     "numerical": {
       "status": "PASS",
       "command": [
-        "/opt/pyvenv/bin/python",
+        "D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe",
         "-m",
         "tools.numerical_check"
       ]
     },
     "ruff": {
-      "status": "NOT_RUN",
-      "reason": "tool unavailable; install dev dependencies in target environment"
+      "status": "PASS",
+      "command": [
+        "D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "iabp",
+        "tests",
+        "tools",
+        "examples"
+      ]
     },
     "mypy": {
-      "status": "NOT_RUN",
-      "reason": "tool unavailable; install dev dependencies in target environment"
+      "status": "PASS",
+      "command": [
+        "D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe",
+        "-m",
+        "mypy",
+        "iabp"
+      ]
     }
   },
   "pytest_counts": {

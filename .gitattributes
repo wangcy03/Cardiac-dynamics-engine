@@ -1,0 +1,7 @@
+# Keep source and generated text reproducible across Windows and Linux.
+* text=auto eol=lf
+# Archived teaching/research assets retain their exact input bytes.
+legacy/** -text
+docs/reference/** -text
+*.zip -text
+*.pdf -text

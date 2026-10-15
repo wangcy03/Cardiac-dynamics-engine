@@ -1,0 +1,72 @@
+{
+  "release": "r2 / 0.2.0",
+  "python": "3.12.9 | packaged by Anaconda, Inc. | (main, Feb  6 2025, 18:49:16) [MSC v.1929 64 bit (AMD64)]",
+  "platform": "Windows-10-10.0.19045-SP0",
+  "gates": {
+    "compile": {
+      "status": "PASS",
+      "command": [
+        "D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe",
+        "-m",
+        "compileall",
+        "-q",
+        "iabp",
+        "tools",
+        "examples"
+      ]
+    },
+    "pytest": {
+      "status": "PASS",
+      "command": [
+        "D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "-q",
+        "--junitxml=artifacts/pytest.xml"
+      ]
+    },
+    "numerical": {
+      "status": "PASS",
+      "command": [
+        "D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.numerical_check"
+      ]
+    },
+    "ruff": {
+      "status": "PASS",
+      "command": [
+        "D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "iabp",
+        "tests",
+        "tools",
+        "examples"
+      ]
+    },
+    "mypy": {
+      "status": "PASS",
+      "command": [
+        "D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe",
+        "-m",
+        "mypy",
+        "iabp"
+      ]
+    }
+  },
+  "pytest_counts": {
+    "tests": 51,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "physiological_validation": "NOT_VALIDATED",
+  "spatial_convergence": "NOT_IMPLEMENTED",
+  "actuator_calibration": "NOT_VALIDATED",
+  "real_algorithm_integration": "NOT_IMPLEMENTED",
+  "github_ci": "NOT_RUN",
+  "windows_execution": "NOT_RUN",
+  "clinical_5ms_claim": "NOT_ESTABLISHED"
+}

@@ -13,6 +13,7 @@
 ```
 python -m venv .venv
 # 激活 .venv：Windows PowerShell 为 .venv\Scripts\Activate.ps1；类 Unix 为 source .venv/bin/activate
+# Windows 的 GBK 默认环境先执行：$env:PYTHONUTF8 = '1'
 python -m pip install -e ".[dev]"
 python -m pytest -q
 python -m tools.numerical_check

@@ -1,0 +1,246 @@
+{
+  "schema": "iabp-b00-reproduction/v1",
+  "scope": "Frozen B00 before B01; software/numerical reproduction only",
+  "imported_commit": "fc18650722adbfbd05e4077cda456a8dc4bbd82e",
+  "original_environment": {
+    "python": "3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.41"
+  },
+  "reproduced_environment": {
+    "python": "3.12.9 | packaged by Anaconda, Inc. | (main, Feb  6 2025, 18:49:16) [MSC v.1929 64 bit (AMD64)]",
+    "executable": "D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "packages": {
+      "pytest": "9.0.2",
+      "numpy": "2.3.5",
+      "scipy": "1.17.0",
+      "ruff": "0.17.0",
+      "mypy": "1.20.2",
+      "pip": "24.3.1"
+    },
+    "imported_commit": "fc18650722adbfbd05e4077cda456a8dc4bbd82e",
+    "encoding_note": "PYTHONUTF8=1 required by pip 24.3.1 on Windows cp936 for UTF-8 requirements comments"
+  },
+  "pytest_counts": {
+    "tests": 51,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "gates": {
+    "compile": {
+      "status": "PASS",
+      "command": [
+        "D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe",
+        "-m",
+        "compileall",
+        "-q",
+        "iabp",
+        "tools",
+        "examples"
+      ]
+    },
+    "pytest": {
+      "status": "PASS",
+      "command": [
+        "D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "-q",
+        "--junitxml=artifacts/pytest.xml"
+      ]
+    },
+    "numerical": {
+      "status": "PASS",
+      "command": [
+        "D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.numerical_check"
+      ]
+    },
+    "ruff": {
+      "status": "PASS",
+      "command": [
+        "D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "iabp",
+        "tests",
+        "tools",
+        "examples"
+      ]
+    },
+    "mypy": {
+      "status": "PASS",
+      "command": [
+        "D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe",
+        "-m",
+        "mypy",
+        "iabp"
+      ]
+    }
+  },
+  "comparisons": [
+    {
+      "step_us": 250,
+      "pressure_metric_delta_mmHg": {
+        "p_lv": -4.263256414560601e-14,
+        "p_root": 0.0,
+        "p_descending": 0.0,
+        "p_la": -1.0658141036401503e-14
+      },
+      "event_metric_delta_ms": {
+        "AORTIC_OPEN_05": 0.0,
+        "AORTIC_CLOSE_02": 0.0,
+        "MITRAL_OPEN_05": 0.0,
+        "MITRAL_CLOSE_02": 0.0,
+        "DP_LV_AO_REVERSE": 0.0,
+        "QAO_ZERO": 0.0
+      },
+      "event_topology_unchanged": true,
+      "reproduced_status": "PASS_0D_BASELINE_TIME_ONLY"
+    },
+    {
+      "step_us": 125,
+      "pressure_metric_delta_mmHg": {
+        "p_lv": -7.105427357601002e-14,
+        "p_root": 1.2789769243681803e-13,
+        "p_descending": 2.842170943040401e-14,
+        "p_la": 0.0
+      },
+      "event_metric_delta_ms": {
+        "AORTIC_OPEN_05": 0.0,
+        "AORTIC_CLOSE_02": 0.0,
+        "MITRAL_OPEN_05": 0.0,
+        "MITRAL_CLOSE_02": 0.0,
+        "DP_LV_AO_REVERSE": 0.0,
+        "QAO_ZERO": 0.0
+      },
+      "event_topology_unchanged": true,
+      "reproduced_status": "PASS_0D_BASELINE_TIME_ONLY"
+    }
+  ],
+  "max_abs_pressure_metric_change_mmHg": 1.2789769243681803e-13,
+  "mass_residual_change_mL": [
+    {
+      "step_us": 250,
+      "delta": 0.0
+    },
+    {
+      "step_us": 125,
+      "delta": 0.0
+    },
+    {
+      "step_us": 50,
+      "delta": -9.094947017729282e-13
+    }
+  ],
+  "demo_metric_changes": {
+    "baseline": {
+      "max_mass_error_mL": -9.094947017729282e-13,
+      "root_min_mmHg": -5.684341886080802e-14,
+      "root_max_mmHg": -1.2789769243681803e-13,
+      "max_balloon_mL": 0.0,
+      "net_aortic_volume_mL": -2.2737367544323206e-13,
+      "lv_net_external_work_mmHg_mL": -4.3655745685100555e-11
+    },
+    "assisted": {
+      "max_mass_error_mL": 0.0,
+      "root_min_mmHg": 0.0,
+      "root_max_mmHg": 0.0,
+      "max_balloon_mL": 0.0,
+      "net_aortic_volume_mL": -1.1368683772161603e-13,
+      "lv_net_external_work_mmHg_mL": -2.1827872842550278e-11
+    }
+  },
+  "demo_configuration_unchanged": true,
+  "original_core_files": {
+    "iabp/__init__.py": {
+      "sha256": "d7809c34209ced30a8de26539b4ff10693f96c774ea8d09306572a5496989a83",
+      "matches_imported_manifest": true
+    },
+    "iabp/components.py": {
+      "sha256": "9893009e3b02b3c62e07783ce7d73ea02724d1f063ff8a30a572da635d9b07a5",
+      "matches_imported_manifest": true
+    },
+    "iabp/contracts.py": {
+      "sha256": "12b75cd6edf4f0f00a0d28e29c0a75f6e08e1d0fce1e84a26201201cf444d373",
+      "matches_imported_manifest": true
+    },
+    "iabp/engine.py": {
+      "sha256": "471dea2658cc5b4d5c0abc8dcf781a6934c293fcacc13eb92a3cf5ef4ad26608",
+      "matches_imported_manifest": true
+    },
+    "iabp/model.py": {
+      "sha256": "08aa745151b3d9ba142de79718ce15ab6bfb48938a84b21ad34858153699cb3f",
+      "matches_imported_manifest": true
+    },
+    "iabp/scenarios.py": {
+      "sha256": "14f9c4cf1ed3296157048ea07689e747d3aee012318db8dccc01a55e8fb9d17d",
+      "matches_imported_manifest": true
+    },
+    "iabp/sensors.py": {
+      "sha256": "a6eb956da8d30ccf9b01abc6259209de355ded2a62c267f33b2f589fbdb9c009",
+      "matches_imported_manifest": true
+    }
+  },
+  "immutable_assets": {
+    "docs/reference/CONTEXT.md": {
+      "sha256": "394ca3a583903435d24253be1831f6d19653a38e9d183899a57edf61cbf26553",
+      "matches_imported_manifest": true
+    },
+    "docs/reference/IABP_Engine_Spec_r1.md": {
+      "sha256": "2f7039836352bb6800d963fd6d0a5832fd3e8452a45a52634bf8712725a674b1",
+      "matches_imported_manifest": true
+    },
+    "docs/reference/README.md": {
+      "sha256": "518893669daefbac743016f6dfa95022887c5089b1b2b6cd589931b11cd8af06",
+      "matches_imported_manifest": true
+    },
+    "docs/reference/package_check.json": {
+      "sha256": "45544171e2ad635e6640f23e3aa9a2915167b11602418f8427466f692c85cd8a",
+      "matches_imported_manifest": true
+    },
+    "docs/reference/reference_configuration.json": {
+      "sha256": "23faa0eaf848889d1973cf77b72ece6e76048f17227b8480c21be978e0c878e7",
+      "matches_imported_manifest": true
+    },
+    "docs/reference/requirements.json": {
+      "sha256": "de26e23590aa22ac90d2f40311c412c8c3792bd398178d659db0a6f55dc217fc",
+      "matches_imported_manifest": true
+    },
+    "docs/reference/research_r0/CONTEXT.md": {
+      "sha256": "a817a4264a7aba43f42b972116dd13ecb3c9e96da42a2899ed22953b781277a7",
+      "matches_imported_manifest": true
+    },
+    "docs/reference/research_r0/IABP_Physics_Engine_Design_r0.md": {
+      "sha256": "0ae71956b744385799776129de14638f918ece0b0a28ce5b265adc49eab11783",
+      "matches_imported_manifest": true
+    },
+    "docs/reference/research_r0/baseline_sha256.txt": {
+      "sha256": "331fc5de4254876651dbe81b4d0a8da773a57454579946f9f3a7eb9da74e8c90",
+      "matches_imported_manifest": true
+    },
+    "docs/reference/verification_plan.json": {
+      "sha256": "d0a83f72d990c194583e15fde559248b3f5d88b34f5a43037fe7d61a00563a82",
+      "matches_imported_manifest": true
+    },
+    "legacy/SHA256SUMS": {
+      "sha256": "c5a7e2a0086a4558e1d7df73bb58ff5a0f42a62efcf6eab4962fb45e7fc88251",
+      "matches_imported_manifest": true
+    },
+    "legacy/wiggers_complete_teaching_guide_v2_1_fixed.html": {
+      "sha256": "07baedd882a3e97ab584d1984c8f6b0c3b56dda55a00edb8a4225166a6f1a7b1",
+      "matches_imported_manifest": true
+    },
+    "legacy/wiggers_complete_teaching_guide_v3_2_timing.html": {
+      "sha256": "a57c6668263b394f7f781704c5753b5b5448c50dc9f353cee91700f23fbfc20a",
+      "matches_imported_manifest": true
+    }
+  },
+  "reporting_defect_found": "Imported verify_all.py hardcodes windows_execution=NOT_RUN even on Windows; B00 frozen reproduction preserves this raw record. Fixed in the maintained runner.",
+  "physiological_validation": "NOT_VALIDATED",
+  "clinical_5ms_claim": "NOT_ESTABLISHED",
+  "status": "PASS_REPRODUCTION_ONLY"
+}

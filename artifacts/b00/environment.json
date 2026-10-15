@@ -1,0 +1,15 @@
+{
+  "python": "3.12.9 | packaged by Anaconda, Inc. | (main, Feb  6 2025, 18:49:16) [MSC v.1929 64 bit (AMD64)]",
+  "executable": "D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe",
+  "platform": "Windows-10-10.0.19045-SP0",
+  "packages": {
+    "pytest": "9.0.2",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "ruff": "0.17.0",
+    "mypy": "1.20.2",
+    "pip": "24.3.1"
+  },
+  "imported_commit": "fc18650722adbfbd05e4077cda456a8dc4bbd82e",
+  "encoding_note": "PYTHONUTF8=1 required by pip 24.3.1 on Windows cp936 for UTF-8 requirements comments"
+}

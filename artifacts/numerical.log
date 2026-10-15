@@ -5,17 +5,17 @@
     {
       "step_us": 250,
       "max_abs_mass_error_mL": 3.637978807091713e-11,
-      "wall_seconds": 1.6502845759998763
+      "wall_seconds": 3.078565099989646
     },
     {
       "step_us": 125,
       "max_abs_mass_error_mL": 5.275069270282984e-11,
-      "wall_seconds": 3.234174997000082
+      "wall_seconds": 5.90356679999968
     },
     {
       "step_us": 50,
-      "max_abs_mass_error_mL": 1.6370904631912708e-10,
-      "wall_seconds": 7.816972759999999
+      "max_abs_mass_error_mL": 1.6279955161735415e-10,
+      "wall_seconds": 14.729962700002943
     }
   ],
   "comparisons": [
@@ -23,10 +23,10 @@
       "step_us": 250,
       "reference_us": 50,
       "pressure_max_difference_mmHg": {
-        "p_lv": 0.0007149766957326165,
+        "p_lv": 0.0007149766956899839,
         "p_root": 0.003292393186043796,
         "p_descending": 0.0005818664953238795,
-        "p_la": 1.6400741714051037e-05
+        "p_la": 1.6400741703392896e-05
       },
       "event_max_difference_ms": {
         "AORTIC_OPEN_05": 0.002,
@@ -43,9 +43,9 @@
       "step_us": 125,
       "reference_us": 50,
       "pressure_max_difference_mmHg": {
-        "p_lv": 0.00015115622261419048,
-        "p_root": 0.0006875505573162854,
-        "p_descending": 0.00012135619121522723,
+        "p_lv": 0.0001511562225431362,
+        "p_root": 0.0006875505574441831,
+        "p_descending": 0.00012135619124364894,
         "p_la": 3.850923810944096e-06
       },
       "event_max_difference_ms": {
