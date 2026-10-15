@@ -1,0 +1,264 @@
+{
+  "schema": "arterial1d-benchmark/v1",
+  "identity": {
+    "python_executable": "D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe",
+    "python_version": "3.12.9",
+    "source_sha256": {
+      "D:\\codehub2026\\04_heart_engine_r2\\tools\\arterial1d_check.py": "6dd400909fa09f09ed29470dc0f68dceb66456e0352e77c0b7a0599b0052fbed",
+      "iabp\\arterial1d\\__init__.py": "793796aa44e076d7450f860a96da4e9e7ca81447e2e4213817cd042b113c780f",
+      "iabp\\arterial1d\\boundaries.py": "131d46cca8e20573b7daae9fc2686bacb19785fbf53e76e3236c695786ad408d",
+      "iabp\\arterial1d\\physics.py": "9ee6d6abdfae0d127af9868b854d2c7e09cb8176e7ac873d73dc82e3e0454ecf",
+      "iabp\\arterial1d\\solver.py": "eefea67a6d57300c7cb6b781749150e37ffed0c3fb3e7faf7680aeae771c5708"
+    }
+  },
+  "thresholds_declared_before_runs": {
+    "arrival_error_ms": 0.5,
+    "peak_relative_error": 0.01,
+    "conservation_relative_initial_volume": 1e-10,
+    "reflection_coefficient_absolute_error": 0.05,
+    "symmetric_split_absolute_error": 0.005,
+    "junction_backward_forward_peak_ratio": 0.05
+  },
+  "boileau_thresholds_declared_before_runs": {
+    "relative_max_profile_error": 0.05,
+    "maximum_peak_relative_error": 0.05,
+    "peak_position_absolute_difference_m": 0.02,
+    "conservation_relative_initial_volume": 1e-10
+  },
+  "scope": "independent uniform vessels; no heart, balloon, clinical calibration or event accuracy claim",
+  "alignment": "none",
+  "selected_case": "reflections",
+  "reflections": [
+    {
+      "case": "closed",
+      "runs": [
+        {
+          "case": "closed",
+          "cells": 80,
+          "scheme": "muscl_ssprk2",
+          "probe_x_m": 0.75,
+          "coefficient_definition": "signed peak p- in fixed reflected window / peak p+ in fixed incident window",
+          "incident_window_s": [
+            0.17,
+            0.27
+          ],
+          "reflected_window_s": [
+            0.27,
+            0.39
+          ],
+          "expected_coefficient": 1.0,
+          "measured_coefficient": 0.9496663850712068,
+          "coefficient_absolute_error": 0.05033361492879318,
+          "conservation_relative_initial_volume": 1.839208519324572e-16,
+          "pass": false,
+          "wall_seconds": 1.6563424000050873,
+          "trace_csv": "reflection_closed_80.csv"
+        },
+        {
+          "case": "closed",
+          "cells": 160,
+          "scheme": "muscl_ssprk2",
+          "probe_x_m": 0.75,
+          "coefficient_definition": "signed peak p- in fixed reflected window / peak p+ in fixed incident window",
+          "incident_window_s": [
+            0.17,
+            0.27
+          ],
+          "reflected_window_s": [
+            0.27,
+            0.39
+          ],
+          "expected_coefficient": 1.0,
+          "measured_coefficient": 0.9864516689310344,
+          "coefficient_absolute_error": 0.01354833106896558,
+          "conservation_relative_initial_volume": 2.7837384881117895e-16,
+          "pass": true,
+          "wall_seconds": 6.542360899999039,
+          "trace_csv": "reflection_closed_160.csv"
+        },
+        {
+          "case": "closed",
+          "cells": 320,
+          "scheme": "muscl_ssprk2",
+          "probe_x_m": 0.75,
+          "coefficient_definition": "signed peak p- in fixed reflected window / peak p+ in fixed incident window",
+          "incident_window_s": [
+            0.17,
+            0.27
+          ],
+          "reflected_window_s": [
+            0.27,
+            0.39
+          ],
+          "expected_coefficient": 1.0,
+          "measured_coefficient": 0.997300684882984,
+          "coefficient_absolute_error": 0.0026993151170160434,
+          "conservation_relative_initial_volume": 1.0576882765844714e-16,
+          "pass": true,
+          "wall_seconds": 19.992182000001776,
+          "trace_csv": "reflection_closed_320.csv"
+        }
+      ],
+      "coefficient_error_orders": [
+        1.8934070687338038,
+        2.327449834861876
+      ],
+      "candidate_pass": true
+    },
+    {
+      "case": "pressure_release",
+      "runs": [
+        {
+          "case": "pressure_release",
+          "cells": 80,
+          "scheme": "muscl_ssprk2",
+          "probe_x_m": 0.75,
+          "coefficient_definition": "signed peak p- in fixed reflected window / peak p+ in fixed incident window",
+          "incident_window_s": [
+            0.17,
+            0.27
+          ],
+          "reflected_window_s": [
+            0.27,
+            0.39
+          ],
+          "expected_coefficient": -1.0,
+          "measured_coefficient": -0.9490802263477763,
+          "coefficient_absolute_error": 0.050919773652223665,
+          "conservation_relative_initial_volume": 1.1412886638264975e-16,
+          "pass": false,
+          "wall_seconds": 1.6659966000006534,
+          "trace_csv": "reflection_pressure_release_80.csv"
+        },
+        {
+          "case": "pressure_release",
+          "cells": 160,
+          "scheme": "muscl_ssprk2",
+          "probe_x_m": 0.75,
+          "coefficient_definition": "signed peak p- in fixed reflected window / peak p+ in fixed incident window",
+          "incident_window_s": [
+            0.17,
+            0.27
+          ],
+          "reflected_window_s": [
+            0.27,
+            0.39
+          ],
+          "expected_coefficient": -1.0,
+          "measured_coefficient": -0.985597393436943,
+          "coefficient_absolute_error": 0.01440260656305703,
+          "conservation_relative_initial_volume": 1.9835791089021606e-16,
+          "pass": true,
+          "wall_seconds": 6.557387699998799,
+          "trace_csv": "reflection_pressure_release_160.csv"
+        },
+        {
+          "case": "pressure_release",
+          "cells": 320,
+          "scheme": "muscl_ssprk2",
+          "probe_x_m": 0.75,
+          "coefficient_definition": "signed peak p- in fixed reflected window / peak p+ in fixed incident window",
+          "incident_window_s": [
+            0.17,
+            0.27
+          ],
+          "reflected_window_s": [
+            0.27,
+            0.39
+          ],
+          "expected_coefficient": -1.0,
+          "measured_coefficient": -0.9964523152341315,
+          "coefficient_absolute_error": 0.0035476847658685307,
+          "conservation_relative_initial_volume": 1.7398365550698683e-16,
+          "pass": true,
+          "wall_seconds": 20.02247390001139,
+          "trace_csv": "reflection_pressure_release_320.csv"
+        }
+      ],
+      "coefficient_error_orders": [
+        1.8218960740342,
+        2.021380204266539
+      ],
+      "candidate_pass": true
+    },
+    {
+      "case": "resistance_2z0",
+      "runs": [
+        {
+          "case": "resistance_2z0",
+          "cells": 80,
+          "scheme": "muscl_ssprk2",
+          "probe_x_m": 0.75,
+          "coefficient_definition": "signed peak p- in fixed reflected window / peak p+ in fixed incident window",
+          "incident_window_s": [
+            0.17,
+            0.27
+          ],
+          "reflected_window_s": [
+            0.27,
+            0.39
+          ],
+          "expected_coefficient": 0.3333333333333333,
+          "measured_coefficient": 0.3168400070283804,
+          "coefficient_absolute_error": 0.016493326304952927,
+          "conservation_relative_initial_volume": 8.046812998915854e-17,
+          "pass": true,
+          "wall_seconds": 1.780421200004639,
+          "trace_csv": "reflection_resistance_2z0_80.csv"
+        },
+        {
+          "case": "resistance_2z0",
+          "cells": 160,
+          "scheme": "muscl_ssprk2",
+          "probe_x_m": 0.75,
+          "coefficient_definition": "signed peak p- in fixed reflected window / peak p+ in fixed incident window",
+          "incident_window_s": [
+            0.17,
+            0.27
+          ],
+          "reflected_window_s": [
+            0.27,
+            0.39
+          ],
+          "expected_coefficient": 0.3333333333333333,
+          "measured_coefficient": 0.32886896906003765,
+          "coefficient_absolute_error": 0.004464364273295662,
+          "conservation_relative_initial_volume": 5.249839621003216e-17,
+          "pass": true,
+          "wall_seconds": 6.83188599999994,
+          "trace_csv": "reflection_resistance_2z0_160.csv"
+        },
+        {
+          "case": "resistance_2z0",
+          "cells": 320,
+          "scheme": "muscl_ssprk2",
+          "probe_x_m": 0.75,
+          "coefficient_definition": "signed peak p- in fixed reflected window / peak p+ in fixed incident window",
+          "incident_window_s": [
+            0.17,
+            0.27
+          ],
+          "reflected_window_s": [
+            0.27,
+            0.39
+          ],
+          "expected_coefficient": 0.3333333333333333,
+          "measured_coefficient": 0.332596173178679,
+          "coefficient_absolute_error": 0.0007371601546543038,
+          "conservation_relative_initial_volume": 1.0823934042127219e-16,
+          "pass": true,
+          "wall_seconds": 20.421196900002542,
+          "trace_csv": "reflection_resistance_2z0_320.csv"
+        }
+      ],
+      "coefficient_error_orders": [
+        1.8853557298974655,
+        2.598404752878578
+      ],
+      "candidate_pass": true
+    }
+  ],
+  "wall_seconds": 85.6347786999977,
+  "engineering_status": "PASS",
+  "public_benchmark_status": "NOT_RUN"
+}

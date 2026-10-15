@@ -1,0 +1,14 @@
+{
+  "purpose": "bounded process-local hot-path probe, not physical acceptance or realtime qualification",
+  "reference_solver_sha256": "eefea67a6d57300c7cb6b781749150e37ffed0c3fb3e7faf7680aeae771c5708",
+  "current_solver_sha256": "8d70b1192ed64efe05a5702415e642ba850040ae094c6e0dfbcb8a7d99c7455b",
+  "scheme": "muscl_ssprk2",
+  "steps": 100,
+  "rows": [
+    {"cells": 160, "original_wall_time_s": 0.3842798999976367, "cached_wall_time_s": 0.23986439999134745},
+    {"cells": 320, "original_wall_time_s": 0.7762404999957653, "cached_wall_time_s": 0.4709765999868978},
+    {"cells": 640, "original_wall_time_s": 1.5696293000073638, "cached_wall_time_s": 0.955633299992769}
+  ],
+  "exact_100_step_result_equivalence_320_cells": true,
+  "method": "Original stage versus process-local cached-stage subclass; identical smooth pulse initial state, boundary model, CFL and float arithmetic order. Final production cached stage separately checked against the frozen original in compare_cached_stage.json."
+}

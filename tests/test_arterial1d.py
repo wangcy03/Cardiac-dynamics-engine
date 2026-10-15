@@ -259,4 +259,3 @@ def test_network_detects_segment_advanced_independently_after_construction() -> 
     with pytest.raises(ArterialError, match="same time_s"):
         network.step(dt)
     assert (parent.state, child.state, parent.ledger, child.ledger, network.ledger) == before
-

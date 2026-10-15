@@ -1,0 +1,330 @@
+{
+  "schema": "boileau-reference-ensemble/v1",
+  "schemes": {
+    "DCG": {
+      "original_output_rows": 5000,
+      "repeated_adjacent_coordinates": 999,
+      "output_spacing_min_m": 0.0016999999999995907,
+      "output_spacing_max_m": 0.003300000000001191,
+      "profiles": [
+        {
+          "time_s": 0.1,
+          "max_absolute_difference_from_fvm_pa": 0.06660999999999717,
+          "rms_difference_from_fvm_pa": 0.004723350209707806
+        },
+        {
+          "time_s": 0.3,
+          "max_absolute_difference_from_fvm_pa": 0.10418999999999912,
+          "rms_difference_from_fvm_pa": 0.006087609376184755
+        },
+        {
+          "time_s": 0.5,
+          "max_absolute_difference_from_fvm_pa": 0.12996000000000407,
+          "rms_difference_from_fvm_pa": 0.008357606262588703
+        },
+        {
+          "time_s": 0.7,
+          "max_absolute_difference_from_fvm_pa": 0.17265000000000086,
+          "rms_difference_from_fvm_pa": 0.010800603898880953
+        },
+        {
+          "time_s": 0.9,
+          "max_absolute_difference_from_fvm_pa": 0.19861999999999824,
+          "rms_difference_from_fvm_pa": 0.013266407877091473
+        },
+        {
+          "time_s": 1.1,
+          "max_absolute_difference_from_fvm_pa": 0.238780000000002,
+          "rms_difference_from_fvm_pa": 0.015851828127050674
+        },
+        {
+          "time_s": 1.3,
+          "max_absolute_difference_from_fvm_pa": 0.2732700000000001,
+          "rms_difference_from_fvm_pa": 0.018481045145132175
+        },
+        {
+          "time_s": 1.5,
+          "max_absolute_difference_from_fvm_pa": 0.30790999999999613,
+          "rms_difference_from_fvm_pa": 0.021204414794245487
+        }
+      ]
+    },
+    "LCG": {
+      "original_output_rows": 2000,
+      "repeated_adjacent_coordinates": 0,
+      "output_spacing_min_m": 0.004999999999999005,
+      "output_spacing_max_m": 0.005000000000000782,
+      "profiles": [
+        {
+          "time_s": 0.1,
+          "max_absolute_difference_from_fvm_pa": 1.3585390000000004,
+          "rms_difference_from_fvm_pa": 0.13857536174026303
+        },
+        {
+          "time_s": 0.3,
+          "max_absolute_difference_from_fvm_pa": 1.0463229999999992,
+          "rms_difference_from_fvm_pa": 0.10912796041842597
+        },
+        {
+          "time_s": 0.5,
+          "max_absolute_difference_from_fvm_pa": 0.8057850000000002,
+          "rms_difference_from_fvm_pa": 0.08377975251849366
+        },
+        {
+          "time_s": 0.7,
+          "max_absolute_difference_from_fvm_pa": 0.7080156000000004,
+          "rms_difference_from_fvm_pa": 0.06731033321642771
+        },
+        {
+          "time_s": 0.9,
+          "max_absolute_difference_from_fvm_pa": 0.6952865999999998,
+          "rms_difference_from_fvm_pa": 0.06656295009255454
+        },
+        {
+          "time_s": 1.1,
+          "max_absolute_difference_from_fvm_pa": 0.7259610000000016,
+          "rms_difference_from_fvm_pa": 0.0816909565081124
+        },
+        {
+          "time_s": 1.3,
+          "max_absolute_difference_from_fvm_pa": 1.102292000000002,
+          "rms_difference_from_fvm_pa": 0.10583068623672828
+        },
+        {
+          "time_s": 1.5,
+          "max_absolute_difference_from_fvm_pa": 1.4533500000000004,
+          "rms_difference_from_fvm_pa": 0.13390853715927073
+        }
+      ]
+    },
+    "FEM": {
+      "original_output_rows": 4001,
+      "repeated_adjacent_coordinates": 0,
+      "output_spacing_min_m": 0.0024999999999995026,
+      "output_spacing_max_m": 0.002500000000001279,
+      "profiles": [
+        {
+          "time_s": 0.1,
+          "max_absolute_difference_from_fvm_pa": 0.05469009999999841,
+          "rms_difference_from_fvm_pa": 0.003996879024128828
+        },
+        {
+          "time_s": 0.3,
+          "max_absolute_difference_from_fvm_pa": 0.06161600000000078,
+          "rms_difference_from_fvm_pa": 0.003900735051369496
+        },
+        {
+          "time_s": 0.5,
+          "max_absolute_difference_from_fvm_pa": 0.05722110000000313,
+          "rms_difference_from_fvm_pa": 0.004716355065386416
+        },
+        {
+          "time_s": 0.7,
+          "max_absolute_difference_from_fvm_pa": 0.06927050000000001,
+          "rms_difference_from_fvm_pa": 0.005821022662289026
+        },
+        {
+          "time_s": 0.9,
+          "max_absolute_difference_from_fvm_pa": 0.09254110000000182,
+          "rms_difference_from_fvm_pa": 0.007043966070272785
+        },
+        {
+          "time_s": 1.1,
+          "max_absolute_difference_from_fvm_pa": 0.11300469999999763,
+          "rms_difference_from_fvm_pa": 0.008425290956021176
+        },
+        {
+          "time_s": 1.3,
+          "max_absolute_difference_from_fvm_pa": 0.1438484000000031,
+          "rms_difference_from_fvm_pa": 0.00988231547166569
+        },
+        {
+          "time_s": 1.5,
+          "max_absolute_difference_from_fvm_pa": 0.1585245999999998,
+          "rms_difference_from_fvm_pa": 0.011459059781773777
+        }
+      ]
+    },
+    "FVM": {
+      "original_output_rows": 1000,
+      "repeated_adjacent_coordinates": 0,
+      "output_spacing_min_m": 0.009999999999999787,
+      "output_spacing_max_m": 0.010000000000001563,
+      "profiles": [
+        {
+          "time_s": 0.1,
+          "max_absolute_difference_from_fvm_pa": 0.0,
+          "rms_difference_from_fvm_pa": 0.0
+        },
+        {
+          "time_s": 0.3,
+          "max_absolute_difference_from_fvm_pa": 0.0,
+          "rms_difference_from_fvm_pa": 0.0
+        },
+        {
+          "time_s": 0.5,
+          "max_absolute_difference_from_fvm_pa": 0.0,
+          "rms_difference_from_fvm_pa": 0.0
+        },
+        {
+          "time_s": 0.7,
+          "max_absolute_difference_from_fvm_pa": 0.0,
+          "rms_difference_from_fvm_pa": 0.0
+        },
+        {
+          "time_s": 0.9,
+          "max_absolute_difference_from_fvm_pa": 0.0,
+          "rms_difference_from_fvm_pa": 0.0
+        },
+        {
+          "time_s": 1.1,
+          "max_absolute_difference_from_fvm_pa": 0.0,
+          "rms_difference_from_fvm_pa": 0.0
+        },
+        {
+          "time_s": 1.3,
+          "max_absolute_difference_from_fvm_pa": 0.0,
+          "rms_difference_from_fvm_pa": 0.0
+        },
+        {
+          "time_s": 1.5,
+          "max_absolute_difference_from_fvm_pa": 0.0,
+          "rms_difference_from_fvm_pa": 0.0
+        }
+      ]
+    },
+    "McC": {
+      "original_output_rows": 3201,
+      "repeated_adjacent_coordinates": 0,
+      "output_spacing_min_m": 0.003124999999998934,
+      "output_spacing_max_m": 0.0031250000000007105,
+      "profiles": [
+        {
+          "time_s": 0.1,
+          "max_absolute_difference_from_fvm_pa": 0.05917115949999996,
+          "rms_difference_from_fvm_pa": 0.004137280307606263
+        },
+        {
+          "time_s": 0.3,
+          "max_absolute_difference_from_fvm_pa": 0.07675059319999988,
+          "rms_difference_from_fvm_pa": 0.005067798384229734
+        },
+        {
+          "time_s": 0.5,
+          "max_absolute_difference_from_fvm_pa": 0.09792153759999778,
+          "rms_difference_from_fvm_pa": 0.006461524542219162
+        },
+        {
+          "time_s": 0.7,
+          "max_absolute_difference_from_fvm_pa": 0.1369167740241526,
+          "rms_difference_from_fvm_pa": 0.008256853315799397
+        },
+        {
+          "time_s": 0.9,
+          "max_absolute_difference_from_fvm_pa": 0.16341750605994854,
+          "rms_difference_from_fvm_pa": 0.00998323728948624
+        },
+        {
+          "time_s": 1.1,
+          "max_absolute_difference_from_fvm_pa": 0.20609777373210214,
+          "rms_difference_from_fvm_pa": 0.01170540144375837
+        },
+        {
+          "time_s": 1.3,
+          "max_absolute_difference_from_fvm_pa": 0.23219148413989288,
+          "rms_difference_from_fvm_pa": 0.013735089444291216
+        },
+        {
+          "time_s": 1.5,
+          "max_absolute_difference_from_fvm_pa": 0.2768220485942088,
+          "rms_difference_from_fvm_pa": 0.015768716100688963
+        }
+      ]
+    },
+    "STM": {
+      "original_output_rows": 10001,
+      "repeated_adjacent_coordinates": 0,
+      "output_spacing_min_m": 0.0009999999999994458,
+      "output_spacing_max_m": 0.0010000000000012221,
+      "profiles": [
+        {
+          "time_s": 0.1,
+          "max_absolute_difference_from_fvm_pa": 0.060609999999996944,
+          "rms_difference_from_fvm_pa": 0.004668700793320221
+        },
+        {
+          "time_s": 0.3,
+          "max_absolute_difference_from_fvm_pa": 0.0701900000000002,
+          "rms_difference_from_fvm_pa": 0.005298540436000272
+        },
+        {
+          "time_s": 0.5,
+          "max_absolute_difference_from_fvm_pa": 0.0819600000000058,
+          "rms_difference_from_fvm_pa": 0.006428293086163182
+        },
+        {
+          "time_s": 0.7,
+          "max_absolute_difference_from_fvm_pa": 0.11519999999999975,
+          "rms_difference_from_fvm_pa": 0.0077030556241829305
+        },
+        {
+          "time_s": 0.9,
+          "max_absolute_difference_from_fvm_pa": 0.13196100000000044,
+          "rms_difference_from_fvm_pa": 0.009063605454972748
+        },
+        {
+          "time_s": 1.1,
+          "max_absolute_difference_from_fvm_pa": 0.17051999999999978,
+          "rms_difference_from_fvm_pa": 0.010556299617113029
+        },
+        {
+          "time_s": 1.3,
+          "max_absolute_difference_from_fvm_pa": 0.18591200000000008,
+          "rms_difference_from_fvm_pa": 0.012123209324386828
+        },
+        {
+          "time_s": 1.5,
+          "max_absolute_difference_from_fvm_pa": 0.22900000000000098,
+          "rms_difference_from_fvm_pa": 0.013824507970245833
+        }
+      ]
+    }
+  },
+  "ensemble_spread": [
+    {
+      "time_s": 0.1,
+      "max_ensemble_range_pa": 1.3585390000000004
+    },
+    {
+      "time_s": 0.3,
+      "max_ensemble_range_pa": 1.0463229999999992
+    },
+    {
+      "time_s": 0.5,
+      "max_ensemble_range_pa": 0.8057850000000002
+    },
+    {
+      "time_s": 0.7,
+      "max_ensemble_range_pa": 0.7080156000000004
+    },
+    {
+      "time_s": 0.9,
+      "max_ensemble_range_pa": 0.6952865999999998
+    },
+    {
+      "time_s": 1.1,
+      "max_ensemble_range_pa": 0.9398440000000043
+    },
+    {
+      "time_s": 1.3,
+      "max_ensemble_range_pa": 1.3755620000000022
+    },
+    {
+      "time_s": 1.5,
+      "max_ensemble_range_pa": 1.726560000000001
+    }
+  ],
+  "comparison_coordinates": "original FVM output centers, 0.005..9.995 m; spacing 0.01 m",
+  "interpolation": "linear; duplicate DCG interface values averaged for ensemble analysis only",
+  "interpretation": "Published numerical solutions differ and have finite sampling resolution; none is clinical ground truth. Output sampling spacing need not equal computational mesh spacing."
+}

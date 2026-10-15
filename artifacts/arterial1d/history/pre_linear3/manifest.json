@@ -1,0 +1,334 @@
+{
+  "schema": "arterial1d-historical-source-snapshot/v1",
+  "description": "Pre-linear3 source bytes and original reports, with exact source hashes. Final candidates must run the current core separately.",
+  "core_files": [
+    {
+      "original_path": "iabp\\arterial1d\\__init__.py",
+      "snapshot_path": "history\\pre_linear3\\iabp\\arterial1d\\__init__.py",
+      "sha256": "793796aa44e076d7450f860a96da4e9e7ca81447e2e4213817cd042b113c780f"
+    },
+    {
+      "original_path": "iabp\\arterial1d\\boundaries.py",
+      "snapshot_path": "history\\pre_linear3\\iabp\\arterial1d\\boundaries.py",
+      "sha256": "131d46cca8e20573b7daae9fc2686bacb19785fbf53e76e3236c695786ad408d"
+    },
+    {
+      "original_path": "iabp\\arterial1d\\physics.py",
+      "snapshot_path": "history\\pre_linear3\\iabp\\arterial1d\\physics.py",
+      "sha256": "9ee6d6abdfae0d127af9868b854d2c7e09cb8176e7ac873d73dc82e3e0454ecf"
+    },
+    {
+      "original_path": "iabp\\arterial1d\\solver.py",
+      "snapshot_path": "history\\pre_linear3\\iabp\\arterial1d\\solver.py",
+      "sha256": "eefea67a6d57300c7cb6b781749150e37ffed0c3fb3e7faf7680aeae771c5708"
+    }
+  ],
+  "files": [
+    {
+      "path": "arterial1d_check_current.py",
+      "sha256": "3f372a39d35f593c32bf3384b9fbf2aa19747e03fc43e78da6fa4d3d6bd5d46c",
+      "bytes": 36657
+    },
+    {
+      "path": "arterial1d_check_original.py",
+      "sha256": "6dd400909fa09f09ed29470dc0f68dceb66456e0352e77c0b7a0599b0052fbed",
+      "bytes": 28717
+    },
+    {
+      "path": "benchmark_boileau.json",
+      "sha256": "9918b800f80afa85e83cfd4cc048fa9c64141543b0b965c0ca4363cd06098aaa",
+      "bytes": 14717
+    },
+    {
+      "path": "benchmark_junction.json",
+      "sha256": "96b507a5432264f1a264d3a42e3b67f7c2ef8ee2c94e7d50f6554de7dde17abb",
+      "bytes": 4505
+    },
+    {
+      "path": "benchmark_matched.json",
+      "sha256": "5c10cf78b6e9b469a9ef2b511f188dc0b68ee88d76d40687e1d9c90f54db2669",
+      "bytes": 11970
+    },
+    {
+      "path": "benchmark_reflections.json",
+      "sha256": "0cddbe51b839a6ac83dc9a12e25a5f4dad7cb937e40f80ff7877d96299a0b0ab",
+      "bytes": 9496
+    },
+    {
+      "path": "boileau_muscl_ssprk2_1280.json",
+      "sha256": "16eb5db631bbf0e971ebe6e6bbc34e7c20077b6da184d696118cd69339d40082",
+      "bytes": 3858
+    },
+    {
+      "path": "boileau_muscl_ssprk2_1280_profiles.csv",
+      "sha256": "0a65db5b154b8e882448736afbc3586c6af9718b75ee443a35eba7e4202449ba",
+      "bytes": 476446
+    },
+    {
+      "path": "boileau_muscl_ssprk2_2560.json",
+      "sha256": "14e617ef33b680857212ed74e4c121df92dd2e31ab75b259c19a07fd5a7b38d2",
+      "bytes": 3923
+    },
+    {
+      "path": "boileau_muscl_ssprk2_2560_profiles.csv",
+      "sha256": "915ee51d1d2d0fbffacf135d3d017da03cefa04c4b4a321c825046f66b83a096",
+      "bytes": 475386
+    },
+    {
+      "path": "boileau_muscl_ssprk2_640.json",
+      "sha256": "3f2809a67b2ad5222d27771502047418b888a99475f1c1c0fa1ad496f8cd1d94",
+      "bytes": 3908
+    },
+    {
+      "path": "boileau_muscl_ssprk2_640_profiles.csv",
+      "sha256": "4fb2cd92b6c5170a7f988bf7b34d1a8b3b3876238aa64da9cc26c5ccb578cd8f",
+      "bytes": 476880
+    },
+    {
+      "path": "iabp\\arterial1d\\__init__.py",
+      "sha256": "793796aa44e076d7450f860a96da4e9e7ca81447e2e4213817cd042b113c780f",
+      "bytes": 1051
+    },
+    {
+      "path": "iabp\\arterial1d\\boundaries.py",
+      "sha256": "131d46cca8e20573b7daae9fc2686bacb19785fbf53e76e3236c695786ad408d",
+      "bytes": 6698
+    },
+    {
+      "path": "iabp\\arterial1d\\physics.py",
+      "sha256": "9ee6d6abdfae0d127af9868b854d2c7e09cb8176e7ac873d73dc82e3e0454ecf",
+      "bytes": 5639
+    },
+    {
+      "path": "iabp\\arterial1d\\solver.py",
+      "sha256": "eefea67a6d57300c7cb6b781749150e37ffed0c3fb3e7faf7680aeae771c5708",
+      "bytes": 20803
+    },
+    {
+      "path": "junction_symmetric_160.csv",
+      "sha256": "095119453f182e7a60054692ad61a4d7b11bb0dd3ce07278dc82d2685744fcf0",
+      "bytes": 62084
+    },
+    {
+      "path": "junction_symmetric_160.json",
+      "sha256": "3b394ef582db9a7626ffe795224eaa3670eae95524d3f283bc8e554be389b1a1",
+      "bytes": 794
+    },
+    {
+      "path": "junction_symmetric_40.csv",
+      "sha256": "21d57c26c1df21aa26af6e35672db5773087d4d9417b6bacc7df830e8858dec0",
+      "bytes": 67360
+    },
+    {
+      "path": "junction_symmetric_40.json",
+      "sha256": "b57391b89c0a3b29d780cd6db06188c432bb22ab27c2daaf2f99daad91346251",
+      "bytes": 792
+    },
+    {
+      "path": "junction_symmetric_80.csv",
+      "sha256": "412219e0212197122802af66d40ba21585d40a9b5f71c7da3d200fbb3657349e",
+      "bytes": 63807
+    },
+    {
+      "path": "junction_symmetric_80.json",
+      "sha256": "5de95b75a9fad8c8e02051972762b349fb2a644eba25867248ca166370002d38",
+      "bytes": 789
+    },
+    {
+      "path": "matched_muscl_ssprk2_160.json",
+      "sha256": "d6183fb83a5fa189d813cb6a874164153bc849b8a58a7dda5b8f5425a25f2073",
+      "bytes": 1104
+    },
+    {
+      "path": "matched_muscl_ssprk2_160_profiles.csv",
+      "sha256": "b192b54e2a6b6e6c804fec299d4c061c0a8f4008e105bce8d1dddac0b1a8f016",
+      "bytes": 33458
+    },
+    {
+      "path": "matched_muscl_ssprk2_160_trace.csv",
+      "sha256": "464320d69b15ec34ca2075d30b69df38076aa2e4d1d69d4c89e63155435467dd",
+      "bytes": 79751
+    },
+    {
+      "path": "matched_muscl_ssprk2_320.json",
+      "sha256": "3e13eb0d3352e7e95a7b6b8ac0f3b6b496932ff68de25d7862588a422b6b391d",
+      "bytes": 1106
+    },
+    {
+      "path": "matched_muscl_ssprk2_320_profiles.csv",
+      "sha256": "3ea8a650f49f927eb5cbe591623c941b4cb0f35879c7ca309603f544afd476f4",
+      "bytes": 67363
+    },
+    {
+      "path": "matched_muscl_ssprk2_320_trace.csv",
+      "sha256": "3845db93a16d6fd903fd653a9876da108677f3efc62f2940a6c27864dc6e88ac",
+      "bytes": 79722
+    },
+    {
+      "path": "matched_muscl_ssprk2_640.json",
+      "sha256": "5f4d8bd7ab0d82ab00cfc55015b96405c2303e20d378b9ecb2fcb9db155ea4c1",
+      "bytes": 1110
+    },
+    {
+      "path": "matched_muscl_ssprk2_640_profiles.csv",
+      "sha256": "e5e1a9dcfe3fb5368e2b16e11c84b8238d7c850dcb9987c44adf7496d12b241a",
+      "bytes": 135977
+    },
+    {
+      "path": "matched_muscl_ssprk2_640_trace.csv",
+      "sha256": "c4a4e56d655b7ba9f5106aab38a43f32fa5b1403803ad3620c7e65591bd2b891",
+      "bytes": 79292
+    },
+    {
+      "path": "matched_muscl_ssprk2_80.json",
+      "sha256": "01e98c8945bac08c46d9872ad61c8731e67621f904f0d5a840091765527366e0",
+      "bytes": 1101
+    },
+    {
+      "path": "matched_muscl_ssprk2_80_profiles.csv",
+      "sha256": "71f2aeffa345df5041ae1e300a4cb2b21b0b570a7ab2524d1402f18b725e9fea",
+      "bytes": 16811
+    },
+    {
+      "path": "matched_muscl_ssprk2_80_trace.csv",
+      "sha256": "ee3788584e423dede5e7e0de84016caa30d8e7c9f64df12f3d74a66b8788158d",
+      "bytes": 80998
+    },
+    {
+      "path": "matched_rusanov_160.json",
+      "sha256": "08bccaeb33ffe223ec6f8845ce05192302df1199b41e631a37c082cdc9fd1c4f",
+      "bytes": 1073
+    },
+    {
+      "path": "matched_rusanov_160_profiles.csv",
+      "sha256": "192d6f72eb77bc45d72582ae047a357f2000b054eab1162a7a41724ccbba316f",
+      "bytes": 34430
+    },
+    {
+      "path": "matched_rusanov_160_trace.csv",
+      "sha256": "9e7d9f0c1d97f9880875736e36a813b5720c82150cc3f5a7079d494d1073e9c0",
+      "bytes": 81211
+    },
+    {
+      "path": "matched_rusanov_320.json",
+      "sha256": "e8261226d47856fe2a508afb528e9e8319d27d66e355d5bae700cd48ca3a1cb2",
+      "bytes": 1074
+    },
+    {
+      "path": "matched_rusanov_320_profiles.csv",
+      "sha256": "049a0249e1de594f7e4c2cfd09e5ec966741a57924622fa2112bb944a60c9fc4",
+      "bytes": 69401
+    },
+    {
+      "path": "matched_rusanov_320_trace.csv",
+      "sha256": "a112c2c97325e5ef6f99b749325abb9815f194d0f75e0f07b91e45a865218d32",
+      "bytes": 80432
+    },
+    {
+      "path": "matched_rusanov_80.json",
+      "sha256": "200a7120a572462855dfbfd52cf16cda19398c9cfda83f16574d063ea503f1b5",
+      "bytes": 1068
+    },
+    {
+      "path": "matched_rusanov_80_profiles.csv",
+      "sha256": "2f71dbc0cb7499466f91897aa7b9a42059fd909e99c1e7c3944643bcf22ab4f4",
+      "bytes": 17346
+    },
+    {
+      "path": "matched_rusanov_80_trace.csv",
+      "sha256": "70cd2603f4948fa42164992c94ab978b75d51281ed6314c69c267ee23fab0204",
+      "bytes": 82468
+    },
+    {
+      "path": "reflection_closed_160.csv",
+      "sha256": "d057fc6e2bc004a0933dba757c7b7a80d6b103a1c74e1c316d9d2e4aa10cbc80",
+      "bytes": 55144
+    },
+    {
+      "path": "reflection_closed_160.json",
+      "sha256": "d25fe5d5e192b131126349e6e76df4658fb47dc2d8478e1050f68640b8cf7ad1",
+      "bytes": 609
+    },
+    {
+      "path": "reflection_closed_320.csv",
+      "sha256": "c25cd0f3cb1d066c086dee40797c61f4b41b14f4307b82e039ef1125c8c2cb48",
+      "bytes": 54110
+    },
+    {
+      "path": "reflection_closed_320.json",
+      "sha256": "80c245c0a3900471c8a0659d5feba2b462bd6cd1016041a1d61ed95619fb63ea",
+      "bytes": 611
+    },
+    {
+      "path": "reflection_closed_80.csv",
+      "sha256": "29687bc1c999a404b68f2cb8a6f7403739517ca71ed6f8d4419d8f69c39eed6a",
+      "bytes": 57516
+    },
+    {
+      "path": "reflection_closed_80.json",
+      "sha256": "b8f8e61bf191e8f543135ab6daf9c0414a935c31df8e0deeecf93e54da4ea442",
+      "bytes": 608
+    },
+    {
+      "path": "reflection_pressure_release_160.csv",
+      "sha256": "7989f77cf8d11023a6b062b30f873063d3ac613e1c6a659d7eca325518818708",
+      "bytes": 55321
+    },
+    {
+      "path": "reflection_pressure_release_160.json",
+      "sha256": "00c52fb54e9b69b3031ff6b26525369a32229aca553560731bfb7515de20c093",
+      "bytes": 630
+    },
+    {
+      "path": "reflection_pressure_release_320.csv",
+      "sha256": "7c3cba15e333a3fd105ba200039fb7818dace9d57a90bfc478bd72b33b7e78ce",
+      "bytes": 54088
+    },
+    {
+      "path": "reflection_pressure_release_320.json",
+      "sha256": "c59e2e07a81a02dff02a0ca0a989c12d10a2bd773b4710f6493c48d5c3e85019",
+      "bytes": 633
+    },
+    {
+      "path": "reflection_pressure_release_80.csv",
+      "sha256": "e673ceefc5ef16e1f43324dde0999d01fb65968d649144bf719fcdc64ee9e5be",
+      "bytes": 57760
+    },
+    {
+      "path": "reflection_pressure_release_80.json",
+      "sha256": "b3f6bf2b790a7f1e889061ae600577601d8525f3c9f93bf54f361ba38dfdf1aa",
+      "bytes": 632
+    },
+    {
+      "path": "reflection_resistance_2z0_160.csv",
+      "sha256": "fe3bde477758d7464e3876c42fc58bdac3b890c5a663fcf5d4e435f483cf10d8",
+      "bytes": 55170
+    },
+    {
+      "path": "reflection_resistance_2z0_160.json",
+      "sha256": "86224b91c2be232c60639d141bff2730afa69a361fa2786925d03638b079fd94",
+      "bytes": 640
+    },
+    {
+      "path": "reflection_resistance_2z0_320.csv",
+      "sha256": "54ac743dbe0d6fa4814f6949aac75549f3c6d0fce56b71a0a8095887938a2bfb",
+      "bytes": 54035
+    },
+    {
+      "path": "reflection_resistance_2z0_320.json",
+      "sha256": "74c70103ff41e6a78c14d2f5ee38f99c57c90786b0718658c7bcb20a66c0ad18",
+      "bytes": 642
+    },
+    {
+      "path": "reflection_resistance_2z0_80.csv",
+      "sha256": "d880714366c8ac485ff8de610bad49826e6e7594f3da4866c3fc0c63d5bb2c31",
+      "bytes": 57657
+    },
+    {
+      "path": "reflection_resistance_2z0_80.json",
+      "sha256": "76de79434542306e08a20f2c8d9557d11d35065b5331c5297c41bde42cb9f0a2",
+      "bytes": 638
+    }
+  ],
+  "original_tool_reconstruction_exact": true
+}

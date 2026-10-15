@@ -1,0 +1,106 @@
+{
+  "status": "PASS",
+  "frozen_original_stage_reference": "artifacts\\arterial1d\\history\\pre_linear3\\iabp\\arterial1d\\solver.py",
+  "script_sha256": "59012b9a6ca6121fad71c60c775766f22f99607767ec2bb7d2e5500e9564596d",
+  "current_solver_sha256": "8d70b1192ed64efe05a5702415e642ba850040ae094c6e0dfbcb8a7d99c7455b",
+  "reference_solver_sha256": "eefea67a6d57300c7cb6b781749150e37ffed0c3fb3e7faf7680aeae771c5708",
+  "cases": [
+    {
+      "scheme": "rusanov",
+      "viscosity_m2_s": 0.0,
+      "boundaries": "pressure_resistance",
+      "steps": 40,
+      "exact_step_and_ledger_equality": true
+    },
+    {
+      "scheme": "rusanov",
+      "viscosity_m2_s": 0.0,
+      "boundaries": "flow_absorbing",
+      "steps": 40,
+      "exact_step_and_ledger_equality": true
+    },
+    {
+      "scheme": "rusanov",
+      "viscosity_m2_s": 0.0,
+      "boundaries": "closed",
+      "steps": 40,
+      "exact_step_and_ledger_equality": true
+    },
+    {
+      "scheme": "rusanov",
+      "viscosity_m2_s": 3e-06,
+      "boundaries": "pressure_resistance",
+      "steps": 40,
+      "exact_step_and_ledger_equality": true
+    },
+    {
+      "scheme": "rusanov",
+      "viscosity_m2_s": 3e-06,
+      "boundaries": "flow_absorbing",
+      "steps": 40,
+      "exact_step_and_ledger_equality": true
+    },
+    {
+      "scheme": "rusanov",
+      "viscosity_m2_s": 3e-06,
+      "boundaries": "closed",
+      "steps": 40,
+      "exact_step_and_ledger_equality": true
+    },
+    {
+      "scheme": "rusanov",
+      "case": "viscous_branch",
+      "steps": 40,
+      "exact_step_and_ledger_equality": true
+    },
+    {
+      "scheme": "muscl_ssprk2",
+      "viscosity_m2_s": 0.0,
+      "boundaries": "pressure_resistance",
+      "steps": 40,
+      "exact_step_and_ledger_equality": true
+    },
+    {
+      "scheme": "muscl_ssprk2",
+      "viscosity_m2_s": 0.0,
+      "boundaries": "flow_absorbing",
+      "steps": 40,
+      "exact_step_and_ledger_equality": true
+    },
+    {
+      "scheme": "muscl_ssprk2",
+      "viscosity_m2_s": 0.0,
+      "boundaries": "closed",
+      "steps": 40,
+      "exact_step_and_ledger_equality": true
+    },
+    {
+      "scheme": "muscl_ssprk2",
+      "viscosity_m2_s": 3e-06,
+      "boundaries": "pressure_resistance",
+      "steps": 40,
+      "exact_step_and_ledger_equality": true
+    },
+    {
+      "scheme": "muscl_ssprk2",
+      "viscosity_m2_s": 3e-06,
+      "boundaries": "flow_absorbing",
+      "steps": 40,
+      "exact_step_and_ledger_equality": true
+    },
+    {
+      "scheme": "muscl_ssprk2",
+      "viscosity_m2_s": 3e-06,
+      "boundaries": "closed",
+      "steps": 40,
+      "exact_step_and_ledger_equality": true
+    },
+    {
+      "scheme": "muscl_ssprk2",
+      "case": "viscous_branch",
+      "steps": 40,
+      "exact_step_and_ledger_equality": true
+    }
+  ],
+  "failure_types_messages_and_atomicity_exact": true
+}

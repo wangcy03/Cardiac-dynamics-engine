@@ -1,0 +1,7 @@
+{
+  "python_executable": "C:\\Users\\02210027\\AppData\\Local\\miniconda3\\python.exe",
+  "python_version": "3.12.9",
+  "matplotlib": "3.10.5",
+  "backend": "Agg",
+  "inputs": "existing benchmark CSV only; no generated physical waveforms"
+}

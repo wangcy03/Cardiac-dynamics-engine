@@ -1,0 +1,75 @@
+{
+  "schema": "boileau-case1-source-configuration/v1",
+  "case_id": "boileau2015_single_pulse",
+  "acquisition_date": "2026-10-15",
+  "configuration_origin": "Source transcription from article Table II, equations (3), (14), (15), with explicitly derived SI conversion; not an original downloaded input file.",
+  "source_article_doi": "10.1002/cnm.2732",
+  "source_author_manuscript_url": "https://cronfa.swan.ac.uk/Record/cronfa22154/Download/0022154-24062016154300.pdf",
+  "source_locations": {
+    "table_ii": "author manuscript printed page 18; PDF page 20",
+    "equation_14": "author manuscript printed page 8; PDF page 10",
+    "tube_law_equation_3": "author manuscript printed page 3; PDF page 5"
+  },
+  "length_m": 10.0,
+  "reference_area_m2": 0.0003141592653589793,
+  "density_kg_m3": 1050.0,
+  "wall_thickness_m": 0.0015,
+  "young_modulus_pa": 400000.0,
+  "paper_beta_pa_m": 1417.9630807244125,
+  "module_beta_pa": 80000.0,
+  "reference_pressure_pa": 0.0,
+  "external_pressure_pa": 0.0,
+  "outflow_reference_pressure_pa": 0.0,
+  "initial_area": "reference_area_m2",
+  "initial_flow_m3_s": 0.0,
+  "inlet": {
+    "quantity": "flow_m3_s",
+    "expression": "1e-6 * exp(-10000 * (t_s - 0.05)**2)",
+    "peak_flow_m3_s": 1e-06,
+    "peak_time_s": 0.05,
+    "inverse_width_s2": 10000.0,
+    "starts_at_s": 0.0,
+    "boundary_semantics": "Prescribe one incoming characteristic through flow rate; do not impose pressure simultaneously."
+  },
+  "outlet": {
+    "type": "fully_absorbing",
+    "reflection_coefficient": 0.0
+  },
+  "reference_profile_times_s": [
+    0.1,
+    0.3,
+    0.5,
+    0.7,
+    0.9,
+    1.1,
+    1.3,
+    1.5
+  ],
+  "reference_columns": {
+    "0": "distance_m",
+    "1_to_8": "pressure_kpa at reference_profile_times_s; multiply by 1000 to obtain Pa"
+  },
+  "schemes": [
+    "DCG",
+    "LCG",
+    "FEM",
+    "FVM",
+    "McC",
+    "STM"
+  ],
+  "inviscid_dynamic_viscosity_pa_s": 0.0,
+  "viscous_case": {
+    "dynamic_viscosity_pa_s": 0.004,
+    "kinematic_viscosity_m2_s": 3.8095238095238094e-06,
+    "velocity_profile_order_zeta": 9,
+    "momentum_source": "-2*(zeta+2)*pi*nu*Q/A = -22*pi*nu*Q/A",
+    "compatibility_with_b01_optional_poiseuille_source": "Different from -8*pi*nu*Q/A; requires a declared source coefficient before viscous numerical comparison."
+  },
+  "derived_small_signal": {
+    "wave_speed_m_s": 6.172133998483677,
+    "impedance_pa_s_m3": 20628838.340968665,
+    "linear_peak_pressure_pa": 20.628838340968663
+  },
+  "numerical_reproduction_status": "NOT_RUN",
+  "clinical_validation_status": "NOT_ESTABLISHED"
+}

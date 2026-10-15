@@ -1,17 +1,22 @@
 {
-  "engine": "system Chromium via set_content",
-  "viewports": [
-    "1440x900",
-    "390x844"
-  ],
-  "javascript_errors": [],
-  "checks": [
-    "baseline 7 paths",
-    "assisted+reference 14 paths",
-    "overlay off 7 paths",
-    "window switch",
-    "mobile render"
-  ],
-  "status": "PASS",
-  "note": "file:// navigation blocked by local browser policy; rendered supplied HTML directly"
+  "schema": "iabp-current-document-visual-check/v2",
+  "date": "2026-10-15",
+  "status": "PARTIAL_STATIC_ONLY",
+  "imported_viewer_check": "artifacts/b00/imported/browser_check.json",
+  "prototype_viewer": {
+    "data_regeneration": "PASS_B00_REAL_EXPORTED_TRACES",
+    "browser_render_current_session": "NOT_RUN",
+    "note": "The imported Chromium result remains historical evidence, not a new Windows browser check."
+  },
+  "mathematical_document": {
+    "path": "docs/MATHEMATICAL_PRINCIPLES.html",
+    "offline_schematic_self_checks": "PASS_THREE_STANDALONE_FIGURES",
+    "formula_and_structure_static_check": "PASS",
+    "browser_render": "NOT_RUN_BROWSER_POLICY",
+    "reason": "Browser URL security policy rejected file: and explicitly prohibited circumvention.",
+    "attempted_tool": "mcp__cua_repl.js",
+    "policy_compliance": "Stopped; no alternate browser, local-server or indirect retry.",
+    "details": "docs/tasks/reports/principles_document.md"
+  },
+  "scope": "Static artifact checks only; not actual browser rendering or physiological validation."
 }

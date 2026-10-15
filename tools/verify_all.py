@@ -92,8 +92,9 @@ def main() -> None:
     # B01 never replaces the separate 0D time-step study.
     if Path("tools/arterial1d_check.py").exists():
         results["arterial1d"] = run_job(
-            "arterial1d", [sys.executable, "-m", "tools.arterial1d_check"], out,
+            "arterial1d", [sys.executable, "-m", "tools.arterial1d_check", "--collect"], out,
         )
+        results["arterial1d"]["mode"] = "IDENTITY_CHECK_OF_RECORDED_NUMERICAL_RUNS"
     counts = read_pytest_counts(report)
     if counts is None or counts["tests"] == 0:
         results["pytest"]["status"] = "FAIL"

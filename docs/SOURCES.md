@@ -12,3 +12,13 @@
 
 本轮具体激活、阀阻、容积、顺应性、动作/传感器时间常数均为未校准工程选值。
 不能引用以上论文给这些数值背书。无新的临床验证数据。
+
+## B01 独立数值参考，2026-10-15
+
+- [Boileau et al., 2015，论文 DOI 10.1002/cnm.2732](https://onlinelibrary.wiley.com/doi/10.1002/cnm.2732)。
+  单脉冲均匀管的几何、本构与入口按作者稿核查；没有用这些工程用例给患者参数背书。
+- [KCL 机构数据记录](https://kclpure.kcl.ac.uk/portal/en/datasets/a-benchmark-study-of-numerical-schemes-for-one-dimensional-arteri/)
+  与 [Figshare 固定版本](https://doi.org/10.6084/m9.figshare.1586944.v1)。
+  已实际获取 CC0 单脉冲原包，保留原始字节和哈希；许可/列含义/SI 换算见
+  [BOILEAU_PROVENANCE.md](benchmarks/BOILEAU_PROVENANCE.md)。
+  数值复现结论以实际 benchmark_summary.json 为准，数据可获得不等于复现通过。

@@ -1,0 +1,100 @@
+{
+  "schema": "arterial1d-benchmark/v1",
+  "identity": {
+    "python_executable": "D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe",
+    "python_version": "3.12.9",
+    "source_sha256": {
+      "D:\\codehub2026\\04_heart_engine_r2\\tools\\arterial1d_check.py": "6dd400909fa09f09ed29470dc0f68dceb66456e0352e77c0b7a0599b0052fbed",
+      "iabp\\arterial1d\\__init__.py": "793796aa44e076d7450f860a96da4e9e7ca81447e2e4213817cd042b113c780f",
+      "iabp\\arterial1d\\boundaries.py": "131d46cca8e20573b7daae9fc2686bacb19785fbf53e76e3236c695786ad408d",
+      "iabp\\arterial1d\\physics.py": "9ee6d6abdfae0d127af9868b854d2c7e09cb8176e7ac873d73dc82e3e0454ecf",
+      "iabp\\arterial1d\\solver.py": "eefea67a6d57300c7cb6b781749150e37ffed0c3fb3e7faf7680aeae771c5708"
+    }
+  },
+  "thresholds_declared_before_runs": {
+    "arrival_error_ms": 0.5,
+    "peak_relative_error": 0.01,
+    "conservation_relative_initial_volume": 1e-10,
+    "reflection_coefficient_absolute_error": 0.05,
+    "symmetric_split_absolute_error": 0.005,
+    "junction_backward_forward_peak_ratio": 0.05
+  },
+  "boileau_thresholds_declared_before_runs": {
+    "relative_max_profile_error": 0.05,
+    "maximum_peak_relative_error": 0.05,
+    "peak_position_absolute_difference_m": 0.02,
+    "conservation_relative_initial_volume": 1e-10
+  },
+  "scope": "independent uniform vessels; no heart, balloon, clinical calibration or event accuracy claim",
+  "alignment": "none",
+  "selected_case": "junction",
+  "junction": {
+    "runs": [
+      {
+        "case": "symmetric_static_pressure_junction",
+        "cells_per_segment": 40,
+        "scheme": "muscl_ssprk2",
+        "junction_model": "common static pressure; no kinetic/local losses",
+        "parent_integrated_outflow_m3": 2.2653660992244034e-08,
+        "child1_integrated_inflow_m3": 1.1326830496122017e-08,
+        "child2_integrated_inflow_m3": 1.1326830496122017e-08,
+        "child1_fraction": 0.5,
+        "child2_fraction": 0.5,
+        "symmetric_split_absolute_error": 0.0,
+        "parent_backward_forward_peak_ratio": 0.004272029552271795,
+        "max_single_step_interface_volume_mismatch_m3": 0.0,
+        "integrated_interface_volume_mismatch_m3": 0.0,
+        "conservation_relative_initial_volume": 3.5319388618024884e-16,
+        "pass": true,
+        "wall_seconds": 2.3368938000057824,
+        "trace_csv": "junction_symmetric_40.csv"
+      },
+      {
+        "case": "symmetric_static_pressure_junction",
+        "cells_per_segment": 80,
+        "scheme": "muscl_ssprk2",
+        "junction_model": "common static pressure; no kinetic/local losses",
+        "parent_integrated_outflow_m3": 2.265290358331065e-08,
+        "child1_integrated_inflow_m3": 1.1326451791655324e-08,
+        "child2_integrated_inflow_m3": 1.1326451791655324e-08,
+        "child1_fraction": 0.5,
+        "child2_fraction": 0.5,
+        "symmetric_split_absolute_error": 0.0,
+        "parent_backward_forward_peak_ratio": 0.0009519289712510242,
+        "max_single_step_interface_volume_mismatch_m3": 0.0,
+        "integrated_interface_volume_mismatch_m3": 0.0,
+        "conservation_relative_initial_volume": 3.364750150369036e-16,
+        "pass": true,
+        "wall_seconds": 8.64593220000097,
+        "trace_csv": "junction_symmetric_80.csv"
+      },
+      {
+        "case": "symmetric_static_pressure_junction",
+        "cells_per_segment": 160,
+        "scheme": "muscl_ssprk2",
+        "junction_model": "common static pressure; no kinetic/local losses",
+        "parent_integrated_outflow_m3": 2.2652743154473956e-08,
+        "child1_integrated_inflow_m3": 1.1326371577236978e-08,
+        "child2_integrated_inflow_m3": 1.1326371577236978e-08,
+        "child1_fraction": 0.5,
+        "child2_fraction": 0.5,
+        "symmetric_split_absolute_error": 0.0,
+        "parent_backward_forward_peak_ratio": 0.0004306864074494703,
+        "max_single_step_interface_volume_mismatch_m3": 0.0,
+        "integrated_interface_volume_mismatch_m3": 0.0,
+        "conservation_relative_initial_volume": 3.659276423933256e-16,
+        "pass": true,
+        "wall_seconds": 24.283483700011857,
+        "trace_csv": "junction_symmetric_160.csv"
+      }
+    ],
+    "backward_ratio_orders": [
+      2.165995791965022,
+      1.144216137446991
+    ],
+    "candidate_pass": true
+  },
+  "wall_seconds": 35.35877559999062,
+  "engineering_status": "PASS",
+  "public_benchmark_status": "NOT_RUN"
+}

@@ -1,0 +1,724 @@
+{
+  "schema": "arterial1d-benchmark/v1",
+  "identity": {
+    "python_executable": "D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe",
+    "python_version": "3.12.9",
+    "source_sha256": {
+      "D:\\codehub2026\\04_heart_engine_r2\\tools\\arterial1d_check.py": "9b04739a740c6c7fc10d348d78a5cca43e3bbc2607a42a16283ac93396ab8427",
+      "iabp\\arterial1d\\__init__.py": "793796aa44e076d7450f860a96da4e9e7ca81447e2e4213817cd042b113c780f",
+      "iabp\\arterial1d\\boundaries.py": "131d46cca8e20573b7daae9fc2686bacb19785fbf53e76e3236c695786ad408d",
+      "iabp\\arterial1d\\physics.py": "f7455b4f9fac8b52d8cedd43389d162e58aa551bc5db28e0826c1fb233c88761",
+      "iabp\\arterial1d\\solver.py": "8d70b1192ed64efe05a5702415e642ba850040ae094c6e0dfbcb8a7d99c7455b"
+    },
+    "source_snapshot_manifest": "history\\source_bd493b738097c431\\manifest.json"
+  },
+  "thresholds_declared_before_runs": {
+    "arrival_error_ms": 0.5,
+    "peak_relative_error": 0.01,
+    "conservation_relative_initial_volume": 1e-10,
+    "reflection_coefficient_absolute_error": 0.05,
+    "symmetric_split_absolute_error": 0.005,
+    "junction_backward_forward_peak_ratio": 0.05
+  },
+  "boileau_thresholds_declared_before_runs": {
+    "relative_max_profile_error": 0.05,
+    "maximum_peak_relative_error": 0.05,
+    "peak_position_absolute_difference_m": 0.02,
+    "conservation_relative_initial_volume": 1e-10
+  },
+  "scope": "independent uniform vessels; no heart, balloon, clinical calibration or event accuracy claim",
+  "alignment": "none",
+  "selected_case": "reflections",
+  "mode": "ACTUAL_SOLVER_RUN",
+  "reflections": [
+    {
+      "case": "closed",
+      "runs": [
+        {
+          "case": "closed",
+          "cells": 80,
+          "scheme": "muscl_ssprk2",
+          "probe_x_m": 0.75,
+          "coefficient_definition": "signed peak p- in fixed reflected window / peak p+ in fixed incident window",
+          "incident_window_s": [
+            0.17,
+            0.27
+          ],
+          "reflected_window_s": [
+            0.27,
+            0.39
+          ],
+          "expected_coefficient": 1.0,
+          "measured_coefficient": 0.9496663850712068,
+          "coefficient_absolute_error": 0.05033361492879318,
+          "conservation_relative_initial_volume": 1.839208519324572e-16,
+          "pass": false,
+          "wall_seconds": 1.135842200004845,
+          "trace_csv": "reflection_closed_80.csv",
+          "max_abs_conservation_residual_m3": 5.517625557973716e-20,
+          "integrated_left_inflow_m3": 2.2653939536712067e-08,
+          "integrated_right_outflow_m3": 0.0,
+          "identity": {
+            "python_executable": "D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe",
+            "python_version": "3.12.9",
+            "source_sha256": {
+              "D:\\codehub2026\\04_heart_engine_r2\\tools\\arterial1d_check.py": "9b04739a740c6c7fc10d348d78a5cca43e3bbc2607a42a16283ac93396ab8427",
+              "iabp\\arterial1d\\__init__.py": "793796aa44e076d7450f860a96da4e9e7ca81447e2e4213817cd042b113c780f",
+              "iabp\\arterial1d\\boundaries.py": "131d46cca8e20573b7daae9fc2686bacb19785fbf53e76e3236c695786ad408d",
+              "iabp\\arterial1d\\physics.py": "f7455b4f9fac8b52d8cedd43389d162e58aa551bc5db28e0826c1fb233c88761",
+              "iabp\\arterial1d\\solver.py": "8d70b1192ed64efe05a5702415e642ba850040ae094c6e0dfbcb8a7d99c7455b"
+            },
+            "source_snapshot_manifest": "history\\source_bd493b738097c431\\manifest.json"
+          },
+          "parameters": {
+            "length_m": 1.0,
+            "cells": 80,
+            "scheme": "muscl_ssprk2",
+            "reference_area_m2": 0.0003,
+            "density_kg_m3": 1060.0,
+            "beta_pa": 53000.0,
+            "reference_pressure_pa": 0.0,
+            "initial_flow_m3_s": 0.0,
+            "kinematic_viscosity_m2_s": 0.0,
+            "cfl": 0.4,
+            "inlet": {
+              "quantity": "pressure_pa",
+              "amplitude_pa": 20.0,
+              "start_s": 0.05,
+              "end_s": 0.09,
+              "shape": "sine_squared; zero otherwise"
+            },
+            "outlet": {
+              "type": "closed",
+              "expected_linear_reflection": 1.0
+            }
+          },
+          "source_unchanged_during_run": true,
+          "run_log_path": "run_logs\\reflections_d339fc888dd5.log",
+          "csv_artifacts": [
+            {
+              "path": "reflection_closed_80.csv",
+              "sha256": "29687bc1c999a404b68f2cb8a6f7403739517ca71ed6f8d4419d8f69c39eed6a"
+            }
+          ],
+          "result_json": {
+            "path": "reflection_closed_80.json",
+            "sha256": "37626cfa7f808d342e6007e3b296a9db5d4f35be625c27f0e88c695271b086f6"
+          }
+        },
+        {
+          "case": "closed",
+          "cells": 160,
+          "scheme": "muscl_ssprk2",
+          "probe_x_m": 0.75,
+          "coefficient_definition": "signed peak p- in fixed reflected window / peak p+ in fixed incident window",
+          "incident_window_s": [
+            0.17,
+            0.27
+          ],
+          "reflected_window_s": [
+            0.27,
+            0.39
+          ],
+          "expected_coefficient": 1.0,
+          "measured_coefficient": 0.9864516689310344,
+          "coefficient_absolute_error": 0.01354833106896558,
+          "conservation_relative_initial_volume": 2.7837384881117895e-16,
+          "pass": true,
+          "wall_seconds": 4.0251540999888675,
+          "trace_csv": "reflection_closed_160.csv",
+          "max_abs_conservation_residual_m3": 8.351215464335367e-20,
+          "integrated_left_inflow_m3": 2.2652992406616507e-08,
+          "integrated_right_outflow_m3": 0.0,
+          "identity": {
+            "python_executable": "D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe",
+            "python_version": "3.12.9",
+            "source_sha256": {
+              "D:\\codehub2026\\04_heart_engine_r2\\tools\\arterial1d_check.py": "9b04739a740c6c7fc10d348d78a5cca43e3bbc2607a42a16283ac93396ab8427",
+              "iabp\\arterial1d\\__init__.py": "793796aa44e076d7450f860a96da4e9e7ca81447e2e4213817cd042b113c780f",
+              "iabp\\arterial1d\\boundaries.py": "131d46cca8e20573b7daae9fc2686bacb19785fbf53e76e3236c695786ad408d",
+              "iabp\\arterial1d\\physics.py": "f7455b4f9fac8b52d8cedd43389d162e58aa551bc5db28e0826c1fb233c88761",
+              "iabp\\arterial1d\\solver.py": "8d70b1192ed64efe05a5702415e642ba850040ae094c6e0dfbcb8a7d99c7455b"
+            },
+            "source_snapshot_manifest": "history\\source_bd493b738097c431\\manifest.json"
+          },
+          "parameters": {
+            "length_m": 1.0,
+            "cells": 160,
+            "scheme": "muscl_ssprk2",
+            "reference_area_m2": 0.0003,
+            "density_kg_m3": 1060.0,
+            "beta_pa": 53000.0,
+            "reference_pressure_pa": 0.0,
+            "initial_flow_m3_s": 0.0,
+            "kinematic_viscosity_m2_s": 0.0,
+            "cfl": 0.4,
+            "inlet": {
+              "quantity": "pressure_pa",
+              "amplitude_pa": 20.0,
+              "start_s": 0.05,
+              "end_s": 0.09,
+              "shape": "sine_squared; zero otherwise"
+            },
+            "outlet": {
+              "type": "closed",
+              "expected_linear_reflection": 1.0
+            }
+          },
+          "source_unchanged_during_run": true,
+          "run_log_path": "run_logs\\reflections_d339fc888dd5.log",
+          "csv_artifacts": [
+            {
+              "path": "reflection_closed_160.csv",
+              "sha256": "d057fc6e2bc004a0933dba757c7b7a80d6b103a1c74e1c316d9d2e4aa10cbc80"
+            }
+          ],
+          "result_json": {
+            "path": "reflection_closed_160.json",
+            "sha256": "96a812b62e775be97dbe4c47963a991f6d9f3b25e0028e6d7ec8eeb7374ca5c0"
+          }
+        },
+        {
+          "case": "closed",
+          "cells": 320,
+          "scheme": "muscl_ssprk2",
+          "probe_x_m": 0.75,
+          "coefficient_definition": "signed peak p- in fixed reflected window / peak p+ in fixed incident window",
+          "incident_window_s": [
+            0.17,
+            0.27
+          ],
+          "reflected_window_s": [
+            0.27,
+            0.39
+          ],
+          "expected_coefficient": 1.0,
+          "measured_coefficient": 0.997300684882984,
+          "coefficient_absolute_error": 0.0026993151170160434,
+          "conservation_relative_initial_volume": 1.0576882765844714e-16,
+          "pass": true,
+          "wall_seconds": 12.237058700004127,
+          "trace_csv": "reflection_closed_320.csv",
+          "max_abs_conservation_residual_m3": 3.173064829753414e-20,
+          "integrated_left_inflow_m3": 2.2652753963781413e-08,
+          "integrated_right_outflow_m3": 0.0,
+          "identity": {
+            "python_executable": "D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe",
+            "python_version": "3.12.9",
+            "source_sha256": {
+              "D:\\codehub2026\\04_heart_engine_r2\\tools\\arterial1d_check.py": "9b04739a740c6c7fc10d348d78a5cca43e3bbc2607a42a16283ac93396ab8427",
+              "iabp\\arterial1d\\__init__.py": "793796aa44e076d7450f860a96da4e9e7ca81447e2e4213817cd042b113c780f",
+              "iabp\\arterial1d\\boundaries.py": "131d46cca8e20573b7daae9fc2686bacb19785fbf53e76e3236c695786ad408d",
+              "iabp\\arterial1d\\physics.py": "f7455b4f9fac8b52d8cedd43389d162e58aa551bc5db28e0826c1fb233c88761",
+              "iabp\\arterial1d\\solver.py": "8d70b1192ed64efe05a5702415e642ba850040ae094c6e0dfbcb8a7d99c7455b"
+            },
+            "source_snapshot_manifest": "history\\source_bd493b738097c431\\manifest.json"
+          },
+          "parameters": {
+            "length_m": 1.0,
+            "cells": 320,
+            "scheme": "muscl_ssprk2",
+            "reference_area_m2": 0.0003,
+            "density_kg_m3": 1060.0,
+            "beta_pa": 53000.0,
+            "reference_pressure_pa": 0.0,
+            "initial_flow_m3_s": 0.0,
+            "kinematic_viscosity_m2_s": 0.0,
+            "cfl": 0.4,
+            "inlet": {
+              "quantity": "pressure_pa",
+              "amplitude_pa": 20.0,
+              "start_s": 0.05,
+              "end_s": 0.09,
+              "shape": "sine_squared; zero otherwise"
+            },
+            "outlet": {
+              "type": "closed",
+              "expected_linear_reflection": 1.0
+            }
+          },
+          "source_unchanged_during_run": true,
+          "run_log_path": "run_logs\\reflections_d339fc888dd5.log",
+          "csv_artifacts": [
+            {
+              "path": "reflection_closed_320.csv",
+              "sha256": "c25cd0f3cb1d066c086dee40797c61f4b41b14f4307b82e039ef1125c8c2cb48"
+            }
+          ],
+          "result_json": {
+            "path": "reflection_closed_320.json",
+            "sha256": "44570be32f683214915f2399e94c0b14884be10fb7ce1c7d4c7dd6f7b33c6129"
+          }
+        }
+      ],
+      "coefficient_error_orders": [
+        1.8934070687338038,
+        2.327449834861876
+      ],
+      "candidate_pass": true
+    },
+    {
+      "case": "pressure_release",
+      "runs": [
+        {
+          "case": "pressure_release",
+          "cells": 80,
+          "scheme": "muscl_ssprk2",
+          "probe_x_m": 0.75,
+          "coefficient_definition": "signed peak p- in fixed reflected window / peak p+ in fixed incident window",
+          "incident_window_s": [
+            0.17,
+            0.27
+          ],
+          "reflected_window_s": [
+            0.27,
+            0.39
+          ],
+          "expected_coefficient": -1.0,
+          "measured_coefficient": -0.9490802263477763,
+          "coefficient_absolute_error": 0.050919773652223665,
+          "conservation_relative_initial_volume": 1.1412886638264975e-16,
+          "pass": false,
+          "wall_seconds": 1.1783605000091484,
+          "trace_csv": "reflection_pressure_release_80.csv",
+          "max_abs_conservation_residual_m3": 3.423865991479492e-20,
+          "integrated_left_inflow_m3": 2.265411031057297e-08,
+          "integrated_right_outflow_m3": 4.527856364243089e-08,
+          "identity": {
+            "python_executable": "D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe",
+            "python_version": "3.12.9",
+            "source_sha256": {
+              "D:\\codehub2026\\04_heart_engine_r2\\tools\\arterial1d_check.py": "9b04739a740c6c7fc10d348d78a5cca43e3bbc2607a42a16283ac93396ab8427",
+              "iabp\\arterial1d\\__init__.py": "793796aa44e076d7450f860a96da4e9e7ca81447e2e4213817cd042b113c780f",
+              "iabp\\arterial1d\\boundaries.py": "131d46cca8e20573b7daae9fc2686bacb19785fbf53e76e3236c695786ad408d",
+              "iabp\\arterial1d\\physics.py": "f7455b4f9fac8b52d8cedd43389d162e58aa551bc5db28e0826c1fb233c88761",
+              "iabp\\arterial1d\\solver.py": "8d70b1192ed64efe05a5702415e642ba850040ae094c6e0dfbcb8a7d99c7455b"
+            },
+            "source_snapshot_manifest": "history\\source_bd493b738097c431\\manifest.json"
+          },
+          "parameters": {
+            "length_m": 1.0,
+            "cells": 80,
+            "scheme": "muscl_ssprk2",
+            "reference_area_m2": 0.0003,
+            "density_kg_m3": 1060.0,
+            "beta_pa": 53000.0,
+            "reference_pressure_pa": 0.0,
+            "initial_flow_m3_s": 0.0,
+            "kinematic_viscosity_m2_s": 0.0,
+            "cfl": 0.4,
+            "inlet": {
+              "quantity": "pressure_pa",
+              "amplitude_pa": 20.0,
+              "start_s": 0.05,
+              "end_s": 0.09,
+              "shape": "sine_squared; zero otherwise"
+            },
+            "outlet": {
+              "type": "pressure_release",
+              "expected_linear_reflection": -1.0
+            }
+          },
+          "source_unchanged_during_run": true,
+          "run_log_path": "run_logs\\reflections_d339fc888dd5.log",
+          "csv_artifacts": [
+            {
+              "path": "reflection_pressure_release_80.csv",
+              "sha256": "e673ceefc5ef16e1f43324dde0999d01fb65968d649144bf719fcdc64ee9e5be"
+            }
+          ],
+          "result_json": {
+            "path": "reflection_pressure_release_80.json",
+            "sha256": "40762fe747182f799ecc3617b9e5d25037979c48ccf260f6cf9d04a451542847"
+          }
+        },
+        {
+          "case": "pressure_release",
+          "cells": 160,
+          "scheme": "muscl_ssprk2",
+          "probe_x_m": 0.75,
+          "coefficient_definition": "signed peak p- in fixed reflected window / peak p+ in fixed incident window",
+          "incident_window_s": [
+            0.17,
+            0.27
+          ],
+          "reflected_window_s": [
+            0.27,
+            0.39
+          ],
+          "expected_coefficient": -1.0,
+          "measured_coefficient": -0.985597393436943,
+          "coefficient_absolute_error": 0.01440260656305703,
+          "conservation_relative_initial_volume": 1.9835791089021606e-16,
+          "pass": true,
+          "wall_seconds": 4.105809700005921,
+          "trace_csv": "reflection_pressure_release_160.csv",
+          "max_abs_conservation_residual_m3": 5.950737326706481e-20,
+          "integrated_left_inflow_m3": 2.2652992546324186e-08,
+          "integrated_right_outflow_m3": 4.527186295087205e-08,
+          "identity": {
+            "python_executable": "D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe",
+            "python_version": "3.12.9",
+            "source_sha256": {
+              "D:\\codehub2026\\04_heart_engine_r2\\tools\\arterial1d_check.py": "9b04739a740c6c7fc10d348d78a5cca43e3bbc2607a42a16283ac93396ab8427",
+              "iabp\\arterial1d\\__init__.py": "793796aa44e076d7450f860a96da4e9e7ca81447e2e4213817cd042b113c780f",
+              "iabp\\arterial1d\\boundaries.py": "131d46cca8e20573b7daae9fc2686bacb19785fbf53e76e3236c695786ad408d",
+              "iabp\\arterial1d\\physics.py": "f7455b4f9fac8b52d8cedd43389d162e58aa551bc5db28e0826c1fb233c88761",
+              "iabp\\arterial1d\\solver.py": "8d70b1192ed64efe05a5702415e642ba850040ae094c6e0dfbcb8a7d99c7455b"
+            },
+            "source_snapshot_manifest": "history\\source_bd493b738097c431\\manifest.json"
+          },
+          "parameters": {
+            "length_m": 1.0,
+            "cells": 160,
+            "scheme": "muscl_ssprk2",
+            "reference_area_m2": 0.0003,
+            "density_kg_m3": 1060.0,
+            "beta_pa": 53000.0,
+            "reference_pressure_pa": 0.0,
+            "initial_flow_m3_s": 0.0,
+            "kinematic_viscosity_m2_s": 0.0,
+            "cfl": 0.4,
+            "inlet": {
+              "quantity": "pressure_pa",
+              "amplitude_pa": 20.0,
+              "start_s": 0.05,
+              "end_s": 0.09,
+              "shape": "sine_squared; zero otherwise"
+            },
+            "outlet": {
+              "type": "pressure_release",
+              "expected_linear_reflection": -1.0
+            }
+          },
+          "source_unchanged_during_run": true,
+          "run_log_path": "run_logs\\reflections_d339fc888dd5.log",
+          "csv_artifacts": [
+            {
+              "path": "reflection_pressure_release_160.csv",
+              "sha256": "7989f77cf8d11023a6b062b30f873063d3ac613e1c6a659d7eca325518818708"
+            }
+          ],
+          "result_json": {
+            "path": "reflection_pressure_release_160.json",
+            "sha256": "703de71f5f229db651fe5893965ca4610dcdfe109631dac8060ef8bed4c95d33"
+          }
+        },
+        {
+          "case": "pressure_release",
+          "cells": 320,
+          "scheme": "muscl_ssprk2",
+          "probe_x_m": 0.75,
+          "coefficient_definition": "signed peak p- in fixed reflected window / peak p+ in fixed incident window",
+          "incident_window_s": [
+            0.17,
+            0.27
+          ],
+          "reflected_window_s": [
+            0.27,
+            0.39
+          ],
+          "expected_coefficient": -1.0,
+          "measured_coefficient": -0.9964523152341315,
+          "coefficient_absolute_error": 0.0035476847658685307,
+          "conservation_relative_initial_volume": 1.7398365550698683e-16,
+          "pass": true,
+          "wall_seconds": 12.249053699997603,
+          "trace_csv": "reflection_pressure_release_320.csv",
+          "max_abs_conservation_residual_m3": 5.2195096652096046e-20,
+          "integrated_left_inflow_m3": 2.2652753961316385e-08,
+          "integrated_right_outflow_m3": 4.5270415973425375e-08,
+          "identity": {
+            "python_executable": "D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe",
+            "python_version": "3.12.9",
+            "source_sha256": {
+              "D:\\codehub2026\\04_heart_engine_r2\\tools\\arterial1d_check.py": "9b04739a740c6c7fc10d348d78a5cca43e3bbc2607a42a16283ac93396ab8427",
+              "iabp\\arterial1d\\__init__.py": "793796aa44e076d7450f860a96da4e9e7ca81447e2e4213817cd042b113c780f",
+              "iabp\\arterial1d\\boundaries.py": "131d46cca8e20573b7daae9fc2686bacb19785fbf53e76e3236c695786ad408d",
+              "iabp\\arterial1d\\physics.py": "f7455b4f9fac8b52d8cedd43389d162e58aa551bc5db28e0826c1fb233c88761",
+              "iabp\\arterial1d\\solver.py": "8d70b1192ed64efe05a5702415e642ba850040ae094c6e0dfbcb8a7d99c7455b"
+            },
+            "source_snapshot_manifest": "history\\source_bd493b738097c431\\manifest.json"
+          },
+          "parameters": {
+            "length_m": 1.0,
+            "cells": 320,
+            "scheme": "muscl_ssprk2",
+            "reference_area_m2": 0.0003,
+            "density_kg_m3": 1060.0,
+            "beta_pa": 53000.0,
+            "reference_pressure_pa": 0.0,
+            "initial_flow_m3_s": 0.0,
+            "kinematic_viscosity_m2_s": 0.0,
+            "cfl": 0.4,
+            "inlet": {
+              "quantity": "pressure_pa",
+              "amplitude_pa": 20.0,
+              "start_s": 0.05,
+              "end_s": 0.09,
+              "shape": "sine_squared; zero otherwise"
+            },
+            "outlet": {
+              "type": "pressure_release",
+              "expected_linear_reflection": -1.0
+            }
+          },
+          "source_unchanged_during_run": true,
+          "run_log_path": "run_logs\\reflections_d339fc888dd5.log",
+          "csv_artifacts": [
+            {
+              "path": "reflection_pressure_release_320.csv",
+              "sha256": "7c3cba15e333a3fd105ba200039fb7818dace9d57a90bfc478bd72b33b7e78ce"
+            }
+          ],
+          "result_json": {
+            "path": "reflection_pressure_release_320.json",
+            "sha256": "224be163d7e645844a5e9ed2d03d72537d5e23d56859e85fc0c319724b9f9760"
+          }
+        }
+      ],
+      "coefficient_error_orders": [
+        1.8218960740342,
+        2.021380204266539
+      ],
+      "candidate_pass": true
+    },
+    {
+      "case": "resistance_2z0",
+      "runs": [
+        {
+          "case": "resistance_2z0",
+          "cells": 80,
+          "scheme": "muscl_ssprk2",
+          "probe_x_m": 0.75,
+          "coefficient_definition": "signed peak p- in fixed reflected window / peak p+ in fixed incident window",
+          "incident_window_s": [
+            0.17,
+            0.27
+          ],
+          "reflected_window_s": [
+            0.27,
+            0.39
+          ],
+          "expected_coefficient": 0.3333333333333333,
+          "measured_coefficient": 0.3168400070283804,
+          "coefficient_absolute_error": 0.016493326304952927,
+          "conservation_relative_initial_volume": 8.046812998915854e-17,
+          "pass": true,
+          "wall_seconds": 1.167346300004283,
+          "trace_csv": "reflection_resistance_2z0_80.csv",
+          "max_abs_conservation_residual_m3": 2.414043899674756e-20,
+          "integrated_left_inflow_m3": 2.2653984566114673e-08,
+          "integrated_right_outflow_m3": 1.5100283903566018e-08,
+          "identity": {
+            "python_executable": "D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe",
+            "python_version": "3.12.9",
+            "source_sha256": {
+              "D:\\codehub2026\\04_heart_engine_r2\\tools\\arterial1d_check.py": "9b04739a740c6c7fc10d348d78a5cca43e3bbc2607a42a16283ac93396ab8427",
+              "iabp\\arterial1d\\__init__.py": "793796aa44e076d7450f860a96da4e9e7ca81447e2e4213817cd042b113c780f",
+              "iabp\\arterial1d\\boundaries.py": "131d46cca8e20573b7daae9fc2686bacb19785fbf53e76e3236c695786ad408d",
+              "iabp\\arterial1d\\physics.py": "f7455b4f9fac8b52d8cedd43389d162e58aa551bc5db28e0826c1fb233c88761",
+              "iabp\\arterial1d\\solver.py": "8d70b1192ed64efe05a5702415e642ba850040ae094c6e0dfbcb8a7d99c7455b"
+            },
+            "source_snapshot_manifest": "history\\source_bd493b738097c431\\manifest.json"
+          },
+          "parameters": {
+            "length_m": 1.0,
+            "cells": 80,
+            "scheme": "muscl_ssprk2",
+            "reference_area_m2": 0.0003,
+            "density_kg_m3": 1060.0,
+            "beta_pa": 53000.0,
+            "reference_pressure_pa": 0.0,
+            "initial_flow_m3_s": 0.0,
+            "kinematic_viscosity_m2_s": 0.0,
+            "cfl": 0.4,
+            "inlet": {
+              "quantity": "pressure_pa",
+              "amplitude_pa": 20.0,
+              "start_s": 0.05,
+              "end_s": 0.09,
+              "shape": "sine_squared; zero otherwise"
+            },
+            "outlet": {
+              "type": "resistance_2z0",
+              "expected_linear_reflection": 0.3333333333333333,
+              "resistance_pa_s_m3": 35333333.333333336
+            }
+          },
+          "source_unchanged_during_run": true,
+          "run_log_path": "run_logs\\reflections_d339fc888dd5.log",
+          "csv_artifacts": [
+            {
+              "path": "reflection_resistance_2z0_80.csv",
+              "sha256": "d880714366c8ac485ff8de610bad49826e6e7594f3da4866c3fc0c63d5bb2c31"
+            }
+          ],
+          "result_json": {
+            "path": "reflection_resistance_2z0_80.json",
+            "sha256": "fe8647c154b83d9d3a46ce6b088e0c1bb5928a856a69afd651fbc8e7f056945b"
+          }
+        },
+        {
+          "case": "resistance_2z0",
+          "cells": 160,
+          "scheme": "muscl_ssprk2",
+          "probe_x_m": 0.75,
+          "coefficient_definition": "signed peak p- in fixed reflected window / peak p+ in fixed incident window",
+          "incident_window_s": [
+            0.17,
+            0.27
+          ],
+          "reflected_window_s": [
+            0.27,
+            0.39
+          ],
+          "expected_coefficient": 0.3333333333333333,
+          "measured_coefficient": 0.32886896906003765,
+          "coefficient_absolute_error": 0.004464364273295662,
+          "conservation_relative_initial_volume": 5.249839621003216e-17,
+          "pass": true,
+          "wall_seconds": 4.314861400009249,
+          "trace_csv": "reflection_resistance_2z0_160.csv",
+          "max_abs_conservation_residual_m3": 1.5749518863009647e-20,
+          "integrated_left_inflow_m3": 2.2652992407042962e-08,
+          "integrated_right_outflow_m3": 1.509932241374052e-08,
+          "identity": {
+            "python_executable": "D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe",
+            "python_version": "3.12.9",
+            "source_sha256": {
+              "D:\\codehub2026\\04_heart_engine_r2\\tools\\arterial1d_check.py": "9b04739a740c6c7fc10d348d78a5cca43e3bbc2607a42a16283ac93396ab8427",
+              "iabp\\arterial1d\\__init__.py": "793796aa44e076d7450f860a96da4e9e7ca81447e2e4213817cd042b113c780f",
+              "iabp\\arterial1d\\boundaries.py": "131d46cca8e20573b7daae9fc2686bacb19785fbf53e76e3236c695786ad408d",
+              "iabp\\arterial1d\\physics.py": "f7455b4f9fac8b52d8cedd43389d162e58aa551bc5db28e0826c1fb233c88761",
+              "iabp\\arterial1d\\solver.py": "8d70b1192ed64efe05a5702415e642ba850040ae094c6e0dfbcb8a7d99c7455b"
+            },
+            "source_snapshot_manifest": "history\\source_bd493b738097c431\\manifest.json"
+          },
+          "parameters": {
+            "length_m": 1.0,
+            "cells": 160,
+            "scheme": "muscl_ssprk2",
+            "reference_area_m2": 0.0003,
+            "density_kg_m3": 1060.0,
+            "beta_pa": 53000.0,
+            "reference_pressure_pa": 0.0,
+            "initial_flow_m3_s": 0.0,
+            "kinematic_viscosity_m2_s": 0.0,
+            "cfl": 0.4,
+            "inlet": {
+              "quantity": "pressure_pa",
+              "amplitude_pa": 20.0,
+              "start_s": 0.05,
+              "end_s": 0.09,
+              "shape": "sine_squared; zero otherwise"
+            },
+            "outlet": {
+              "type": "resistance_2z0",
+              "expected_linear_reflection": 0.3333333333333333,
+              "resistance_pa_s_m3": 35333333.333333336
+            }
+          },
+          "source_unchanged_during_run": true,
+          "run_log_path": "run_logs\\reflections_d339fc888dd5.log",
+          "csv_artifacts": [
+            {
+              "path": "reflection_resistance_2z0_160.csv",
+              "sha256": "fe3bde477758d7464e3876c42fc58bdac3b890c5a663fcf5d4e435f483cf10d8"
+            }
+          ],
+          "result_json": {
+            "path": "reflection_resistance_2z0_160.json",
+            "sha256": "e06884979fd413c4cf448bfe6172891f1a0ab5d7b343f7d236f8b372bcd29fdc"
+          }
+        },
+        {
+          "case": "resistance_2z0",
+          "cells": 320,
+          "scheme": "muscl_ssprk2",
+          "probe_x_m": 0.75,
+          "coefficient_definition": "signed peak p- in fixed reflected window / peak p+ in fixed incident window",
+          "incident_window_s": [
+            0.17,
+            0.27
+          ],
+          "reflected_window_s": [
+            0.27,
+            0.39
+          ],
+          "expected_coefficient": 0.3333333333333333,
+          "measured_coefficient": 0.332596173178679,
+          "coefficient_absolute_error": 0.0007371601546543038,
+          "conservation_relative_initial_volume": 1.0823934042127219e-16,
+          "pass": true,
+          "wall_seconds": 12.643217499993625,
+          "trace_csv": "reflection_resistance_2z0_320.csv",
+          "max_abs_conservation_residual_m3": 3.2471802126381654e-20,
+          "integrated_left_inflow_m3": 2.265275396336263e-08,
+          "integrated_right_outflow_m3": 1.5099114747052932e-08,
+          "identity": {
+            "python_executable": "D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe",
+            "python_version": "3.12.9",
+            "source_sha256": {
+              "D:\\codehub2026\\04_heart_engine_r2\\tools\\arterial1d_check.py": "9b04739a740c6c7fc10d348d78a5cca43e3bbc2607a42a16283ac93396ab8427",
+              "iabp\\arterial1d\\__init__.py": "793796aa44e076d7450f860a96da4e9e7ca81447e2e4213817cd042b113c780f",
+              "iabp\\arterial1d\\boundaries.py": "131d46cca8e20573b7daae9fc2686bacb19785fbf53e76e3236c695786ad408d",
+              "iabp\\arterial1d\\physics.py": "f7455b4f9fac8b52d8cedd43389d162e58aa551bc5db28e0826c1fb233c88761",
+              "iabp\\arterial1d\\solver.py": "8d70b1192ed64efe05a5702415e642ba850040ae094c6e0dfbcb8a7d99c7455b"
+            },
+            "source_snapshot_manifest": "history\\source_bd493b738097c431\\manifest.json"
+          },
+          "parameters": {
+            "length_m": 1.0,
+            "cells": 320,
+            "scheme": "muscl_ssprk2",
+            "reference_area_m2": 0.0003,
+            "density_kg_m3": 1060.0,
+            "beta_pa": 53000.0,
+            "reference_pressure_pa": 0.0,
+            "initial_flow_m3_s": 0.0,
+            "kinematic_viscosity_m2_s": 0.0,
+            "cfl": 0.4,
+            "inlet": {
+              "quantity": "pressure_pa",
+              "amplitude_pa": 20.0,
+              "start_s": 0.05,
+              "end_s": 0.09,
+              "shape": "sine_squared; zero otherwise"
+            },
+            "outlet": {
+              "type": "resistance_2z0",
+              "expected_linear_reflection": 0.3333333333333333,
+              "resistance_pa_s_m3": 35333333.333333336
+            }
+          },
+          "source_unchanged_during_run": true,
+          "run_log_path": "run_logs\\reflections_d339fc888dd5.log",
+          "csv_artifacts": [
+            {
+              "path": "reflection_resistance_2z0_320.csv",
+              "sha256": "54ac743dbe0d6fa4814f6949aac75549f3c6d0fce56b71a0a8095887938a2bfb"
+            }
+          ],
+          "result_json": {
+            "path": "reflection_resistance_2z0_320.json",
+            "sha256": "e51ab91241d51ed386f3aae75c25ea4f8bac0022843863a10a53ee608a5cb99a"
+          }
+        }
+      ],
+      "coefficient_error_orders": [
+        1.8853557298974655,
+        2.598404752878578
+      ],
+      "candidate_pass": true
+    }
+  ],
+  "wall_seconds": 53.35409249999793,
+  "engineering_status": "PASS",
+  "public_benchmark_status": "NOT_RUN",
+  "overall_status": "PASS_DECLARED_CHECKS",
+  "run_log": {
+    "path": "run_logs\\reflections_d339fc888dd5.log",
+    "sha256": "7c2ea4d090b958e45cbda0f636f0b4da8426e3768bfcf4ae3f5b14b0d8ed8cd7"
+  }
+}

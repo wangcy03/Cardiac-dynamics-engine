@@ -1,0 +1,22 @@
+{
+  "case": "closed",
+  "cells": 80,
+  "scheme": "muscl_ssprk2",
+  "probe_x_m": 0.75,
+  "coefficient_definition": "signed peak p- in fixed reflected window / peak p+ in fixed incident window",
+  "incident_window_s": [
+    0.17,
+    0.27
+  ],
+  "reflected_window_s": [
+    0.27,
+    0.39
+  ],
+  "expected_coefficient": 1.0,
+  "measured_coefficient": 0.9496663850712068,
+  "coefficient_absolute_error": 0.05033361492879318,
+  "conservation_relative_initial_volume": 1.839208519324572e-16,
+  "pass": false,
+  "wall_seconds": 1.6563424000050873,
+  "trace_csv": "reflection_closed_80.csv"
+}

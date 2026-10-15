@@ -1,0 +1,19 @@
+{
+  "baseline": {
+    "max_mass_error_mL": 3.54702933691442e-11,
+    "root_min_mmHg": 65.9356373518812,
+    "root_max_mmHg": 123.24425719888339,
+    "max_balloon_mL": 0.0,
+    "net_aortic_volume_mL": 282.557134778036,
+    "lv_net_external_work_mmHg_mL": 36277.18238459368
+  },
+  "assisted": {
+    "max_mass_error_mL": 5.184119800105691e-11,
+    "root_min_mmHg": 65.9380330731172,
+    "root_max_mmHg": 135.83411442876314,
+    "max_balloon_mL": 39.9999606926025,
+    "net_aortic_volume_mL": 277.43862461156937,
+    "lv_net_external_work_mmHg_mL": 36617.40080942296
+  }
+}
+Created artifacts\demo\prototype_viewer.html

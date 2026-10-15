@@ -1,0 +1,199 @@
+{
+  "schema": "boileau-public-data-provenance/v1",
+  "acquisition_date": "2026-10-15",
+  "acquisition_timezone": "Asia/Singapore",
+  "dataset_doi": "10.6084/m9.figshare.1586944.v1",
+  "article_doi": "10.1002/cnm.2732",
+  "figshare_article_id": 1586944,
+  "figshare_version": 1,
+  "institutional_record_url": "https://kclpure.kcl.ac.uk/portal/en/datasets/a-benchmark-study-of-numerical-schemes-for-one-dimensional-arteri/",
+  "metadata_url": "https://api.figshare.com/v2/articles/1586944/versions/1",
+  "license": {
+    "value": 2,
+    "name": "CC0",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "public_input_availability": "AVAILABLE",
+  "download_integrity": "PASS",
+  "numerical_reproduction_status": "NOT_RUN",
+  "clinical_validation_status": "NOT_ESTABLISHED",
+  "download_method": "HTTPS public Figshare API and file URLs, no login; PowerShell Invoke-WebRequest. Original bytes retained.",
+  "original_files": [
+    {
+      "path": "figshare_article_1586944_v1.json",
+      "source_url": "https://api.figshare.com/v2/articles/1586944/versions/1",
+      "bytes": 8559,
+      "sha256": "1e19fe90398faa9beab638f57b9c815a434da41498ed8b88b1da7ff6bbfdc6c4",
+      "md5": "2224f9020a63652bba08a04865b0122c"
+    },
+    {
+      "path": "Data_README_1-6_consolidated.txt",
+      "source_url": "https://ndownloader.figshare.com/files/2382481",
+      "bytes": 5142,
+      "sha256": "922dc96ddc0377fa7188550553bea6a953d96d1536e258584a3a491579bbfe29",
+      "md5": "623c88a22c6b38eed800e8c8ef6fa4f0",
+      "figshare_file_id": 2382481,
+      "published_bytes": 5142,
+      "published_md5": "623c88a22c6b38eed800e8c8ef6fa4f0"
+    },
+    {
+      "path": "Benchmark1_SinglePulseModel.zip",
+      "source_url": "https://ndownloader.figshare.com/files/2386679",
+      "bytes": 976099,
+      "sha256": "da31f4730aa3236e6dd3a686cc92a9bc19887807122b7b31f73c0ae695a2f86e",
+      "md5": "3eddc3dfae6bca6baf270be8ce7a1a2d",
+      "figshare_file_id": 2386679,
+      "published_bytes": 976099,
+      "published_md5": "3eddc3dfae6bca6baf270be8ce7a1a2d"
+    },
+    {
+      "path": "CC0-1.0-legalcode.txt",
+      "source_url": "https://creativecommons.org/publicdomain/zero/1.0/legalcode.txt",
+      "bytes": 7048,
+      "sha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499",
+      "md5": "65d3616852dbf7b1a6d4b53b00626032"
+    }
+  ],
+  "archive_members": [
+    {
+      "path": "Benchmark1_SinglePulseModel/NumData/DCG_inviscid.txt",
+      "bytes": 453704,
+      "sha256": "c4c7af73d2c8d60c4529cf3b52bf6ab608f85152ba04c6a0aa92d0fe8d3568f4",
+      "rows": 5000,
+      "columns": 9,
+      "x_min_m": 0.0,
+      "x_max_m": 10.0,
+      "x_strictly_increasing": false,
+      "x_repeated_adjacent_count": 999
+    },
+    {
+      "path": "Benchmark1_SinglePulseModel/NumData/DCG_viscous.txt",
+      "bytes": 435131,
+      "sha256": "5d8b517f335bfff9dc5559add0bca60fe3903e40e31f2afa2fe6828bf0a0f147",
+      "rows": 5000,
+      "columns": 9,
+      "x_min_m": 0.0,
+      "x_max_m": 10.0,
+      "x_strictly_increasing": false,
+      "x_repeated_adjacent_count": 999
+    },
+    {
+      "path": "Benchmark1_SinglePulseModel/NumData/FEM_inviscid.txt",
+      "bytes": 915760,
+      "sha256": "ecb49051d8941c2225e1e407f7eb283fff64b43bc5912c540067aa187f9de915",
+      "rows": 4001,
+      "columns": 9,
+      "x_min_m": 0.0,
+      "x_max_m": 10.0,
+      "x_strictly_increasing": true,
+      "x_repeated_adjacent_count": 0
+    },
+    {
+      "path": "Benchmark1_SinglePulseModel/NumData/FEM_viscous.txt",
+      "bytes": 904591,
+      "sha256": "e8f48ac4ad9d9e14cfa1f2c3fa23f36279d1e52709b3b4d921f1cccecf5cdbd1",
+      "rows": 4001,
+      "columns": 9,
+      "x_min_m": 0.0,
+      "x_max_m": 10.0,
+      "x_strictly_increasing": true,
+      "x_repeated_adjacent_count": 0
+    },
+    {
+      "path": "Benchmark1_SinglePulseModel/NumData/FVM_inviscid.txt",
+      "bytes": 229420,
+      "sha256": "b9bde8e113497909ef6dacf3c4d77e5dc8aba1574be2ca701cfe351fae486cfb",
+      "rows": 1000,
+      "columns": 9,
+      "x_min_m": 0.005,
+      "x_max_m": 9.995,
+      "x_strictly_increasing": true,
+      "x_repeated_adjacent_count": 0
+    },
+    {
+      "path": "Benchmark1_SinglePulseModel/NumData/FVM_viscous.txt",
+      "bytes": 227862,
+      "sha256": "fd3e1cd5ad0cddeddd1c081c8699f9adbb28c2765346ffc547c06bce99160673",
+      "rows": 1000,
+      "columns": 9,
+      "x_min_m": 0.005,
+      "x_max_m": 9.995,
+      "x_strictly_increasing": true,
+      "x_repeated_adjacent_count": 0
+    },
+    {
+      "path": "Benchmark1_SinglePulseModel/NumData/LCG_inviscid.txt",
+      "bytes": 292000,
+      "sha256": "55f02fc6ee2d206165041fa35e4dc27c5c8b146de487cfeb3299dd83eb58e06b",
+      "rows": 2000,
+      "columns": 9,
+      "x_min_m": 0.005,
+      "x_max_m": 10.0,
+      "x_strictly_increasing": true,
+      "x_repeated_adjacent_count": 0
+    },
+    {
+      "path": "Benchmark1_SinglePulseModel/NumData/LCG_viscous.txt",
+      "bytes": 292000,
+      "sha256": "44beaee01923a821a223b6b7ca171bb0cfc7f832d21f923da52c112402733486",
+      "rows": 2000,
+      "columns": 9,
+      "x_min_m": 0.005,
+      "x_max_m": 10.0,
+      "x_strictly_increasing": true,
+      "x_repeated_adjacent_count": 0
+    },
+    {
+      "path": "Benchmark1_SinglePulseModel/NumData/McC_inviscid.txt",
+      "bytes": 385103,
+      "sha256": "8f38f73976ed0d536f96bc6810adaf10faa54013624400d3923c34a0c26ae5cc",
+      "rows": 3201,
+      "columns": 9,
+      "x_min_m": 0.0,
+      "x_max_m": 10.0,
+      "x_strictly_increasing": true,
+      "x_repeated_adjacent_count": 0
+    },
+    {
+      "path": "Benchmark1_SinglePulseModel/NumData/McC_viscous.txt",
+      "bytes": 385221,
+      "sha256": "7847b70a684d00da22288f8a10e4650dfa690ce5eabdd562fa0e10f7584652de",
+      "rows": 3201,
+      "columns": 9,
+      "x_min_m": 0.0,
+      "x_max_m": 10.0,
+      "x_strictly_increasing": true,
+      "x_repeated_adjacent_count": 0
+    },
+    {
+      "path": "Benchmark1_SinglePulseModel/NumData/STM_inviscid.txt",
+      "bytes": 1270127,
+      "sha256": "b88bf30eadf2c18b42a4cf7fe694db337a29b88cc1a642e459735df46568f207",
+      "rows": 10001,
+      "columns": 9,
+      "x_min_m": 0.0,
+      "x_max_m": 10.0,
+      "x_strictly_increasing": true,
+      "x_repeated_adjacent_count": 0
+    },
+    {
+      "path": "Benchmark1_SinglePulseModel/NumData/STM_viscous.txt",
+      "bytes": 1270127,
+      "sha256": "13a78f33bbc9737b1f5e79c55a3ffffbe9a052c8f372fb18cfbe3763a876db6d",
+      "rows": 10001,
+      "columns": 9,
+      "x_min_m": 0.0,
+      "x_max_m": 10.0,
+      "x_strictly_increasing": true,
+      "x_repeated_adjacent_count": 0
+    },
+    {
+      "path": "Benchmark1_SinglePulseModel/README.txt",
+      "bytes": 652,
+      "sha256": "269607c8c8a1af0e235ab11a139e2e27fc386a1d5ca47c135f45a027b69d86a7"
+    }
+  ],
+  "configuration_file": "case1_source_config.json",
+  "configuration_status": "SOURCE_TRANSCRIBED_WITH_DERIVED_SI_CONVERSIONS",
+  "not_downloaded": "Cases 2-6 and the publisher aggregate supplement were omitted to keep this isolated uniform-vessel benchmark small."
+}

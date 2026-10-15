@@ -1,0 +1,2055 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="IABP 模拟引擎的可维护数理说明：从守恒、动量、储能与因果信息，到当前 0D 桥接原型和独立 1D 传播模块。">
+<title>IABP 心脏模拟引擎 · 数理原理</title>
+<style>
+:root{color-scheme:light;--paper:#f5f5f5;--paper2:#ececec;--ink:#2d3142;--muted:#4f5d75;--soft:#5a6580;--accent:#bf4520;--tint:rgba(191,69,32,.08);--link:#2e5aa8;--rule:rgba(45,49,66,.12);--sans:'Geist','Noto Sans SC','PingFang SC','Microsoft YaHei',system-ui,sans-serif;--serif:'Instrument Serif','Noto Serif SC','Songti SC','SimSun',serif;--mono:'Geist Mono',Consolas,ui-monospace,monospace}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.85}a{color:var(--link);text-underline-offset:3px}a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:4px}header,main,footer{max-width:1440px;margin:auto;padding:32px 40px}header{padding-top:60px;border-bottom:1px solid var(--rule)}.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--soft)}h1{font-family:var(--serif);font-size:44px;line-height:1.4;font-weight:400;margin:16px 0}h2{font-size:28px;line-height:1.5;font-weight:600;margin:64px 0 20px;scroll-margin-top:24px}h3{font-size:21px;line-height:1.55;margin:32px 0 12px}p{margin:12px 0}.lead{max-width:1000px;font-size:20px}.scope,.note,.record-scope{border-left:3px solid var(--accent);padding:12px 20px;background:var(--tint)}.scope strong{color:var(--accent)}nav{display:flex;flex-wrap:wrap;gap:8px 24px;margin:24px 0 0;padding:20px 0;border-top:1px solid var(--rule);font-size:15px}section{min-width:0}.reading-guide{display:grid;grid-template-columns:1.2fr 1fr;gap:24px;margin:24px 0}.reading-guide>div{border-top:1px solid var(--rule);padding-top:12px}.tag{display:inline-block;font-family:var(--mono);font-size:12px;padding:0 6px;border:1px solid var(--rule);border-radius:2px}.small,figcaption{font-size:14px;color:var(--muted)}code,pre{font-family:var(--mono)}code{font-size:.86em;overflow-wrap:anywhere}pre{font-size:13px;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere;background:#fff;border:1px solid var(--rule);padding:16px;border-radius:6px}details{margin:14px 0;border-top:1px solid var(--rule);padding-top:8px}summary{cursor:pointer;color:var(--muted);font-size:14px}.equation{margin:22px 0;padding:20px 24px;background:#fff;border:1px solid var(--rule);border-radius:6px;overflow-x:auto}.equation math{font-size:1.15em;line-height:1.8;min-width:min-content}.equation>p{font-size:14px;color:var(--muted);margin-top:12px}.equation details{margin-bottom:0}.table-scroll{width:100%;overflow-x:auto;min-width:0;margin:20px 0}table{width:100%;border-collapse:collapse;font-size:14px;line-height:1.7}th{text-align:left;font-weight:600;background:var(--paper2)}td,th{padding:10px 12px;border-bottom:1px solid var(--rule);vertical-align:top}td:first-child{font-weight:500}td code.hash{font-size:11px;word-break:break-all}figure{margin:28px 0;min-width:0;max-width:100%}.diagram-container{width:100%;overflow-x:auto;min-width:0}.diagram-container svg{display:block;width:100%;min-width:1280px;height:auto}svg .node-name{font-family:var(--sans);font-size:12px;font-weight:600;fill:var(--ink)}svg .sub{font-family:var(--mono);font-size:9px;fill:var(--muted)}svg .cn{font-family:var(--sans);font-size:12px;font-weight:500;fill:var(--muted)}svg .label{font-family:var(--mono);font-size:8px;fill:var(--soft);letter-spacing:.06em}svg .group-name{font-family:var(--sans);font-size:14px;font-weight:600;fill:var(--ink)}svg .caption{font-family:var(--sans);font-size:12px;fill:var(--muted)}svg .node{fill:#fff;stroke:var(--ink);stroke-width:1}svg .focal{fill:var(--tint);stroke:var(--accent);stroke-width:1.2}svg .future{fill:var(--paper);stroke:var(--muted);stroke-width:1;stroke-dasharray:4 3}svg .arrow{fill:none;stroke:var(--muted);stroke-width:1.2}svg .planned{fill:none;stroke:var(--muted);stroke-width:1;stroke-dasharray:5 4}svg .mask{fill:var(--paper)}figcaption{margin:12px 0 0}.source{font-size:14px;color:var(--muted)}footer{font-size:14px;color:var(--muted);border-top:1px solid var(--rule);padding-bottom:60px}ul,ol{padding-left:24px}li{margin:6px 0}.key{font-weight:600}.evidence-generated h3{margin-top:36px}.evidence-generated table{font-size:13px}.equation-number{font:12px var(--mono);color:var(--soft);margin-bottom:10px}
+figure.scientific .diagram-container svg{min-width:1152px}
+@media(max-width:720px){header,main,footer{padding:24px 18px}header{padding-top:36px}h1{font-size:32px}h2{font-size:24px;margin-top:48px}.lead{font-size:18px}.reading-guide{grid-template-columns:1fr}.equation{padding:16px}body{font-size:16px}}
+@media print{html{scroll-behavior:auto}header,main,footer{max-width:none;padding:12px 0}body{font-size:11pt}.diagram-container{overflow-x:visible}.diagram-container svg,figure.scientific .diagram-container svg{min-width:0}h2{break-after:avoid;margin-top:28px}figure,.equation,tr{break-inside:avoid}a{color:inherit}details:not([open])>pre{display:none}}
+</style>
+</head>
+<body>
+<header>
+<div class="eyebrow">IABP ENGINE / LIVING MATHEMATICAL REFERENCE / r2</div>
+<h1>从守恒出发，理解心脏模拟引擎</h1>
+<p class="lead">引擎的任务是持续计算“血液在哪里、怎样流动、血管和心肌怎样储存或提供能量”，再让算法通过有延迟的样本观察它。压力波形是这些状态相互作用的结果。</p>
+<p class="scope"><strong>用途：研发与软件在环。</strong>最终路线保持为 <b>0D 心脏／回流 + 1D 动脉 + 分布式球囊</b>。当前闭环演示使用 0D 桥接原型；B01 独立传播器的通过范围必须以<a href="#evidence">实际基准记录</a>为准，不能推定已经接入心脏、球囊或真实患者。</p>
+<p class="small">建立日期：2026-10-15。正文与实现一同维护；公式使用原生 MathML 离线排版，每块都保留 LaTeX 源码。采用 diagram-design 默认浅色及本机字体回退，不依赖网络字体或公式 CDN。</p>
+<nav aria-label="文档目录">
+<a href="#map">路线与阅读地图</a><a href="#conservation">守恒、动量、储能</a><a href="#heart">0D 心脏与有限循环</a><a href="#balloon">球囊记账</a><a href="#causality">信息与时间</a><a href="#arterial">独立 1D 传播</a><a href="#numerics">数值与验收</a><a href="#evidence">实际运行证据</a><a href="#maintenance">维护与来源</a>
+</nav>
+</header>
+<main>
+<section id="map">
+<h2>1. 先分清：哪些在运行，哪些是目标</h2>
+<p>0D 把一段空间内的状态集总成压力、容积和流量；它适合心腔、回流与元件耦合。1D 则保留沿动脉轴向的位置，让压力和流量变化传播、反射并在分叉处分流。把两个集总结点叫作“根部”和“降主动脉”，不会自动得到这两处真实解剖位置之间的传播时差。</p>
+<div class="reading-guide"><div><span class="tag">先理解机制</span><p>先看第 2–4 节：血量账本如何闭合，压差如何改变流量，为什么球囊充气不等于凭空加血。</p></div><div><span class="tag">再审查证据</span><p>第 5–8 节连接因果接口、离散方法和真实导出；任何结果都要带着方程、初态、网格、步长与证据范围阅读。</p></div></div>
+<div class="table-scroll"><table><thead><tr><th>层次</th><th>当前职责与状态</th><th>不能据此推出</th></tr></thead><tbody>
+<tr><td>0D 桥接闭环</td><td>四心腔、体／肺有限回流、动态开口瓣膜、惯性连接；实际演示与时间离散基线</td><td>空间传播、真实部位延迟、患者标定</td></tr>
+<tr><td>B01 独立 1D</td><td>均匀管段、特征边界、反射与分叉基准；具体实现与门槛记录见证据区</td><td>已与当前 0D 闭环集成、真实主动脉切迹</td></tr>
+<tr><td>后续 0D／1D 耦合</td><td>B04 的心脏与传播网络接口、时间／空间联合收敛</td><td>独立传播器通过就等于整体通过</td></tr>
+<tr><td>分布式球囊</td><td>B05 重新推导有效过血面积、壁面积与动量耦合；当前是单结点接口试验</td><td>把 0D 容积项搬进 1D 就已完成</td></tr>
+</tbody></table></div>
+<figure>
+<div class="diagram-container">
+<svg viewBox="0 0 1280 720" role="img" aria-labelledby="principles-architecture-title principles-architecture-desc" xmlns="http://www.w3.org/2000/svg">
+<title id="principles-architecture-title">最终模型路线与算法可见边界</title>
+<desc id="principles-architecture-desc">0D 心脏与 1D 动脉交换压力和流量，分布式球囊受执行器驱动；控制器只能经测量链获得已交付样本。</desc>
+<defs><marker id="pa-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#4f5d75"/></marker><marker id="pa-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#bf4520"/></marker><marker id="pa-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#2e5aa8"/></marker></defs>
+<rect width="1280" height="720" fill="#f5f5f5"/>
+<text x="80" y="72" class="group-name">物理层：最终 0D／1D 路线</text><text x="80" y="104" class="caption">虚线连接属于后续整体集成；B01 先独立验证传播器。</text>
+<line x1="320" y1="188" x2="520" y2="188" class="planned" marker-end="url(#pa-arrow)"/><line x1="520" y1="228" x2="320" y2="228" class="planned" marker-end="url(#pa-arrow)"/>
+<rect x="392" y="168" width="56" height="12" class="mask"/><text x="420" y="177" class="label" text-anchor="middle">FLOW Q</text><rect x="384" y="236" width="72" height="12" class="mask"/><text x="420" y="245" class="label" text-anchor="middle">PRESSURE P</text>
+<line x1="960" y1="208" x2="760" y2="208" class="planned" marker-end="url(#pa-arrow)"/><rect x="816" y="188" width="88" height="12" class="mask"/><text x="860" y="197" class="label" text-anchor="middle">AREA / SOURCE</text>
+<line x1="640" y1="256" x2="640" y2="432" class="arrow" marker-end="url(#pa-arrow)"/><rect x="648" y="336" width="80" height="16" class="mask"/><text x="688" y="348" class="cn" text-anchor="middle">局部真值</text>
+<line x1="520" y1="480" x2="320" y2="480" class="arrow" marker-end="url(#pa-arrow)"/><rect x="372" y="456" width="96" height="16" class="mask"/><text x="420" y="468" class="cn" text-anchor="middle">已交付样本</text>
+<line x1="1080" y1="432" x2="1080" y2="256" class="arrow" marker-end="url(#pa-arrow)"/><rect x="1088" y="336" width="96" height="16" class="mask"/><text x="1136" y="348" class="cn" text-anchor="middle">实际动作</text>
+<path d="M200 528 V576 Q200 584 208 584 H1072 Q1080 584 1080 576 V528" class="arrow" marker-end="url(#pa-arrow)"/><rect x="592" y="560" width="96" height="16" class="mask"/><text x="640" y="572" class="cn" text-anchor="middle">带时戳命令</text>
+<g><rect x="80" y="160" width="240" height="96" rx="6" class="node"/><text x="200" y="204" class="node-name" text-anchor="middle">0D 心腔与有限回流</text><text x="200" y="228" class="sub" text-anchor="middle">V / ACTIVATION / VALVES</text></g>
+<g><rect x="520" y="160" width="240" height="96" rx="6" class="focal"/><text x="640" y="204" class="node-name" text-anchor="middle">1D 动脉传播网络</text><text x="640" y="228" class="sub" text-anchor="middle">A(x,t) / Q(x,t)</text></g>
+<g><rect x="960" y="160" width="240" height="96" rx="6" class="future"/><text x="1080" y="204" class="node-name" text-anchor="middle">分布式球囊 · B05</text><text x="1080" y="228" class="sub" text-anchor="middle">Aw - Ab / MOMENTUM</text></g>
+<g><rect x="80" y="432" width="240" height="96" rx="6" class="node"/><text x="200" y="476" class="node-name" text-anchor="middle">待测控制器</text><text x="200" y="500" class="sub" text-anchor="middle">Sample + now_us</text></g>
+<g><rect x="520" y="432" width="240" height="96" rx="6" class="node"/><text x="640" y="476" class="node-name" text-anchor="middle">位置 × 传感 × 交付</text><text x="640" y="500" class="sub" text-anchor="middle">FILTER / CLOCK / QUEUE</text></g>
+<g><rect x="960" y="432" width="240" height="96" rx="6" class="node"/><text x="1080" y="476" class="node-name" text-anchor="middle">可替换执行器</text><text x="1080" y="500" class="sub" text-anchor="middle">COMMAND != Vb</text></g>
+<line x1="40" y1="652" x2="1240" y2="652" stroke="#bfc0c0"/><text x="80" y="684" class="cn">实线：接口因果方向</text><text x="400" y="684" class="cn">虚线：后续耦合或分布式模块</text><text x="864" y="684" class="cn">焦点：独立验证 1D 后再集成</text>
+</svg></div>
+<figcaption>图 1 · 架构图，doc-wide，6 个模块、7 条连接。只保留决定物理耦合和信息可见性的模块；评估器、文件日志与十二导联扩展在正文说明。当前运行时的测量链读取 0D 结点；图中的 1D 测量位置属于最终集成路线。</figcaption>
+</figure>
+</section>
+
+<section id="conservation">
+<h2>2. 三条第一性原理：守恒、动量、储能</h2>
+<h3>2.1 血液不能在连接处凭空出现</h3>
+<p>对任一控制体，容积增长等于流入减流出。在封闭循环中，一条连接转移多少血液，就必须从上游减去同样体积、给下游加上同样体积。把所有结点相加，内部连接逐对抵消。持续状态因此携带前面所有心搏和干预的后果。</p>
+<div class="equation"><div class="equation-number">(1) 有限体积质量守恒</div>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>d</mi><msub><mi>V</mi><mi>i</mi></msub></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><munder><mo>∑</mo><mtext>入</mtext></munder><mi>Q</mi><mo>−</mo><munder><mo>∑</mo><mtext>出</mtext></munder><mi>Q</mi><mo>,</mo><mspace width="1em"/><mfrac><mi>d</mi><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>N</mi></munderover><msub><mi>V</mi><mi>i</mi></msub><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\frac{dV_i}{dt}=\sum_{\mathrm{in}}Q-\sum_{\mathrm{out}}Q,\qquad \frac{d}{dt}\sum_{i=1}^{N}V_i=0</annotation></semantics></math>
+<p>这里暂不含球囊；含球囊时要按第 4 节扣除占据体积。血液密度取常数，因此质量守恒可以直接写成血液体积守恒。</p><details><summary>LaTeX 源码</summary><pre>\frac{dV_i}{dt}=\sum_{\mathrm{in}}Q-\sum_{\mathrm{out}}Q,\qquad \frac{d}{dt}\sum_{i=1}^{N}V_i=0</pre></details></div>
+<h3>2.2 压差先改变动量，流量不必立即翻转</h3>
+<p>把一段流体的平均惯性写成 L，把黏性损失写成 R，得到 RL 连接。正的压差推动流量，阻力消耗机械能；只要 L 为正，压差突然反向后，原有正流量仍可短暂继续。这解释了为什么“压差反向”和“流量过零”是两个事件。</p>
+<div class="equation"><div class="equation-number">(2) 0D 动量与局部能量</div>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mfrac><mrow><mi>d</mi><mi>Q</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mi>ΔP</mi><mo>−</mo><mi>R</mi><mi>Q</mi><mo>,</mo><mspace width="1em"/><mfrac><mi>d</mi><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>(</mo><mfrac><mrow><mi>L</mi><msup><mi>Q</mi><mn>2</mn></msup></mrow><mn>2</mn></mfrac><mo>)</mo><mo>=</mo><mi>ΔP</mi><mi>Q</mi><mo>−</mo><mi>R</mi><msup><mi>Q</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">L\frac{dQ}{dt}=\Delta P-RQ,\qquad \frac{d}{dt}\left(\frac{LQ^2}{2}\right)=\Delta P\,Q-RQ^2</annotation></semantics></math>
+<details><summary>LaTeX 源码</summary><pre>L\frac{dQ}{dt}=\Delta P-RQ,\qquad \frac{d}{dt}\left(\frac{LQ^2}{2}\right)=\Delta P\,Q-RQ^2</pre></details></div>
+<h3>2.3 血管壁储存能量，心肌主动提供能量</h3>
+<p>液体近似不可压缩，不意味着循环不能储血。容积变化主要来自壁的变形。在线性顺应性元件中，C 表示压力增加一个单位所增加的容积；伸展血管壁需要做功，壁回缩时释放这部分弹性储能。主动心肌还有随时间改变的主动项，因此它不是纯被动弹簧。</p>
+<div class="equation"><div class="equation-number">(3) 线性顺应性与弹性储能</div>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo>=</mo><mfrac><mrow><mi>V</mi><mo>−</mo><msub><mi>V</mi><mn>0</mn></msub></mrow><mi>C</mi></mfrac><mo>,</mo><mspace width="1em"/><msub><mi>E</mi><mtext>wall</mtext></msub><mo>=</mo><mfrac><msup><mrow><mo>(</mo><mi>V</mi><mo>−</mo><msub><mi>V</mi><mn>0</mn></msub><mo>)</mo></mrow><mn>2</mn></msup><mrow><mn>2</mn><mi>C</mi></mrow></mfrac><mo>,</mo><mspace width="1em"/><mfrac><mrow><mi>d</mi><msub><mi>E</mi><mtext>wall</mtext></msub></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mi>P</mi><mfrac><mrow><mi>d</mi><mi>V</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">P=\frac{V-V_0}{C},\quad E_{\mathrm{wall}}=\frac{(V-V_0)^2}{2C},\quad \frac{dE_{\mathrm{wall}}}{dt}=P\frac{dV}{dt}</annotation></semantics></math>
+<details><summary>LaTeX 源码</summary><pre>P=\frac{V-V_0}{C},\quad E_{\mathrm{wall}}=\frac{(V-V_0)^2}{2C},\quad \frac{dE_{\mathrm{wall}}}{dt}=P\frac{dV}{dt}</pre></details></div>
+<p class="note">这些局部恒等式提供设计检查：R ≥ 0 不应自己产能，内部流量不应自己造血。当前项目尚未完成全系统能量账本与所有源项的离散能量核验；不能把极小的总血量残差等同于所有物理量都正确。</p>
+<p class="source">实现映射：<a href="../iabp/components.py">components.py</a> 的 <code>inertial_step</code> 同时返回端点 Q 和积分体积 ∫Qdt；<a href="../iabp/model.py">model.py</a> 将同一积分体积在连接两端等量加减。</p>
+</section>
+
+<section id="heart">
+<h2>3. 当前 0D：一套持续状态，九个有限容积</h2>
+<p>当前拓扑按血流方向闭合：LV → 主动脉根部 → 降主动脉 → 体静脉 → RA → RV → 肺动脉 → 肺静脉 → LA → LV。它没有固定左房压力池。每个容积有限，所以一次射血不足、回流变化或球囊干预会延续到之后的心搏；代码不在每搏开始时重置容积或套用同一条周期曲线。</p>
+<h3>3.1 压力是状态的本构输出</h3>
+<p>心室压力由被动项和主动项相加。被动项使心室在充盈时产生压力；主动项通过激活状态改变张力。下面是当前 <code>pressures()</code> 中的精确工程方程，全部使用 mmHg、mL、s；外压在此原型中取 0，因此表压与跨壁压相同。</p>
+<div class="equation"><div class="equation-number">(4) 当前左室压力</div>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>P</mi><mtext>LV</mtext></msub><mo>=</mo><mn>0.05</mn><mo>(</mo><msub><mi>V</mi><mtext>LV</mtext></msub><mo>−</mo><mn>10</mn><mo>)</mo><mo>+</mo><mn>0.12</mn><mo>[</mo><msup><mi>e</mi><mrow><mn>0.022</mn><mo>(</mo><msub><mi>V</mi><mtext>LV</mtext></msub><mo>−</mo><mn>10</mn><mo>)</mo></mrow></msup><mo>−</mo><mn>1</mn><mo>]</mo><mo>+</mo><msub><mi>E</mi><mtext>LV</mtext></msub><msub><mi>a</mi><mi>v</mi></msub><mo>(</mo><msub><mi>V</mi><mtext>LV</mtext></msub><mo>−</mo><mn>10</mn><mo>)</mo></mrow><annotation encoding="application/x-tex">P_{LV}=0.05(V_{LV}-10)+0.12\left[e^{0.022(V_{LV}-10)}-1\right]+E_{LV}a_v(V_{LV}-10)</annotation></semantics></math>
+<details><summary>LaTeX 源码</summary><pre>P_{LV}=0.05(V_{LV}-10)+0.12\left[e^{0.022(V_{LV}-10)}-1\right]+E_{LV}a_v(V_{LV}-10)</pre></details></div>
+<div class="table-scroll"><table><thead><tr><th>其余结点</th><th>当前压力关系（mmHg；V 为 mL）</th><th>解释</th></tr></thead><tbody>
+<tr><td>RV</td><td><code>0.025(V−15) + 0.04[exp(0.018(V−15))−1] + E_RV a_v(V−15)</code></td><td>右室有独立被动／主动参数，共享室激活状态</td></tr>
+<tr><td>主动脉根部</td><td><code>(V−50) / C_root</code></td><td>线性弹性容积</td></tr><tr><td>降主动脉</td><td><code>(V−75) / C_descending</code></td><td>这里的 V 是含球囊占据的壁包围容积</td></tr>
+<tr><td>体静脉</td><td><code>(V−2600) / 80</code></td><td>有限回流容积</td></tr><tr><td>RA</td><td><code>(0.10 + 0.25 a_a)(V−20)</code></td><td>房激活改变主动项</td></tr><tr><td>肺动脉／肺静脉</td><td><code>(V−80)/5</code>；<code>(V−320)/20</code></td><td>低阶肺循环</td></tr><tr><td>LA</td><td><code>(0.16 + 0.35 a_a)(V−20)</code></td><td>非固定压力边界</td></tr>
+</tbody></table></div>
+<p>默认 <code>E_LV=2.1</code>、<code>E_RV=0.50</code>、<code>C_root=0.22</code>、<code>C_descending=0.85</code>，均为人工工程参数。参数改变会改变适用域和输出，不能为不同验证工况重新拟合后再报告成同一个冻结模型。</p>
+<h3>3.2 电事件先驱动代理，再产生机械激活</h3>
+<p>外生电事件并不立即规定压力峰值。它先触发一个有效驱动 u，驱动经过两个一阶环节形成代理 c 和激活 a。c 的命名虽保留 <code>calcium_proxy</code>，它并不是细胞内钙浓度。两级响应保留上升和松弛过程，也允许相邻心搏通过未恢复的状态相互影响。</p>
+<div class="equation"><div class="equation-number">(5) 两级激活与间期恢复</div>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>c</mi><mo>˙</mo></mover><mo>=</mo><mfrac><mrow><mi>u</mi><mo>−</mo><mi>c</mi></mrow><mi>τ</mi></mfrac><mo>,</mo><mspace width="1em"/><mover><mi>a</mi><mo>˙</mo></mover><mo>=</mo><mfrac><mrow><mi>c</mi><mo>−</mo><mi>a</mi></mrow><mi>τ</mi></mfrac><mo>,</mo><mspace width="1em"/><mover><mi>r</mi><mo>˙</mo></mover><mo>=</mo><mfrac><mrow><mn>1</mn><mo>−</mo><mi>r</mi></mrow><mn>0.60</mn></mfrac></mrow><annotation encoding="application/x-tex">\dot c=\frac{u-c}{\tau},\qquad \dot a=\frac{c-a}{\tau},\qquad \dot r=\frac{1-r}{0.60}</annotation></semantics></math>
+<details><summary>LaTeX 源码</summary><pre>\dot c=\frac{u-c}{\tau},\qquad \dot a=\frac{c-a}{\tau},\qquad \dot r=\frac{1-r}{0.60}
+u_v\leftarrow0.55+0.45r,\qquad r\leftarrow0.5r\quad\text{（每次室驱动开始）}</pre></details></div>
+<p>当前 τ 上升为 0.050 s、松弛为 0.035 s。室驱动开始时 <code>u_v ← 0.55 + 0.45r</code>，随后 <code>r ← 0.5r</code>。这是一种可追踪的间期记忆，不是已经验证的 PVC、PESP 或完整心肌电生理模型。房和室驱动与 II 导联观测共享已处理的电事件；左右心房尚未有各自独立的电传播。</p>
+<p>当前电到有效驱动的 20 ms（房）与 35 ms（室）、持续 100 ms／230 ms 均是显式工程配置。它们与“没有机械事件就补一个固定延时”的做法不同：阈值开闭和流量事件仍由连续状态检测，缺失则保持缺失。</p>
+<h3>3.3 瓣膜开口、阻力和流量分别演化</h3>
+<div class="equation"><div class="equation-number">(6) 当前有限开口瓣膜</div>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>z</mi><mo>˙</mo></mover><mo>=</mo><mn>7</mn><mo>[</mo><mi>ΔP</mi><msup><mo>]</mo><mo>+</mo></msup><mo>(</mo><mn>1</mn><mo>−</mo><mi>z</mi><mo>)</mo><mo>−</mo><mn>12</mn><mo>[</mo><mo>−</mo><mi>ΔP</mi><msup><mo>]</mo><mo>+</mo></msup><mi>z</mi><mo>,</mo><mspace width="1em"/><mi>R</mi><mo>(</mo><mi>z</mi><mo>)</mo><mo>=</mo><msub><mi>R</mi><mtext>open</mtext></msub><mo>+</mo><mo>(</mo><mn>20</mn><mo>−</mo><msub><mi>R</mi><mtext>open</mtext></msub><mo>)</mo><msup><mrow><mo>(</mo><mn>1</mn><mo>−</mo><mi>z</mi><mo>)</mo></mrow><mn>4</mn></msup></mrow><annotation encoding="application/x-tex">\dot z=7[\Delta P]_+(1-z)-12[-\Delta P]_+z,\qquad R(z)=R_{open}+(20-R_{open})(1-z)^4</annotation></semantics></math>
+<p>[x]₊ = max(x,0)。开口自然趋向 [0,1] 内的平衡，不用事后截断压力或容积来遮盖失稳。随后式 (2) 用 R(z) 更新流量。</p><details><summary>LaTeX 源码</summary><pre>\dot z=7[\Delta P]_+(1-z)-12[-\Delta P]_+z,\qquad R(z)=R_{open}+(20-R_{open})(1-z)^4,\quad [x]_+=\max(x,0)</pre></details></div>
+<p>关闭阻力有限，意味着关闭期允许小量泄漏；此原型没有严格密封的瓣叶接触与等容阶段。有效惯量固定，避免在尚未推导时漏掉随开口变化的动量项。开口 0.05 的上穿、0.02 的下穿是工程检测定义，不能改称瓣叶真实接触。</p>
+<div class="table-scroll"><table><thead><tr><th>事件</th><th>当前可解释的含义</th><th>必须分开的对象</th></tr></thead><tbody>
+<tr><td><code>QRS_ONSET</code></td><td>已处理的外生电激活起点</td><td>II 导联 R 峰、机械驱动开始</td></tr><tr><td><code>DP_LV_AO_REVERSE</code></td><td>LV−根部压差由正变非正</td><td>瓣膜关闭、出流已停止</td></tr><tr><td><code>QAO_ZERO</code></td><td>主动脉瓣流量从正向变为反向的过零</td><td>有效开口达到关闭阈值</td></tr><tr><td><code>AORTIC_CLOSE_02</code></td><td>有效开口 z 下穿 0.02</td><td>瓣叶接触、某位置 AP 切迹</td></tr><tr><td>切迹候选</td><td>某一观测波形中的形态特征；当前未作为关闭真值</td><td>根部机械事件、外周传播后的反射特征</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="balloon">
+<h2>4. 球囊挤占空间，也改变通路阻力</h2>
+<p>把降主动脉段的壁包围容积记作 V<sub>wall</sub>、球囊占据记作 V<sub>b</sub>。里面真正的血液只有两者之差。充气可以提高压力，是因为球囊占据了空间，使血液向两端转移或撑开血管壁；它没有向闭环新增血液。</p>
+<div class="equation"><div class="equation-number">(7) 不重复计数的球囊体积账本</div>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable columnalign="left"><mtr><mtd><msub><mi>V</mi><mtext>blood</mtext></msub><mo>=</mo><msub><mi>V</mi><mtext>wall</mtext></msub><mo>−</mo><msub><mi>V</mi><mi>b</mi></msub></mtd></mtr><mtr><mtd><mfrac><mrow><mi>d</mi><msub><mi>V</mi><mtext>wall</mtext></msub></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><msub><mi>Q</mi><mtext>in</mtext></msub><mo>−</mo><msub><mi>Q</mi><mtext>out</mtext></msub><mo>+</mo><mfrac><mrow><mi>d</mi><msub><mi>V</mi><mi>b</mi></msub></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac></mtd></mtr><mtr><mtd><msub><mi>V</mi><mtext>total blood</mtext></msub><mo>=</mo><munder><mo>∑</mo><mi>i</mi></munder><msub><mi>V</mi><mi>i</mi></msub><mo>−</mo><msub><mi>V</mi><mi>b</mi></msub><mo>=</mo><mtext>常数</mtext></mtd></mtr></mtable><annotation encoding="application/x-tex">V_{blood}=V_{wall}-V_b,\quad \frac{dV_{wall}}{dt}=Q_{in}-Q_{out}+\frac{dV_b}{dt},\quad V_{total\ blood}=\sum_iV_i-V_b=\mathrm{const}</annotation></semantics></math>
+<details><summary>LaTeX 源码</summary><pre>V_{blood}=V_{wall}-V_b
+\frac{dV_{wall}}{dt}=Q_{in}-Q_{out}+\frac{dV_b}{dt}
+V_{total\ blood}=\sum_iV_i-V_b=\mathrm{const}</pre></details></div>
+<p>在代码里，全步输运后向降主动脉容积加上 <code>Vb_new−Vb_old</code>，总血量计算再减去 Vb。保持充盈时 dVb/dt 为 0，但通路仍更窄，所以阻塞不能消失。</p>
+<div class="equation"><div class="equation-number">(8) 当前阻塞代理与负荷相关动作</div>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo>=</mo><mfrac><msub><mi>V</mi><mi>b</mi></msub><msub><mi>V</mi><mtext>segment</mtext></msub></mfrac><mo>,</mo><mspace width="1em"/><msub><mi>R</mi><mtext>effective</mtext></msub><mo>=</mo><msub><mi>R</mi><mn>0</mn></msub><msup><mrow><mo>(</mo><mn>1</mn><mo>−</mo><mi>f</mi><mo>)</mo></mrow><mrow><mo>−</mo><mn>2</mn></mrow></msup><mo>,</mo><mspace width="1em"/><mover><msub><mi>V</mi><mi>b</mi></msub><mo>˙</mo></mover><mo>=</mo><mfrac><mrow><msub><mi>V</mi><mtext>target</mtext></msub><mo>(</mo><mi>P</mi><mo>)</mo><mo>−</mo><msub><mi>V</mi><mi>b</mi></msub></mrow><mrow><msub><mi>τ</mi><mi>b</mi></msub><mo>(</mo><mi>P</mi><mo>)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">f=V_b/V_{segment},\quad R_{effective}=R_0(1-f)^{-2},\quad \dot V_b=\frac{V_{target}(P)-V_b}{\tau_b(P)}</annotation></semantics></math>
+<details><summary>LaTeX 源码与当前动作参数</summary><pre>f=V_b/V_{segment},\quad R_{effective}=R_0(1-f)^{-2}
+\dot V_b=\frac{V_{target}(P)-V_b}{\tau_b(P)}
+V_{target,inflate}=V_{capacity}\min\{1,\max[0,(260-P)/120]\}
+\tau_{inflate}=0.025\left(1+\frac{\max(P-80,0)}{160}\right)
+V_{target,deflate}=0,\qquad \tau_{deflate}=\frac{0.025}{1+\max(P,0)/160}</pre></details></div>
+<p>阻塞因子同时用于主动脉惯性连接的阻力与体循环出口阻力，是定长几何的工程代理，并非已验证的环隙流动公式。f ≥ 0.9 时显式失败；容量平衡值的上下界是声明的执行器本构边界，不是对血压／血量作 clipping。放气和反向也要经过连续动作，取消已开始命令不能把既有球囊体积删除。</p>
+<p class="note">B05 的分布式球囊需要重新从 A<sub>blood</sub> = A<sub>wall</sub> − A<sub>balloon</sub> 推导质量与动量方程。一旦有效面积已经包含球囊占据，不可再把同一排挤量当成第二份血量源。单结点试验与固定容积动画都不能替代这一步。</p>
+</section>
+
+<section id="causality">
+<h2>5. 物理时间、采样时间、算法看到的时间</h2>
+<p>算法只能在样本交付后做决定。引擎的真值、未来节律和评估器状态不得进入控制器接口。多路 AP 的解剖位置、传感技术和仪器链分别配置；改变测量噪声不应直接改动心肌激活，闭环中算法因此改变命令后的物理后果则应保留。</p>
+<h3>5.1 测量链有状态，也有自己的时钟</h3>
+<div class="equation"><div class="equation-number">(9) 当前一阶测量链与时钟</div>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable columnalign="left"><mtr><mtd><msub><mi>τ</mi><mi>s</mi></msub><mover><mi>y</mi><mo>˙</mo></mover><mo>=</mo><msub><mi>P</mi><mtext>local</mtext></msub><mo>−</mo><mi>y</mi><mo>,</mo><mspace width="1em"/><msub><mi>y</mi><mtext>sample</mtext></msub><mo>=</mo><mi>g</mi><mi>y</mi><mo>+</mo><mi>b</mi><mo>+</mo><mi>ε</mi></mtd></mtr><mtr><mtd><msub><mi>t</mi><mtext>source</mtext></msub><mo>=</mo><mtext>round</mtext><mo>[</mo><msub><mi>t</mi><mtext>true</mtext></msub><mo>(</mo><mn>1</mn><mo>+</mo><mi>d</mi><mo>×</mo><msup><mn>10</mn><mrow><mo>−</mo><mn>6</mn></mrow></msup><mo>)</mo><mo>]</mo><mo>+</mo><mi>o</mi></mtd></mtr><mtr><mtd><msub><mi>t</mi><mtext>available</mtext></msub><mo>=</mo><msub><mi>t</mi><mtext>true</mtext></msub><mo>+</mo><msub><mi>ℓ</mi><mtext>transport</mtext></msub></mtd></mtr></mtable><annotation encoding="application/x-tex">\tau_s\dot y=P_{local}-y,\quad y_{sample}=gy+b+\epsilon;\quad t_{source}=\operatorname{round}[t_{true}(1+d\,10^{-6})]+o,\quad t_{available}=t_{true}+\ell_{transport}</annotation></semantics></math>
+<details><summary>LaTeX 源码</summary><pre>\tau_s\dot y=P_{local}-y,\qquad y_{sample}=gy+b+\epsilon
+t_{source}=\operatorname{round}[t_{true}(1+d\,10^{-6})]+o
+t_{available}=t_{true}+\ell_{transport}</pre></details></div>
+<p>d 为 ppm 漂移，o 为本地时钟偏置；二者与传输延迟是不同因素。τ=0 时使用直接输入。每路随机源由全局 seed 与通道名的稳定哈希组合，丢样也消耗该路随机流，避免增加一路传感器就改变其他通道的噪声。外部接口不提供可信采集时刻时，<code>source_time_us</code> 保持 <code>None</code>，不冒充零延迟。</p>
+<p>当前只生成已处理共同电事件的合成 II 导联形态，不是实测 ECG 或完整电场模型。其他导联应保持未实现，不能复制 II 导联或填零后宣称十二导联已经完成。</p>
+<h3>5.2 同时事件有确定次序</h3>
+<p>调度使用整数微秒，连续求解步长仍换算为秒。在同一边界，先推进到该物理时刻，再处理电／驱动事件、先前预约命令、采样和样本交付。控制器在交付后运行；新命令不能改写刚刚产生的历史样本。</p>
+<figure><div class="diagram-container">
+<svg viewBox="0 0 1280 720" role="img" aria-labelledby="principles-sequence-title principles-sequence-desc" xmlns="http://www.w3.org/2000/svg">
+<title id="principles-sequence-title">从连续状态到可执行命令的因果时序</title>
+<desc id="principles-sequence-desc">调度器先推进连续状态，依次处理既有事件、采样和交付，控制器才提交新命令，执行器在后续边界开始实际动作。</desc>
+<defs><marker id="ps-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#4f5d75"/></marker><marker id="ps-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#bf4520"/></marker><marker id="ps-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#2e5aa8"/></marker><marker id="ps-open" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polyline points="0 0,8 3,0 6" fill="none" stroke="#4f5d75" stroke-width="1.2"/></marker></defs>
+<rect width="1280" height="720" fill="#f5f5f5"/>
+<text x="80" y="64" class="group-name">时间向下；边界内有固定先后，不代表图中箭头之间相隔固定毫秒数。</text>
+<g stroke="#bfc0c0" stroke-dasharray="3 3"><line x1="160" y1="160" x2="160" y2="620"/><line x1="400" y1="160" x2="400" y2="620"/><line x1="640" y1="160" x2="640" y2="620"/><line x1="880" y1="160" x2="880" y2="620"/><line x1="1120" y1="160" x2="1120" y2="620"/></g>
+<line x1="160" y1="216" x2="400" y2="216" class="arrow" marker-end="url(#ps-arrow)"/><rect x="220" y="192" width="120" height="16" class="mask"/><text x="280" y="204" class="cn" text-anchor="middle">推进上一连续段</text>
+<line x1="160" y1="284" x2="400" y2="284" class="planned" marker-end="url(#ps-open)"/><rect x="220" y="260" width="120" height="16" class="mask"/><text x="280" y="272" class="cn" text-anchor="middle">电／机械驱动事件</text>
+<line x1="160" y1="352" x2="1120" y2="352" class="planned" marker-end="url(#ps-open)"/><rect x="940" y="328" width="120" height="16" class="mask"/><text x="1000" y="340" class="cn" text-anchor="middle">执行先前预约命令</text>
+<line x1="400" y1="420" x2="640" y2="420" class="arrow" marker-end="url(#ps-arrow)"/><rect x="472" y="396" width="96" height="16" class="mask"/><text x="520" y="408" class="cn" text-anchor="middle">当前真值采样</text>
+<line x1="640" y1="488" x2="880" y2="488" stroke="#bf4520" stroke-width="1.2" marker-end="url(#ps-accent)"/><rect x="700" y="464" width="120" height="16" class="mask"/><text x="760" y="476" class="cn" text-anchor="middle">到可用时刻才交付</text>
+<line x1="880" y1="556" x2="160" y2="556" class="arrow" marker-end="url(#ps-arrow)"/><rect x="460" y="532" width="120" height="16" class="mask"/><text x="520" y="544" class="cn" text-anchor="middle">按当前 now 提交</text>
+<line x1="160" y1="612" x2="1120" y2="612" class="planned" marker-end="url(#ps-open)"/><rect x="928" y="588" width="144" height="16" class="mask"/><text x="1000" y="600" class="cn" text-anchor="middle">后续边界开始新动作</text>
+<g><rect x="64" y="104" width="192" height="56" rx="6" class="node"/><text x="160" y="136" class="node-name" text-anchor="middle">调度器</text><rect x="304" y="104" width="192" height="56" rx="6" class="node"/><text x="400" y="136" class="node-name" text-anchor="middle">连续物理状态</text><rect x="544" y="104" width="192" height="56" rx="6" class="node"/><text x="640" y="136" class="node-name" text-anchor="middle">测量／交付队列</text><rect x="784" y="104" width="192" height="56" rx="6" class="node"/><text x="880" y="136" class="node-name" text-anchor="middle">控制器</text><rect x="1024" y="104" width="192" height="56" rx="6" class="node"/><text x="1120" y="136" class="node-name" text-anchor="middle">执行器</text></g>
+<line x1="40" y1="652" x2="1240" y2="652" stroke="#bfc0c0"/><text x="80" y="684" class="cn">实线：调用／数据交付</text><text x="416" y="684" class="cn">虚线开箭头：异步事件</text><text x="864" y="684" class="cn">控制器接口：Sample + now_us</text>
+</svg></div><figcaption>图 2 · 时序图，doc-wide，5 条生命线、7 条消息。无分支；拒绝、取消和超时语义在契约与测试中分别审查。新命令最早在当前边界处理之后生效；实际执行时刻还包括已声明命令延迟。</figcaption></figure>
+<p><code>Sample.t_available_us</code> 是进入可读收件箱的时刻，控制器收到的 <code>now_us</code> 是这次实际批处理时刻，两者可以不同。命令的 issued、预约 execute、实际 started、工程 completed 也必须分别保留。当前完成条件是充气达到额定容量 95% 或放气残余 ≤0.5 mL；这不是临床安全阈值，也不保证任意负荷下都会达到。</p>
+<p>快照需包含容积、流量、开口、激活／恢复、测量滤波与随机源、时钟、传输队列、预约命令和节律状态。当前 deep copy 快照限同版本进程内受信对象；Python 对象分离并不构成恶意算法隔离沙箱。跨进程格式、schema 迁移与隔离留待后续任务。</p>
+<p class="source">实现映射：<a href="../iabp/engine.py">engine.py</a>、<a href="../iabp/sensors.py">sensors.py</a>、<a href="../iabp/contracts.py">contracts.py</a>。同一物理时刻的事件优先级与实际日志需要一起审查。</p>
+</section>
+
+<section id="arterial">
+<h2>6. 独立 1D：让压力与流量沿空间传播</h2>
+<p>B01 先把心脏和球囊拿掉，在均匀弹性管中单独验证传播。沿管长 x 的每个截面有面积 A 与体积流量 Q，平均速度 u=Q/A。第一切片采用 α=1、固定参考几何、常密度与纯弹性壁；空间变参数、壁黏弹性、球囊源项都不能在没有推导的情况下顺带加入。</p>
+<h3>6.1 从小段控制体得到两条守恒方程</h3>
+<div class="equation"><div class="equation-number">(10) B01 的质量和动量守恒（SI）</div>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable columnalign="left"><mtr><mtd><mfrac><mrow><mo>∂</mo><mi>A</mi></mrow><mrow><mo>∂</mo><mi>t</mi></mrow></mfrac><mo>+</mo><mfrac><mrow><mo>∂</mo><mi>Q</mi></mrow><mrow><mo>∂</mo><mi>x</mi></mrow></mfrac><mo>=</mo><mn>0</mn></mtd></mtr><mtr><mtd><mfrac><mrow><mo>∂</mo><mi>Q</mi></mrow><mrow><mo>∂</mo><mi>t</mi></mrow></mfrac><mo>+</mo><mfrac><mo>∂</mo><mrow><mo>∂</mo><mi>x</mi></mrow></mfrac><mo>[</mo><mfrac><msup><mi>Q</mi><mn>2</mn></msup><mi>A</mi></mfrac><mo>+</mo><mi>Π</mi><mo>(</mo><mi>A</mi><mo>)</mo><mo>]</mo><mo>=</mo><msub><mi>S</mi><mi>f</mi></msub></mtd></mtr></mtable><annotation encoding="application/x-tex">\frac{\partial A}{\partial t}+\frac{\partial Q}{\partial x}=0,\qquad \frac{\partial Q}{\partial t}+\frac{\partial}{\partial x}\left[\frac{Q^2}{A}+\Pi(A)\right]=S_f</annotation></semantics></math>
+<details><summary>LaTeX 源码</summary><pre>\frac{\partial A}{\partial t}+\frac{\partial Q}{\partial x}=0
+\frac{\partial Q}{\partial t}+\frac{\partial}{\partial x}\left[\frac{Q^2}{A}+\Pi(A)\right]=S_f</pre></details></div>
+<p>第一式说一小段的血液体积变化由两端 Q 的差决定。第二式同时保留对流动量 Q²/A、壁压力作用与摩擦。先令 S<sub>f</sub>=0 隔离无黏传播；若加入准稳态 Poiseuille 阻力，则 S<sub>f</sub>=−8πνQ/A。α=1 与该阻力并用是降阶近似，不意味着精确重建三维速度剖面。</p>
+<p class="source">理论背景：<a href="https://onlinelibrary.wiley.com/doi/full/10.1002/cnm.2602">Alastruey、Hunt 与 Weinberg，2014，Methods</a> 从连续方程、壁本构与特征路径讨论动脉波传播。本文采用的具体方程及参数以<a href="tasks/B01_SPEC.md">冻结的 B01 规格</a>为准，不把论文中不同摩擦系数或病例参数移作本项目校准值。</p>
+<h3>6.2 壁本构闭合压力，决定波速</h3>
+<div class="equation"><div class="equation-number">(11) 管壁关系、压力通量与波速</div>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable columnalign="left"><mtr><mtd><mi>P</mi><mo>=</mo><msub><mi>P</mi><mn>0</mn></msub><mo>+</mo><mi>β</mi><mo>(</mo><msqrt><mfrac><mi>A</mi><msub><mi>A</mi><mn>0</mn></msub></mfrac></msqrt><mo>−</mo><mn>1</mn><mo>)</mo></mtd></mtr><mtr><mtd><mfrac><mrow><mi>d</mi><mi>Π</mi></mrow><mrow><mi>d</mi><mi>A</mi></mrow></mfrac><mo>=</mo><mfrac><mi>A</mi><mi>ρ</mi></mfrac><mfrac><mrow><mi>d</mi><mi>P</mi></mrow><mrow><mi>d</mi><mi>A</mi></mrow></mfrac><mo>,</mo><mspace width="1em"/><mi>Π</mi><mo>(</mo><mi>A</mi><mo>)</mo><mo>=</mo><mfrac><mrow><mi>β</mi><msup><mi>A</mi><mrow><mn>3</mn><mo>/</mo><mn>2</mn></mrow></msup></mrow><mrow><mn>3</mn><mi>ρ</mi><msqrt><msub><mi>A</mi><mn>0</mn></msub></msqrt></mrow></mfrac></mtd></mtr><mtr><mtd><msup><mi>c</mi><mn>2</mn></msup><mo>=</mo><mfrac><mi>A</mi><mi>ρ</mi></mfrac><mfrac><mrow><mi>d</mi><mi>P</mi></mrow><mrow><mi>d</mi><mi>A</mi></mrow></mfrac><mo>=</mo><mfrac><mi>β</mi><mrow><mn>2</mn><mi>ρ</mi></mrow></mfrac><msqrt><mfrac><mi>A</mi><msub><mi>A</mi><mn>0</mn></msub></mfrac></msqrt></mtd></mtr></mtable><annotation encoding="application/x-tex">P=P_0+\beta(\sqrt{A/A_0}-1),\quad \Pi'(A)=\frac{A}{\rho}P'(A),\quad \Pi(A)=\frac{\beta A^{3/2}}{3\rho\sqrt{A_0}},\quad c^2=\frac{A}{\rho}P'(A)=\frac{\beta}{2\rho}\sqrt{A/A_0}</annotation></semantics></math>
+<details><summary>LaTeX 源码</summary><pre>P=P_0+\beta(\sqrt{A/A_0}-1)
+\Pi'(A)=\frac{A}{\rho}P'(A),\qquad \Pi(A)=\frac{\beta A^{3/2}}{3\rho\sqrt{A_0}}
+c^2=\frac{A}{\rho}P'(A)=\frac{\beta}{2\rho}\sqrt{A/A_0}</pre></details></div>
+<p>Π 不是简单的 AP/ρ：它的导数必须等于 (A/ρ)P′。这里 P<sub>0</sub>、A<sub>0</sub>、β 沿单管固定，常数压力不会制造空间压力梯度；若它们随 x 改变，要补相应几何／本构源项。波速 c 由壁刚度和当前面积决定，与血液平均速度 u 是不同量。</p>
+<figure><div class="diagram-container">
+<svg viewBox="0 0 1280 720" role="img" aria-labelledby="principles-control-volume-title principles-control-volume-desc" xmlns="http://www.w3.org/2000/svg">
+<title id="principles-control-volume-title">有限体积输运与两向特征传播</title>
+<desc id="principles-control-volume-desc">相邻控制体共享同一个界面通量，内部通量逐对抵消；亚临界流中信息沿 u 加 c 与 u 减 c 两个特征方向传播。</desc>
+<defs><marker id="pc-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#4f5d75"/></marker><marker id="pc-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#bf4520"/></marker><marker id="pc-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#2e5aa8"/></marker></defs>
+<rect width="1280" height="720" fill="#f5f5f5"/>
+<text x="80" y="80" class="group-name">同一个界面通量，给左侧减去、给右侧加上。</text>
+<line x1="352" y1="240" x2="512" y2="240" class="arrow" marker-end="url(#pc-arrow)"/><line x1="768" y1="240" x2="928" y2="240" class="arrow" marker-end="url(#pc-arrow)"/>
+<rect x="384" y="216" width="96" height="16" class="mask"/><text x="432" y="228" class="cn" text-anchor="middle">共享左通量</text><rect x="800" y="216" width="96" height="16" class="mask"/><text x="848" y="228" class="cn" text-anchor="middle">共享右通量</text>
+<line x1="240" y1="440" x2="1040" y2="440" class="arrow" marker-end="url(#pc-arrow)"/><rect x="592" y="420" width="96" height="12" class="mask"/><text x="640" y="429" class="label" text-anchor="middle">u + c / W+</text>
+<line x1="1040" y1="528" x2="240" y2="528" class="planned" marker-end="url(#pc-arrow)"/><rect x="592" y="508" width="96" height="12" class="mask"/><text x="640" y="517" class="label" text-anchor="middle">u - c / W-</text>
+<g><rect x="96" y="168" width="256" height="144" rx="6" class="node"/><text x="224" y="228" class="node-name" text-anchor="middle">上游控制体</text><text x="224" y="256" class="sub" text-anchor="middle">U[i-1] = (A,Q)</text><rect x="512" y="168" width="256" height="144" rx="6" class="focal"/><text x="640" y="228" class="node-name" text-anchor="middle">正在更新的控制体</text><text x="640" y="256" class="sub" text-anchor="middle">U[i] = (A,Q)</text><rect x="928" y="168" width="256" height="144" rx="6" class="node"/><text x="1056" y="228" class="node-name" text-anchor="middle">下游控制体</text><text x="1056" y="256" class="sub" text-anchor="middle">U[i+1] = (A,Q)</text></g>
+<text x="80" y="376" class="caption">面积 × 管长是血液体积；信息传播方向不等于每一时刻的血流方向。</text><text x="80" y="588" class="caption">亚临界条件 |u| &lt; c：两端各有一个入射特征，不能在入口同时任意指定 P 与 Q。</text>
+<line x1="40" y1="652" x2="1240" y2="652" stroke="#bfc0c0"/><text x="80" y="684" class="cn">框：有限体积状态</text><text x="400" y="684" class="cn">上层箭头：共享通量</text><text x="864" y="684" class="cn">下层箭头：两向信息传播</text>
+</svg></div><figcaption>图 3 · 守恒／传播框架图，doc-wide，3 个控制体、4 条连接。不画示意压力峰，以免把示意线条当作引擎产物。两向特征关系限均匀、无摩擦的亚临界管段。</figcaption></figure>
+<h3>6.3 特征量告诉边界“能指定多少信息”</h3>
+<p>对当前纯弹性均匀管，系统的两条特征速度是 u±c。把 c/A 对 A 积分得到 4c，选择参考态归一化后，可用以下特征量。没有摩擦源项时，它们沿对应路径保持不变；有摩擦时要相应处理源项，不能仍宣称全程严格不变。</p>
+<div class="equation"><div class="equation-number">(12) 归一化特征量</div>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>λ</mi><mo>±</mo></msub><mo>=</mo><mi>u</mi><mo>±</mo><mi>c</mi><mo>,</mo><mspace width="1em"/><msub><mi>W</mi><mo>±</mo></msub><mo>=</mo><mi>u</mi><mo>±</mo><mn>4</mn><mo>(</mo><mi>c</mi><mo>−</mo><msub><mi>c</mi><mn>0</mn></msub><mo>)</mo><mo>,</mo><mspace width="1em"/><mi>c</mi><mo>=</mo><msub><mi>c</mi><mn>0</mn></msub><msup><mrow><mo>(</mo><mi>A</mi><mo>/</mo><msub><mi>A</mi><mn>0</mn></msub><mo>)</mo></mrow><mfrac><mn>1</mn><mn>4</mn></mfrac></msup></mrow><annotation encoding="application/x-tex">\lambda_\pm=u\pm c,\qquad W_\pm=u\pm4(c-c_0),\qquad c=c_0(A/A_0)^{1/4}</annotation></semantics></math>
+<details><summary>LaTeX 源码</summary><pre>\lambda_\pm=u\pm c,\qquad W_\pm=u\pm4(c-c_0),\qquad c=c_0(A/A_0)^{1/4}</pre></details></div>
+<p>实际代码使用 R<sub>±</sub>=u±4c；式 (12) 的 W<sub>±</sub> 只是减去了固定参考偏置，表达的是相同特征信息。亚临界条件 |u|&lt;c 下，入口有一个从外部进入的特征，另一个来自管内。指定入口压力时，先由壁本构得到 A，再结合管内传来的 R<sub>−</sub> 求 u；不可额外强迫一个不兼容的 Q。末端同样只补一个外部条件，配合管内 R<sub>+</sub> 求解；无反射端固定相应的入射参考特征量。</p>
+<p class="source">特征路径与纯弹性假设的来源见 <a href="https://onlinelibrary.wiley.com/doi/full/10.1002/cnm.2602">Alastruey 等，§2.3 与 Appendix A</a>。式 (12) 的 4c 来自本文选定平方根管壁定律的直接积分，不将它推广到任意壁本构。</p>
+<h3>6.4 反射与分叉给出可核验的解析关系</h3>
+<div class="equation"><div class="equation-number">(13) 小信号阻抗、反射与无损静压分叉</div>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable columnalign="left"><mtr><mtd><msub><mi>Z</mi><mn>0</mn></msub><mo>=</mo><mfrac><mrow><mi>ρ</mi><msub><mi>c</mi><mn>0</mn></msub></mrow><msub><mi>A</mi><mn>0</mn></msub></mfrac><mo>,</mo><mspace width="1em"/><mi>Γ</mi><mo>=</mo><mfrac><mrow><msub><mi>R</mi><mi>T</mi></msub><mo>−</mo><msub><mi>Z</mi><mn>0</mn></msub></mrow><mrow><msub><mi>R</mi><mi>T</mi></msub><mo>+</mo><msub><mi>Z</mi><mn>0</mn></msub></mrow></mfrac></mtd></mtr><mtr><mtd><msub><mi>Q</mi><mi>p</mi></msub><mo>=</mo><msub><mi>Q</mi><mn>1</mn></msub><mo>+</mo><msub><mi>Q</mi><mn>2</mn></msub><mo>,</mo><mspace width="1em"/><msub><mi>P</mi><mi>p</mi></msub><mo>=</mo><msub><mi>P</mi><mn>1</mn></msub><mo>=</mo><msub><mi>P</mi><mn>2</mn></msub></mtd></mtr></mtable><annotation encoding="application/x-tex">Z_0=\rho c_0/A_0,\quad \Gamma=(R_T-Z_0)/(R_T+Z_0);\qquad Q_p=Q_1+Q_2,\quad P_p=P_1=P_2</annotation></semantics></math>
+<details><summary>LaTeX 源码</summary><pre>Z_0=\frac{\rho c_0}{A_0},\qquad \Gamma=\frac{R_T-Z_0}{R_T+Z_0}
+Q_p=Q_1+Q_2,\qquad P_p=P_1=P_2</pre></details></div>
+<p>反射系数 Γ 是线性化压力波的关系：封闭 Q=0 给出约 +1，压力释放给出约 −1，R<sub>T</sub>=2Z<sub>0</sub> 给出约 1/3。不能把非线性大振幅情形也要求精确等于这些值。对称分叉中，子管各为母管一半面积且 c<sub>0</sub> 相同，则每条子管阻抗加倍、两条并联后与母管匹配，小信号近似无净反射，流量各半。</p>
+<p>当前分叉采用共同静压、无局部损失近似，忽略动压差与几何损失。它不是总压守恒的完整分叉模型；后续若更换总压方案，需按项目规则补 ADR 与独立基准。亚临界假设不成立、面积非正或边界无可接受解时，应返回显式失败，不能截断出一份表面合法的结果。</p>
+<p class="source">独立公开参考的定位：<a href="https://cronfa.swan.ac.uk/Record/cronfa22154">Boileau 等，2015，作者机构仓库</a>介绍六类数值方案和递增复杂度基准。论文可读、数据已下载、许可已核查、输入已复现是四件事；只有证据区中真正取得并核验的数据才可用于外部基准结论。</p>
+<p>本轮使用该公开包的无黏单脉冲<b>数值参考输出</b>，不是物理实验或患者记录。来源、CC0 许可与归档身份见 <a href="benchmarks/BOILEAU_PROVENANCE.md">Boileau 来源记录</a>。六种数值法在同一坐标上的包络差，个别时刻按 FVM 参考峰值归一可达约 6.6–8.4%；这包含参考解自身的离散和输出采样差，不可把某一种方案当成唯一精确真值。逐方案／时刻记录见 <a href="../artifacts/arterial1d/external/boileau2015/reference_scheme_spread.json">参考数值解差异</a>。</p>
+</section>
+
+<section id="numerics">
+<h2>7. 方程正确，还要证明怎样被近似求解</h2>
+<h3>7.1 当前 0D 的整体方法并非“处处解析精确”</h3>
+<p>先用旧状态做半步预测，再用中点预测的压力／开口系数做一次全步。每条 RL 连接在冻结系数下解析计算端点流量和积分体积，激活、开口和一阶球囊也解析推进。系数在全系统中仍随时间变化，所以整体属于分裂的中点方案；局部解析不等于耦合系统解析解。</p>
+<p>0D 每步不超过 250 μs，并按事件、采样和交付边界再细分。独立 SciPy Radau 参考核验的是“同一组 0D 方程是否被近似一致求解”，而不是“这组方程是否代表患者”。改变异步采样配置也可能改变积分切分，需要把它造成的细小数值差与真实生理差分开。</p>
+<h3>7.2 B01 用守恒有限体积，再约束 CFL</h3>
+<div class="equation"><div class="equation-number">(14) 有限体积与 Rusanov 界面通量</div>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable columnalign="left"><mtr><mtd><msubsup><mi>U</mi><mi>i</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msubsup><mo>=</mo><msubsup><mi>U</mi><mi>i</mi><mi>n</mi></msubsup><mo>−</mo><mfrac><mrow><mi>Δ</mi><mi>t</mi></mrow><mrow><mi>Δ</mi><mi>x</mi></mrow></mfrac><mo>(</mo><msub><mover><mi>F</mi><mo>^</mo></mover><mrow><mi>i</mi><mo>+</mo><mn>1</mn><mo>/</mo><mn>2</mn></mrow></msub><mo>−</mo><msub><mover><mi>F</mi><mo>^</mo></mover><mrow><mi>i</mi><mo>−</mo><mn>1</mn><mo>/</mo><mn>2</mn></mrow></msub><mo>)</mo><mo>+</mo><mi>Δ</mi><mi>t</mi><msub><mi>S</mi><mi>i</mi></msub></mtd></mtr><mtr><mtd><mover><mi>F</mi><mo>^</mo></mover><mo>=</mo><mfrac><mrow><mi>F</mi><mo>(</mo><msub><mi>U</mi><mi>L</mi></msub><mo>)</mo><mo>+</mo><mi>F</mi><mo>(</mo><msub><mi>U</mi><mi>R</mi></msub><mo>)</mo></mrow><mn>2</mn></mfrac><mo>−</mo><mfrac><mi>s</mi><mn>2</mn></mfrac><mo>(</mo><msub><mi>U</mi><mi>R</mi></msub><mo>−</mo><msub><mi>U</mi><mi>L</mi></msub><mo>)</mo></mtd></mtr></mtable><annotation encoding="application/x-tex">U_i^{n+1}=U_i^n-\frac{\Delta t}{\Delta x}(\widehat F_{i+1/2}-\widehat F_{i-1/2})+\Delta tS_i,\quad \widehat F=\frac{F(U_L)+F(U_R)}2-\frac{s}2(U_R-U_L)</annotation></semantics></math>
+<p>U=(A,Q)；F=(Q,Q²/A+Π)。s 至少覆盖界面两侧的 |u|+c。相邻单元共享同一通量，质量账本才能在内部界面抵消。</p><details><summary>LaTeX 源码</summary><pre>U_i^{n+1}=U_i^n-\frac{\Delta t}{\Delta x}(\widehat F_{i+1/2}-\widehat F_{i-1/2})+\Delta tS_i
+\widehat F=\frac{F(U_L)+F(U_R)}2-\frac{s}2(U_R-U_L)
+U=(A,Q),\quad F=(Q,Q^2/A+\Pi(A)),\quad s\ge\max(|u_L|+c_L,|u_R|+c_R)</pre></details></div>
+<div class="equation"><div class="equation-number">(15) CFL 限制</div>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Δ</mi><mi>t</mi><mo>≤</mo><mi>CFL</mi><munder><mi>min</mi><mi>i</mi></munder><mfrac><msub><mrow><mi>Δ</mi><mi>x</mi></mrow><mi>i</mi></msub><mrow><mo>|</mo><msub><mi>u</mi><mi>i</mi></msub><mo>|</mo><mo>+</mo><msub><mi>c</mi><mi>i</mi></msub></mrow></mfrac><mo>,</mo><mspace width="1em"/><mi>CFL</mi><mo>=</mo><mn>0.4</mn></mrow><annotation encoding="application/x-tex">\Delta t\le\mathrm{CFL}\min_i\frac{\Delta x_i}{|u_i|+c_i},\qquad \mathrm{CFL}=0.4</annotation></semantics></math>
+<details><summary>LaTeX 源码</summary><pre>\Delta t\le\mathrm{CFL}\min_i\frac{\Delta x_i}{|u_i|+c_i},\qquad \mathrm{CFL}=0.4</pre></details></div>
+<p>CFL 约束让显式一步内的信息传播不越过数值依赖范围；它是稳定性约束的一部分，不是精度保证。显式 Poiseuille 源项还要求 Δt≤A/(8πν)。求解器公开可接受步长与失败原因；面积非正、超出 CFL、边界无根或超出亚临界域时显式失败，全网不提交一部分成功、一部分失败的状态。</p>
+<h3>7.3 一阶基线与高阶对照分别保留</h3>
+<p>基础方法是分片常量有限体积、Rusanov 通量与显式 Euler。它容易追踪通量和体积账本，但对 20 Pa／40 ms 的短脉冲可能存在明显数值耗散。低阶结果必须保留原始网格、误差与未通过的候选门槛；不能换输入振幅、改变脉冲宽度或调参数掩盖这个限制。</p>
+<p>为比较精度与计算代价，独立增加逐守恒量的 MUSCL 重构：使用 θ=1.5 的 generalized minmod 限制器，再以 SSPRK2 推进。该对照仍使用同一物理方程、同一工程输入及 Rusanov 通量，每个 RK 阶段在实际阶段时刻调用边界，体积账本使用与更新相同的 RK 加权界面通量。高阶结果和一阶结果按方法名分开报告；高阶通过不重写一阶记录。</p>
+<div class="equation"><div class="equation-number">(15b) SSPRK2 的两个阶段</div>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable columnalign="left"><mtr><mtd><msup><mi>U</mi><mrow><mo>(</mo><mn>1</mn><mo>)</mo></mrow></msup><mo>=</mo><msup><mi>U</mi><mi>n</mi></msup><mo>+</mo><mi>Δ</mi><mi>t</mi><mi>ℒ</mi><mo>(</mo><msup><mi>U</mi><mi>n</mi></msup><mo>,</mo><msup><mi>t</mi><mi>n</mi></msup><mo>)</mo></mtd></mtr><mtr><mtd><msup><mi>U</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msup><mi>U</mi><mi>n</mi></msup><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>[</mo><msup><mi>U</mi><mrow><mo>(</mo><mn>1</mn><mo>)</mo></mrow></msup><mo>+</mo><mi>Δ</mi><mi>t</mi><mi>ℒ</mi><mo>(</mo><msup><mi>U</mi><mrow><mo>(</mo><mn>1</mn><mo>)</mo></mrow></msup><mo>,</mo><msup><mi>t</mi><mi>n</mi></msup><mo>+</mo><mi>Δ</mi><mi>t</mi><mo>)</mo><mo>]</mo></mtd></mtr></mtable><annotation encoding="application/x-tex">U^{(1)}=U^n+\Delta t\mathcal L(U^n,t^n),\quad U^{n+1}=\frac12U^n+\frac12[U^{(1)}+\Delta t\mathcal L(U^{(1)},t^n+\Delta t)]</annotation></semantics></math>
+<p>ℒ 是守恒通量差与声明源项组成的半离散算子。重构失败时仍必须显式报告，不能把负面积截成正值。限制器、边界与非线性都会影响实际观察阶次。</p><details><summary>LaTeX 源码</summary><pre>U^{(1)}=U^n+\Delta t\mathcal L(U^n,t^n)
+U^{n+1}=\frac12U^n+\frac12\left[U^{(1)}+\Delta t\mathcal L(U^{(1)},t^n+\Delta t)\right]</pre></details></div>
+<h3>7.4 第三方案：光滑小振幅专用的三阶对照</h3>
+<p>公开 Boileau 长管窄脉冲参考暴露了 MUSCL 的累计峰值耗散，因此增加显式选择的 <code>linear3_ssprk3</code> 作为第三个实验方案。默认仍为一阶 <code>rusanov</code>；已有一阶与 MUSCL 的失败结果保存在 <a href="../artifacts/arterial1d/history/pre_linear3/manifest.json">历史源／结果身份清单</a>，不改写成新方法的结果。方案增加不改变壁本构、基准输入或工程门槛。</p>
+<p>它用相邻三个控制体平均值重建界面两侧状态，再使用同一 Rusanov 通量。下面的 U 对 A 与 Q 分别应用；“左／右迹”表示同一单元的左右面重建值，边界首单元使用三个内部单元的一侧二次多项式，末端镜像处理，至少需要 3 个单元。</p>
+<div class="equation"><div class="equation-number">(15c) 三阶有限体积界面重建</div>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable columnalign="left"><mtr><mtd><msubsup><mi>U</mi><mi>i</mi><mi>R</mi></msubsup><mo>=</mo><mfrac><mrow><mo>−</mo><msub><mi>U</mi><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>+</mo><mn>5</mn><msub><mi>U</mi><mi>i</mi></msub><mo>+</mo><mn>2</mn><msub><mi>U</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow><mn>6</mn></mfrac><mo>,</mo><mspace width="1em"/><msubsup><mi>U</mi><mi>i</mi><mi>L</mi></msubsup><mo>=</mo><mfrac><mrow><mn>2</mn><msub><mi>U</mi><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>+</mo><mn>5</mn><msub><mi>U</mi><mi>i</mi></msub><mo>−</mo><msub><mi>U</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow><mn>6</mn></mfrac></mtd></mtr><mtr><mtd><msubsup><mi>U</mi><mn>0</mn><mi>L</mi></msubsup><mo>=</mo><mfrac><mrow><mn>11</mn><msub><mi>U</mi><mn>0</mn></msub><mo>−</mo><mn>7</mn><msub><mi>U</mi><mn>1</mn></msub><mo>+</mo><mn>2</mn><msub><mi>U</mi><mn>2</mn></msub></mrow><mn>6</mn></mfrac><mo>,</mo><mspace width="1em"/><msubsup><mi>U</mi><mn>0</mn><mi>R</mi></msubsup><mo>=</mo><mfrac><mrow><mn>2</mn><msub><mi>U</mi><mn>0</mn></msub><mo>+</mo><mn>5</mn><msub><mi>U</mi><mn>1</mn></msub><mo>−</mo><msub><mi>U</mi><mn>2</mn></msub></mrow><mn>6</mn></mfrac></mtd></mtr></mtable><annotation encoding="application/x-tex">U_i^R=\frac{-U_{i-1}+5U_i+2U_{i+1}}6,\quad U_i^L=\frac{2U_{i-1}+5U_i-U_{i+1}}6;\quad U_0^L=\frac{11U_0-7U_1+2U_2}6,\quad U_0^R=\frac{2U_0+5U_1-U_2}6</annotation></semantics></math>
+<details><summary>LaTeX 源码</summary><pre>U_i^R=\frac{-U_{i-1}+5U_i+2U_{i+1}}6,\qquad U_i^L=\frac{2U_{i-1}+5U_i-U_{i+1}}6
+U_0^L=\frac{11U_0-7U_1+2U_2}6,\qquad U_0^R=\frac{2U_0+5U_1-U_2}6</pre></details></div>
+<p>实际计算写成“本单元平均值 + 邻居差分”，减少大背景上小扰动的相消，并让常数背景保持。边界重建不增加新的物理边界条件，仍按特征数量求解。时间积分使用 SSPRK3，在 t、t+Δt、t+Δt/2 三个实际阶段时刻调用边界。</p>
+<div class="equation"><div class="equation-number">(15d) SSPRK3 与一致的通量／源项权重</div>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable columnalign="left"><mtr><mtd><msup><mi>U</mi><mrow><mo>(</mo><mn>1</mn><mo>)</mo></mrow></msup><mo>=</mo><msup><mi>U</mi><mi>n</mi></msup><mo>+</mo><mi>Δ</mi><mi>t</mi><mi>ℒ</mi><mo>(</mo><msup><mi>U</mi><mi>n</mi></msup><mo>,</mo><msup><mi>t</mi><mi>n</mi></msup><mo>)</mo></mtd></mtr><mtr><mtd><msup><mi>U</mi><mrow><mo>(</mo><mn>2</mn><mo>)</mo></mrow></msup><mo>=</mo><mfrac><mn>3</mn><mn>4</mn></mfrac><msup><mi>U</mi><mi>n</mi></msup><mo>+</mo><mfrac><mn>1</mn><mn>4</mn></mfrac><mo>[</mo><msup><mi>U</mi><mrow><mo>(</mo><mn>1</mn><mo>)</mo></mrow></msup><mo>+</mo><mi>Δ</mi><mi>t</mi><mi>ℒ</mi><mo>(</mo><msup><mi>U</mi><mrow><mo>(</mo><mn>1</mn><mo>)</mo></mrow></msup><mo>,</mo><msup><mi>t</mi><mi>n</mi></msup><mo>+</mo><mi>Δ</mi><mi>t</mi><mo>)</mo><mo>]</mo></mtd></mtr><mtr><mtd><msup><mi>U</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>=</mo><mfrac><mn>1</mn><mn>3</mn></mfrac><msup><mi>U</mi><mi>n</mi></msup><mo>+</mo><mfrac><mn>2</mn><mn>3</mn></mfrac><mo>[</mo><msup><mi>U</mi><mrow><mo>(</mo><mn>2</mn><mo>)</mo></mrow></msup><mo>+</mo><mi>Δ</mi><mi>t</mi><mi>ℒ</mi><mo>(</mo><msup><mi>U</mi><mrow><mo>(</mo><mn>2</mn><mo>)</mo></mrow></msup><mo>,</mo><msup><mi>t</mi><mi>n</mi></msup><mo>+</mo><mfrac><mrow><mi>Δ</mi><mi>t</mi></mrow><mn>2</mn></mfrac><mo>)</mo><mo>]</mo></mtd></mtr><mtr><mtd><msub><mi>w</mi><mn>1</mn></msub><mo>=</mo><mfrac><mn>1</mn><mn>6</mn></mfrac><mo>,</mo><mspace width="1em"/><msub><mi>w</mi><mn>2</mn></msub><mo>=</mo><mfrac><mn>1</mn><mn>6</mn></mfrac><mo>,</mo><mspace width="1em"/><msub><mi>w</mi><mn>3</mn></msub><mo>=</mo><mfrac><mn>2</mn><mn>3</mn></mfrac></mtd></mtr></mtable><annotation encoding="application/x-tex">U^{(1)}=U^n+\Delta t\mathcal L(U^n,t^n),\quad U^{(2)}=\frac34U^n+\frac14[U^{(1)}+\Delta t\mathcal L(U^{(1)},t^n+\Delta t)],\quad U^{n+1}=\frac13U^n+\frac23[U^{(2)}+\Delta t\mathcal L(U^{(2)},t^n+\Delta t/2)],\quad (w_1,w_2,w_3)=(1/6,1/6,2/3)</annotation></semantics></math>
+<details><summary>LaTeX 源码</summary><pre>U^{(1)}=U^n+\Delta t\mathcal L(U^n,t^n)
+U^{(2)}=\frac34U^n+\frac14\left[U^{(1)}+\Delta t\mathcal L(U^{(1)},t^n+\Delta t)\right]
+U^{n+1}=\frac13U^n+\frac23\left[U^{(2)}+\Delta t\mathcal L(U^{(2)},t^n+\Delta t/2)\right]
+(w_1,w_2,w_3)=(1/6,1/6,2/3),\qquad \int_t^{t+\Delta t}\widehat F\,dt=\Delta t\sum_{k=1}^3w_k\widehat F_k</pre></details></div>
+<p>返回的实际界面通量积分与动量源项均使用相同的 (1/6,1/6,2/3) 权重，不能把三个阶段简单平均。任一阶段的面积、边界、源项步长、亚临界或 CFL 检查失败时，全网不提交部分更新。</p>
+<p class="note">该空间重建没有 TVD 限制器，可能出现振铃、过冲和下冲；SSPRK3 的名称不让这套空间离散自动成为 TVD。它只用于已经声明的光滑小振幅实验，不能外推到激波、突变强波、复杂生理或病理场景。精度结果必须同时报告最小／最大压力、参考峰过冲及观察范围；缺少极值记录不能等同“没有振铃”。</p>
+<p class="source">实现映射：<a href="../iabp/arterial1d/solver.py">solver.py</a> 的 <code>_linear3_values</code>、SSPRK3 分支和带权 <code>_result</code>。本节只描述已实现方法；是否达到各基准门槛仍以独立运行结果为准。</p>
+<h3>7.5 冻结的工程管段与三档收敛</h3>
+<div class="table-scroll"><table><thead><tr><th>量</th><th>B01 工程配置</th><th>需要验证</th></tr></thead><tbody>
+<tr><td>L / A<sub>0</sub></td><td>1 m / 3×10<sup>−4</sup> m²</td><td>均匀管的传播与积分体积</td></tr><tr><td>ρ / c<sub>0</sub> / β</td><td>1060 kg/m³ / 5 m/s / 53000 Pa</td><td>β=2ρc<sub>0</sub>²；单位集中转换</td></tr><tr><td>小脉冲</td><td>0.05–0.09 s，20 Pa 正弦平方入口压</td><td>小信号参考 p(x,t)=p<sub>in</sub>(t−x/c<sub>0</sub>)</td></tr><tr><td>网格</td><td>至少 80／160／320；必要时继续细化</td><td>等物理时间压力差、到达时间、反射系数、体积误差与阶次</td></tr><tr><td>细网格候选门槛</td><td>到达差 ≤0.5 ms；峰值相对差 ≤1%</td><td>不足就细化；不移动时间轴或改解析答案来绿化结果</td></tr>
+</tbody></table></div>
+<p>三档收敛不应只看一个峰。至少报告压力最大差、峰值误差、到达时刻、反射系数和界面流量积分得到的体积残差。若比较误差 E 的比例符合渐近范围，网格翻倍的观察阶次可写为 log₂(E<sub>N</sub>/E<sub>2N</sub>)；非线性模型与线性参考的差包含模型线性化误差，不能全部算作离散误差。</p>
+<p class="note">5 ms 是受声明条件限制的工程目标，不能直接等于求解步长、R 峰定位或真实球囊动作精度。0.5 ms 的模型数值事件预算也不等于 0.5 ms 的患者机械关闭真值。未知延迟、无切迹、无射血、无可靠事件与数值失败必须分别统计。</p>
+<h3>7.6 辅助效果需要相同参考与多个指标</h3>
+<p>从同一完整快照分叉、使用相同后续外生电事件，比较无辅助与待测策略。对同一个参考时间窗，同时看净主动脉出流、LV 压力时间积分、净外部功、舒张驱动代理及残余球囊阻塞。仅看 AP 峰高会把“增压但少射血、做功更高”的结果误判为改善。</p>
+<div class="equation"><div class="equation-number">(16) 窗口积分与共同参考窗口</div>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable columnalign="left"><mtr><mtd><msub><mi>V</mi><mtext>net Ao</mtext></msub><mo>=</mo><msubsup><mo>∫</mo><msub><mi>t</mi><mn>0</mn></msub><msub><mi>t</mi><mn>1</mn></msub></msubsup><msub><mi>Q</mi><mtext>Ao</mtext></msub><mi>d</mi><mi>t</mi><mo>,</mo><mspace width="1em"/><msub><mi>W</mi><mtext>LV</mtext></msub><mo>=</mo><mo>−</mo><mo>∫</mo><msub><mi>P</mi><mtext>LV</mtext></msub><mi>d</mi><msub><mi>V</mi><mtext>LV</mtext></msub></mtd></mtr><mtr><mtd><msub><mi>DPTI</mi><mtext>ref window</mtext></msub><mo>=</mo><msubsup><mo>∫</mo><msub><mi>AC</mi><mtext>ref</mtext></msub><msub><mi>AO</mi><mtext>next,ref</mtext></msub></msubsup><mo>(</mo><msub><mi>P</mi><mtext>root</mtext></msub><mo>−</mo><msub><mi>P</mi><mtext>LV</mtext></msub><mo>)</mo><mi>d</mi><mi>t</mi></mtd></mtr></mtable><annotation encoding="application/x-tex">V_{net\ Ao}=\int_{t_0}^{t_1}Q_{Ao}\,dt,\quad W_{LV}=-\int P_{LV}\,dV_{LV};\quad DPTI_{refwindow}=\int_{AC_{ref}}^{AO_{next,ref}}(P_{root}-P_{LV})\,dt</annotation></semantics></math>
+<details><summary>LaTeX 源码</summary><pre>V_{net\ Ao}=\int_{t_0}^{t_1}Q_{Ao}\,dt,\qquad W_{LV}=-\int P_{LV}\,dV_{LV}
+DPTI_{refwindow}=\int_{AC_{ref}}^{AO_{next,ref}}(P_{root}-P_{LV})\,dt</pre></details></div>
+<p>式 (16) 的 DPTI 是需求中的后续评价定义，当前演示并未完成共同 DPTI 窗口模块。窗口积分不是自动得到的单搏 SV；开放或过渡 PV 路径的 −∫P dV 也不能不加说明地称为闭合稳态环功。DPTI 是压差驱动力代理，不是已经验证的冠脉流量或灌注。</p>
+</section>
+
+<section id="evidence">
+<h2>8. 实际运行证据：与方程并排阅读</h2>
+<p>下面的表格由 <a href="../tools/update_principles_evidence.py">update_principles_evidence.py</a> 从 JSON／CSV 生成；它只读取、重新积分导出值和记录文件身份，不运行另一套物理模型。完整波形、事件与交互查看 <a href="../artifacts/demo/prototype_viewer.html">prototype_viewer.html</a>。所有旧教学页面仍保留在 <a href="../legacy/">legacy/</a>。</p>
+<p>B01 的实际求解命令产生 case 结果、CSV 与原始运行日志；<code>tools.verify_all</code> 随后调用的 <code>tools.arterial1d_check --collect</code> 读取这些已完成记录，核查当前源文件与产物身份后收集，不重复求解。收集门退出码、原始求解退出码和各方法的精度状态分别保留；仅有收集文件或命令成功不能替代原始运行证据。</p>
+<!-- PRINCIPLES_EVIDENCE_START -->
+<div class="evidence-generated">
+<p class="record-scope">自动证据区：仅整理磁盘中的真实导出值。可重复刷新，未运行求解器；文件中的 PASS 只在其声明范围内有效。</p>
+<h3>软件质量门与证据范围</h3>
+<p>环境：<code>3.12.9 | packaged by Anaconda, Inc. | (main, Feb  6 2025, 18:49:16) [MSC v.1929 64 bit (AMD64)]</code>；<code>Windows-10-10.0.19045-SP0</code>。</p><div class="table-scroll"><table><thead><tr><th scope="col">质量门</th><th scope="col">文件声明状态</th><th scope="col">退出码</th><th scope="col">命令或未运行原因</th></tr></thead><tbody><tr><td>compile</td><td>PASS</td><td>0</td><td><code>[&quot;D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe&quot;, &quot;-m&quot;, &quot;compileall&quot;, &quot;-q&quot;, &quot;iabp&quot;, &quot;tools&quot;, &quot;examples&quot;]</code></td></tr><tr><td>pytest</td><td>PASS</td><td>0</td><td><code>[&quot;D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe&quot;, &quot;-m&quot;, &quot;pytest&quot;, &quot;-q&quot;, &quot;--junitxml=artifacts/pytest.xml&quot;]</code></td></tr><tr><td>numerical</td><td>PASS</td><td>0</td><td><code>[&quot;D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe&quot;, &quot;-m&quot;, &quot;tools.numerical_check&quot;]</code></td></tr><tr><td>ruff</td><td>PASS</td><td>0</td><td><code>[&quot;D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe&quot;, &quot;-m&quot;, &quot;ruff&quot;, &quot;check&quot;, &quot;iabp&quot;, &quot;tests&quot;, &quot;tools&quot;, &quot;examples&quot;]</code></td></tr><tr><td>mypy</td><td>PASS</td><td>0</td><td><code>[&quot;D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe&quot;, &quot;-m&quot;, &quot;mypy&quot;, &quot;iabp&quot;]</code></td></tr><tr><td>arterial1d</td><td>PASS</td><td>0</td><td><code>[&quot;D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe&quot;, &quot;-m&quot;, &quot;tools.arterial1d_check&quot;, &quot;--collect&quot;]</code></td></tr></tbody></table></div><p>pytest 计数：<code>{&quot;errors&quot;: 0, &quot;failures&quot;: 0, &quot;skipped&quot;: 0, &quot;tests&quot;: 121}</code>。未记录退出码保持“未记录”，不自动补为 0。</p><div class="table-scroll"><table><thead><tr><th scope="col">证据边界</th><th scope="col">文件声明状态</th></tr></thead><tbody><tr><td>physiological_validation</td><td>NOT_VALIDATED</td></tr><tr><td>spatial_convergence</td><td>SEE_INDEPENDENT_B01_REPORT_NOT_COUPLED_ENGINE</td></tr><tr><td>actuator_calibration</td><td>NOT_VALIDATED</td></tr><tr><td>real_algorithm_integration</td><td>NOT_IMPLEMENTED</td></tr><tr><td>github_ci</td><td>NOT_RUN</td></tr><tr><td>windows_execution</td><td>PASS_LOCAL</td></tr><tr><td>clinical_5ms_claim</td><td>NOT_ESTABLISHED</td></tr></tbody></table></div><h3>0D 时间离散与守恒基线</h3>
+<p>12 s unassisted engineering baseline; compare at equal times 9-12 s; no temporal alignment；0D prototype; no spatial convergence or physiological validation。</p><div class="table-scroll"><table><thead><tr><th scope="col">最大步长 / μs</th><th scope="col">最大全循环血量残差 / mL</th></tr></thead><tbody><tr><td>250</td><td>3.63797881e-11</td></tr><tr><td>125</td><td>5.27506927e-11</td></tr><tr><td>50</td><td>1.62799552e-10</td></tr></tbody></table></div><div class="table-scroll"><table><thead><tr><th scope="col">比较 / μs</th><th scope="col">根部压力最大差 / mmHg</th><th scope="col">已有数值的事件最大差 / ms</th><th scope="col">事件拓扑一致</th><th scope="col">缺失事件</th><th scope="col">比较覆盖</th><th scope="col">文件声明状态</th></tr></thead><tbody><tr><td>250 / 50</td><td>0.00329239319</td><td>0.002</td><td>True</td><td>无</td><td>仅覆盖本文件列出的事件</td><td>PASS_0D_BASELINE_TIME_ONLY</td></tr><tr><td>125 / 50</td><td>0.000687550557</td><td>0.001</td><td>True</td><td>无</td><td>仅覆盖本文件列出的事件</td><td>PASS_0D_BASELINE_TIME_ONLY</td></tr></tbody></table></div><p>这些差值在相同物理时刻比较，未作时间平移。参考解也有离散误差；0D 时间比较不提供 1D 空间收敛或患者事件精度。</p><h3>B00 跨环境基线复现记录</h3><p>记录来源：<a href="../artifacts/b00/baseline_comparison.json">artifacts/b00/baseline_comparison.json</a>。以下是原文件声明，存在文件不代表通过验收。</p><details><summary>展开原始 JSON 记录</summary><pre>{
+  &quot;schema&quot;: &quot;iabp-b00-reproduction/v1&quot;,
+  &quot;scope&quot;: &quot;Frozen B00 before B01; software/numerical reproduction only&quot;,
+  &quot;imported_commit&quot;: &quot;fc18650722adbfbd05e4077cda456a8dc4bbd82e&quot;,
+  &quot;original_environment&quot;: {
+    &quot;python&quot;: &quot;3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]&quot;,
+    &quot;platform&quot;: &quot;Linux-6.18.44-x86_64-with-glibc2.41&quot;
+  },
+  &quot;reproduced_environment&quot;: {
+    &quot;python&quot;: &quot;3.12.9 | packaged by Anaconda, Inc. | (main, Feb  6 2025, 18:49:16) [MSC v.1929 64 bit (AMD64)]&quot;,
+    &quot;executable&quot;: &quot;D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe&quot;,
+    &quot;platform&quot;: &quot;Windows-10-10.0.19045-SP0&quot;,
+    &quot;packages&quot;: {
+      &quot;pytest&quot;: &quot;9.0.2&quot;,
+      &quot;numpy&quot;: &quot;2.3.5&quot;,
+      &quot;scipy&quot;: &quot;1.17.0&quot;,
+      &quot;ruff&quot;: &quot;0.17.0&quot;,
+      &quot;mypy&quot;: &quot;1.20.2&quot;,
+      &quot;pip&quot;: &quot;24.3.1&quot;
+    },
+    &quot;imported_commit&quot;: &quot;fc18650722adbfbd05e4077cda456a8dc4bbd82e&quot;,
+    &quot;encoding_note&quot;: &quot;PYTHONUTF8=1 required by pip 24.3.1 on Windows cp936 for UTF-8 requirements comments&quot;
+  },
+  &quot;pytest_counts&quot;: {
+    &quot;tests&quot;: 51,
+    &quot;failures&quot;: 0,
+    &quot;errors&quot;: 0,
+    &quot;skipped&quot;: 0
+  },
+  &quot;gates&quot;: {
+    &quot;compile&quot;: {
+      &quot;status&quot;: &quot;PASS&quot;,
+      &quot;command&quot;: [
+        &quot;D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe&quot;,
+        &quot;-m&quot;,
+        &quot;compileall&quot;,
+        &quot;-q&quot;,
+        &quot;iabp&quot;,
+        &quot;tools&quot;,
+        &quot;examples&quot;
+      ]
+    },
+    &quot;pytest&quot;: {
+      &quot;status&quot;: &quot;PASS&quot;,
+      &quot;command&quot;: [
+        &quot;D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe&quot;,
+        &quot;-m&quot;,
+        &quot;pytest&quot;,
+        &quot;-q&quot;,
+        &quot;--junitxml=artifacts/pytest.xml&quot;
+      ]
+    },
+    &quot;numerical&quot;: {
+      &quot;status&quot;: &quot;PASS&quot;,
+      &quot;command&quot;: [
+        &quot;D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe&quot;,
+        &quot;-m&quot;,
+        &quot;tools.numerical_check&quot;
+      ]
+    },
+    &quot;ruff&quot;: {
+      &quot;status&quot;: &quot;PASS&quot;,
+      &quot;command&quot;: [
+        &quot;D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe&quot;,
+        &quot;-m&quot;,
+        &quot;ruff&quot;,
+        &quot;check&quot;,
+        &quot;iabp&quot;,
+        &quot;tests&quot;,
+        &quot;tools&quot;,
+        &quot;examples&quot;
+      ]
+    },
+    &quot;mypy&quot;: {
+      &quot;status&quot;: &quot;PASS&quot;,
+      &quot;command&quot;: [
+        &quot;D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe&quot;,
+        &quot;-m&quot;,
+        &quot;mypy&quot;,
+        &quot;iabp&quot;
+      ]
+    }
+  },
+  &quot;comparisons&quot;: [
+    {
+      &quot;step_us&quot;: 250,
+      &quot;pressure_metric_delta_mmHg&quot;: {
+        &quot;p_lv&quot;: -4.263256414560601e-14,
+        &quot;p_root&quot;: 0.0,
+        &quot;p_descending&quot;: 0.0,
+        &quot;p_la&quot;: -1.0658141036401503e-14
+      },
+      &quot;event_metric_delta_ms&quot;: {
+        &quot;AORTIC_OPEN_05&quot;: 0.0,
+        &quot;AORTIC_CLOSE_02&quot;: 0.0,
+        &quot;MITRAL_OPEN_05&quot;: 0.0,
+        &quot;MITRAL_CLOSE_02&quot;: 0.0,
+        &quot;DP_LV_AO_REVERSE&quot;: 0.0,
+        &quot;QAO_ZERO&quot;: 0.0
+      },
+      &quot;event_topology_unchanged&quot;: true,
+      &quot;reproduced_status&quot;: &quot;PASS_0D_BASELINE_TIME_ONLY&quot;
+    },
+    {
+      &quot;step_us&quot;: 125,
+      &quot;pressure_metric_delta_mmHg&quot;: {
+        &quot;p_lv&quot;: -7.105427357601002e-14,
+        &quot;p_root&quot;: 1.2789769243681803e-13,
+        &quot;p_descending&quot;: 2.842170943040401e-14,
+        &quot;p_la&quot;: 0.0
+      },
+      &quot;event_metric_delta_ms&quot;: {
+        &quot;AORTIC_OPEN_05&quot;: 0.0,
+        &quot;AORTIC_CLOSE_02&quot;: 0.0,
+        &quot;MITRAL_OPEN_05&quot;: 0.0,
+        &quot;MITRAL_CLOSE_02&quot;: 0.0,
+        &quot;DP_LV_AO_REVERSE&quot;: 0.0,
+        &quot;QAO_ZERO&quot;: 0.0
+      },
+      &quot;event_topology_unchanged&quot;: true,
+      &quot;reproduced_status&quot;: &quot;PASS_0D_BASELINE_TIME_ONLY&quot;
+    }
+  ],
+  &quot;max_abs_pressure_metric_change_mmHg&quot;: 1.2789769243681803e-13,
+  &quot;mass_residual_change_mL&quot;: [
+    {
+      &quot;step_us&quot;: 250,
+      &quot;delta&quot;: 0.0
+    },
+    {
+      &quot;step_us&quot;: 125,
+      &quot;delta&quot;: 0.0
+    },
+    {
+      &quot;step_us&quot;: 50,
+      &quot;delta&quot;: -9.094947017729282e-13
+    }
+  ],
+  &quot;demo_metric_changes&quot;: {
+    &quot;baseline&quot;: {
+      &quot;max_mass_error_mL&quot;: -9.094947017729282e-13,
+      &quot;root_min_mmHg&quot;: -5.684341886080802e-14,
+      &quot;root_max_mmHg&quot;: -1.2789769243681803e-13,
+      &quot;max_balloon_mL&quot;: 0.0,
+      &quot;net_aortic_volume_mL&quot;: -2.2737367544323206e-13,
+      &quot;lv_net_external_work_mmHg_mL&quot;: -4.3655745685100555e-11
+    },
+    &quot;assisted&quot;: {
+      &quot;max_mass_error_mL&quot;: 0.0,
+      &quot;root_min_mmHg&quot;: 0.0,
+      &quot;root_max_mmHg&quot;: 0.0,
+      &quot;max_balloon_mL&quot;: 0.0,
+      &quot;net_aortic_volume_mL&quot;: -1.1368683772161603e-13,
+      &quot;lv_net_external_work_mmHg_mL&quot;: -2.1827872842550278e-11
+    }
+  },
+  &quot;demo_configuration_unchanged&quot;: true,
+  &quot;original_core_files&quot;: {
+    &quot;iabp/__init__.py&quot;: {
+      &quot;sha256&quot;: &quot;d7809c34209ced30a8de26539b4ff10693f96c774ea8d09306572a5496989a83&quot;,
+      &quot;matches_imported_manifest&quot;: true
+    },
+    &quot;iabp/components.py&quot;: {
+      &quot;sha256&quot;: &quot;9893009e3b02b3c62e07783ce7d73ea02724d1f063ff8a30a572da635d9b07a5&quot;,
+      &quot;matches_imported_manifest&quot;: true
+    },
+    &quot;iabp/contracts.py&quot;: {
+      &quot;sha256&quot;: &quot;12b75cd6edf4f0f00a0d28e29c0a75f6e08e1d0fce1e84a26201201cf444d373&quot;,
+      &quot;matches_imported_manifest&quot;: true
+    },
+    &quot;iabp/engine.py&quot;: {
+      &quot;sha256&quot;: &quot;471dea2658cc5b4d5c0abc8dcf781a6934c293fcacc13eb92a3cf5ef4ad26608&quot;,
+      &quot;matches_imported_manifest&quot;: true
+    },
+    &quot;iabp/model.py&quot;: {
+      &quot;sha256&quot;: &quot;08aa745151b3d9ba142de79718ce15ab6bfb48938a84b21ad34858153699cb3f&quot;,
+      &quot;matches_imported_manifest&quot;: true
+    },
+    &quot;iabp/scenarios.py&quot;: {
+      &quot;sha256&quot;: &quot;14f9c4cf1ed3296157048ea07689e747d3aee012318db8dccc01a55e8fb9d17d&quot;,
+      &quot;matches_imported_manifest&quot;: true
+    },
+    &quot;iabp/sensors.py&quot;: {
+      &quot;sha256&quot;: &quot;a6eb956da8d30ccf9b01abc6259209de355ded2a62c267f33b2f589fbdb9c009&quot;,
+      &quot;matches_imported_manifest&quot;: true
+    }
+  },
+  &quot;immutable_assets&quot;: {
+    &quot;docs/reference/CONTEXT.md&quot;: {
+      &quot;sha256&quot;: &quot;394ca3a583903435d24253be1831f6d19653a38e9d183899a57edf61cbf26553&quot;,
+      &quot;matches_imported_manifest&quot;: true
+    },
+    &quot;docs/reference/IABP_Engine_Spec_r1.md&quot;: {
+      &quot;sha256&quot;: &quot;2f7039836352bb6800d963fd6d0a5832fd3e8452a45a52634bf8712725a674b1&quot;,
+      &quot;matches_imported_manifest&quot;: true
+    },
+    &quot;docs/reference/README.md&quot;: {
+      &quot;sha256&quot;: &quot;518893669daefbac743016f6dfa95022887c5089b1b2b6cd589931b11cd8af06&quot;,
+      &quot;matches_imported_manifest&quot;: true
+    },
+    &quot;docs/reference/package_check.json&quot;: {
+      &quot;sha256&quot;: &quot;45544171e2ad635e6640f23e3aa9a2915167b11602418f8427466f692c85cd8a&quot;,
+      &quot;matches_imported_manifest&quot;: true
+    },
+    &quot;docs/reference/reference_configuration.json&quot;: {
+      &quot;sha256&quot;: &quot;23faa0eaf848889d1973cf77b72ece6e76048f17227b8480c21be978e0c878e7&quot;,
+      &quot;matches_imported_manifest&quot;: true
+    },
+    &quot;docs/reference/requirements.json&quot;: {
+      &quot;sha256&quot;: &quot;de26e23590aa22ac90d2f40311c412c8c3792bd398178d659db0a6f55dc217fc&quot;,
+      &quot;matches_imported_manifest&quot;: true
+    },
+    &quot;docs/reference/research_r0/CONTEXT.md&quot;: {
+      &quot;sha256&quot;: &quot;a817a4264a7aba43f42b972116dd13ecb3c9e96da42a2899ed22953b781277a7&quot;,
+      &quot;matches_imported_manifest&quot;: true
+    },
+    &quot;docs/reference/research_r0/IABP_Physics_Engine_Design_r0.md&quot;: {
+      &quot;sha256&quot;: &quot;0ae71956b744385799776129de14638f918ece0b0a28ce5b265adc49eab11783&quot;,
+      &quot;matches_imported_manifest&quot;: true
+    },
+    &quot;docs/reference/research_r0/baseline_sha256.txt&quot;: {
+      &quot;sha256&quot;: &quot;331fc5de4254876651dbe81b4d0a8da773a57454579946f9f3a7eb9da74e8c90&quot;,
+      &quot;matches_imported_manifest&quot;: true
+    },
+    &quot;docs/reference/verification_plan.json&quot;: {
+      &quot;sha256&quot;: &quot;d0a83f72d990c194583e15fde559248b3f5d88b34f5a43037fe7d61a00563a82&quot;,
+      &quot;matches_imported_manifest&quot;: true
+    },
+    &quot;legacy/SHA256SUMS&quot;: {
+      &quot;sha256&quot;: &quot;c5a7e2a0086a4558e1d7df73bb58ff5a0f42a62efcf6eab4962fb45e7fc88251&quot;,
+      &quot;matches_imported_manifest&quot;: true
+    },
+    &quot;legacy/wiggers_complete_teaching_guide_v2_1_fixed.html&quot;: {
+      &quot;sha256&quot;: &quot;07baedd882a3e97ab584d1984c8f6b0c3b56dda55a00edb8a4225166a6f1a7b1&quot;,
+      &quot;matches_imported_manifest&quot;: true
+    },
+    &quot;legacy/wiggers_complete_teaching_guide_v3_2_timing.html&quot;: {
+      &quot;sha256&quot;: &quot;a57c6668263b394f7f781704c5753b5b5448c50dc9f353cee91700f23fbfc20a&quot;,
+      &quot;matches_imported_manifest&quot;: true
+    }
+  },
+  &quot;reporting_defect_found&quot;: &quot;Imported verify_all.py hardcodes windows_execution=NOT_RUN even on Windows; B00 frozen reproduction preserves this raw record. Fixed in the maintained runner.&quot;,
+  &quot;physiological_validation&quot;: &quot;NOT_VALIDATED&quot;,
+  &quot;clinical_5ms_claim&quot;: &quot;NOT_ESTABLISHED&quot;,
+  &quot;status&quot;: &quot;PASS_REPRODUCTION_ONLY&quot;
+}</pre></details><h3>B01：方案、网格与证据范围</h3><p>来源：<a href="../artifacts/arterial1d/benchmark_summary.json">artifacts/arterial1d/benchmark_summary.json</a>。independent uniform vessels; no heart, balloon, clinical calibration or event accuracy claim；对齐方式：none。</p><div class="table-scroll"><table><thead><tr><th scope="col">记录范围</th><th scope="col">原文件声明</th></tr></thead><tbody><tr><td>engineering_status</td><td>PASS</td></tr><tr><td>public_benchmark_status</td><td>PASS_DECLARED_ENGINEERING_TOLERANCE</td></tr><tr><td>overall_status</td><td>PASS_DECLARED_CHECKS</td></tr><tr><td>selected_case</td><td>current_candidates_and_explicit_historical_controls</td></tr><tr><td>mode</td><td>EVIDENCE_GATE_NO_SOLVER_RUN</td></tr></tbody></table></div><p>历史一阶与 MUSCL 结果按原方案保留，不能被第三方案的状态覆盖。历史源与结果快照见 <a href="../artifacts/arterial1d/history/pre_linear3/manifest.json">历史身份清单</a>。</p><h3>工程短管：同一输入的空间／时间误差</h3><div class="table-scroll"><table><thead><tr><th scope="col">证据组</th><th scope="col">方案</th><th scope="col">单元数</th><th scope="col">最大压力差 / Pa</th><th scope="col">峰值相对差 / %</th><th scope="col">到达差 / ms</th><th scope="col">文件候选门</th></tr></thead><tbody><tr><td>历史一阶基线</td><td>rusanov</td><td>80</td><td>12.4672947</td><td>49.9326358</td><td>8.68427133</td><td>False</td></tr><tr><td>历史一阶基线</td><td>rusanov</td><td>160</td><td>9.06896562</td><td>31.5824405</td><td>0.784649162</td><td>False</td></tr><tr><td>历史一阶基线</td><td>rusanov</td><td>320</td><td>6.28747658</td><td>19.4394402</td><td>0.214179226</td><td>False</td></tr><tr><td>历史 MUSCL 对照</td><td>muscl_ssprk2</td><td>80</td><td>4.9028895</td><td>16.7880377</td><td>1.10564836</td><td>False</td></tr><tr><td>历史 MUSCL 对照</td><td>muscl_ssprk2</td><td>160</td><td>1.84759372</td><td>6.32604114</td><td>0.512102476</td><td>False</td></tr><tr><td>历史 MUSCL 对照</td><td>muscl_ssprk2</td><td>320</td><td>0.650102496</td><td>2.21916322</td><td>0.132841448</td><td>False</td></tr><tr><td>历史 MUSCL 对照</td><td>muscl_ssprk2</td><td>640</td><td>0.276899255</td><td>0.781009647</td><td>0.0720797925</td><td>True</td></tr><tr><td>当前第三方案对照</td><td>linear3_ssprk3</td><td>80</td><td>1.63218761</td><td>4.63527447</td><td>0.0287511559</td><td>False</td></tr><tr><td>当前第三方案对照</td><td>linear3_ssprk3</td><td>160</td><td>0.453534142</td><td>0.78882728</td><td>0.0244172199</td><td>True</td></tr><tr><td>当前第三方案对照</td><td>linear3_ssprk3</td><td>320</td><td>0.203966455</td><td>0.14599029</td><td>0.0466805733</td><td>True</td></tr></tbody></table></div><h3>Boileau：公开数值参考复现</h3><div class="table-scroll"><table><thead><tr><th scope="col">证据组</th><th scope="col">方案</th><th scope="col">单元数</th><th scope="col">最大压力差 / Pa</th><th scope="col">全剖面相对差 / %</th><th scope="col">最大峰值差 / %</th><th scope="col">原文件声明</th></tr></thead><tbody><tr><td>历史 MUSCL 外部参考</td><td>muscl_ssprk2</td><td>640</td><td>11.7643645</td><td>56.9787592</td><td>56.9567598</td><td>ACCURACY_NOT_MET</td></tr><tr><td>历史 MUSCL 外部参考</td><td>muscl_ssprk2</td><td>1280</td><td>7.18116469</td><td>34.7807867</td><td>34.7087311</td><td>ACCURACY_NOT_MET</td></tr><tr><td>历史 MUSCL 外部参考</td><td>muscl_ssprk2</td><td>2560</td><td>3.23774263</td><td>15.6814724</td><td>15.5830352</td><td>ACCURACY_NOT_MET</td></tr><tr><td>本次外部参考对照</td><td>linear3_ssprk3</td><td>640</td><td>7.42674703</td><td>35.9702243</td><td>35.5753445</td><td>ACCURACY_NOT_MET</td></tr><tr><td>本次外部参考对照</td><td>linear3_ssprk3</td><td>1280</td><td>3.01327971</td><td>14.5943233</td><td>14.5943233</td><td>ACCURACY_NOT_MET</td></tr><tr><td>本次外部参考对照</td><td>linear3_ssprk3</td><td>2560</td><td>0.676451534</td><td>3.27628144</td><td>3.27628144</td><td>PASS_DECLARED_ENGINEERING_TOLERANCE</td></tr></tbody></table></div><p>公开六法输出具有各自离散与采样差；选用 FVM 输出对照，不把它称为唯一精确真值。外部数值参考通过也不证明物理实验、患者或真实传感时延已经验证。</p><h3>极值与过冲：精度改善不能掩盖振铃</h3><div class="table-scroll"><table><thead><tr><th scope="col">证据组</th><th scope="col">方案</th><th scope="col">单元数</th><th scope="col">观察范围</th><th scope="col">最小压力 / Pa</th><th scope="col">最大压力 / Pa</th><th scope="col">参考峰过冲 / %</th><th scope="col">参考峰下冲 / %</th><th scope="col">最大体积账本残差 / m³</th></tr></thead><tbody><tr><td>历史一阶基线</td><td>rusanov</td><td>80</td><td>全部单元；每 0.5 ms 观察</td><td>未记录</td><td>未记录</td><td>未记录</td><td>未记录</td><td>7.43271485e-20</td></tr><tr><td>历史一阶基线</td><td>rusanov</td><td>160</td><td>全部单元；每 0.5 ms 观察</td><td>未记录</td><td>未记录</td><td>未记录</td><td>未记录</td><td>1.16265198e-19</td></tr><tr><td>历史一阶基线</td><td>rusanov</td><td>320</td><td>全部单元；每 0.5 ms 观察</td><td>未记录</td><td>未记录</td><td>未记录</td><td>未记录</td><td>1.00499136e-19</td></tr><tr><td>历史 MUSCL 对照</td><td>muscl_ssprk2</td><td>80</td><td>全部单元；每 0.5 ms 观察</td><td>未记录</td><td>未记录</td><td>未记录</td><td>未记录</td><td>1.06203373e-19</td></tr><tr><td>历史 MUSCL 对照</td><td>muscl_ssprk2</td><td>160</td><td>全部单元；每 0.5 ms 观察</td><td>未记录</td><td>未记录</td><td>未记录</td><td>未记录</td><td>9.42357241e-20</td></tr><tr><td>历史 MUSCL 对照</td><td>muscl_ssprk2</td><td>320</td><td>全部单元；每 0.5 ms 观察</td><td>未记录</td><td>未记录</td><td>未记录</td><td>未记录</td><td>8.61373679e-20</td></tr><tr><td>历史 MUSCL 对照</td><td>muscl_ssprk2</td><td>640</td><td>全部单元；每 0.5 ms 观察</td><td>未记录</td><td>未记录</td><td>未记录</td><td>未记录</td><td>1.1563985e-19</td></tr><tr><td>当前第三方案对照</td><td>linear3_ssprk3</td><td>80</td><td>全部单元；每 0.5 ms 观察</td><td>-0.659488038</td><td>20.0170845</td><td>0.0854225725</td><td>3.29744019</td><td>8.36144764e-20</td></tr><tr><td>当前第三方案对照</td><td>linear3_ssprk3</td><td>160</td><td>全部单元；每 0.5 ms 观察</td><td>-0.261017135</td><td>19.9906807</td><td>0</td><td>1.30508567</td><td>3.93797529e-19</td></tr><tr><td>当前第三方案对照</td><td>linear3_ssprk3</td><td>320</td><td>全部单元；每 0.5 ms 观察</td><td>-0.0954272289</td><td>19.9957336</td><td>0</td><td>0.477136144</td><td>1.09415481e-18</td></tr><tr><td>历史 MUSCL 外部参考</td><td>muscl_ssprk2</td><td>640</td><td>全部单元；8 个原始剖面时刻</td><td>未记录</td><td>未记录</td><td>未记录</td><td>未记录</td><td>未记录</td></tr><tr><td>历史 MUSCL 外部参考</td><td>muscl_ssprk2</td><td>1280</td><td>全部单元；8 个原始剖面时刻</td><td>未记录</td><td>未记录</td><td>未记录</td><td>未记录</td><td>未记录</td></tr><tr><td>历史 MUSCL 外部参考</td><td>muscl_ssprk2</td><td>2560</td><td>全部单元；8 个原始剖面时刻</td><td>未记录</td><td>未记录</td><td>未记录</td><td>未记录</td><td>未记录</td></tr><tr><td>本次外部参考对照</td><td>linear3_ssprk3</td><td>640</td><td>全部单元；8 个原始剖面时刻</td><td>-0.966504565</td><td>19.4948168</td><td>0</td><td>4.68110545</td><td>1.55716639e-18</td></tr><tr><td>本次外部参考对照</td><td>linear3_ssprk3</td><td>1280</td><td>全部单元；8 个原始剖面时刻</td><td>-0.418227838</td><td>20.4181571</td><td>0</td><td>2.02561755</td><td>1.70823616e-17</td></tr><tr><td>本次外部参考对照</td><td>linear3_ssprk3</td><td>2560</td><td>全部单元；8 个原始剖面时刻</td><td>-0.018958531</td><td>20.5713089</td><td>0.344617701</td><td>0.0918225181</td><td>4.23267724e-17</td></tr></tbody></table></div><p>min/max 是全部单元在记录观察时刻的极值：工程匹配每 0.5 ms，公开参考仅 8 个原始剖面时刻，不涵盖所有内部步或 RK 阶段。过冲=max(0,maxP/reference_peak−1)，下冲=max(0,−minP/reference_peak)；压力值本身不截断。缺字段保持未记录；不拿缺失或有限采样的极值推定没有振铃。</p><details><summary>逐个公开剖面时刻的误差、极值与过冲</summary><div class="table-scroll"><table><thead><tr><th scope="col">证据组</th><th scope="col">方案</th><th scope="col">单元数</th><th scope="col">时刻 / s</th><th scope="col">最大差 / Pa</th><th scope="col">峰差 / %</th><th scope="col">峰位置差 / m</th><th scope="col">最小压 / Pa</th><th scope="col">最大压 / Pa</th><th scope="col">过冲 / %</th><th scope="col">下冲 / %</th></tr></thead><tbody><tr><td>历史 MUSCL 外部参考</td><td>muscl_ssprk2</td><td>640</td><td>0.1</td><td>3.31152835</td><td>16.0133815</td><td>0</td><td>未记录</td><td>未记录</td><td>未记录</td><td>未记录</td></tr><tr><td>历史 MUSCL 外部参考</td><td>muscl_ssprk2</td><td>640</td><td>0.3</td><td>7.17567724</td><td>34.819912</td><td>-0.01</td><td>未记录</td><td>未记录</td><td>未记录</td><td>未记录</td></tr><tr><td>历史 MUSCL 外部参考</td><td>muscl_ssprk2</td><td>640</td><td>0.5</td><td>8.69797819</td><td>42.3476729</td><td>-0.01</td><td>未记录</td><td>未记录</td><td>未记录</td><td>未记录</td></tr><tr><td>历史 MUSCL 外部参考</td><td>muscl_ssprk2</td><td>640</td><td>0.7</td><td>9.75776222</td><td>47.2980729</td><td>-0.01</td><td>未记录</td><td>未记录</td><td>未记录</td><td>未记录</td></tr><tr><td>历史 MUSCL 外部参考</td><td>muscl_ssprk2</td><td>640</td><td>0.9</td><td>10.348428</td><td>50.4123063</td><td>-0.01</td><td>未记录</td><td>未记录</td><td>未记录</td><td>未记录</td></tr><tr><td>历史 MUSCL 外部参考</td><td>muscl_ssprk2</td><td>640</td><td>1.1</td><td>10.9816833</td><td>53.1957368</td><td>-0.01</td><td>未记录</td><td>未记录</td><td>未记录</td><td>未记录</td></tr><tr><td>历史 MUSCL 外部参考</td><td>muscl_ssprk2</td><td>640</td><td>1.3</td><td>11.2918307</td><td>55.0153094</td><td>-0.01</td><td>未记录</td><td>未记录</td><td>未记录</td><td>未记录</td></tr><tr><td>历史 MUSCL 外部参考</td><td>muscl_ssprk2</td><td>640</td><td>1.5</td><td>11.7643645</td><td>56.9567598</td><td>-0.01</td><td>未记录</td><td>未记录</td><td>未记录</td><td>未记录</td></tr><tr><td>历史 MUSCL 外部参考</td><td>muscl_ssprk2</td><td>1280</td><td>0.1</td><td>1.36056761</td><td>6.37502691</td><td>0</td><td>未记录</td><td>未记录</td><td>未记录</td><td>未记录</td></tr><tr><td>历史 MUSCL 外部参考</td><td>muscl_ssprk2</td><td>1280</td><td>0.3</td><td>3.2992283</td><td>15.8432968</td><td>-0.01</td><td>未记录</td><td>未记录</td><td>未记录</td><td>未记录</td></tr><tr><td>历史 MUSCL 外部参考</td><td>muscl_ssprk2</td><td>1280</td><td>0.5</td><td>4.21170227</td><td>20.5228246</td><td>0</td><td>未记录</td><td>未记录</td><td>未记录</td><td>未记录</td></tr><tr><td>历史 MUSCL 外部参考</td><td>muscl_ssprk2</td><td>1280</td><td>0.7</td><td>5.10664396</td><td>24.6458404</td><td>-0.01</td><td>未记录</td><td>未记录</td><td>未记录</td><td>未记录</td></tr><tr><td>历史 MUSCL 外部参考</td><td>muscl_ssprk2</td><td>1280</td><td>0.9</td><td>5.62421049</td><td>27.4097823</td><td>0</td><td>未记录</td><td>未记录</td><td>未记录</td><td>未记录</td></tr><tr><td>历史 MUSCL 外部参考</td><td>muscl_ssprk2</td><td>1280</td><td>1.1</td><td>6.29632519</td><td>30.4216622</td><td>-0.01</td><td>未记录</td><td>未记录</td><td>未记录</td><td>未记录</td></tr><tr><td>历史 MUSCL 外部参考</td><td>muscl_ssprk2</td><td>1280</td><td>1.3</td><td>6.63194111</td><td>32.3208029</td><td>0</td><td>未记录</td><td>未记录</td><td>未记录</td><td>未记录</td></tr><tr><td>历史 MUSCL 外部参考</td><td>muscl_ssprk2</td><td>1280</td><td>1.5</td><td>7.18116469</td><td>34.7087311</td><td>-0.01</td><td>未记录</td><td>未记录</td><td>未记录</td><td>未记录</td></tr><tr><td>历史 MUSCL 外部参考</td><td>muscl_ssprk2</td><td>2560</td><td>0.1</td><td>0.416971103</td><td>2.0339399</td><td>0</td><td>未记录</td><td>未记录</td><td>未记录</td><td>未记录</td></tr><tr><td>历史 MUSCL 外部参考</td><td>muscl_ssprk2</td><td>2560</td><td>0.3</td><td>1.2335291</td><td>5.85581028</td><td>-0.01</td><td>未记录</td><td>未记录</td><td>未记录</td><td>未记录</td></tr><tr><td>历史 MUSCL 外部参考</td><td>muscl_ssprk2</td><td>2560</td><td>0.5</td><td>1.65869675</td><td>7.76027518</td><td>-0.01</td><td>未记录</td><td>未记录</td><td>未记录</td><td>未记录</td></tr><tr><td>历史 MUSCL 外部参考</td><td>muscl_ssprk2</td><td>2560</td><td>0.7</td><td>2.13211078</td><td>9.99702376</td><td>-0.01</td><td>未记录</td><td>未记录</td><td>未记录</td><td>未记录</td></tr><tr><td>历史 MUSCL 外部参考</td><td>muscl_ssprk2</td><td>2560</td><td>0.9</td><td>2.55150742</td><td>11.1563569</td><td>-0.01</td><td>未记录</td><td>未记录</td><td>未记录</td><td>未记录</td></tr><tr><td>历史 MUSCL 外部参考</td><td>muscl_ssprk2</td><td>2560</td><td>1.1</td><td>2.81192506</td><td>13.0523502</td><td>-0.01</td><td>未记录</td><td>未记录</td><td>未记录</td><td>未记录</td></tr><tr><td>历史 MUSCL 外部参考</td><td>muscl_ssprk2</td><td>2560</td><td>1.3</td><td>2.91964372</td><td>13.858504</td><td>-0.01</td><td>未记录</td><td>未记录</td><td>未记录</td><td>未记录</td></tr><tr><td>历史 MUSCL 外部参考</td><td>muscl_ssprk2</td><td>2560</td><td>1.5</td><td>3.23774263</td><td>15.5830352</td><td>-0.01</td><td>未记录</td><td>未记录</td><td>未记录</td><td>未记录</td></tr><tr><td>本次外部参考对照</td><td>linear3_ssprk3</td><td>640</td><td>0.1</td><td>1.3421751</td><td>4.97750961</td><td>0</td><td>-0.106403001</td><td>19.4948168</td><td>0</td><td>0.519022321</td></tr><tr><td>本次外部参考对照</td><td>linear3_ssprk3</td><td>640</td><td>0.3</td><td>3.60925362</td><td>17.5208613</td><td>0</td><td>-0.563601618</td><td>17.1606058</td><td>0</td><td>2.73596339</td></tr><tr><td>本次外部参考对照</td><td>linear3_ssprk3</td><td>640</td><td>0.5</td><td>4.6914583</td><td>22.3626874</td><td>0</td><td>-0.751826915</td><td>15.9665836</td><td>0</td><td>3.66350964</td></tr><tr><td>本次外部参考对照</td><td>linear3_ssprk3</td><td>640</td><td>0.7</td><td>5.58770127</td><td>26.9516177</td><td>-0.01</td><td>-0.855102674</td><td>15.1580723</td><td>0</td><td>4.14687322</td></tr><tr><td>本次外部参考对照</td><td>linear3_ssprk3</td><td>640</td><td>0.9</td><td>6.07534584</td><td>29.2966024</td><td>0</td><td>-0.908556125</td><td>14.5484603</td><td>0</td><td>4.42787937</td></tr><tr><td>本次外部参考对照</td><td>linear3_ssprk3</td><td>640</td><td>1.1</td><td>6.67833118</td><td>32.0681896</td><td>-0.01</td><td>-0.931512205</td><td>14.0607091</td><td>0</td><td>4.51422972</td></tr><tr><td>本次外部参考对照</td><td>linear3_ssprk3</td><td>640</td><td>1.3</td><td>6.95352109</td><td>33.6606893</td><td>0</td><td>-0.949943004</td><td>13.6553016</td><td>0</td><td>4.62955266</td></tr><tr><td>本次外部参考对照</td><td>linear3_ssprk3</td><td>640</td><td>1.5</td><td>7.42674703</td><td>35.5753445</td><td>-0.01</td><td>-0.966504565</td><td>13.3092232</td><td>0</td><td>4.68110545</td></tr><tr><td>本次外部参考对照</td><td>linear3_ssprk3</td><td>1280</td><td>0.1</td><td>0.224469925</td><td>1.09493999</td><td>0</td><td>-0.00121159558</td><td>20.4181571</td><td>0</td><td>0.00591003206</td></tr><tr><td>本次外部参考对照</td><td>linear3_ssprk3</td><td>1280</td><td>0.3</td><td>0.891803766</td><td>4.32919703</td><td>0</td><td>-0.0481057958</td><td>19.7719259</td><td>0</td><td>0.233526115</td></tr><tr><td>本次外部参考对照</td><td>linear3_ssprk3</td><td>1280</td><td>0.5</td><td>1.33740072</td><td>6.51689949</td><td>0</td><td>-0.123062025</td><td>19.2723303</td><td>0</td><td>0.599657855</td></tr><tr><td>本次外部参考对照</td><td>linear3_ssprk3</td><td>1280</td><td>0.7</td><td>1.82521155</td><td>8.8514761</td><td>0</td><td>-0.196992729</td><td>18.8595588</td><td>0</td><td>0.955328402</td></tr><tr><td>本次外部参考对照</td><td>linear3_ssprk3</td><td>1280</td><td>0.9</td><td>2.12523819</td><td>10.0128786</td><td>0</td><td>-0.263946892</td><td>18.5056701</td><td>0</td><td>1.28635421</td></tr><tr><td>本次外部参考对照</td><td>linear3_ssprk3</td><td>1280</td><td>1.1</td><td>2.49261763</td><td>12.0795504</td><td>0</td><td>-0.321400582</td><td>18.194832</td><td>0</td><td>1.55754917</td></tr><tr><td>本次外部参考对照</td><td>linear3_ssprk3</td><td>1280</td><td>1.3</td><td>2.7368054</td><td>12.6875126</td><td>0</td><td>-0.369299118</td><td>17.917051</td><td>0</td><td>1.79978136</td></tr><tr><td>本次外部参考对照</td><td>linear3_ssprk3</td><td>1280</td><td>1.5</td><td>3.01327971</td><td>14.5943233</td><td>0</td><td>-0.418227838</td><td>17.6655555</td><td>0</td><td>2.02561755</td></tr><tr><td>本次外部参考对照</td><td>linear3_ssprk3</td><td>2560</td><td>0.1</td><td>0.0310468582</td><td>0.042164124</td><td>0</td><td>-5.37445644e-07</td><td>20.5713089</td><td>0.344617701</td><td>2.62160166e-06</td></tr><tr><td>本次外部参考对照</td><td>linear3_ssprk3</td><td>2560</td><td>0.3</td><td>0.120532052</td><td>0.585114148</td><td>0</td><td>-7.59310836e-06</td><td>20.4816295</td><td>0</td><td>3.68601967e-05</td></tr><tr><td>本次外部参考对照</td><td>linear3_ssprk3</td><td>2560</td><td>0.5</td><td>0.220981704</td><td>1.07680184</td><td>0</td><td>-0.000226623706</td><td>20.3908065</td><td>0</td><td>0.00110429424</td></tr><tr><td>本次外部参考对照</td><td>linear3_ssprk3</td><td>2560</td><td>0.7</td><td>0.341235004</td><td>1.65484022</td><td>0</td><td>-0.00123881853</td><td>20.299241</td><td>0</td><td>0.00600772696</td></tr><tr><td>本次外部参考对照</td><td>linear3_ssprk3</td><td>2560</td><td>0.9</td><td>0.403944455</td><td>1.96863713</td><td>0</td><td>-0.00350787003</td><td>20.2071706</td><td>0</td><td>0.0170957246</td></tr><tr><td>本次外部参考对照</td><td>linear3_ssprk3</td><td>2560</td><td>1.1</td><td>0.523849787</td><td>2.53864444</td><td>0</td><td>-0.00716158373</td><td>20.1147512</td><td>0</td><td>0.0347059694</td></tr><tr><td>本次外部参考对照</td><td>linear3_ssprk3</td><td>2560</td><td>1.3</td><td>0.572478029</td><td>2.78518738</td><td>0</td><td>-0.0123587756</td><td>20.0410773</td><td>0</td><td>0.0602305637</td></tr><tr><td>本次外部参考对照</td><td>linear3_ssprk3</td><td>2560</td><td>1.5</td><td>0.676451534</td><td>3.27628144</td><td>0</td><td>-0.018958531</td><td>19.9713194</td><td>0</td><td>0.0918225181</td></tr></tbody></table></div></details><h3>收集来源与原始运行日志身份</h3><div class="table-scroll"><table><thead><tr><th scope="col">Case</th><th scope="col">结果 JSON</th><th scope="col">记录的结果 SHA-256</th><th scope="col">原始 run 日志</th><th scope="col">记录的日志 SHA-256</th></tr></thead><tbody><tr><td>linear3_matched</td><td><a href="../artifacts/arterial1d/benchmark_linear3_matched.json">artifacts/arterial1d/benchmark_linear3_matched.json</a></td><td><code class="hash">d66e4dcaa23bc898ec23e0b773ceba561473be9ff21d5d9fc3603b146dbd6ce8</code></td><td><a href="../artifacts/arterial1d/run_logs/linear3_matched_bab289e7db74.log">artifacts/arterial1d/run_logs/linear3_matched_bab289e7db74.log</a></td><td><code class="hash">2990215cda8702090c234026fdca684cf3f4be1b7d04e43c19cc03c2a4d7e7fc</code></td></tr><tr><td>reflections</td><td><a href="../artifacts/arterial1d/benchmark_reflections.json">artifacts/arterial1d/benchmark_reflections.json</a></td><td><code class="hash">f2f47b20d2a24c0ded2a41d4f1c974c3758a74e494ef75782772f48a8681831d</code></td><td><a href="../artifacts/arterial1d/run_logs/reflections_db0434b97af3.log">artifacts/arterial1d/run_logs/reflections_db0434b97af3.log</a></td><td><code class="hash">c5995bc1246e6bbfd4946c8641a8379e86c94fbb92f27ebc2a0ec5e5c057a413</code></td></tr><tr><td>junction</td><td><a href="../artifacts/arterial1d/benchmark_junction.json">artifacts/arterial1d/benchmark_junction.json</a></td><td><code class="hash">2ae2367feac40b10aa643a56f9ddf21a549e9b69894acd905e3e2d534180d9b5</code></td><td><a href="../artifacts/arterial1d/run_logs/junction_420d5e7d6de4.log">artifacts/arterial1d/run_logs/junction_420d5e7d6de4.log</a></td><td><code class="hash">510a60f1c6d7be061b2c78cebdd8e8f793768ead2a5875f2d7950705f38fb2f1</code></td></tr><tr><td>linear3_boileau</td><td><a href="../artifacts/arterial1d/benchmark_linear3_boileau.json">artifacts/arterial1d/benchmark_linear3_boileau.json</a></td><td><code class="hash">f38279c03d07101b8ff324a6b0f7e98d405943260f7a8832597571973f377072</code></td><td><a href="../artifacts/arterial1d/run_logs/linear3_boileau_520c16c2fb67.log">artifacts/arterial1d/run_logs/linear3_boileau_520c16c2fb67.log</a></td><td><code class="hash">3c220939591562fcd1fe7e985d308734e2a0e93a5a03ae0ab2f34474c429e2f4</code></td></tr></tbody></table></div><p><code>tools.verify_all</code> 中的 <code>--collect</code> 质量门读取已经实际跑完的 case，核查源文件、结果、CSV 与运行日志身份后收集；它不重新求解，也不替代原始 run 日志。门本身的退出码与原始求解退出码需分别阅读。实际收集身份与日志路径保留在下方原 JSON 中。</p><h3>B01 原始 JSON 与收集身份</h3><p>记录来源：<a href="../artifacts/arterial1d/benchmark_summary.json">artifacts/arterial1d/benchmark_summary.json</a>。以下是原文件声明，存在文件不代表通过验收。</p><details><summary>展开原始 JSON 记录</summary><p>这里只展示前 24,000 个字符，完整内容见原始文件。</p><pre>{
+  &quot;schema&quot;: &quot;arterial1d-benchmark/v1&quot;,
+  &quot;identity&quot;: {
+    &quot;python_executable&quot;: &quot;D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe&quot;,
+    &quot;python_version&quot;: &quot;3.12.9&quot;,
+    &quot;source_sha256&quot;: {
+      &quot;D:/codehub2026/04_heart_engine_r2/tools/arterial1d_check.py&quot;: &quot;a60fa6d721fc9bc63af9c2ff18917a7fc46df68c92bcb472c8cb41a474f0e635&quot;,
+      &quot;iabp/arterial1d/__init__.py&quot;: &quot;793796aa44e076d7450f860a96da4e9e7ca81447e2e4213817cd042b113c780f&quot;,
+      &quot;iabp/arterial1d/boundaries.py&quot;: &quot;131d46cca8e20573b7daae9fc2686bacb19785fbf53e76e3236c695786ad408d&quot;,
+      &quot;iabp/arterial1d/physics.py&quot;: &quot;f7455b4f9fac8b52d8cedd43389d162e58aa551bc5db28e0826c1fb233c88761&quot;,
+      &quot;iabp/arterial1d/solver.py&quot;: &quot;8d70b1192ed64efe05a5702415e642ba850040ae094c6e0dfbcb8a7d99c7455b&quot;
+    }
+  },
+  &quot;thresholds_declared_before_runs&quot;: {
+    &quot;arrival_error_ms&quot;: 0.5,
+    &quot;peak_relative_error&quot;: 0.01,
+    &quot;conservation_relative_initial_volume&quot;: 1e-10,
+    &quot;reflection_coefficient_absolute_error&quot;: 0.05,
+    &quot;symmetric_split_absolute_error&quot;: 0.005,
+    &quot;junction_backward_forward_peak_ratio&quot;: 0.05
+  },
+  &quot;boileau_thresholds_declared_before_runs&quot;: {
+    &quot;relative_max_profile_error&quot;: 0.05,
+    &quot;maximum_peak_relative_error&quot;: 0.05,
+    &quot;peak_position_absolute_difference_m&quot;: 0.02,
+    &quot;conservation_relative_initial_volume&quot;: 1e-10
+  },
+  &quot;scope&quot;: &quot;independent uniform vessels; no heart, balloon, clinical calibration or event accuracy claim&quot;,
+  &quot;alignment&quot;: &quot;none&quot;,
+  &quot;mode&quot;: &quot;EVIDENCE_GATE_NO_SOLVER_RUN&quot;,
+  &quot;selected_case&quot;: &quot;current_candidates_and_explicit_historical_controls&quot;,
+  &quot;source_reports&quot;: {
+    &quot;linear3_matched&quot;: {
+      &quot;path&quot;: &quot;benchmark_linear3_matched.json&quot;,
+      &quot;sha256&quot;: &quot;d66e4dcaa23bc898ec23e0b773ceba561473be9ff21d5d9fc3603b146dbd6ce8&quot;,
+      &quot;identity&quot;: {
+        &quot;python_executable&quot;: &quot;D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe&quot;,
+        &quot;python_version&quot;: &quot;3.12.9&quot;,
+        &quot;source_sha256&quot;: {
+          &quot;D:/codehub2026/04_heart_engine_r2/tools/arterial1d_check.py&quot;: &quot;a60fa6d721fc9bc63af9c2ff18917a7fc46df68c92bcb472c8cb41a474f0e635&quot;,
+          &quot;iabp/arterial1d/__init__.py&quot;: &quot;793796aa44e076d7450f860a96da4e9e7ca81447e2e4213817cd042b113c780f&quot;,
+          &quot;iabp/arterial1d/boundaries.py&quot;: &quot;131d46cca8e20573b7daae9fc2686bacb19785fbf53e76e3236c695786ad408d&quot;,
+          &quot;iabp/arterial1d/physics.py&quot;: &quot;f7455b4f9fac8b52d8cedd43389d162e58aa551bc5db28e0826c1fb233c88761&quot;,
+          &quot;iabp/arterial1d/solver.py&quot;: &quot;8d70b1192ed64efe05a5702415e642ba850040ae094c6e0dfbcb8a7d99c7455b&quot;
+        },
+        &quot;source_snapshot_manifest&quot;: &quot;history/source_5a00d0421e14c051/manifest.json&quot;
+      },
+      &quot;run_log&quot;: {
+        &quot;path&quot;: &quot;run_logs/linear3_matched_bab289e7db74.log&quot;,
+        &quot;sha256&quot;: &quot;2990215cda8702090c234026fdca684cf3f4be1b7d04e43c19cc03c2a4d7e7fc&quot;
+      }
+    },
+    &quot;reflections&quot;: {
+      &quot;path&quot;: &quot;benchmark_reflections.json&quot;,
+      &quot;sha256&quot;: &quot;f2f47b20d2a24c0ded2a41d4f1c974c3758a74e494ef75782772f48a8681831d&quot;,
+      &quot;identity&quot;: {
+        &quot;python_executable&quot;: &quot;D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe&quot;,
+        &quot;python_version&quot;: &quot;3.12.9&quot;,
+        &quot;source_sha256&quot;: {
+          &quot;D:/codehub2026/04_heart_engine_r2/tools/arterial1d_check.py&quot;: &quot;a60fa6d721fc9bc63af9c2ff18917a7fc46df68c92bcb472c8cb41a474f0e635&quot;,
+          &quot;iabp/arterial1d/__init__.py&quot;: &quot;793796aa44e076d7450f860a96da4e9e7ca81447e2e4213817cd042b113c780f&quot;,
+          &quot;iabp/arterial1d/boundaries.py&quot;: &quot;131d46cca8e20573b7daae9fc2686bacb19785fbf53e76e3236c695786ad408d&quot;,
+          &quot;iabp/arterial1d/physics.py&quot;: &quot;f7455b4f9fac8b52d8cedd43389d162e58aa551bc5db28e0826c1fb233c88761&quot;,
+          &quot;iabp/arterial1d/solver.py&quot;: &quot;8d70b1192ed64efe05a5702415e642ba850040ae094c6e0dfbcb8a7d99c7455b&quot;
+        },
+        &quot;source_snapshot_manifest&quot;: &quot;history/source_5a00d0421e14c051/manifest.json&quot;
+      },
+      &quot;run_log&quot;: {
+        &quot;path&quot;: &quot;run_logs/reflections_db0434b97af3.log&quot;,
+        &quot;sha256&quot;: &quot;c5995bc1246e6bbfd4946c8641a8379e86c94fbb92f27ebc2a0ec5e5c057a413&quot;
+      }
+    },
+    &quot;junction&quot;: {
+      &quot;path&quot;: &quot;benchmark_junction.json&quot;,
+      &quot;sha256&quot;: &quot;2ae2367feac40b10aa643a56f9ddf21a549e9b69894acd905e3e2d534180d9b5&quot;,
+      &quot;identity&quot;: {
+        &quot;python_executable&quot;: &quot;D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe&quot;,
+        &quot;python_version&quot;: &quot;3.12.9&quot;,
+        &quot;source_sha256&quot;: {
+          &quot;D:/codehub2026/04_heart_engine_r2/tools/arterial1d_check.py&quot;: &quot;a60fa6d721fc9bc63af9c2ff18917a7fc46df68c92bcb472c8cb41a474f0e635&quot;,
+          &quot;iabp/arterial1d/__init__.py&quot;: &quot;793796aa44e076d7450f860a96da4e9e7ca81447e2e4213817cd042b113c780f&quot;,
+          &quot;iabp/arterial1d/boundaries.py&quot;: &quot;131d46cca8e20573b7daae9fc2686bacb19785fbf53e76e3236c695786ad408d&quot;,
+          &quot;iabp/arterial1d/physics.py&quot;: &quot;f7455b4f9fac8b52d8cedd43389d162e58aa551bc5db28e0826c1fb233c88761&quot;,
+          &quot;iabp/arterial1d/solver.py&quot;: &quot;8d70b1192ed64efe05a5702415e642ba850040ae094c6e0dfbcb8a7d99c7455b&quot;
+        },
+        &quot;source_snapshot_manifest&quot;: &quot;history/source_5a00d0421e14c051/manifest.json&quot;
+      },
+      &quot;run_log&quot;: {
+        &quot;path&quot;: &quot;run_logs/junction_420d5e7d6de4.log&quot;,
+        &quot;sha256&quot;: &quot;510a60f1c6d7be061b2c78cebdd8e8f793768ead2a5875f2d7950705f38fb2f1&quot;
+      }
+    },
+    &quot;linear3_boileau&quot;: {
+      &quot;path&quot;: &quot;benchmark_linear3_boileau.json&quot;,
+      &quot;sha256&quot;: &quot;f38279c03d07101b8ff324a6b0f7e98d405943260f7a8832597571973f377072&quot;,
+      &quot;identity&quot;: {
+        &quot;python_executable&quot;: &quot;D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe&quot;,
+        &quot;python_version&quot;: &quot;3.12.9&quot;,
+        &quot;source_sha256&quot;: {
+          &quot;D:/codehub2026/04_heart_engine_r2/tools/arterial1d_check.py&quot;: &quot;a60fa6d721fc9bc63af9c2ff18917a7fc46df68c92bcb472c8cb41a474f0e635&quot;,
+          &quot;iabp/arterial1d/__init__.py&quot;: &quot;793796aa44e076d7450f860a96da4e9e7ca81447e2e4213817cd042b113c780f&quot;,
+          &quot;iabp/arterial1d/boundaries.py&quot;: &quot;131d46cca8e20573b7daae9fc2686bacb19785fbf53e76e3236c695786ad408d&quot;,
+          &quot;iabp/arterial1d/physics.py&quot;: &quot;f7455b4f9fac8b52d8cedd43389d162e58aa551bc5db28e0826c1fb233c88761&quot;,
+          &quot;iabp/arterial1d/solver.py&quot;: &quot;8d70b1192ed64efe05a5702415e642ba850040ae094c6e0dfbcb8a7d99c7455b&quot;
+        },
+        &quot;source_snapshot_manifest&quot;: &quot;history/source_5a00d0421e14c051/manifest.json&quot;
+      },
+      &quot;run_log&quot;: {
+        &quot;path&quot;: &quot;run_logs/linear3_boileau_520c16c2fb67.log&quot;,
+        &quot;sha256&quot;: &quot;3c220939591562fcd1fe7e985d308734e2a0e93a5a03ae0ab2f34474c429e2f4&quot;
+      }
+    }
+  },
+  &quot;historical_controls&quot;: {
+    &quot;path&quot;: &quot;history/pre_linear3/manifest.json&quot;,
+    &quot;sha256&quot;: &quot;c18f484cfda9bfc9ad40addb99824bfc8dbb6967b5dfeb9f3220d94775b483de&quot;,
+    &quot;current_core_coverage&quot;: false
+  },
+  &quot;matched&quot;: {
+    &quot;first_order_baseline&quot;: [
+      {
+        &quot;arrival_definition&quot;: &quot;first rising crossing of fixed 10 Pa; no time translation&quot;,
+        &quot;arrival_time_s&quot;: 0.16868427133033137,
+        &quot;expected_arrival_time_s&quot;: 0.16,
+        &quot;arrival_error_ms&quot;: 8.684271330331367,
+        &quot;peak_pressure_pa&quot;: 10.01347283778653,
+        &quot;peak_relative_error&quot;: 0.4993263581106735,
+        &quot;candidate_pass&quot;: false,
+        &quot;case&quot;: &quot;engineering_matched_pressure_pulse&quot;,
+        &quot;cells&quot;: 80,
+        &quot;scheme&quot;: &quot;rusanov&quot;,
+        &quot;cfl&quot;: 0.4,
+        &quot;dt_policy&quot;: &quot;0.95 * max_stable_dt_s, clipped to observation time&quot;,
+        &quot;observation_interval_s&quot;: 0.0005,
+        &quot;spatial_pressure_max_abs_error_pa&quot;: 12.467294713850874,
+        &quot;spatiotemporal_pressure_rms_error_pa&quot;: 2.100349019028037,
+        &quot;max_abs_linear_volume_error_m3&quot;: 5.4531122142343675e-09,
+        &quot;max_abs_conservation_residual_m3&quot;: 7.432714849780875e-20,
+        &quot;conservation_relative_initial_volume&quot;: 2.4775716165936253e-16,
+        &quot;conservation_pass&quot;: true,
+        &quot;minimum_area_m2&quot;: 0.0003,
+        &quot;steps&quot;: 640,
+        &quot;wall_seconds&quot;: 0.6634713999956148,
+        &quot;trace_csv&quot;: &quot;matched_rusanov_80_trace.csv&quot;,
+        &quot;profile_csv&quot;: &quot;matched_rusanov_80_profiles.csv&quot;
+      },
+      {
+        &quot;arrival_definition&quot;: &quot;first rising crossing of fixed 10 Pa; no time translation&quot;,
+        &quot;arrival_time_s&quot;: 0.16078464916212232,
+        &quot;expected_arrival_time_s&quot;: 0.16,
+        &quot;arrival_error_ms&quot;: 0.784649162122314,
+        &quot;peak_pressure_pa&quot;: 13.683511908349931,
+        &quot;peak_relative_error&quot;: 0.31582440458250344,
+        &quot;candidate_pass&quot;: false,
+        &quot;case&quot;: &quot;engineering_matched_pressure_pulse&quot;,
+        &quot;cells&quot;: 160,
+        &quot;scheme&quot;: &quot;rusanov&quot;,
+        &quot;cfl&quot;: 0.4,
+        &quot;dt_policy&quot;: &quot;0.95 * max_stable_dt_s, clipped to observation time&quot;,
+        &quot;observation_interval_s&quot;: 0.0005,
+        &quot;spatial_pressure_max_abs_error_pa&quot;: 9.068965621002892,
+        &quot;spatiotemporal_pressure_rms_error_pa&quot;: 1.3901803366470016,
+        &quot;max_abs_linear_volume_error_m3&quot;: 3.6068173492602376e-09,
+        &quot;max_abs_conservation_residual_m3&quot;: 1.1626519817800336e-19,
+        &quot;conservation_relative_initial_volume&quot;: 3.875506605933446e-16,
+        &quot;conservation_pass&quot;: true,
+        &quot;minimum_area_m2&quot;: 0.0003,
+        &quot;steps&quot;: 1280,
+        &quot;wall_seconds&quot;: 2.533397799998056,
+        &quot;trace_csv&quot;: &quot;matched_rusanov_160_trace.csv&quot;,
+        &quot;profile_csv&quot;: &quot;matched_rusanov_160_profiles.csv&quot;
+      },
+      {
+        &quot;arrival_definition&quot;: &quot;first rising crossing of fixed 10 Pa; no time translation&quot;,
+        &quot;arrival_time_s&quot;: 0.16021417922578643,
+        &quot;expected_arrival_time_s&quot;: 0.16,
+        &quot;arrival_error_ms&quot;: 0.21417922578642612,
+        &quot;peak_pressure_pa&quot;: 16.112111952469313,
+        &quot;peak_relative_error&quot;: 0.19439440237653435,
+        &quot;candidate_pass&quot;: false,
+        &quot;case&quot;: &quot;engineering_matched_pressure_pulse&quot;,
+        &quot;cells&quot;: 320,
+        &quot;scheme&quot;: &quot;rusanov&quot;,
+        &quot;cfl&quot;: 0.4,
+        &quot;dt_policy&quot;: &quot;0.95 * max_stable_dt_s, clipped to observation time&quot;,
+        &quot;observation_interval_s&quot;: 0.0005,
+        &quot;spatial_pressure_max_abs_error_pa&quot;: 6.287476584509568,
+        &quot;spatiotemporal_pressure_rms_error_pa&quot;: 0.9074291210624643,
+        &quot;max_abs_linear_volume_error_m3&quot;: 2.368040218090002e-09,
+        &quot;max_abs_conservation_residual_m3&quot;: 1.0049913570274265e-19,
+        &quot;conservation_relative_initial_volume&quot;: 3.349971190091422e-16,
+        &quot;conservation_pass&quot;: true,
+        &quot;minimum_area_m2&quot;: 0.0003,
+        &quot;steps&quot;: 1920,
+        &quot;wall_seconds&quot;: 7.063780399999814,
+        &quot;trace_csv&quot;: &quot;matched_rusanov_320_trace.csv&quot;,
+        &quot;profile_csv&quot;: &quot;matched_rusanov_320_profiles.csv&quot;
+      }
+    ],
+    &quot;high_order_separate_comparison&quot;: [
+      {
+        &quot;arrival_definition&quot;: &quot;first rising crossing of fixed 10 Pa; no time translation&quot;,
+        &quot;arrival_time_s&quot;: 0.15889435163577026,
+        &quot;expected_arrival_time_s&quot;: 0.16,
+        &quot;arrival_error_ms&quot;: 1.1056483642297443,
+        &quot;peak_pressure_pa&quot;: 16.642392462804303,
+        &quot;peak_relative_error&quot;: 0.16788037685978488,
+        &quot;candidate_pass&quot;: false,
+        &quot;case&quot;: &quot;engineering_matched_pressure_pulse&quot;,
+        &quot;cells&quot;: 80,
+        &quot;scheme&quot;: &quot;muscl_ssprk2&quot;,
+        &quot;cfl&quot;: 0.4,
+        &quot;dt_policy&quot;: &quot;0.95 * max_stable_dt_s, clipped to observation time&quot;,
+        &quot;observation_interval_s&quot;: 0.0005,
+        &quot;spatial_pressure_max_abs_error_pa&quot;: 4.902889504361008,
+        &quot;spatiotemporal_pressure_rms_error_pa&quot;: 0.5804652266411602,
+        &quot;max_abs_linear_volume_error_m3&quot;: 1.5890032644995799e-09,
+        &quot;max_abs_conservation_residual_m3&quot;: 1.0620337320690833e-19,
+        &quot;conservation_relative_initial_volume&quot;: 3.540112440230278e-16,
+        &quot;conservation_pass&quot;: true,
+        &quot;minimum_area_m2&quot;: 0.0002999952261934436,
+        &quot;steps&quot;: 640,
+        &quot;wall_seconds&quot;: 1.3383911999990232,
+        &quot;trace_csv&quot;: &quot;matched_muscl_ssprk2_80_trace.csv&quot;,
+        &quot;profile_csv&quot;: &quot;matched_muscl_ssprk2_80_profiles.csv&quot;
+      },
+      {
+        &quot;arrival_definition&quot;: &quot;first rising crossing of fixed 10 Pa; no time translation&quot;,
+        &quot;arrival_time_s&quot;: 0.1594878975238307,
+        &quot;expected_arrival_time_s&quot;: 0.16,
+        &quot;arrival_error_ms&quot;: 0.5121024761693127,
+        &quot;peak_pressure_pa&quot;: 18.734791771519156,
+        &quot;peak_relative_error&quot;: 0.06326041142404222,
+        &quot;candidate_pass&quot;: false,
+        &quot;case&quot;: &quot;engineering_matched_pressure_pulse&quot;,
+        &quot;cells&quot;: 160,
+        &quot;scheme&quot;: &quot;muscl_ssprk2&quot;,
+        &quot;cfl&quot;: 0.4,
+        &quot;dt_policy&quot;: &quot;0.95 * max_stable_dt_s, clipped to observation time&quot;,
+        &quot;observation_interval_s&quot;: 0.0005,
+        &quot;spatial_pressure_max_abs_error_pa&quot;: 1.847593723255038,
+        &quot;spatiotemporal_pressure_rms_error_pa&quot;: 0.22208107988629924,
+        &quot;max_abs_linear_volume_error_m3&quot;: 5.236310543934119e-10,
+        &quot;max_abs_conservation_residual_m3&quot;: 9.423572410449112e-20,
+        &quot;conservation_relative_initial_volume&quot;: 3.1411908034830377e-16,
+        &quot;conservation_pass&quot;: true,
+        &quot;minimum_area_m2&quot;: 0.00029999880043637294,
+        &quot;steps&quot;: 1280,
+        &quot;wall_seconds&quot;: 5.255153499994776,
+        &quot;trace_csv&quot;: &quot;matched_muscl_ssprk2_160_trace.csv&quot;,
+        &quot;profile_csv&quot;: &quot;matched_muscl_ssprk2_160_profiles.csv&quot;
+      },
+      {
+        &quot;arrival_definition&quot;: &quot;first rising crossing of fixed 10 Pa; no time translation&quot;,
+        &quot;arrival_time_s&quot;: 0.1598671585522244,
+        &quot;expected_arrival_time_s&quot;: 0.16,
+        &quot;arrival_error_ms&quot;: 0.1328414477756168,
+        &quot;peak_pressure_pa&quot;: 19.556167355712418,
+        &quot;peak_relative_error&quot;: 0.022191632214379097,
+        &quot;candidate_pass&quot;: false,
+        &quot;case&quot;: &quot;engineering_matched_pressure_pulse&quot;,
+        &quot;cells&quot;: 320,
+        &quot;scheme&quot;: &quot;muscl_ssprk2&quot;,
+        &quot;cfl&quot;: 0.4,
+        &quot;dt_policy&quot;: &quot;0.95 * max_stable_dt_s, clipped to observation time&quot;,
+        &quot;observation_interval_s&quot;: 0.0005,
+        &quot;spatial_pressure_max_abs_error_pa&quot;: 0.6501024959681487,
+        &quot;spatiotemporal_pressure_rms_error_pa&quot;: 0.08423566691344005,
+        &quot;max_abs_linear_volume_error_m3&quot;: 2.037327033769141e-10,
+        &quot;max_abs_conservation_residual_m3&quot;: 8.613736785064444e-20,
+        &quot;conservation_relative_initial_volume&quot;: 2.871245595021482e-16,
+        &quot;conservation_pass&quot;: true,
+        &quot;minimum_area_m2&quot;: 0.00029999969454486564,
+        &quot;steps&quot;: 1920,
+        &quot;wall_seconds&quot;: 15.648628399998415,
+        &quot;trace_csv&quot;: &quot;matched_muscl_ssprk2_320_trace.csv&quot;,
+        &quot;profile_csv&quot;: &quot;matched_muscl_ssprk2_320_profiles.csv&quot;
+      },
+      {
+        &quot;arrival_definition&quot;: &quot;first rising crossing of fixed 10 Pa; no time translation&quot;,
+        &quot;arrival_time_s&quot;: 0.15992792020749408,
+        &quot;expected_arrival_time_s&quot;: 0.16,
+        &quot;arrival_error_ms&quot;: 0.07207979250592467,
+        &quot;peak_pressure_pa&quot;: 19.843798070562137,
+        &quot;peak_relative_error&quot;: 0.007810096471893147,
+        &quot;candidate_pass&quot;: true,
+        &quot;case&quot;: &quot;engineering_matched_pressure_pulse&quot;,
+        &quot;cells&quot;: 640,
+        &quot;scheme&quot;: &quot;muscl_ssprk2&quot;,
+        &quot;cfl&quot;: 0.4,
+        &quot;dt_policy&quot;: &quot;0.95 * max_stable_dt_s, clipped to observation time&quot;,
+        &quot;observation_interval_s&quot;: 0.0005,
+        &quot;spatial_pressure_max_abs_error_pa&quot;: 0.27689925519640823,
+        &quot;spatiotemporal_pressure_rms_error_pa&quot;: 0.03839470452818619,
+        &quot;max_abs_linear_volume_error_m3&quot;: 1.2401543197184417e-10,
+        &quot;max_abs_conservation_residual_m3&quot;: 1.1563984963491327e-19,
+        &quot;conservation_relative_initial_volume&quot;: 3.8546616544971095e-16,
+        &quot;conservation_pass&quot;: true,
+        &quot;minimum_area_m2&quot;: 0.00029999994272231423,
+        &quot;steps&quot;: 3200,
+        &quot;wall_seconds&quot;: 57.27940899999521,
+        &quot;trace_csv&quot;: &quot;matched_muscl_ssprk2_640_trace.csv&quot;,
+        &quot;profile_csv&quot;: &quot;matched_muscl_ssprk2_640_profiles.csv&quot;
+      }
+    ],
+    &quot;linear3_current_comparison&quot;: [
+      {
+        &quot;arrival_definition&quot;: &quot;first rising crossing of fixed 10 Pa; no time translation&quot;,
+        &quot;arrival_time_s&quot;: 0.15997124884407982,
+        &quot;expected_arrival_time_s&quot;: 0.16,
+        &quot;arrival_error_ms&quot;: 0.028751155920186955,
+        &quot;peak_pressure_pa&quot;: 19.07294510549784,
+        &quot;peak_relative_error&quot;: 0.046352744725107975,
+        &quot;candidate_pass&quot;: false,
+        &quot;case&quot;: &quot;engineering_matched_pressure_pulse&quot;,
+        &quot;cells&quot;: 80,
+        &quot;scheme&quot;: &quot;linear3_ssprk3&quot;,
+        &quot;cfl&quot;: 0.4,
+        &quot;dt_policy&quot;: &quot;0.95 * max_stable_dt_s, clipped to observation time&quot;,
+        &quot;observation_interval_s&quot;: 0.0005,
+        &quot;spatial_pressure_max_abs_error_pa&quot;: 1.6321876088137655,
+        &quot;spatiotemporal_pressure_rms_error_pa&quot;: 0.2617511666543216,
+        &quot;max_abs_linear_volume_error_m3&quot;: 4.990671724806622e-10,
+        &quot;max_abs_conservation_residual_m3&quot;: 8.3614476422499e-20,
+        &quot;conservation_relative_initial_volume&quot;: 2.7871492140833005e-16,
+        &quot;conservation_pass&quot;: true,
+        &quot;minimum_area_m2&quot;: 0.0002999925341441347,
+        &quot;steps&quot;: 640,
+        &quot;wall_seconds&quot;: 1.1431086999946274,
+        &quot;min_pressure_pa&quot;: -0.6594880378285595,
+        &quot;max_pressure_pa&quot;: 20.017084514504457,
+        &quot;relative_reference_peak_overshoot&quot;: 0.000854225725222868,
+        &quot;relative_reference_peak_undershoot&quot;: 0.032974401891427974,
+        &quot;scheme_scope&quot;: &quot;smooth small-amplitude only; non-TVD; not a shock test&quot;,
+        &quot;trace_csv&quot;: &quot;matched_linear3_ssprk3_80_trace.csv&quot;,
+        &quot;profile_csv&quot;: &quot;matched_linear3_ssprk3_80_profiles.csv&quot;,
+        &quot;identity&quot;: {
+          &quot;python_executable&quot;: &quot;D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe&quot;,
+          &quot;python_version&quot;: &quot;3.12.9&quot;,
+          &quot;source_sha256&quot;: {
+            &quot;D:/codehub2026/04_heart_engine_r2/tools/arterial1d_check.py&quot;: &quot;a60fa6d721fc9bc63af9c2ff18917a7fc46df68c92bcb472c8cb41a474f0e635&quot;,
+            &quot;iabp/arterial1d/__init__.py&quot;: &quot;793796aa44e076d7450f860a96da4e9e7ca81447e2e4213817cd042b113c780f&quot;,
+            &quot;iabp/arterial1d/boundaries.py&quot;: &quot;131d46cca8e20573b7daae9fc2686bacb19785fbf53e76e3236c695786ad408d&quot;,
+            &quot;iabp/arterial1d/physics.py&quot;: &quot;f7455b4f9fac8b52d8cedd43389d162e58aa551bc5db28e0826c1fb233c88761&quot;,
+            &quot;iabp/arterial1d/solver.py&quot;: &quot;8d70b1192ed64efe05a5702415e642ba850040ae094c6e0dfbcb8a7d99c7455b&quot;
+          },
+          &quot;source_snapshot_manifest&quot;: &quot;history/source_5a00d0421e14c051/manifest.json&quot;
+        },
+        &quot;parameters&quot;: {
+          &quot;length_m&quot;: 1.0,
+          &quot;cells&quot;: 80,
+          &quot;scheme&quot;: &quot;linear3_ssprk3&quot;,
+          &quot;reference_area_m2&quot;: 0.0003,
+          &quot;density_kg_m3&quot;: 1060.0,
+          &quot;beta_pa&quot;: 53000.0,
+          &quot;reference_pressure_pa&quot;: 0.0,
+          &quot;initial_flow_m3_s&quot;: 0.0,
+          &quot;kinematic_viscosity_m2_s&quot;: 0.0,
+          &quot;cfl&quot;: 0.4,
+          &quot;inlet&quot;: {
+            &quot;quantity&quot;: &quot;pressure_pa&quot;,
+            &quot;amplitude_pa&quot;: 20.0,
+            &quot;start_s&quot;: 0.05,
+            &quot;end_s&quot;: 0.09,
+            &quot;shape&quot;: &quot;sine_squared; zero otherwise&quot;
+          }
+        },
+        &quot;source_unchanged_during_run&quot;: true,
+        &quot;run_log_path&quot;: &quot;run_logs/linear3_matched_bab289e7db74.log&quot;,
+        &quot;csv_artifacts&quot;: [
+          {
+            &quot;path&quot;: &quot;matched_linear3_ssprk3_80_trace.csv&quot;,
+            &quot;sha256&quot;: &quot;f97a5e4fa9b57c8481c5f5d354123197893ede46341d9fdf59c532d7db811733&quot;
+          },
+          {
+            &quot;path&quot;: &quot;matched_linear3_ssprk3_80_profiles.csv&quot;,
+            &quot;sha256&quot;: &quot;e3e0882ffa8782e56d20d6a53c5ad0c660470c9e39a205f71eca93518fe3f29a&quot;
+          }
+        ],
+        &quot;result_json&quot;: {
+          &quot;path&quot;: &quot;matched_linear3_ssprk3_80.json&quot;,
+          &quot;sha256&quot;: &quot;327e593285682f1e8694aa038a623caeaec16157d8f3e7da1efa17aa3a8c48e2&quot;
+        }
+      },
+      {
+        &quot;arrival_definition&quot;: &quot;first rising crossing of fixed 10 Pa; no time translation&quot;,
+        &quot;arrival_time_s&quot;: 0.15997558278012128,
+        &quot;expected_arrival_time_s&quot;: 0.16,
+        &quot;arrival_error_ms&quot;: 0.024417219878725138,
+        &quot;peak_pressure_pa&quot;: 19.842234544059867,
+        &quot;peak_relative_error&quot;: 0.007888272797006657,
+        &quot;candidate_pass&quot;: true,
+        &quot;case&quot;: &quot;engineering_matched_pressure_pulse&quot;,
+        &quot;cells&quot;: 160,
+        &quot;scheme&quot;: &quot;linear3_ssprk3&quot;,
+        &quot;cfl&quot;: 0.4,
+        &quot;dt_policy&quot;: &quot;0.95 * max_stable_dt_s, clipped to observation time&quot;,
+        &quot;observation_interval_s&quot;: 0.0005,
+        &quot;spatial_pressure_max_abs_error_pa&quot;: 0.45353414195301456,
+        &quot;spatiotemporal_pressure_rms_error_pa&quot;: 0.05938654005955451,
+        &quot;max_abs_linear_volume_error_m3&quot;: 1.1304464117554881e-10,
+        &quot;max_abs_conservation_residual_m3&quot;: 3.93797528579345e-19,
+        &quot;conservation_relative_initial_volume&quot;: 1.3126584285978167e-15,
+        &quot;conservation_pass&quot;: true,
+        &quot;minimum_area_m2&quot;: 0.0002999970450963143,
+        &quot;steps&quot;: 1280,
+        &quot;wall_seconds&quot;: 4.349071000004187,
+        &quot;min_pressure_pa&quot;: -0.261017134969288,
+        &quot;max_pressure_pa&quot;: 19.990680728467545,
+        &quot;relative_reference_peak_overshoot&quot;: 0.0,
+        &quot;relative_reference_peak_undershoot&quot;: 0.013050856748464401,
+        &quot;scheme_scope&quot;: &quot;smooth small-amplitude only; non-TVD; not a shock test&quot;,
+        &quot;trace_csv&quot;: &quot;matched_linear3_ssprk3_160_trace.csv&quot;,
+        &quot;profile_csv&quot;: &quot;matched_linear3_ssprk3_160_profiles.csv&quot;,
+        &quot;identity&quot;: {
+          &quot;python_executable&quot;: &quot;D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe&quot;,
+          &quot;python_version&quot;: &quot;3.12.9&quot;,
+          &quot;source_sha256&quot;: {
+            &quot;D:/codehub2026/04_heart_engine_r2/tools/arterial1d_check.py&quot;: &quot;a60fa6d721fc9bc63af9c2ff18917a7fc46df68c92bcb472c8cb41a474f0e635&quot;,
+            &quot;iabp/arterial1d/__init__.py&quot;: &quot;793796aa44e076d7450f860a96da4e9e7ca81447e2e4213817cd042b113c780f&quot;,
+            &quot;iabp/arterial1d/boundaries.py&quot;: &quot;131d46cca8e20573b7daae9fc2686bacb19785fbf53e76e3236c695786ad408d&quot;,
+            &quot;iabp/arterial1d/physics.py&quot;: &quot;f7455b4f9fac8b52d8cedd43389d162e58aa551bc5db28e0826c1fb233c88761&quot;,
+            &quot;iabp/arterial1d/solver.py&quot;: &quot;8d70b1192ed64efe05a5702415e642ba850040ae094c6e0dfbcb8a7d99c7455b&quot;
+          },
+          &quot;source_snapshot_manifest&quot;: &quot;history/source_5a00d0421e14c051/manifest.json&quot;
+        },
+        &quot;parameters&quot;: {
+          &quot;length_m&quot;: 1.0,
+          &quot;cells&quot;: 160,
+          &quot;scheme&quot;: &quot;linear3_ssprk3&quot;,
+          &quot;reference_area_m2&quot;: 0.0003,
+          &quot;density_kg_m3&quot;: 1060.0,
+          &quot;beta_pa&quot;: 53000.0,
+          &quot;reference_pressure_pa&quot;: 0.0,
+          &quot;initial_flow_m3_s&quot;: 0.0,
+          &quot;kinematic_viscosity_m2_s&quot;: 0.0,
+          &quot;cfl&quot;: 0.4,
+          &quot;inlet&quot;: {
+            &quot;quantity&quot;: &quot;pressure_pa&quot;,
+            &quot;amplitude_pa&quot;: 20.0,
+            &quot;start_s&quot;: 0.05,
+            &quot;end_s&quot;: 0.09,
+            &quot;shape&quot;: &quot;sine_squared; zero otherwise&quot;
+          }
+        },
+        &quot;source_unchanged_during_run&quot;: true,
+        &quot;run_log_path&quot;: &quot;run_logs/linear3_matched_bab289e7db74.log&quot;,
+        &quot;csv_artifacts&quot;: [
+          {
+            &quot;path&quot;: &quot;matched_linear3_ssprk3_160_trace.csv&quot;,
+            &quot;sha256&quot;: &quot;cfd25b1fd80e7c3d6c9b4552bd83a0d01a0b96ab46491b734ae334aa23ec74f5&quot;
+          },
+          {
+            &quot;path&quot;: &quot;matched_linear3_ssprk3_160_profiles.csv&quot;,
+            &quot;sha256&quot;: &quot;8eb18fcd4d80ba1282a2112f1a08d7604a6651a7120b00a1345ccf9880c92bbb&quot;
+          }
+        ],
+        &quot;result_json&quot;: {
+          &quot;path&quot;: &quot;matched_linear3_ssprk3_160.json&quot;,
+          &quot;sha256&quot;: &quot;41cf5adf069a4323582914f66b49f74fff9e15c8f3bb89ca076c681296f87370&quot;
+        }
+      },
+      {
+        &quot;arrival_definition&quot;: &quot;first rising crossing of fixed 10 Pa; no time translation&quot;,
+        &quot;arrival_time_s&quot;: 0.15995331942671664,
+        &quot;expected_arrival_time_s&quot;: 0.16,
+        &quot;arrival_error_ms&quot;: 0.04668057328335862,
+        &quot;peak_pressure_pa&quot;: 19.970801942093665,
+        &quot;peak_relative_error&quot;: 0.0014599028953167447,
+        &quot;candidate_pass&quot;: true,
+        &quot;case&quot;: &quot;engineering_matched_pressure_pulse&quot;,
+        &quot;cells&quot;: 320,
+        &quot;scheme&quot;: &quot;linear3_ssprk3&quot;,
+        &quot;cfl&quot;: 0.4,
+        &quot;dt_policy&quot;: &quot;0.95 * max_stable_dt_s, clipped to observation time&quot;,
+        &quot;observation_interval_s&quot;: 0.0005,
+        &quot;spatial_pressure_max_abs_error_pa&quot;: 0.2039664548114839,
+        &quot;spatiotemporal_pressure_rms_error_pa&quot;: 0.026670127175137448,
+        &quot;max_abs_linear_volume_error_m3&quot;: 1.0049979956468602e-10,
+        &quot;max_abs_conservation_residual_m3&quot;: 1.0941548096157425e-18,
+        &quot;conservation_relative_initial_volume&quot;: 3.647182698719142e-15,
+        &quot;conservation_pass&quot;: true,
+        &quot;minimum_area_m2&quot;: 0.00029999891969272085,
+        &quot;steps&quot;: 1920,
+        &quot;wall_seconds&quot;: 12.909345099993516,
+        &quot;min_pressure_pa&quot;: -0.09542722889621658,
+        &quot;max_pressure_pa&quot;: 19.99573358445805,
+        &quot;relative_reference_peak_overshoot&quot;: 0.0,
+        &quot;relative_reference_peak_undershoot&quot;: 0.004771361444810829,
+        &quot;scheme_scope&quot;: &quot;smooth small-amplitude only; non-TVD; not a shock test&quot;,
+        &quot;trace_</pre></details><h3>共享初态的实际 0D 配对运行</h3>
+<p>直接读取两份 truth CSV：无辅助 4001 行、演示辅助 4001 行；时间窗分别为 18–22 s 和 18–22 s。</p><div class="table-scroll"><table><thead><tr><th scope="col">量</th><th scope="col">无辅助</th><th scope="col">演示辅助</th><th scope="col">辅助减无辅助</th><th scope="col">单位</th></tr></thead><tbody><tr><td>根部最小压力</td><td>65.9356374</td><td>65.9380331</td><td>0.00239572124</td><td>mmHg</td></tr><tr><td>根部最大压力</td><td>123.244257</td><td>135.834114</td><td>12.5898572</td><td>mmHg</td></tr><tr><td>窗口净主动脉出流积分</td><td>282.557135</td><td>277.438625</td><td>-5.11851017</td><td>mL</td></tr><tr><td>窗口 LV 净外部功</td><td>36277.1824</td><td>36617.4008</td><td>340.218425</td><td>mmHg·mL</td></tr><tr><td>最大球囊占据体积</td><td>0</td><td>39.9999607</td><td>39.9999607</td><td>mL</td></tr><tr><td>最大血量残差</td><td>3.54702934e-11</td><td>5.1841198e-11</td><td>1.63709046e-11</td><td>mL</td></tr></tbody></table></div><p>控制器：<code>ThresholdDemoController; causal, uncalibrated, not optimized</code>。固定预热 18 s：预热时长本身不证明周期稳态。以上窗口积分包含过渡过程，不能直接命名为单搏 SV 或闭合稳态 PV 环功。</p><p>provenance 记录的 model.py SHA-256：<code>08aa745151b3d9ba142de79718ce15ab6bfb48938a84b21ad34858153699cb3f</code>；与当前源文件比较：<strong>MATCH</strong>。</p><p>若峰压增加同时出流减少、做功增加，应保留全部方向相反的结果；不能仅凭峰压宣称辅助有效。</p><details><summary>CSV 重新积分与 provenance 指标的数值差</summary><div class="table-scroll"><table><thead><tr><th scope="col">分叉</th><th scope="col">字段</th><th scope="col">CSV 推导值减 JSON 记录值</th></tr></thead><tbody><tr><td>baseline</td><td>root_min_mmHg</td><td>0</td></tr><tr><td>assisted</td><td>root_min_mmHg</td><td>0</td></tr><tr><td>baseline</td><td>root_max_mmHg</td><td>0</td></tr><tr><td>assisted</td><td>root_max_mmHg</td><td>0</td></tr><tr><td>baseline</td><td>net_aortic_volume_mL</td><td>0</td></tr><tr><td>assisted</td><td>net_aortic_volume_mL</td><td>0</td></tr><tr><td>baseline</td><td>lv_net_external_work_mmHg_mL</td><td>0</td></tr><tr><td>assisted</td><td>lv_net_external_work_mmHg_mL</td><td>0</td></tr><tr><td>baseline</td><td>max_balloon_mL</td><td>0</td></tr><tr><td>assisted</td><td>max_balloon_mL</td><td>0</td></tr><tr><td>baseline</td><td>max_mass_error_mL</td><td>0</td></tr><tr><td>assisted</td><td>max_mass_error_mL</td><td>0</td></tr></tbody></table></div><p>采用 CSV 实际相邻时间间隔作梯形积分，未重新运行物理模型、插值平移或拟合参数。</p></details><p><a href="../artifacts/demo/prototype_viewer.html">打开本次真实运行观察器</a> · <a href="../artifacts/demo/provenance.json">参数与运行来源</a></p><figure class="scientific"><div class="diagram-container"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1152pt" height="432pt" viewBox="0 0 1152 432" xmlns="http://www.w3.org/2000/svg" version="1.1" role="img" aria-labelledby="principles-demo-pressure-title principles-demo-pressure-desc"><title id="principles-demo-pressure-title">实际导出的 0D 根部压力</title><desc id="principles-demo-pressure-desc">共享初态的无辅助与因果演示辅助根部压力按全部 CSV 样本绘制，峰压须与出流及做功共同评价。</desc>
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:description>Actual exported IABP engineering simulation; not a clinical trace.</dc:description>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib 3.10.5; render_demo_pressure.py v1</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 432 
+L 1152 432 
+L 1152 0 
+L 0 0 
+z
+" style="fill: #f5f5f5"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 86.4 358.56 
+L 1128.96 358.56 
+L 1128.96 60.48 
+L 86.4 60.48 
+z
+" style="fill: #f5f5f5"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <defs>
+       <path id="m1ea5fa9de4" d="M 0 0 
+L 0 3.5 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#m1ea5fa9de4" x="86.4" y="358.56" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_1">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle" x="86.4" y="374.678125" transform="rotate(-0 86.4 374.678125)">18.0</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_2">
+      <g>
+       <use xlink:href="#m1ea5fa9de4" x="216.72" y="358.56" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_2">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle" x="216.72" y="374.678125" transform="rotate(-0 216.72 374.678125)">18.5</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_3">
+      <g>
+       <use xlink:href="#m1ea5fa9de4" x="347.04" y="358.56" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_3">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle" x="347.04" y="374.678125" transform="rotate(-0 347.04 374.678125)">19.0</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_4">
+      <g>
+       <use xlink:href="#m1ea5fa9de4" x="477.36" y="358.56" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_4">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle" x="477.36" y="374.678125" transform="rotate(-0 477.36 374.678125)">19.5</text>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_5">
+      <g>
+       <use xlink:href="#m1ea5fa9de4" x="607.68" y="358.56" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_5">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle" x="607.68" y="374.678125" transform="rotate(-0 607.68 374.678125)">20.0</text>
+     </g>
+    </g>
+    <g id="xtick_6">
+     <g id="line2d_6">
+      <g>
+       <use xlink:href="#m1ea5fa9de4" x="738" y="358.56" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_6">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle" x="738" y="374.678125" transform="rotate(-0 738 374.678125)">20.5</text>
+     </g>
+    </g>
+    <g id="xtick_7">
+     <g id="line2d_7">
+      <g>
+       <use xlink:href="#m1ea5fa9de4" x="868.32" y="358.56" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_7">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle" x="868.32" y="374.678125" transform="rotate(-0 868.32 374.678125)">21.0</text>
+     </g>
+    </g>
+    <g id="xtick_8">
+     <g id="line2d_8">
+      <g>
+       <use xlink:href="#m1ea5fa9de4" x="998.64" y="358.56" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_8">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle" x="998.64" y="374.678125" transform="rotate(-0 998.64 374.678125)">21.5</text>
+     </g>
+    </g>
+    <g id="xtick_9">
+     <g id="line2d_9">
+      <g>
+       <use xlink:href="#m1ea5fa9de4" x="1128.96" y="358.56" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_9">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle" x="1128.96" y="374.678125" transform="rotate(-0 1128.96 374.678125)">22.0</text>
+     </g>
+    </g>
+    <g id="text_10">
+     <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle" x="607.68" y="390.291875" transform="rotate(-0 607.68 390.291875)">Engine physical time (s)</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_10">
+      <path d="M 86.4 358.56 
+L 1128.96 358.56 
+" clip-path="url(#p016f20574b)" style="fill: none; stroke: #bfc0c0; stroke-width: 0.6; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_11">
+      <defs>
+       <path id="md1431ec2b6" d="M 0 0 
+L -3.5 0 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#md1431ec2b6" x="86.4" y="358.56" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_11">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: end" x="79.4" y="363.119062" transform="rotate(-0 79.4 363.119062)">0</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_12">
+      <path d="M 86.4 315.772078 
+L 1128.96 315.772078 
+" clip-path="url(#p016f20574b)" style="fill: none; stroke: #bfc0c0; stroke-width: 0.6; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_13">
+      <g>
+       <use xlink:href="#md1431ec2b6" x="86.4" y="315.772078" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_12">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: end" x="79.4" y="320.331141" transform="rotate(-0 79.4 320.331141)">20</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_14">
+      <path d="M 86.4 272.984156 
+L 1128.96 272.984156 
+" clip-path="url(#p016f20574b)" style="fill: none; stroke: #bfc0c0; stroke-width: 0.6; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_15">
+      <g>
+       <use xlink:href="#md1431ec2b6" x="86.4" y="272.984156" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_13">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: end" x="79.4" y="277.543219" transform="rotate(-0 79.4 277.543219)">40</text>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_16">
+      <path d="M 86.4 230.196234 
+L 1128.96 230.196234 
+" clip-path="url(#p016f20574b)" style="fill: none; stroke: #bfc0c0; stroke-width: 0.6; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_17">
+      <g>
+       <use xlink:href="#md1431ec2b6" x="86.4" y="230.196234" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_14">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: end" x="79.4" y="234.755297" transform="rotate(-0 79.4 234.755297)">60</text>
+     </g>
+    </g>
+    <g id="ytick_5">
+     <g id="line2d_18">
+      <path d="M 86.4 187.408313 
+L 1128.96 187.408313 
+" clip-path="url(#p016f20574b)" style="fill: none; stroke: #bfc0c0; stroke-width: 0.6; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_19">
+      <g>
+       <use xlink:href="#md1431ec2b6" x="86.4" y="187.408313" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_15">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: end" x="79.4" y="191.967375" transform="rotate(-0 79.4 191.967375)">80</text>
+     </g>
+    </g>
+    <g id="ytick_6">
+     <g id="line2d_20">
+      <path d="M 86.4 144.620391 
+L 1128.96 144.620391 
+" clip-path="url(#p016f20574b)" style="fill: none; stroke: #bfc0c0; stroke-width: 0.6; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_21">
+      <g>
+       <use xlink:href="#md1431ec2b6" x="86.4" y="144.620391" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_16">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: end" x="79.4" y="149.179453" transform="rotate(-0 79.4 149.179453)">100</text>
+     </g>
+    </g>
+    <g id="ytick_7">
+     <g id="line2d_22">
+      <path d="M 86.4 101.832469 
+L 1128.96 101.832469 
+" clip-path="url(#p016f20574b)" style="fill: none; stroke: #bfc0c0; stroke-width: 0.6; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_23">
+      <g>
+       <use xlink:href="#md1431ec2b6" x="86.4" y="101.832469" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_17">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: end" x="79.4" y="106.391531" transform="rotate(-0 79.4 106.391531)">120</text>
+     </g>
+    </g>
+    <g id="text_18">
+     <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle" x="49.999375" y="209.52" transform="rotate(-90 49.999375 209.52)">Aortic root pressure (mmHg)</text>
+    </g>
+   </g>
+   <g id="line2d_24">
+    <path d="M 86.4 128.568286 
+L 89.0064 130.264992 
+L 92.916 133.147174 
+L 101.25648 139.329775 
+L 110.63952 145.92882 
+L 121.5864 153.365934 
+L 132.27264 160.356076 
+L 142.95888 167.086399 
+L 154.1664 173.879365 
+L 165.37392 180.415336 
+L 176.84208 186.848348 
+L 188.57088 193.171189 
+L 200.29968 199.240247 
+L 212.28912 205.189794 
+L 224.79984 211.144073 
+L 232.09776 214.425285 
+L 237.83184 216.727896 
+L 239.91696 217.452661 
+L 240.43824 217.485643 
+L 240.69888 217.39884 
+L 240.95952 217.181198 
+L 241.22016 216.764682 
+L 241.4808 216.071765 
+L 242.00208 213.583623 
+L 242.52336 209.395088 
+L 243.30528 200.124081 
+L 244.34784 184.026881 
+L 246.43296 150.819707 
+L 247.47552 138.14137 
+L 248.25744 131.05414 
+L 249.03936 125.898485 
+L 249.82128 122.316288 
+L 250.6032 119.848616 
+L 251.64576 117.494825 
+L 253.47024 113.649222 
+L 254.77344 110.17425 
+L 258.4224 99.698147 
+L 259.46496 97.648346 
+L 260.24688 96.533909 
+L 261.0288 95.75776 
+L 261.81072 95.269755 
+L 262.59264 95.006391 
+L 263.6352 94.892443 
+L 265.19904 94.975207 
+L 268.58736 95.412701 
+L 270.41184 95.847061 
+L 272.23632 96.535765 
+L 274.32144 97.593409 
+L 280.05552 100.921084 
+L 287.35344 105.232529 
+L 288.13536 106.003149 
+L 288.91728 107.229247 
+L 289.6992 109.09452 
+L 290.48112 111.723668 
+L 292.04496 117.500358 
+L 293.08752 120.136145 
+L 294.13008 122.089271 
+L 295.17264 123.513891 
+L 296.2152 124.544497 
+L 297.5184 125.463727 
+L 299.34288 126.403622 
+L 302.99184 128.216047 
+L 305.3376 129.670716 
+L 308.46528 131.905439 
+L 321.23664 141.311895 
+L 331.92288 148.736384 
+L 342.60912 155.897443 
+L 353.29536 162.793893 
+L 364.24224 169.592595 
+L 375.44976 176.290519 
+L 386.91792 182.882507 
+L 398.38608 189.220481 
+L 410.11488 195.449099 
+L 421.84368 201.425253 
+L 433.83312 207.286126 
+L 445.82256 212.905951 
+L 451.296 215.254478 
+L 456.76944 217.361246 
+L 457.55136 217.495251 
+L 458.07264 217.272499 
+L 458.33328 216.930564 
+L 458.59392 216.338296 
+L 459.1152 214.112449 
+L 459.63648 210.212089 
+L 460.15776 204.638571 
+L 460.93968 193.777713 
+L 464.328 141.960772 
+L 465.10992 133.950193 
+L 465.89184 127.970819 
+L 466.67376 123.742543 
+L 467.45568 120.838736 
+L 468.2376 118.786122 
+L 471.62592 111.166509 
+L 473.4504 105.681044 
+L 475.01424 101.178294 
+L 476.0568 98.766365 
+L 476.83872 97.370093 
+L 477.62064 96.334094 
+L 478.40256 95.627013 
+L 479.18448 95.194682 
+L 480.22704 94.933392 
+L 481.53024 94.907547 
+L 484.13664 95.170715 
+L 486.74304 95.611829 
+L 488.56752 96.175889 
+L 490.392 96.992825 
+L 492.9984 98.43892 
+L 504.7272 105.375952 
+L 505.50912 106.229617 
+L 506.29104 107.583879 
+L 507.07296 109.610599 
+L 507.85488 112.409796 
+L 508.89744 116.424958 
+L 509.94 119.343358 
+L 510.98256 121.504541 
+L 512.02512 123.089875 
+L 513.06768 124.23745 
+L 514.11024 125.074439 
+L 515.41344 125.851223 
+L 522.19008 129.440768 
+L 525.05712 131.454912 
+L 541.2168 143.269207 
+L 552.16368 150.802047 
+L 562.84992 157.886873 
+L 573.53616 164.709308 
+L 584.48304 171.435928 
+L 595.69056 178.064151 
+L 607.15872 184.587764 
+L 618.88752 190.999765 
+L 630.61632 197.156934 
+L 642.34512 203.063676 
+L 654.5952 208.982371 
+L 665.0208 213.792467 
+L 670.49424 216.053982 
+L 674.40384 217.470488 
+L 674.92512 217.468646 
+L 675.18576 217.344853 
+L 675.4464 217.069273 
+L 675.70704 216.569453 
+L 675.96768 215.767668 
+L 676.48896 213.008004 
+L 677.01024 208.533262 
+L 677.79216 198.913263 
+L 678.83472 182.58727 
+L 680.6592 153.273378 
+L 681.70176 140.000852 
+L 682.48368 132.454023 
+L 683.2656 126.894297 
+L 684.04752 122.999996 
+L 684.82944 120.325919 
+L 685.61136 118.400442 
+L 688.4784 112.114622 
+L 690.04224 107.55801 
+L 692.12736 101.405716 
+L 693.16992 98.944639 
+L 694.21248 97.109872 
+L 694.9944 96.150583 
+L 695.77632 95.509737 
+L 696.55824 95.129755 
+L 697.6008 94.915579 
+L 698.904 94.918186 
+L 701.77104 95.226805 
+L 704.1168 95.654693 
+L 705.94128 96.243626 
+L 707.76576 97.081745 
+L 710.6328 98.693471 
+L 722.10096 105.533142 
+L 722.88288 106.480379 
+L 723.6648 107.971138 
+L 724.44672 110.164954 
+L 725.48928 114.184388 
+L 726.2712 116.978213 
+L 727.31376 119.749685 
+L 728.35632 121.804797 
+L 729.39888 123.307952 
+L 730.44144 124.395351 
+L 731.74464 125.358762 
+L 733.30848 126.198627 
+L 737.73936 128.416325 
+L 740.08512 129.906368 
+L 743.47344 132.361601 
+L 753.89904 140.077719 
+L 763.80336 147.00958 
+L 774.4896 154.233871 
+L 785.17584 161.19194 
+L 796.12272 168.05141 
+L 807.33024 174.807726 
+L 818.7984 181.456905 
+L 830.26656 187.84979 
+L 841.99536 194.132971 
+L 853.72416 200.162808 
+L 865.7136 206.074747 
+L 878.22432 211.992414 
+L 884.21904 214.645468 
+L 889.95312 216.927804 
+L 891.51696 217.45355 
+L 892.03824 217.486521 
+L 892.29888 217.399709 
+L 892.55952 217.182051 
+L 892.82016 216.765512 
+L 893.0808 216.072567 
+L 893.60208 213.584354 
+L 894.12336 209.395746 
+L 894.90528 200.124657 
+L 895.94784 184.027419 
+L 898.03296 150.820369 
+L 899.07552 138.142137 
+L 899.85744 131.054983 
+L 900.63936 125.899391 
+L 901.42128 122.317241 
+L 902.2032 119.849599 
+L 903.24576 117.495825 
+L 905.07024 113.650216 
+L 906.37344 110.175236 
+L 910.0224 99.69916 
+L 911.06496 97.649375 
+L 911.84688 96.53495 
+L 912.6288 95.75881 
+L 913.41072 95.270812 
+L 914.19264 95.007454 
+L 915.2352 94.893509 
+L 916.79904 94.976273 
+L 920.18736 95.413765 
+L 922.01184 95.848125 
+L 923.83632 96.536829 
+L 925.92144 97.594471 
+L 931.65552 100.922135 
+L 938.95344 105.233564 
+L 939.73536 106.00418 
+L 940.51728 107.230273 
+L 941.2992 109.095538 
+L 942.08112 111.724676 
+L 943.64496 117.501348 
+L 944.68752 120.137125 
+L 945.73008 122.090243 
+L 946.77264 123.514856 
+L 947.8152 124.545456 
+L 949.1184 125.464681 
+L 950.94288 126.404571 
+L 954.59184 128.216987 
+L 956.9376 129.671649 
+L 960.06528 131.906362 
+L 972.83664 141.312777 
+L 983.52288 148.737234 
+L 994.20912 155.898261 
+L 1004.89536 162.794682 
+L 1015.84224 169.593354 
+L 1027.04976 176.291248 
+L 1038.51792 182.883208 
+L 1049.98608 189.221154 
+L 1061.71488 195.449745 
+L 1073.44368 201.425873 
+L 1085.43312 207.286721 
+L 1097.42256 212.906521 
+L 1102.896 215.255037 
+L 1108.36944 217.361794 
+L 1109.15136 217.495791 
+L 1109.67264 217.273025 
+L 1109.93328 216.931079 
+L 1110.19392 216.338794 
+L 1110.7152 214.112904 
+L 1111.23648 210.212499 
+L 1111.75776 204.638942 
+L 1112.53968 193.77805 
+L 1115.928 141.961221 
+L 1116.70992 133.95069 
+L 1117.49184 127.971359 
+L 1118.27376 123.743117 
+L 1119.05568 120.839332 
+L 1119.8376 118.786731 
+L 1123.22592 111.167115 
+L 1125.0504 105.681649 
+L 1126.61424 101.178909 
+L 1127.6568 98.76699 
+L 1128.43872 97.370726 
+L 1128.96 96.641384 
+L 1128.96 96.641384 
+" clip-path="url(#p016f20574b)" style="fill: none; stroke: #4f5d75; stroke-width: 1.6; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_25">
+    <path d="M 86.4 128.568286 
+L 89.0064 130.264992 
+L 92.916 133.147174 
+L 101.25648 139.329775 
+L 110.63952 145.92882 
+L 121.5864 153.365934 
+L 132.27264 160.356076 
+L 142.95888 167.086399 
+L 154.1664 173.879365 
+L 165.37392 180.415336 
+L 176.84208 186.848348 
+L 188.57088 193.171189 
+L 200.29968 199.240247 
+L 212.28912 205.189794 
+L 224.79984 211.144073 
+L 232.09776 214.425285 
+L 237.83184 216.727896 
+L 239.91696 217.452661 
+L 240.43824 217.485643 
+L 240.69888 217.39884 
+L 240.95952 217.181198 
+L 241.22016 216.764682 
+L 241.4808 216.071765 
+L 242.00208 213.583623 
+L 242.52336 209.395088 
+L 243.30528 200.124081 
+L 244.34784 184.026881 
+L 246.43296 150.819707 
+L 247.47552 138.14137 
+L 248.25744 131.05414 
+L 249.03936 125.898485 
+L 249.82128 122.316288 
+L 250.6032 119.848616 
+L 251.64576 117.494825 
+L 253.47024 113.649222 
+L 254.77344 110.17425 
+L 258.4224 99.698147 
+L 259.46496 97.648346 
+L 260.24688 96.533909 
+L 261.0288 95.75776 
+L 261.81072 95.269755 
+L 262.59264 95.006391 
+L 263.6352 94.892443 
+L 265.19904 94.975207 
+L 268.58736 95.412701 
+L 270.41184 95.847061 
+L 272.23632 96.535765 
+L 274.32144 97.593409 
+L 280.05552 100.921084 
+L 287.35344 105.232529 
+L 288.13536 106.003149 
+L 288.91728 107.229247 
+L 289.6992 109.09452 
+L 290.48112 111.723668 
+L 292.04496 117.500358 
+L 293.08752 120.136145 
+L 294.13008 122.089271 
+L 295.17264 123.513891 
+L 296.2152 124.544497 
+L 297.5184 125.463727 
+L 299.34288 126.403622 
+L 303.77376 128.467548 
+L 304.29504 128.35743 
+L 304.81632 127.945549 
+L 305.3376 127.205705 
+L 306.11952 125.488704 
+L 306.90144 123.120795 
+L 307.944 119.187746 
+L 309.76848 111.182386 
+L 312.37488 99.886837 
+L 313.93872 94.079819 
+L 315.50256 89.192513 
+L 316.80576 85.797826 
+L 318.10896 82.958665 
+L 319.41216 80.607124 
+L 320.71536 78.676995 
+L 322.01856 77.108769 
+L 323.32176 75.851105 
+L 324.62496 74.86052 
+L 326.1888 73.973204 
+L 327.75264 73.365383 
+L 329.31648 72.993681 
+L 331.14096 72.810585 
+L 332.96544 72.852266 
+L 335.05056 73.124991 
+L 337.39632 73.661944 
+L 340.00272 74.480626 
+L 343.1304 75.69257 
+L 347.04 77.452235 
+L 352.2528 80.058786 
+L 360.33264 84.377906 
+L 389.52432 100.149887 
+L 403.0776 107.140766 
+L 416.37024 113.75003 
+L 418.97664 115.136931 
+L 419.49792 115.836171 
+L 420.0192 116.989524 
+L 420.54048 118.652283 
+L 421.3224 122.111368 
+L 422.10432 126.634537 
+L 423.14688 133.993817 
+L 424.97136 148.961044 
+L 427.31712 168.184261 
+L 428.88096 179.068209 
+L 430.18416 186.445881 
+L 431.22672 191.202646 
+L 432.26928 195.005947 
+L 433.31184 197.964684 
+L 434.3544 200.212001 
+L 435.39696 201.888049 
+L 436.43952 203.127115 
+L 437.48208 204.049055 
+L 438.78528 204.906995 
+L 440.60976 205.816406 
+L 450.51408 210.364663 
+L 455.46624 212.530473 
+L 457.55136 213.266183 
+L 458.07264 213.219732 
+L 458.33328 213.04329 
+L 458.59392 212.684517 
+L 458.85456 212.066738 
+L 459.37584 209.767653 
+L 459.89712 205.780941 
+L 460.67904 196.758707 
+L 461.7216 180.832125 
+L 463.80672 147.511187 
+L 464.84928 134.677915 
+L 465.6312 127.483657 
+L 466.41312 122.248164 
+L 467.19504 118.621715 
+L 467.97696 116.146167 
+L 469.01952 113.829098 
+L 470.844 110.115555 
+L 471.88656 107.464922 
+L 473.71104 102.045533 
+L 475.27488 97.611689 
+L 476.31744 95.250773 
+L 477.09936 93.892989 
+L 477.88128 92.893858 
+L 478.6632 92.220652 
+L 479.44512 91.81827 
+L 480.48768 91.590138 
+L 481.79088 91.59547 
+L 484.65792 91.93437 
+L 487.00368 92.368498 
+L 488.82816 92.951745 
+L 490.65264 93.785853 
+L 493.51968 95.405265 
+L 504.7272 102.104132 
+L 505.50912 102.968467 
+L 506.29104 104.34002 
+L 507.07296 106.392939 
+L 507.85488 109.228733 
+L 508.89744 113.278164 
+L 509.94 116.226115 
+L 510.98256 118.414531 
+L 512.02512 120.022265 
+L 513.06768 121.187786 
+L 514.11024 122.03914 
+L 515.41344 122.830281 
+L 520.3656 125.308621 
+L 520.88688 125.442609 
+L 521.40816 125.337844 
+L 521.92944 124.933376 
+L 522.45072 124.202934 
+L 523.23264 122.503116 
+L 524.01456 120.154831 
+L 525.05712 116.249219 
+L 526.8816 108.288142 
+L 529.488 97.038616 
+L 531.05184 91.250647 
+L 532.61568 86.378372 
+L 533.91888 82.994279 
+L 535.22208 80.164557 
+L 536.52528 77.82161 
+L 537.82848 75.899394 
+L 539.13168 74.338496 
+L 540.43488 73.087646 
+L 541.73808 72.103436 
+L 543.30192 71.22331 
+L 544.86576 70.622319 
+L 546.4296 70.257235 
+L 548.25408 70.081776 
+L 550.07856 70.131171 
+L 552.16368 70.412986 
+L 554.50944 70.960674 
+L 557.11584 71.792037 
+L 560.24352 73.020302 
+L 564.15312 74.801978 
+L 569.36592 77.440249 
+L 577.44576 81.812063 
+L 606.63744 97.780449 
+L 620.19072 104.858684 
+L 633.48336 111.550156 
+L 635.82912 112.758125 
+L 636.3504 113.333899 
+L 636.87168 114.333062 
+L 637.39296 115.831401 
+L 638.17488 119.053184 
+L 638.9568 123.373836 
+L 639.99936 130.540335 
+L 641.5632 143.184885 
+L 644.43024 166.807963 
+L 645.73344 175.942453 
+L 647.03664 183.535995 
+L 648.0792 188.456637 
+L 649.12176 192.406699 
+L 650.16432 195.490453 
+L 651.20688 197.839482 
+L 652.24944 199.594691 
+L 653.292 200.892671 
+L 654.33456 201.856463 
+L 655.63776 202.748066 
+L 657.46224 203.681383 
+L 674.66448 211.394821 
+L 675.18576 211.430496 
+L 675.4464 211.337859 
+L 675.70704 211.10639 
+L 675.96768 210.665879 
+L 676.22832 209.938027 
+L 676.7496 207.353634 
+L 677.27088 203.054602 
+L 678.0528 193.637109 
+L 679.09536 177.429363 
+L 681.18048 144.324085 
+L 682.22304 131.809687 
+L 683.00496 124.863959 
+L 683.78688 119.849065 
+L 684.5688 116.395619 
+L 685.35072 114.037773 
+L 686.39328 111.797104 
+L 688.21776 108.073711 
+L 689.52096 104.655904 
+L 693.16992 94.362979 
+L 694.21248 92.376268 
+L 694.9944 91.308061 
+L 695.77632 90.575155 
+L 696.55824 90.126049 
+L 697.34016 89.896485 
+L 698.38272 89.819502 
+L 700.2072 89.974469 
+L 703.59552 90.490274 
+L 705.42 90.985072 
+L 707.24448 91.73566 
+L 709.59024 92.995347 
+L 721.31904 99.935855 
+L 722.10096 100.55712 
+L 722.88288 101.52257 
+L 723.6648 103.04242 
+L 724.44672 105.279681 
+L 725.48928 109.372258 
+L 726.2712 112.1972 
+L 727.31376 115.014509 
+L 728.35632 117.110141 
+L 729.39888 118.64634 
+L 730.44144 119.76012 
+L 731.484 120.577839 
+L 733.04784 121.482553 
+L 738.26064 123.999844 
+L 738.78192 123.902866 
+L 739.3032 123.506765 
+L 739.82448 122.78516 
+L 740.34576 121.738547 
+L 741.12768 119.607274 
+L 742.17024 115.914457 
+L 743.73408 109.276129 
+L 746.86176 95.71381 
+L 748.4256 89.934663 
+L 749.98944 85.069093 
+L 751.29264 81.689654 
+L 752.59584 78.864074 
+L 753.89904 76.524917 
+L 755.20224 74.606214 
+L 756.50544 73.048589 
+L 757.80864 71.8008 
+L 759.11184 70.819466 
+L 760.67568 69.942591 
+L 762.23952 69.344696 
+L 763.80336 68.982618 
+L 765.62784 68.810633 
+L 767.45232 68.863548 
+L 769.53744 69.149521 
+L 771.8832 69.702133 
+L 774.4896 70.539332 
+L 777.61728 71.77513 
+L 781.52688 73.566989 
+L 786.73968 76.21993 
+L 794.81952 80.616155 
+L 824.0112 96.676266 
+L 837.56448 103.79535 
+L 850.85712 110.525102 
+L 853.46352 111.868295 
+L 853.9848 112.445859 
+L 854.50608 113.44752 
+L 855.02736 114.949192 
+L 855.80928 118.177535 
+L 856.5912 122.506324 
+L 857.63376 129.685193 
+L 859.1976 142.348585 
+L 862.06464 165.995908 
+L 863.36784 175.134984 
+L 864.67104 182.729542 
+L 865.7136 187.649081 
+L 866.75616 191.596956 
+L 867.79872 194.677983 
+L 868.84128 197.02421 
+L 869.88384 198.776903 
+L 870.9264 200.072898 
+L 871.96896 201.035376 
+L 873.27216 201.926348 
+L 875.09664 202.860558 
+L 891.7776 210.392074 
+L 892.29888 210.473029 
+L 892.82016 210.271521 
+L 893.0808 209.941146 
+L 893.34144 209.360526 
+L 893.86272 207.155002 
+L 894.384 203.266436 
+L 894.90528 197.694486 
+L 895.6872 186.820615 
+L 899.07552 134.963542 
+L 899.85744 126.985244 
+L 900.63936 121.055495 
+L 901.42128 116.890007 
+L 902.2032 114.056852 
+L 902.98512 112.077405 
+L 906.37344 104.720731 
+L 908.19792 99.328217 
+L 909.76176 94.892501 
+L 910.80432 92.523422 
+L 911.58624 91.158933 
+L 912.36816 90.154211 
+L 913.15008 89.477441 
+L 913.932 89.073909 
+L 914.97456 88.847817 
+L 916.27776 88.859849 
+L 919.1448 89.216858 
+L 921.49056 89.66065 
+L 923.31504 90.249274 
+L 925.13952 91.089438 
+L 927.74592 92.566303 
+L 939.21408 99.507553 
+L 939.996 100.427327 
+L 940.77792 101.881953 
+L 941.55984 104.041308 
+L 942.34176 106.987851 
+L 943.38432 110.99157 
+L 944.42688 113.889741 
+L 945.46944 116.046638 
+L 946.512 117.630699 
+L 947.55456 118.779909 
+L 948.59712 119.622015 
+L 950.16096 120.546922 
+L 955.11312 123.021969 
+L 955.6344 123.053984 
+L 956.15568 122.813252 
+L 956.67696 122.257129 
+L 957.19824 121.373572 
+L 957.98016 119.46324 
+L 958.76208 116.945544 
+L 960.06528 111.792209 
+L 965.01744 90.878721 
+L 966.58128 85.712351 
+L 967.88448 82.097769 
+L 969.18768 79.061729 
+L 970.49088 76.539058 
+L 971.79408 74.462368 
+L 973.09728 72.76935 
+L 974.40048 71.4055 
+L 975.70368 70.324413 
+L 977.26752 69.34576 
+L 978.83136 68.662281 
+L 980.3952 68.228028 
+L 981.95904 68.004897 
+L 983.78352 67.969077 
+L 985.86864 68.172979 
+L 988.2144 68.653356 
+L 990.8208 69.43017 
+L 993.94848 70.614776 
+L 997.59744 72.242559 
+L 1002.28896 74.584686 
+L 1009.32624 78.374578 
+L 1048.42224 99.820191 
+L 1061.71488 106.694585 
+L 1070.57664 111.305004 
+L 1071.09792 112.0828 
+L 1071.6192 113.331481 
+L 1072.14048 115.097506 
+L 1072.9224 118.713014 
+L 1073.70432 123.381793 
+L 1074.74688 130.902658 
+L 1076.57136 146.035607 
+L 1078.91712 165.259007 
+L 1080.22032 174.402174 
+L 1081.52352 181.997584 
+L 1082.56608 186.916068 
+L 1083.60864 190.861905 
+L 1084.6512 193.940406 
+L 1085.69376 196.284044 
+L 1086.73632 198.034405 
+L 1087.77888 199.328551 
+L 1088.82144 200.289787 
+L 1090.12464 201.180129 
+L 1091.94912 202.115083 
+L 1101.5928 206.63792 
+L 1106.54496 208.884604 
+L 1109.15136 209.895407 
+L 1109.67264 209.921586 
+L 1109.93328 209.8172 
+L 1110.19392 209.566329 
+L 1110.45456 209.096966 
+L 1110.7152 208.330493 
+L 1111.23648 205.647021 
+L 1111.75776 201.239854 
+L 1112.53968 191.682841 
+L 1113.58224 175.366954 
+L 1115.66736 142.30079 
+L 1116.70992 129.879781 
+L 1117.49184 123.009935 
+L 1118.27376 118.063966 
+L 1119.05568 114.665624 
+L 1119.8376 112.346016 
+L 1120.88016 110.130994 
+L 1122.444 107.003909 
+L 1123.48656 104.430588 
+L 1125.0504 99.864642 
+L 1126.87488 94.588335 
+L 1127.91744 92.160317 
+L 1128.96 90.357191 
+L 1128.96 90.357191 
+" clip-path="url(#p016f20574b)" style="fill: none; stroke: #bf4520; stroke-width: 1.6; stroke-linecap: square"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 86.4 358.56 
+L 86.4 60.48 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 86.4 358.56 
+L 1128.96 358.56 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_19">
+    <text style="font-size: 14.4px; font-family: 'DejaVu Sans'; text-anchor: start" x="86.4" y="42.48" transform="rotate(-0 86.4 42.48)">Same initial state; raw exported 0D traces</text>
+   </g>
+   <g id="legend_1">
+    <g id="line2d_26">
+     <path d="M 476.89875 76.198125 
+L 488.89875 76.198125 
+L 500.89875 76.198125 
+" style="fill: none; stroke: #4f5d75; stroke-width: 1.6; stroke-linecap: square"/>
+    </g>
+    <g id="text_20">
+     <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: start" x="510.49875" y="80.398125" transform="rotate(-0 510.49875 80.398125)">No assist</text>
+    </g>
+    <g id="line2d_27">
+     <path d="M 588.778125 76.198125 
+L 600.778125 76.198125 
+L 612.778125 76.198125 
+" style="fill: none; stroke: #bf4520; stroke-width: 1.6; stroke-linecap: square"/>
+    </g>
+    <g id="text_21">
+     <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: start" x="622.378125" y="80.398125" transform="rotate(-0 622.378125 80.398125)">Causal demo assist</text>
+    </g>
+   </g>
+  </g>
+  <g id="text_22">
+   <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #4f5d75" x="86.4" y="421.2" transform="rotate(-0 86.4 421.2)">Engineering simulation only. All CSV samples are connected; no smoothing or time alignment.</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p016f20574b">
+   <rect x="86.4" y="60.48" width="1042.56" height="298.08"/>
+  </clipPath>
+ </defs>
+</svg></div><figcaption>图 4 · 两份真实 truth CSV 的根部压力，全量样本直线连接，未平移、平滑、重新求解或拟合。两曲线使用同一时间轴与压力轴。峰压变化须与上表出流／做功一起阅读。使用 Matplotlib 3.10.5 生成；<a href="../docs/principles_assets/demo_root_pressure.svg">独立 SVG</a> · <a href="../docs/principles_assets/demo_root_pressure_provenance.json">绘图来源与哈希</a>。</figcaption></figure><h3>本次刷新读取的文件身份</h3>
+<p>哈希说明“读到了哪一份文件”，不证明这些文件本身正确，也不把读取时的代码自动当作历史产物的构建代码。缺失路径保留 NOT_FOUND。</p>
+<div class="table-scroll"><table><thead><tr><th scope="col">读取来源（相对于仓库）</th><th scope="col">字节数</th><th scope="col">SHA-256</th></tr></thead><tbody><tr><td><a href="../artifacts/verification_summary.json">artifacts/verification_summary.json</a></td><td>6600</td><td><code class="hash">5d62a7489ff934ba075d5bc0e958a6b8fbfc5e31112cb9d44db15e44e1a78c7a</code></td></tr><tr><td><a href="../artifacts/numerical_check.json">artifacts/numerical_check.json</a></td><td>1861</td><td><code class="hash">e6348aee3c46eb3a785eef3508b36e42115e34b91c0292e8956d97b6965b8907</code></td></tr><tr><td><a href="../artifacts/b00/baseline_comparison.json">artifacts/b00/baseline_comparison.json</a></td><td>8302</td><td><code class="hash">2bf02feb0a58bb36544a856e0b20ffbc77a588e2cafa0f30c363059f68f1d057</code></td></tr><tr><td><a href="../artifacts/arterial1d/benchmark_summary.json">artifacts/arterial1d/benchmark_summary.json</a></td><td>133046</td><td><code class="hash">d268710c530a2270054c1da457c37d37a49f63b9d0167b6f66cee9f3df308f42</code></td></tr><tr><td><a href="../artifacts/arterial1d/benchmark_matched.json">artifacts/arterial1d/benchmark_matched.json</a></td><td>11970</td><td><code class="hash">5c10cf78b6e9b469a9ef2b511f188dc0b68ee88d76d40687e1d9c90f54db2669</code></td></tr><tr><td><a href="../artifacts/arterial1d/benchmark_reflections.json">artifacts/arterial1d/benchmark_reflections.json</a></td><td>31679</td><td><code class="hash">f2f47b20d2a24c0ded2a41d4f1c974c3758a74e494ef75782772f48a8681831d</code></td></tr><tr><td><a href="../artifacts/arterial1d/benchmark_junction.json">artifacts/arterial1d/benchmark_junction.json</a></td><td>11505</td><td><code class="hash">2ae2367feac40b10aa643a56f9ddf21a549e9b69894acd905e3e2d534180d9b5</code></td></tr><tr><td><a href="../artifacts/arterial1d/benchmark_boileau.json">artifacts/arterial1d/benchmark_boileau.json</a></td><td>14717</td><td><code class="hash">9918b800f80afa85e83cfd4cc048fa9c64141543b0b965c0ca4363cd06098aaa</code></td></tr><tr><td><a href="../artifacts/arterial1d/history/pre_linear3/manifest.json">artifacts/arterial1d/history/pre_linear3/manifest.json</a></td><td>11635</td><td><code class="hash">c18f484cfda9bfc9ad40addb99824bfc8dbb6967b5dfeb9f3220d94775b483de</code></td></tr><tr><td><a href="../artifacts/arterial1d/external/boileau2015/manifest.json">artifacts/arterial1d/external/boileau2015/manifest.json</a></td><td>7228</td><td><code class="hash">b82e078b04393ee9552a89d06a7599af5c60a80cc53cf9d327e25a0d3810c4d3</code></td></tr><tr><td><a href="../artifacts/arterial1d/external/boileau2015/reference_scheme_spread.json">artifacts/arterial1d/external/boileau2015/reference_scheme_spread.json</a></td><td>11064</td><td><code class="hash">a01c1c5015de0f9f90a677a869fc21b5725eea0894edc485287ee7ca8ba2d6f0</code></td></tr><tr><td><a href="../artifacts/demo/provenance.json">artifacts/demo/provenance.json</a></td><td>2942</td><td><code class="hash">12cb21f6d14c19edcd5b8650ce0f66aba13981c83cb7ce6404b1a6f546c934bd</code></td></tr><tr><td><a href="../artifacts/demo/baseline_truth.csv">artifacts/demo/baseline_truth.csv</a></td><td>2390656</td><td><code class="hash">1788f77e957175dbb7be3021a81af4b2e3cfb5e469518cb03a203a20bb8b866a</code></td></tr><tr><td><a href="../artifacts/demo/assisted_truth.csv">artifacts/demo/assisted_truth.csv</a></td><td>2439230</td><td><code class="hash">24ab4f5cb0d6b31956aa186c9d3580e4baed93926f0f31f005251e765f01cce0</code></td></tr><tr><td><a href="../artifacts/demo/prototype_viewer.html">artifacts/demo/prototype_viewer.html</a></td><td>634160</td><td><code class="hash">cbf868b96e61fcdd4722a7c83b59d50b718f027ce3dce351cbb774249ac24635</code></td></tr><tr><td><a href="../docs/principles_assets/demo_root_pressure.svg">docs/principles_assets/demo_root_pressure.svg</a></td><td>28593</td><td><code class="hash">37c3005bf732c81cad4f53357fe30b8f53dedf0fccd6b7ca72f325d4d1001190</code></td></tr><tr><td><a href="../docs/principles_assets/demo_root_pressure_provenance.json">docs/principles_assets/demo_root_pressure_provenance.json</a></td><td>786</td><td><code class="hash">3226ce55898918c28755c0cc5d1c4a259745e411ad9f440f264b3976da99fa34</code></td></tr><tr><td><a href="../docs/principles_assets/render_demo_pressure.py">docs/principles_assets/render_demo_pressure.py</a></td><td>4272</td><td><code class="hash">2398d4c7cd6a4046c11308f407ce0d43f4e0829b6550535c355921e5df4730bc</code></td></tr><tr><td><a href="../iabp/model.py">iabp/model.py</a></td><td>9006</td><td><code class="hash">08aa745151b3d9ba142de79718ce15ab6bfb48938a84b21ad34858153699cb3f</code></td></tr><tr><td><a href="../iabp/components.py">iabp/components.py</a></td><td>2644</td><td><code class="hash">9893009e3b02b3c62e07783ce7d73ea02724d1f063ff8a30a572da635d9b07a5</code></td></tr><tr><td><a href="../iabp/engine.py">iabp/engine.py</a></td><td>12706</td><td><code class="hash">471dea2658cc5b4d5c0abc8dcf781a6934c293fcacc13eb92a3cf5ef4ad26608</code></td></tr><tr><td><a href="../iabp/sensors.py">iabp/sensors.py</a></td><td>3786</td><td><code class="hash">a6eb956da8d30ccf9b01abc6259209de355ded2a62c267f33b2f589fbdb9c009</code></td></tr><tr><td><a href="../docs/tasks/B01_SPEC.md">docs/tasks/B01_SPEC.md</a></td><td>3333</td><td><code class="hash">1a8534643758055f6b4be45a6e7d9194179111b9be5899d30ed4279a49ec9f26</code></td></tr><tr><td><a href="../tools/update_principles_evidence.py">tools/update_principles_evidence.py</a></td><td>27168</td><td><code class="hash">3b66f9e640b5c9ad9499aad17d0bbe6cb6ea06dc23566106db2bf38c9b0b7dc7</code></td></tr><tr><td><a href="../tools/arterial1d_check.py">tools/arterial1d_check.py</a></td><td>57443</td><td><code class="hash">a60fa6d721fc9bc63af9c2ff18917a7fc46df68c92bcb472c8cb41a474f0e635</code></td></tr><tr><td><a href="../tools/verify_all.py">tools/verify_all.py</a></td><td>5318</td><td><code class="hash">ad090d1a5d5161669b87408cf46aafb610c41e03849ed8272c18be4e91ac64e6</code></td></tr><tr><td><a href="../artifacts/arterial1d/benchmark_linear3_matched.json">artifacts/arterial1d/benchmark_linear3_matched.json</a></td><td>13292</td><td><code class="hash">d66e4dcaa23bc898ec23e0b773ceba561473be9ff21d5d9fc3603b146dbd6ce8</code></td></tr><tr><td><a href="../artifacts/arterial1d/run_logs/linear3_matched_bab289e7db74.log">artifacts/arterial1d/run_logs/linear3_matched_bab289e7db74.log</a></td><td>844</td><td><code class="hash">2990215cda8702090c234026fdca684cf3f4be1b7d04e43c19cc03c2a4d7e7fc</code></td></tr><tr><td><a href="../artifacts/arterial1d/run_logs/reflections_db0434b97af3.log">artifacts/arterial1d/run_logs/reflections_db0434b97af3.log</a></td><td>1736</td><td><code class="hash">c5995bc1246e6bbfd4946c8641a8379e86c94fbb92f27ebc2a0ec5e5c057a413</code></td></tr><tr><td><a href="../artifacts/arterial1d/run_logs/junction_420d5e7d6de4.log">artifacts/arterial1d/run_logs/junction_420d5e7d6de4.log</a></td><td>767</td><td><code class="hash">510a60f1c6d7be061b2c78cebdd8e8f793768ead2a5875f2d7950705f38fb2f1</code></td></tr><tr><td><a href="../artifacts/arterial1d/benchmark_linear3_boileau.json">artifacts/arterial1d/benchmark_linear3_boileau.json</a></td><td>53108</td><td><code class="hash">f38279c03d07101b8ff324a6b0f7e98d405943260f7a8832597571973f377072</code></td></tr><tr><td><a href="../artifacts/arterial1d/run_logs/linear3_boileau_520c16c2fb67.log">artifacts/arterial1d/run_logs/linear3_boileau_520c16c2fb67.log</a></td><td>2844</td><td><code class="hash">3c220939591562fcd1fe7e985d308734e2a0e93a5a03ae0ab2f34474c429e2f4</code></td></tr><tr><td><a href="../iabp/arterial1d/__init__.py">iabp/arterial1d/__init__.py</a></td><td>1051</td><td><code class="hash">793796aa44e076d7450f860a96da4e9e7ca81447e2e4213817cd042b113c780f</code></td></tr><tr><td><a href="../iabp/arterial1d/boundaries.py">iabp/arterial1d/boundaries.py</a></td><td>6698</td><td><code class="hash">131d46cca8e20573b7daae9fc2686bacb19785fbf53e76e3236c695786ad408d</code></td></tr><tr><td><a href="../iabp/arterial1d/physics.py">iabp/arterial1d/physics.py</a></td><td>5657</td><td><code class="hash">f7455b4f9fac8b52d8cedd43389d162e58aa551bc5db28e0826c1fb233c88761</code></td></tr><tr><td><a href="../iabp/arterial1d/solver.py">iabp/arterial1d/solver.py</a></td><td>26509</td><td><code class="hash">8d70b1192ed64efe05a5702415e642ba850040ae094c6e0dfbcb8a7d99c7455b</code></td></tr></tbody></table></div>
+</div>
+<!-- PRINCIPLES_EVIDENCE_END -->
+</section>
+
+<section id="maintenance">
+<h2>9. 让原理、实现与证据一起迭代</h2>
+<p>本 HTML 是正式可维护正文，不是一次性截图。每一票涉及方程、状态、边界、事件或数值方法时，同步修改相关章节和代码映射；完成需要的运行后，再刷新第 8 节。证据刷新不会自动修改正文、任务状态或验收结论。</p>
+<p>维护流程与检查见 <a href="PRINCIPLES_MAINTENANCE.md">PRINCIPLES_MAINTENANCE.md</a>。主要入口是 <a href="../START_HERE.md">START_HERE.md</a>、<a href="../AGENTS.md">AGENTS.md</a>、<a href="STATUS.md">STATUS.md</a>、<a href="ARCHITECTURE.md">ARCHITECTURE.md</a> 与 <a href="tasks/B01_SPEC.md">B01_SPEC.md</a>。这些文件的完成状态以其自身最新记录为准。</p>
+<h3>未完成的适用域与证据</h3>
+<p>当前仍需区分：独立 1D 与心脏集成；单结点与分布式球囊；局部元件能量关系与全系统能量核验；合成 ECG 与实测电生理；工程传感链与真实仪器标定；同进程快照与跨进程隔离；软件／数值验证与独立患者／动物验证。它们不能被同一份 pytest 计数合并成“全部通过”。</p>
+<h3>来源与推导范围</h3>
+<div class="table-scroll"><table><thead><tr><th>来源</th><th>在本文中的用途</th><th>证据限制</th></tr></thead><tbody>
+<tr><td><a href="reference/IABP_Engine_Spec_r1.md">IABP Engine Spec r1</a>、<a href="tasks/B01_SPEC.md">B01 规格</a>、当前源代码</td><td>本文的实际工程方程、参数、接口与任务边界；守恒与能量恒等式为在这些假设下的直接推导</td><td>项目规格不是患者或器械校准数据</td></tr>
+<tr><td><a href="https://onlinelibrary.wiley.com/doi/full/10.1002/cnm.2602">Alastruey J, Hunt AAE, Weinberg PD. Novel wave intensity analysis… 2014. DOI: 10.1002/cnm.2602</a></td><td>纯弹性 1D、壁本构、特征路径与反射背景；本次核查出版方全文</td><td>不借其生理数据证明当前工程参数适用于患者</td></tr>
+<tr><td><a href="https://cronfa.swan.ac.uk/Record/cronfa22154">Boileau E et al. A benchmark study of numerical schemes… 2015. DOI: 10.1002/cnm.2732</a></td><td>独立公开基准的背景与作者机构记录；解析基准与外部数据基准分别记账</td><td>公开论文和公开摘要不自动代表所有输入文件已经取得并复现</td></tr>
+<tr><td><a href="reference/research_r0/IABP_Physics_Engine_Design_r0.md">r0 第一性原理研究原文</a></td><td>历史完整论证与来源，保留查阅</td><td>历史研究说明和旧教学内容不作为当前核心测试 oracle</td></tr>
+</tbody></table></div>
+<p class="small">外部文献访问日期：2026-10-15。未复制第三方图表或原始病例；图 1–3 由本项目架构和冻结方程重新构建。LaTeX 源与 MathML 排版应在同一变更中更新。</p>
+</section>
+</main>
+<footer>本文件是工程原理与证据入口。输出能复现、方程被一致求解、模型具有生理适用性、器械临床安全有效，分别需要各自的证据。</footer>
+</body>
+</html>

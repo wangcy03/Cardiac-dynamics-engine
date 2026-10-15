@@ -1,0 +1,68 @@
+{
+  "case": "closed",
+  "cells": 320,
+  "scheme": "muscl_ssprk2",
+  "probe_x_m": 0.75,
+  "coefficient_definition": "signed peak p- in fixed reflected window / peak p+ in fixed incident window",
+  "incident_window_s": [
+    0.17,
+    0.27
+  ],
+  "reflected_window_s": [
+    0.27,
+    0.39
+  ],
+  "expected_coefficient": 1.0,
+  "measured_coefficient": 0.997300684882984,
+  "coefficient_absolute_error": 0.0026993151170160434,
+  "conservation_relative_initial_volume": 1.0576882765844714e-16,
+  "pass": true,
+  "wall_seconds": 12.237058700004127,
+  "trace_csv": "reflection_closed_320.csv",
+  "max_abs_conservation_residual_m3": 3.173064829753414e-20,
+  "integrated_left_inflow_m3": 2.2652753963781413e-08,
+  "integrated_right_outflow_m3": 0.0,
+  "identity": {
+    "python_executable": "D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe",
+    "python_version": "3.12.9",
+    "source_sha256": {
+      "D:\\codehub2026\\04_heart_engine_r2\\tools\\arterial1d_check.py": "9b04739a740c6c7fc10d348d78a5cca43e3bbc2607a42a16283ac93396ab8427",
+      "iabp\\arterial1d\\__init__.py": "793796aa44e076d7450f860a96da4e9e7ca81447e2e4213817cd042b113c780f",
+      "iabp\\arterial1d\\boundaries.py": "131d46cca8e20573b7daae9fc2686bacb19785fbf53e76e3236c695786ad408d",
+      "iabp\\arterial1d\\physics.py": "f7455b4f9fac8b52d8cedd43389d162e58aa551bc5db28e0826c1fb233c88761",
+      "iabp\\arterial1d\\solver.py": "8d70b1192ed64efe05a5702415e642ba850040ae094c6e0dfbcb8a7d99c7455b"
+    },
+    "source_snapshot_manifest": "history\\source_bd493b738097c431\\manifest.json"
+  },
+  "parameters": {
+    "length_m": 1.0,
+    "cells": 320,
+    "scheme": "muscl_ssprk2",
+    "reference_area_m2": 0.0003,
+    "density_kg_m3": 1060.0,
+    "beta_pa": 53000.0,
+    "reference_pressure_pa": 0.0,
+    "initial_flow_m3_s": 0.0,
+    "kinematic_viscosity_m2_s": 0.0,
+    "cfl": 0.4,
+    "inlet": {
+      "quantity": "pressure_pa",
+      "amplitude_pa": 20.0,
+      "start_s": 0.05,
+      "end_s": 0.09,
+      "shape": "sine_squared; zero otherwise"
+    },
+    "outlet": {
+      "type": "closed",
+      "expected_linear_reflection": 1.0
+    }
+  },
+  "source_unchanged_during_run": true,
+  "run_log_path": "run_logs\\reflections_d339fc888dd5.log",
+  "csv_artifacts": [
+    {
+      "path": "reflection_closed_320.csv",
+      "sha256": "c25cd0f3cb1d066c086dee40797c61f4b41b14f4307b82e039ef1125c8c2cb48"
+    }
+  ]
+}

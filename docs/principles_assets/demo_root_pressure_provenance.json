@@ -1,0 +1,17 @@
+{
+  "schema": "iabp-principles-scientific-figure/v1",
+  "generator": "docs/principles_assets/render_demo_pressure.py v1",
+  "matplotlib_version": "3.10.5",
+  "python_version": "3.12.9",
+  "scope": "Read raw CSV and plot every exported sample; no solver, smoothing, fitting or time alignment",
+  "input_sha256": {
+    "artifacts/demo/baseline_truth.csv": "1788f77e957175dbb7be3021a81af4b2e3cfb5e469518cb03a203a20bb8b866a",
+    "artifacts/demo/assisted_truth.csv": "24ab4f5cb0d6b31956aa186c9d3580e4baed93926f0f31f005251e765f01cce0",
+    "artifacts/demo/provenance.json": "12cb21f6d14c19edcd5b8650ce0f66aba13981c83cb7ce6404b1a6f546c934bd"
+  },
+  "rows": {
+    "baseline": 4001,
+    "assisted": 4001
+  },
+  "svg_sha256": "37c3005bf732c81cad4f53357fe30b8f53dedf0fccd6b7ca72f325d4d1001190"
+}

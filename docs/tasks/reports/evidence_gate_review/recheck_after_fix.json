@@ -1,0 +1,100 @@
+{
+  "scope": "independent repaired evidence-gate fault probes; NO_SOLVER_RUN",
+  "tool_sha256": "a60fa6d721fc9bc63af9c2ff18917a7fc46df68c92bcb472c8cb41a474f0e635",
+  "checks": [
+    {
+      "case": "empty_reflections",
+      "result": "REJECTED_AS_REQUIRED"
+    },
+    {
+      "case": "missing_type",
+      "result": "REJECTED_AS_REQUIRED"
+    },
+    {
+      "case": "duplicate_type",
+      "result": "REJECTED_AS_REQUIRED"
+    },
+    {
+      "case": "missing_reflection_grid",
+      "result": "REJECTED_AS_REQUIRED"
+    },
+    {
+      "case": "empty_junction",
+      "result": "REJECTED_AS_REQUIRED"
+    },
+    {
+      "case": "wrong_scheme",
+      "result": "REJECTED_AS_REQUIRED"
+    },
+    {
+      "case": "wrong_run_case",
+      "result": "REJECTED_AS_REQUIRED"
+    },
+    {
+      "case": "reordered_public",
+      "result": "REJECTED_AS_REQUIRED"
+    },
+    {
+      "case": "append_coarser",
+      "result": "REJECTED_AS_REQUIRED"
+    },
+    {
+      "case": "missing_public_grid",
+      "result": "REJECTED_AS_REQUIRED"
+    },
+    {
+      "case": "empty_csv",
+      "result": "REJECTED_AS_REQUIRED"
+    },
+    {
+      "case": "missing_csv",
+      "result": "REJECTED_AS_REQUIRED"
+    },
+    {
+      "case": "duplicate_csv",
+      "result": "REJECTED_AS_REQUIRED"
+    },
+    {
+      "case": "extra_csv",
+      "result": "REJECTED_AS_REQUIRED"
+    },
+    {
+      "case": "wrapper_true_cannot_override_numeric_fail",
+      "result": "FALSE_AS_REQUIRED"
+    },
+    {
+      "case": "wrapper_false_is_not_numeric_evidence",
+      "result": "TRUE_FROM_VALID_NUMBERS"
+    },
+    {
+      "case": "empty_current_runs",
+      "result": "REJECTED_AS_REQUIRED"
+    },
+    {
+      "case": "empty_snapshot_source_files",
+      "result": "REJECTED_AS_REQUIRED"
+    },
+    {
+      "case": "snapshot_source_byte_drift",
+      "result": "REJECTED_AS_REQUIRED"
+    },
+    {
+      "case": "actual_input_drift_case1_source_config.json",
+      "result": "REJECTED_AS_REQUIRED"
+    },
+    {
+      "case": "actual_input_drift_manifest.json",
+      "result": "REJECTED_AS_REQUIRED"
+    },
+    {
+      "case": "actual_input_drift_Benchmark1_SinglePulseModel.zip",
+      "result": "REJECTED_AS_REQUIRED"
+    },
+    {
+      "case": "missing_captured_public_data_identity",
+      "result": "REJECTED_AS_REQUIRED"
+    }
+  ],
+  "count": 23,
+  "status": "PASS"
+}

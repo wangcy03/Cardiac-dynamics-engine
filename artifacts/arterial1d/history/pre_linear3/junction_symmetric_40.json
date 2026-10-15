@@ -1,0 +1,19 @@
+{
+  "case": "symmetric_static_pressure_junction",
+  "cells_per_segment": 40,
+  "scheme": "muscl_ssprk2",
+  "junction_model": "common static pressure; no kinetic/local losses",
+  "parent_integrated_outflow_m3": 2.2653660992244034e-08,
+  "child1_integrated_inflow_m3": 1.1326830496122017e-08,
+  "child2_integrated_inflow_m3": 1.1326830496122017e-08,
+  "child1_fraction": 0.5,
+  "child2_fraction": 0.5,
+  "symmetric_split_absolute_error": 0.0,
+  "parent_backward_forward_peak_ratio": 0.004272029552271795,
+  "max_single_step_interface_volume_mismatch_m3": 0.0,
+  "integrated_interface_volume_mismatch_m3": 0.0,
+  "conservation_relative_initial_volume": 3.5319388618024884e-16,
+  "pass": true,
+  "wall_seconds": 2.3368938000057824,
+  "trace_csv": "junction_symmetric_40.csv"
+}

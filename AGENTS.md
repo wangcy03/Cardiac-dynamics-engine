@@ -48,3 +48,9 @@ python -m mypy iabp
 修改模型后再运行 `python -m examples.run_demo`。静态工具缺失只能记 NOT_RUN，不得声称已通过。
 不要无依据放宽阈值来绿化测试。不能为了支持临床结论而逐工况重拟合参数。
 提交说明必须给出：修改点、测试命令/结果、数值误差变化、仍未覆盖的风险。
+
+## 数理原理文档随迭代维护
+修改方程、本构参数、数值方法、事件或接口时，同步维护
+`docs/MATHEMATICAL_PRINCIPLES.html` 的相应推导、假设和实现边界；
+按 `docs/PRINCIPLES_MAINTENANCE.md` 刷新实际产物证据及图表，再完成 freshness 检查。
+正文是解释的维护源，自动证据区只读取导出文件；刷新文档不替代数值或生理验证。

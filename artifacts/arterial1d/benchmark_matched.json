@@ -1,0 +1,275 @@
+{
+  "schema": "arterial1d-benchmark/v1",
+  "identity": {
+    "python_executable": "D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe",
+    "python_version": "3.12.9",
+    "source_sha256": {
+      "D:\\codehub2026\\04_heart_engine_r2\\tools\\arterial1d_check.py": "3f372a39d35f593c32bf3384b9fbf2aa19747e03fc43e78da6fa4d3d6bd5d46c",
+      "iabp\\arterial1d\\__init__.py": "793796aa44e076d7450f860a96da4e9e7ca81447e2e4213817cd042b113c780f",
+      "iabp\\arterial1d\\boundaries.py": "131d46cca8e20573b7daae9fc2686bacb19785fbf53e76e3236c695786ad408d",
+      "iabp\\arterial1d\\physics.py": "9ee6d6abdfae0d127af9868b854d2c7e09cb8176e7ac873d73dc82e3e0454ecf",
+      "iabp\\arterial1d\\solver.py": "eefea67a6d57300c7cb6b781749150e37ffed0c3fb3e7faf7680aeae771c5708"
+    }
+  },
+  "thresholds_declared_before_runs": {
+    "arrival_error_ms": 0.5,
+    "peak_relative_error": 0.01,
+    "conservation_relative_initial_volume": 1e-10,
+    "reflection_coefficient_absolute_error": 0.05,
+    "symmetric_split_absolute_error": 0.005,
+    "junction_backward_forward_peak_ratio": 0.05
+  },
+  "boileau_thresholds_declared_before_runs": {
+    "relative_max_profile_error": 0.05,
+    "maximum_peak_relative_error": 0.05,
+    "peak_position_absolute_difference_m": 0.02,
+    "conservation_relative_initial_volume": 1e-10
+  },
+  "scope": "independent uniform vessels; no heart, balloon, clinical calibration or event accuracy claim",
+  "alignment": "none",
+  "selected_case": "matched",
+  "matched": {
+    "first_order_baseline": [
+      {
+        "arrival_definition": "first rising crossing of fixed 10 Pa; no time translation",
+        "arrival_time_s": 0.16868427133033137,
+        "expected_arrival_time_s": 0.16,
+        "arrival_error_ms": 8.684271330331367,
+        "peak_pressure_pa": 10.01347283778653,
+        "peak_relative_error": 0.4993263581106735,
+        "candidate_pass": false,
+        "case": "engineering_matched_pressure_pulse",
+        "cells": 80,
+        "scheme": "rusanov",
+        "cfl": 0.4,
+        "dt_policy": "0.95 * max_stable_dt_s, clipped to observation time",
+        "observation_interval_s": 0.0005,
+        "spatial_pressure_max_abs_error_pa": 12.467294713850874,
+        "spatiotemporal_pressure_rms_error_pa": 2.100349019028037,
+        "max_abs_linear_volume_error_m3": 5.4531122142343675e-09,
+        "max_abs_conservation_residual_m3": 7.432714849780875e-20,
+        "conservation_relative_initial_volume": 2.4775716165936253e-16,
+        "conservation_pass": true,
+        "minimum_area_m2": 0.0003,
+        "steps": 640,
+        "wall_seconds": 0.6634713999956148,
+        "trace_csv": "matched_rusanov_80_trace.csv",
+        "profile_csv": "matched_rusanov_80_profiles.csv"
+      },
+      {
+        "arrival_definition": "first rising crossing of fixed 10 Pa; no time translation",
+        "arrival_time_s": 0.16078464916212232,
+        "expected_arrival_time_s": 0.16,
+        "arrival_error_ms": 0.784649162122314,
+        "peak_pressure_pa": 13.683511908349931,
+        "peak_relative_error": 0.31582440458250344,
+        "candidate_pass": false,
+        "case": "engineering_matched_pressure_pulse",
+        "cells": 160,
+        "scheme": "rusanov",
+        "cfl": 0.4,
+        "dt_policy": "0.95 * max_stable_dt_s, clipped to observation time",
+        "observation_interval_s": 0.0005,
+        "spatial_pressure_max_abs_error_pa": 9.068965621002892,
+        "spatiotemporal_pressure_rms_error_pa": 1.3901803366470016,
+        "max_abs_linear_volume_error_m3": 3.6068173492602376e-09,
+        "max_abs_conservation_residual_m3": 1.1626519817800336e-19,
+        "conservation_relative_initial_volume": 3.875506605933446e-16,
+        "conservation_pass": true,
+        "minimum_area_m2": 0.0003,
+        "steps": 1280,
+        "wall_seconds": 2.533397799998056,
+        "trace_csv": "matched_rusanov_160_trace.csv",
+        "profile_csv": "matched_rusanov_160_profiles.csv"
+      },
+      {
+        "arrival_definition": "first rising crossing of fixed 10 Pa; no time translation",
+        "arrival_time_s": 0.16021417922578643,
+        "expected_arrival_time_s": 0.16,
+        "arrival_error_ms": 0.21417922578642612,
+        "peak_pressure_pa": 16.112111952469313,
+        "peak_relative_error": 0.19439440237653435,
+        "candidate_pass": false,
+        "case": "engineering_matched_pressure_pulse",
+        "cells": 320,
+        "scheme": "rusanov",
+        "cfl": 0.4,
+        "dt_policy": "0.95 * max_stable_dt_s, clipped to observation time",
+        "observation_interval_s": 0.0005,
+        "spatial_pressure_max_abs_error_pa": 6.287476584509568,
+        "spatiotemporal_pressure_rms_error_pa": 0.9074291210624643,
+        "max_abs_linear_volume_error_m3": 2.368040218090002e-09,
+        "max_abs_conservation_residual_m3": 1.0049913570274265e-19,
+        "conservation_relative_initial_volume": 3.349971190091422e-16,
+        "conservation_pass": true,
+        "minimum_area_m2": 0.0003,
+        "steps": 1920,
+        "wall_seconds": 7.063780399999814,
+        "trace_csv": "matched_rusanov_320_trace.csv",
+        "profile_csv": "matched_rusanov_320_profiles.csv"
+      }
+    ],
+    "high_order_separate_comparison": [
+      {
+        "arrival_definition": "first rising crossing of fixed 10 Pa; no time translation",
+        "arrival_time_s": 0.15889435163577026,
+        "expected_arrival_time_s": 0.16,
+        "arrival_error_ms": 1.1056483642297443,
+        "peak_pressure_pa": 16.642392462804303,
+        "peak_relative_error": 0.16788037685978488,
+        "candidate_pass": false,
+        "case": "engineering_matched_pressure_pulse",
+        "cells": 80,
+        "scheme": "muscl_ssprk2",
+        "cfl": 0.4,
+        "dt_policy": "0.95 * max_stable_dt_s, clipped to observation time",
+        "observation_interval_s": 0.0005,
+        "spatial_pressure_max_abs_error_pa": 4.902889504361008,
+        "spatiotemporal_pressure_rms_error_pa": 0.5804652266411602,
+        "max_abs_linear_volume_error_m3": 1.5890032644995799e-09,
+        "max_abs_conservation_residual_m3": 1.0620337320690833e-19,
+        "conservation_relative_initial_volume": 3.540112440230278e-16,
+        "conservation_pass": true,
+        "minimum_area_m2": 0.0002999952261934436,
+        "steps": 640,
+        "wall_seconds": 1.3383911999990232,
+        "trace_csv": "matched_muscl_ssprk2_80_trace.csv",
+        "profile_csv": "matched_muscl_ssprk2_80_profiles.csv"
+      },
+      {
+        "arrival_definition": "first rising crossing of fixed 10 Pa; no time translation",
+        "arrival_time_s": 0.1594878975238307,
+        "expected_arrival_time_s": 0.16,
+        "arrival_error_ms": 0.5121024761693127,
+        "peak_pressure_pa": 18.734791771519156,
+        "peak_relative_error": 0.06326041142404222,
+        "candidate_pass": false,
+        "case": "engineering_matched_pressure_pulse",
+        "cells": 160,
+        "scheme": "muscl_ssprk2",
+        "cfl": 0.4,
+        "dt_policy": "0.95 * max_stable_dt_s, clipped to observation time",
+        "observation_interval_s": 0.0005,
+        "spatial_pressure_max_abs_error_pa": 1.847593723255038,
+        "spatiotemporal_pressure_rms_error_pa": 0.22208107988629924,
+        "max_abs_linear_volume_error_m3": 5.236310543934119e-10,
+        "max_abs_conservation_residual_m3": 9.423572410449112e-20,
+        "conservation_relative_initial_volume": 3.1411908034830377e-16,
+        "conservation_pass": true,
+        "minimum_area_m2": 0.00029999880043637294,
+        "steps": 1280,
+        "wall_seconds": 5.255153499994776,
+        "trace_csv": "matched_muscl_ssprk2_160_trace.csv",
+        "profile_csv": "matched_muscl_ssprk2_160_profiles.csv"
+      },
+      {
+        "arrival_definition": "first rising crossing of fixed 10 Pa; no time translation",
+        "arrival_time_s": 0.1598671585522244,
+        "expected_arrival_time_s": 0.16,
+        "arrival_error_ms": 0.1328414477756168,
+        "peak_pressure_pa": 19.556167355712418,
+        "peak_relative_error": 0.022191632214379097,
+        "candidate_pass": false,
+        "case": "engineering_matched_pressure_pulse",
+        "cells": 320,
+        "scheme": "muscl_ssprk2",
+        "cfl": 0.4,
+        "dt_policy": "0.95 * max_stable_dt_s, clipped to observation time",
+        "observation_interval_s": 0.0005,
+        "spatial_pressure_max_abs_error_pa": 0.6501024959681487,
+        "spatiotemporal_pressure_rms_error_pa": 0.08423566691344005,
+        "max_abs_linear_volume_error_m3": 2.037327033769141e-10,
+        "max_abs_conservation_residual_m3": 8.613736785064444e-20,
+        "conservation_relative_initial_volume": 2.871245595021482e-16,
+        "conservation_pass": true,
+        "minimum_area_m2": 0.00029999969454486564,
+        "steps": 1920,
+        "wall_seconds": 15.648628399998415,
+        "trace_csv": "matched_muscl_ssprk2_320_trace.csv",
+        "profile_csv": "matched_muscl_ssprk2_320_profiles.csv"
+      },
+      {
+        "arrival_definition": "first rising crossing of fixed 10 Pa; no time translation",
+        "arrival_time_s": 0.15992792020749408,
+        "expected_arrival_time_s": 0.16,
+        "arrival_error_ms": 0.07207979250592467,
+        "peak_pressure_pa": 19.843798070562137,
+        "peak_relative_error": 0.007810096471893147,
+        "candidate_pass": true,
+        "case": "engineering_matched_pressure_pulse",
+        "cells": 640,
+        "scheme": "muscl_ssprk2",
+        "cfl": 0.4,
+        "dt_policy": "0.95 * max_stable_dt_s, clipped to observation time",
+        "observation_interval_s": 0.0005,
+        "spatial_pressure_max_abs_error_pa": 0.27689925519640823,
+        "spatiotemporal_pressure_rms_error_pa": 0.03839470452818619,
+        "max_abs_linear_volume_error_m3": 1.2401543197184417e-10,
+        "max_abs_conservation_residual_m3": 1.1563984963491327e-19,
+        "conservation_relative_initial_volume": 3.8546616544971095e-16,
+        "conservation_pass": true,
+        "minimum_area_m2": 0.00029999994272231423,
+        "steps": 3200,
+        "wall_seconds": 57.27940899999521,
+        "trace_csv": "matched_muscl_ssprk2_640_trace.csv",
+        "profile_csv": "matched_muscl_ssprk2_640_profiles.csv"
+      }
+    ],
+    "first_order_pressure_error_orders": [
+      0.45913853203594607,
+      0.5284568885521705
+    ],
+    "high_order_pressure_error_orders": [
+      1.4079846980952995,
+      1.5069084518257228,
+      1.231306020019143
+    ],
+    "first_order_convergence": {
+      "pressure_max_error_orders": [
+        0.45913853203594607,
+        0.5284568885521705
+      ],
+      "peak_relative_error_orders": [
+        0.6608604083666836,
+        0.7001359794802292
+      ],
+      "arrival_error_orders": [
+        3.4682851667611088,
+        1.8732291768291012
+      ],
+      "linear_volume_error_orders": [
+        0.5963534772705879,
+        0.607032782816786
+      ],
+      "roundoff_balance_order": "not interpreted as truncation error convergence"
+    },
+    "high_order_convergence": {
+      "pressure_max_error_orders": [
+        1.4079846980952995,
+        1.5069084518257228,
+        1.231306020019143
+      ],
+      "peak_relative_error_orders": [
+        1.4080587631256598,
+        1.5112871557332643,
+        1.5066035088955758
+      ],
+      "arrival_error_orders": [
+        1.1103881897566872,
+        1.9467271836831042,
+        0.8820385880601398
+      ],
+      "linear_volume_error_orders": [
+        1.6014995233962075,
+        1.3618730783590542,
+        0.7161579269028975
+      ],
+      "roundoff_balance_order": "not interpreted as truncation error convergence"
+    },
+    "candidate_pass": true
+  },
+  "wall_seconds": 90.00090980000095,
+  "engineering_status": "PASS",
+  "public_benchmark_status": "NOT_RUN",
+  "overall_status": "PASS_DECLARED_CHECKS"
+}

@@ -1,0 +1,35 @@
+{
+  "status": "PASS_WHEEL_BUILD_INSTALL_IMPORT_ONLY",
+  "builder_python": "3.12.9 | packaged by Anaconda, Inc. | (main, Feb  6 2025, 18:49:16) [MSC v.1929 64 bit (AMD64)]",
+  "builder_platform": "Windows-10-10.0.19045-SP0",
+  "wheel": "iabp_physics_prototype-0.2.0-py3-none-any.whl",
+  "wheel_sha256": "891b759ceb9618f891d2fabdb85ccb952ac0d173529c4b97d9064b1949452583",
+  "wheel_source_files_byte_identical": true,
+  "included_production_file_count": 12,
+  "source_sha256": {
+    "iabp/__init__.py": "d7809c34209ced30a8de26539b4ff10693f96c774ea8d09306572a5496989a83",
+    "iabp/components.py": "9893009e3b02b3c62e07783ce7d73ea02724d1f063ff8a30a572da635d9b07a5",
+    "iabp/contracts.py": "12b75cd6edf4f0f00a0d28e29c0a75f6e08e1d0fce1e84a26201201cf444d373",
+    "iabp/engine.py": "471dea2658cc5b4d5c0abc8dcf781a6934c293fcacc13eb92a3cf5ef4ad26608",
+    "iabp/model.py": "08aa745151b3d9ba142de79718ce15ab6bfb48938a84b21ad34858153699cb3f",
+    "iabp/scenarios.py": "14f9c4cf1ed3296157048ea07689e747d3aee012318db8dccc01a55e8fb9d17d",
+    "iabp/sensors.py": "a6eb956da8d30ccf9b01abc6259209de355ded2a62c267f33b2f589fbdb9c009",
+    "iabp/units.py": "0f89ba4a917f60874cbf4aa74b02a4d319c1158fa7cd56c22af08354b19efaa2",
+    "iabp/arterial1d/__init__.py": "793796aa44e076d7450f860a96da4e9e7ca81447e2e4213817cd042b113c780f",
+    "iabp/arterial1d/boundaries.py": "131d46cca8e20573b7daae9fc2686bacb19785fbf53e76e3236c695786ad408d",
+    "iabp/arterial1d/physics.py": "f7455b4f9fac8b52d8cedd43389d162e58aa551bc5db28e0826c1fb233c88761",
+    "iabp/arterial1d/solver.py": "8d70b1192ed64efe05a5702415e642ba850040ae094c6e0dfbcb8a7d99c7455b"
+  },
+  "install_exit_code": 0,
+  "smoke_exit_code": 0,
+  "isolated_python_flag": "-I",
+  "smoke_result": {
+    "imported_from": "D:\\codehub2026\\04_heart_engine_r2\\artifacts\\local_packaging\\installed_final\\iabp\\__init__.py",
+    "schemes_smoked": [
+      "rusanov",
+      "muscl_ssprk2",
+      "linear3_ssprk3"
+    ]
+  },
+  "scope": "Packaging and isolated import; not numerical or physiological validation"
+}

@@ -1,0 +1,22 @@
+{
+  "case": "pressure_release",
+  "cells": 320,
+  "scheme": "muscl_ssprk2",
+  "probe_x_m": 0.75,
+  "coefficient_definition": "signed peak p- in fixed reflected window / peak p+ in fixed incident window",
+  "incident_window_s": [
+    0.17,
+    0.27
+  ],
+  "reflected_window_s": [
+    0.27,
+    0.39
+  ],
+  "expected_coefficient": -1.0,
+  "measured_coefficient": -0.9964523152341315,
+  "coefficient_absolute_error": 0.0035476847658685307,
+  "conservation_relative_initial_volume": 1.7398365550698683e-16,
+  "pass": true,
+  "wall_seconds": 20.02247390001139,
+  "trace_csv": "reflection_pressure_release_320.csv"
+}

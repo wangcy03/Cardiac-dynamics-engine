@@ -1,0 +1,22 @@
+{
+  "case": "resistance_2z0",
+  "cells": 320,
+  "scheme": "muscl_ssprk2",
+  "probe_x_m": 0.75,
+  "coefficient_definition": "signed peak p- in fixed reflected window / peak p+ in fixed incident window",
+  "incident_window_s": [
+    0.17,
+    0.27
+  ],
+  "reflected_window_s": [
+    0.27,
+    0.39
+  ],
+  "expected_coefficient": 0.3333333333333333,
+  "measured_coefficient": 0.332596173178679,
+  "coefficient_absolute_error": 0.0007371601546543038,
+  "conservation_relative_initial_volume": 1.0823934042127219e-16,
+  "pass": true,
+  "wall_seconds": 20.421196900002542,
+  "trace_csv": "reflection_resistance_2z0_320.csv"
+}

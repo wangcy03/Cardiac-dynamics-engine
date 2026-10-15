@@ -1,0 +1,8 @@
+2026-10-15T10:17:30.048957+00:00 [start] case=linear3_matched; argv=['D:\\codehub2026\\04_heart_engine_r2\\tools\\arterial1d_check.py', '--case', 'linear3_matched']; mode=ACTUAL_SOLVER_RUN
+2026-10-15T10:17:30.133176+00:00 [matched] scheme=linear3_ssprk3 cells=80
+2026-10-15T10:17:31.278248+00:00   peak_error=0.0463527, arrival_ms=0.028751155920186955, candidate=False
+2026-10-15T10:17:31.292504+00:00 [matched] scheme=linear3_ssprk3 cells=160
+2026-10-15T10:17:35.664861+00:00   peak_error=0.00788827, arrival_ms=0.024417219878725138, candidate=True
+2026-10-15T10:17:35.677958+00:00 [matched] scheme=linear3_ssprk3 cells=320
+2026-10-15T10:17:48.558181+00:00   peak_error=0.0014599, arrival_ms=0.04668057328335862, candidate=True
+2026-10-15T10:17:48.571141+00:00 [complete] engineering=PASS; public=NOT_RUN; overall=PASS_DECLARED_CHECKS

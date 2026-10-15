@@ -6,8 +6,12 @@
 先读 AGENTS.md、docs/STATUS.md 和 docs/tasks/BACKLOG.md。不要先改网页样式，也不要重问输入输出边界。
 
 ## 第一条任务
-先执行 B00：复现原型基线，补齐尚未运行的 lint/mypy，检查测试映射和边界；
-然后执行 B01：独立一维传播模块及公开基准。不可跳过基准直接宣布 5 ms 精度。
+接手复现 B00 已完成，冻结证据及跨平台差异见 `docs/tasks/B00_REPORT.md`。
+B01 已完成独立模块的声明范围验收，数值、适用域与后续缺口见 `docs/tasks/B01_REPORT.md`。
+当前实现和下一张票以 `docs/STATUS.md`、`docs/tasks/BACKLOG.md` 为准；
+B01 的独立一维传播与公开基准不能替代 B04 的心脏耦合或 5 ms 端到端验证。
+数理解释见 `docs/MATHEMATICAL_PRINCIPLES.html`，持续维护步骤见
+`docs/PRINCIPLES_MAINTENANCE.md`。
 
 ## 在项目根目录执行
 ```

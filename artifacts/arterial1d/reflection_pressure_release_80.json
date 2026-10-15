@@ -1,0 +1,68 @@
+{
+  "case": "pressure_release",
+  "cells": 80,
+  "scheme": "muscl_ssprk2",
+  "probe_x_m": 0.75,
+  "coefficient_definition": "signed peak p- in fixed reflected window / peak p+ in fixed incident window",
+  "incident_window_s": [
+    0.17,
+    0.27
+  ],
+  "reflected_window_s": [
+    0.27,
+    0.39
+  ],
+  "expected_coefficient": -1.0,
+  "measured_coefficient": -0.9490802263477763,
+  "coefficient_absolute_error": 0.050919773652223665,
+  "conservation_relative_initial_volume": 1.1412886638264975e-16,
+  "pass": false,
+  "wall_seconds": 1.0262180999998236,
+  "trace_csv": "reflection_pressure_release_80.csv",
+  "max_abs_conservation_residual_m3": 3.423865991479492e-20,
+  "integrated_left_inflow_m3": 2.265411031057297e-08,
+  "integrated_right_outflow_m3": 4.527856364243089e-08,
+  "identity": {
+    "python_executable": "D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe",
+    "python_version": "3.12.9",
+    "source_sha256": {
+      "D:/codehub2026/04_heart_engine_r2/tools/arterial1d_check.py": "a60fa6d721fc9bc63af9c2ff18917a7fc46df68c92bcb472c8cb41a474f0e635",
+      "iabp/arterial1d/__init__.py": "793796aa44e076d7450f860a96da4e9e7ca81447e2e4213817cd042b113c780f",
+      "iabp/arterial1d/boundaries.py": "131d46cca8e20573b7daae9fc2686bacb19785fbf53e76e3236c695786ad408d",
+      "iabp/arterial1d/physics.py": "f7455b4f9fac8b52d8cedd43389d162e58aa551bc5db28e0826c1fb233c88761",
+      "iabp/arterial1d/solver.py": "8d70b1192ed64efe05a5702415e642ba850040ae094c6e0dfbcb8a7d99c7455b"
+    },
+    "source_snapshot_manifest": "history/source_5a00d0421e14c051/manifest.json"
+  },
+  "parameters": {
+    "length_m": 1.0,
+    "cells": 80,
+    "scheme": "muscl_ssprk2",
+    "reference_area_m2": 0.0003,
+    "density_kg_m3": 1060.0,
+    "beta_pa": 53000.0,
+    "reference_pressure_pa": 0.0,
+    "initial_flow_m3_s": 0.0,
+    "kinematic_viscosity_m2_s": 0.0,
+    "cfl": 0.4,
+    "inlet": {
+      "quantity": "pressure_pa",
+      "amplitude_pa": 20.0,
+      "start_s": 0.05,
+      "end_s": 0.09,
+      "shape": "sine_squared; zero otherwise"
+    },
+    "outlet": {
+      "type": "pressure_release",
+      "expected_linear_reflection": -1.0
+    }
+  },
+  "source_unchanged_during_run": true,
+  "run_log_path": "run_logs/reflections_db0434b97af3.log",
+  "csv_artifacts": [
+    {
+      "path": "reflection_pressure_release_80.csv",
+      "sha256": "e673ceefc5ef16e1f43324dde0999d01fb65968d649144bf719fcdc64ee9e5be"
+    }
+  ]
+}

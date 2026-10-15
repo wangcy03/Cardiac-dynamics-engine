@@ -1,0 +1,11 @@
+{
+  "schema": "boileau-public-data-integrity/v1",
+  "acquisition_date": "2026-10-15",
+  "published_size_and_md5_matches": true,
+  "zip_crc_check": "PASS",
+  "reference_table_count": 12,
+  "reference_row_count": 50406,
+  "all_reference_rows_have_9_finite_columns": true,
+  "x_nondecreasing": true,
+  "numerical_reproduction_status": "NOT_RUN"
+}

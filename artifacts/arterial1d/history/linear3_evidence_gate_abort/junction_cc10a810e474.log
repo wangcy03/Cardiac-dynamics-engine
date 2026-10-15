@@ -1,0 +1,8 @@
+2026-10-15T10:19:27.605189+00:00 [start] case=junction; argv=['D:\\codehub2026\\04_heart_engine_r2\\tools\\arterial1d_check.py', '--case', 'junction']; mode=ACTUAL_SOLVER_RUN
+2026-10-15T10:19:27.693178+00:00 [junction] symmetric cells_per_segment=40
+2026-10-15T10:19:29.349771+00:00   split=0.5, backward_ratio=0.00427203, pass=True
+2026-10-15T10:19:29.363772+00:00 [junction] symmetric cells_per_segment=80
+2026-10-15T10:19:35.418394+00:00   split=0.5, backward_ratio=0.000951929, pass=True
+2026-10-15T10:19:35.430394+00:00 [junction] symmetric cells_per_segment=160
+2026-10-15T10:19:50.974735+00:00   split=0.5, backward_ratio=0.000430686, pass=True
+2026-10-15T10:19:50.986733+00:00 [complete] engineering=PASS; public=NOT_RUN; overall=PASS_DECLARED_CHECKS

@@ -1,6 +1,14 @@
 {
   "revision": "r2 implementation trace",
   "execution_status": "PARTIAL_NOT_A_COMPLETE_R1_ACCEPTANCE",
+  "current_evidence": {
+    "date": "2026-10-15",
+    "B00": "tasks/B00_REPORT.md",
+    "B01": "tasks/B01_REPORT.md",
+    "software": "../artifacts/verification_summary.json",
+    "independent_1d": "../artifacts/arterial1d/benchmark_summary.json",
+    "qualification_boundary": "Software and standalone numerical checks only; no coupled-engine, physiological or clinical acceptance."
+  },
   "tests": [
     {
       "id": "T01",
@@ -128,8 +136,8 @@
       "name": "独立传播基准",
       "method": "直管传播、分叉、终端反射参考方案。",
       "acceptance": "联合网格收敛；分叉收支与波到达均符合基准容差。",
-      "execution_status": "NOT_IMPLEMENTED",
-      "evidence_or_gap": "B01/B04"
+      "execution_status": "PASS_DECLARED_STANDALONE_B01_ONLY",
+      "evidence_or_gap": "artifacts/arterial1d/benchmark_summary.json; 18 real runs across four suites, three resolutions per case; frozen tolerances; B04 coupled engine remains NOT_IMPLEMENTED"
     },
     {
       "id": "T11",
@@ -179,8 +187,8 @@
       "name": "联合数值收敛",
       "method": "至少三档时间与空间分辨率，增加独立求解对照。",
       "acceptance": "可匹配事件差≤0.5ms、主要压力差≤0.5mmHg；这不是生理精度。",
-      "execution_status": "PARTIAL_TIME_ONLY",
-      "evidence_or_gap": "artifacts/numerical_check.json; test_against_independent_radau; no 1D spatial checks"
+      "execution_status": "PARTIAL_SEPARATE_0D_AND_1D_NOT_COUPLED",
+      "evidence_or_gap": "artifacts/numerical_check.json; test_against_independent_radau; artifacts/arterial1d/benchmark_summary.json has standalone CFL-coupled grid refinement, not a joint 0D/1D/balloon convergence claim"
     },
     {
       "id": "T15",
@@ -389,8 +397,8 @@
       "name": "文档和旧资产保留",
       "method": "对旧研究、HTML和临床样本进行版本检查。",
       "acceptance": "旧文件不被覆盖；新核心未完成时不把文档检查标成生理验证。",
-      "execution_status": "NOT_RUN",
-      "evidence_or_gap": "See target task; no full acceptance evidence in this release"
+      "execution_status": "PASS_BYTE_PRESERVATION_ONLY",
+      "evidence_or_gap": "artifacts/b00/baseline_comparison.json verifies all imported legacy/reference bytes unchanged; original clinical examples remain teaching references, not validated patient evidence"
     }
   ]
 }

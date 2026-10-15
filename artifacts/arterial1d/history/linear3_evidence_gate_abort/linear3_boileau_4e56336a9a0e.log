@@ -1,0 +1,22 @@
+2026-10-15T10:18:55.908077+00:00 [start] case=linear3_boileau; argv=['D:\\codehub2026\\04_heart_engine_r2\\tools\\arterial1d_check.py', '--case', 'linear3_boileau']; mode=ACTUAL_SOLVER_RUN
+2026-10-15T10:18:56.287601+00:00 [Boileau inviscid] scheme=linear3_ssprk3 cells=640
+2026-10-15T10:18:57.787099+00:00   t=0.1s max_error=1.34218 Pa min=-0.106403 max=19.4948 Pa
+2026-10-15T10:19:00.601384+00:00   t=0.3s max_error=3.60925 Pa min=-0.563602 max=17.1606 Pa
+2026-10-15T10:19:03.565036+00:00   t=0.5s max_error=4.69146 Pa min=-0.751827 max=15.9666 Pa
+2026-10-15T10:19:06.597923+00:00   t=0.7s max_error=5.5877 Pa min=-0.855103 max=15.1581 Pa
+2026-10-15T10:19:09.419005+00:00   t=0.9s max_error=6.07535 Pa min=-0.908556 max=14.5485 Pa
+2026-10-15T10:19:12.221925+00:00   t=1.1s max_error=6.67833 Pa min=-0.931512 max=14.0607 Pa
+2026-10-15T10:19:15.081854+00:00   t=1.3s max_error=6.95352 Pa min=-0.949943 max=13.6553 Pa
+2026-10-15T10:19:17.922074+00:00   t=1.5s max_error=7.42675 Pa min=-0.966505 max=13.3092 Pa
+2026-10-15T10:19:17.985694+00:00 [Boileau inviscid] scheme=linear3_ssprk3 cells=1280
+2026-10-15T10:19:23.708799+00:00   t=0.1s max_error=0.22447 Pa min=-0.0012116 max=20.4182 Pa
+2026-10-15T10:19:35.646166+00:00   t=0.3s max_error=0.891804 Pa min=-0.0481058 max=19.7719 Pa
+2026-10-15T10:19:47.195618+00:00   t=0.5s max_error=1.3374 Pa min=-0.123062 max=19.2723 Pa
+2026-10-15T10:19:58.839960+00:00   t=0.7s max_error=1.82521 Pa min=-0.196993 max=18.8596 Pa
+2026-10-15T10:20:10.338596+00:00   t=0.9s max_error=2.12524 Pa min=-0.263947 max=18.5057 Pa
+2026-10-15T10:20:21.910255+00:00   t=1.1s max_error=2.49262 Pa min=-0.321401 max=18.1948 Pa
+2026-10-15T10:20:33.100636+00:00   t=1.3s max_error=2.73681 Pa min=-0.369299 max=17.9171 Pa
+2026-10-15T10:20:44.458083+00:00   t=1.5s max_error=3.01328 Pa min=-0.418228 max=17.6656 Pa
+2026-10-15T10:20:44.519034+00:00 [Boileau inviscid] scheme=linear3_ssprk3 cells=2560
+2026-10-15T10:21:07.656331+00:00   t=0.1s max_error=0.0310469 Pa min=-5.37446e-07 max=20.5713 Pa
+2026-10-15T10:21:53.797149+00:00   t=0.3s max_error=0.120532 Pa min=-7.59311e-06 max=20.4816 Pa

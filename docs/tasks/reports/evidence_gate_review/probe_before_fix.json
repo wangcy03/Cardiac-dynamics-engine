@@ -1,0 +1,8 @@
+{
+  "scope": "synthetic structure fault probes only; no solver or benchmark run",
+  "empty_run_suite_accepted": true,
+  "conflicting_unbound_suite_pass_flag_accepted": true,
+  "run_pass": false,
+  "suite_candidate_pass": true,
+  "dataset_archive_hash_retained_by_finish_run": false
+}

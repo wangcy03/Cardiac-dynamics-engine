@@ -1,0 +1,15 @@
+{
+  "command": [
+    "D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe",
+    "-m",
+    "examples.run_demo"
+  ],
+  "exit_code": 0,
+  "status": "PASS",
+  "scope": "unchanged 0D paired demo after standalone 1D addition; no 0D/1D coupling",
+  "source_sha256": {
+    "iabp\\model.py": "08aa745151b3d9ba142de79718ce15ab6bfb48938a84b21ad34858153699cb3f",
+    "iabp\\engine.py": "471dea2658cc5b4d5c0abc8dcf781a6934c293fcacc13eb92a3cf5ef4ad26608",
+    "examples\\run_demo.py": "f57bfcb1e3fe73d567bb348cd728df2d8ec0baa8e1de1c5ba802c90a60cd7975"
+  }
+}
