@@ -1,7 +1,6 @@
-# Keep source and generated text reproducible across Windows and Linux.
-* text=auto eol=lf
-# Archived teaching/research assets retain their exact input bytes.
-legacy/** -text
-docs/reference/** -text
-*.zip -text
-*.pdf -text
+# Evidence manifests and source identities use byte hashes. Preserve input bytes
+# through Git checkout on every platform, including Windows-generated CSV/JSON.
+* -text
+*.zip binary
+*.png binary
+*.pdf binary
