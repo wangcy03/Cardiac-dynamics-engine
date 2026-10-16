@@ -1,8 +1,8 @@
 {
   "schema": "iabp-local-verification/v2",
   "release": "r2 / 0.2.0",
-  "started_utc": "2026-10-15T10:41:48.609013+00:00",
-  "finished_utc": "2026-10-15T10:42:30.149577+00:00",
+  "started_utc": "2026-10-16T05:46:32.064733+00:00",
+  "finished_utc": "2026-10-16T05:47:27.041518+00:00",
   "python": "3.12.9 | packaged by Anaconda, Inc. | (main, Feb  6 2025, 18:49:16) [MSC v.1929 64 bit (AMD64)]",
   "executable": "D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe",
   "platform": "Windows-10-10.0.19045-SP0",
@@ -29,9 +29,10 @@
     "tools/arterial1d_check.py": "a60fa6d721fc9bc63af9c2ff18917a7fc46df68c92bcb472c8cb41a474f0e635",
     "tools/b00_compare.py": "6fbc1b4336754d55aa49279aced00a88af56b0eb87d93be2cf355d54f1736024",
     "tools/numerical_check.py": "7ac30f36146b6d01648e2b824b477cb8a6fcf7931dbe15db3829c2229fd999d4",
-    "tools/update_principles_evidence.py": "3b66f9e640b5c9ad9499aad17d0bbe6cb6ea06dc23566106db2bf38c9b0b7dc7",
+    "tools/update_principles_evidence.py": "2568480c80dc4dc0ae46843277ee59ed239017a1ffa816dd5bd5489d55912677",
     "tools/verify_all.py": "ad090d1a5d5161669b87408cf46aafb610c41e03849ed8272c18be4e91ac64e6",
-    "tools/viewer.py": "de19828e79515e13498b4bb226ff317906ffcb929f1cc26df63e483a0758e295",
+    "tools/viewer.py": "12120a631d4659e488eb042ded9adcd76947e31a8bf0897c4d7d52fde7b21812",
+    "tools/viewer_data.py": "a682885165daa3b5e7ef0b43927232dc602dd292aa12dcbeb4ba24736bc20f48",
     "tests/test_arterial1d.py": "0171513f473cf2864a6a0e16a69f938bc24eb931cf03ce96dc5c50fd5c7e53fb",
     "tests/test_arterial1d_benchmarks.py": "7754db53ee84fdd0052f003a289aa9914f7814d60a70d760f753b807a504c9ec",
     "tests/test_arterial1d_linear3.py": "259e3e8c0d46dd741d45397a32461e4d8071ef77cbb697c5ced9302286690b52",
@@ -42,7 +43,9 @@
     "tests/test_reference.py": "968b030c79bfd87ca2af761f33decee77380043cecfbded0fd020fadb1423270",
     "tests/test_units.py": "008da40259c5bf01bfa01c1cec102ab355e895f6e7890d56258eededdfc7c6bd",
     "tests/test_verification.py": "5313daaed7859e4eb5b945a12133c6910a4b48a28eabcfa75514a1fecec0e831",
-    "examples/run_demo.py": "f57bfcb1e3fe73d567bb348cd728df2d8ec0baa8e1de1c5ba802c90a60cd7975"
+    "tests/test_viewer_data.py": "d074ba075706dc25d9155c77b5ca6cb33f53897cb8e7c862e72815b4f695b3ce",
+    "tests/test_viewer_publish.py": "958526f456484a8e1b8a885e1d04282b5b786c243da40d494b57db80d8bf8382",
+    "examples/run_demo.py": "f00ce4d0dfc82e0bce22c1bbc196368199842fe88991be5cbdf97d5eb4cb82a3"
   },
   "gates": {
     "compile": {
@@ -57,7 +60,7 @@
         "examples"
       ],
       "exit_code": 0,
-      "elapsed_seconds": 0.8575541000027442,
+      "elapsed_seconds": 0.7888951000059023,
       "log": "artifacts/compile.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
@@ -71,9 +74,9 @@
         "--junitxml=artifacts/pytest.xml"
       ],
       "exit_code": 0,
-      "elapsed_seconds": 12.03736210000352,
+      "elapsed_seconds": 25.477455899992492,
       "log": "artifacts/pytest.log",
-      "log_sha256": "0c66dd72d385b48abadb5c971b134ab703087a2d1c9fa72c237878984d1df8b9"
+      "log_sha256": "d67005a96d30111f2db3157523d3c1c5d846cf9317feca198cbe7aacf36eb7a2"
     },
     "numerical": {
       "status": "PASS",
@@ -83,9 +86,9 @@
         "tools.numerical_check"
       ],
       "exit_code": 0,
-      "elapsed_seconds": 24.670264600004884,
+      "elapsed_seconds": 24.44818559999112,
       "log": "artifacts/numerical.log",
-      "log_sha256": "90361fcf4b28670b90ed29e395a417a12aee4c15a5ed996e21178736f31e22e4"
+      "log_sha256": "c2fc78f25d3ce47be3c630ebbdb70ef288a6933ff5c2e012767c065296358d2b"
     },
     "ruff": {
       "status": "PASS",
@@ -100,7 +103,7 @@
         "examples"
       ],
       "exit_code": 0,
-      "elapsed_seconds": 1.1441622999991523,
+      "elapsed_seconds": 1.1013579000136815,
       "log": "artifacts/ruff.log",
       "log_sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0"
     },
@@ -113,7 +116,7 @@
         "iabp"
       ],
       "exit_code": 0,
-      "elapsed_seconds": 1.2555958999873837,
+      "elapsed_seconds": 1.5353964999958407,
       "log": "artifacts/mypy.log",
       "log_sha256": "99774ae94d9c061d2ee8a3c00a79bb1c6dfd2b0998f7cb389be50e19a0dc7d15"
     },
@@ -126,14 +129,14 @@
         "--collect"
       ],
       "exit_code": 0,
-      "elapsed_seconds": 1.540478399998392,
+      "elapsed_seconds": 1.5787909000064246,
       "log": "artifacts/arterial1d.log",
       "log_sha256": "ecca6db1ce63d898580e44472ca15c5f889599dabedbd739b46a499615b31022",
       "mode": "IDENTITY_CHECK_OF_RECORDED_NUMERICAL_RUNS"
     }
   },
   "pytest_counts": {
-    "tests": 121,
+    "tests": 171,
     "failures": 0,
     "errors": 0,
     "skipped": 0

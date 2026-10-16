@@ -1,0 +1,106 @@
+{
+  "case": "boileau2015_single_pulse_inviscid",
+  "cells": 2560,
+  "scheme": "muscl_ssprk2",
+  "cfl": 0.4,
+  "identity": {
+    "download_integrity": "PASS",
+    "reference_table_count": 12,
+    "dataset_doi": "10.6084/m9.figshare.1586944.v1",
+    "archive_sha256": "da31f4730aa3236e6dd3a686cc92a9bc19887807122b7b31f73c0ae695a2f86e",
+    "license": {
+      "value": 2,
+      "name": "CC0",
+      "url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    }
+  },
+  "reference_method": "published FVM spatial pressure profiles",
+  "reference_pressure_unit": "kPa converted to Pa",
+  "temporal_alignment": "none",
+  "spatial_comparison": "core linear sampling at original FVM cell centers; no shift",
+  "profiles": [
+    {
+      "time_s": 0.1,
+      "max_abs_error_pa": 0.41697110332058074,
+      "rms_error_pa": 0.026518210878175002,
+      "reference_peak_pa": 20.50066,
+      "calculated_peak_pa": 20.08368889667942,
+      "peak_relative_error": 0.0203393989910852,
+      "peak_position_difference_m": 0.0
+    },
+    {
+      "time_s": 0.3,
+      "max_abs_error_pa": 1.233529103315817,
+      "rms_error_pa": 0.08337165064721082,
+      "reference_peak_pa": 20.59975,
+      "calculated_peak_pa": 19.393467721615565,
+      "peak_relative_error": 0.058558102811171756,
+      "peak_position_difference_m": -0.010000000000000009
+    },
+    {
+      "time_s": 0.5,
+      "max_abs_error_pa": 1.6586967497537142,
+      "rms_error_pa": 0.13213611477143844,
+      "reference_peak_pa": 20.52204,
+      "calculated_peak_pa": 18.92947322284897,
+      "peak_relative_error": 0.0776027518293031,
+      "peak_position_difference_m": -0.009999999999999787
+    },
+    {
+      "time_s": 0.7,
+      "max_abs_error_pa": 2.132110783205567,
+      "rms_error_pa": 0.1707489642007537,
+      "reference_peak_pa": 20.620419999999996,
+      "calculated_peak_pa": 18.558991713345208,
+      "peak_relative_error": 0.09997023759238602,
+      "peak_position_difference_m": -0.009999999999999787
+    },
+    {
+      "time_s": 0.9,
+      "max_abs_error_pa": 2.5515074209818174,
+      "rms_error_pa": 0.1986886880135562,
+      "reference_peak_pa": 20.518990000000002,
+      "calculated_peak_pa": 18.22981824554155,
+      "peak_relative_error": 0.1115635688919606,
+      "peak_position_difference_m": -0.009999999999999787
+    },
+    {
+      "time_s": 1.1,
+      "max_abs_error_pa": 2.8119250588969678,
+      "rms_error_pa": 0.2197910982727272,
+      "reference_peak_pa": 20.63502,
+      "calculated_peak_pa": 17.941664922711098,
+      "peak_relative_error": 0.13052350214775185,
+      "peak_position_difference_m": -0.010000000000000675
+    },
+    {
+      "time_s": 1.3,
+      "max_abs_error_pa": 2.9196437154440957,
+      "rms_error_pa": 0.23927966964182273,
+      "reference_peak_pa": 20.51911,
+      "calculated_peak_pa": 17.675468315106006,
+      "peak_relative_error": 0.13858504023293386,
+      "peak_position_difference_m": -0.009999999999999787
+    },
+    {
+      "time_s": 1.5,
+      "max_abs_error_pa": 3.2377426330158876,
+      "rms_error_pa": 0.25657993984146044,
+      "reference_peak_pa": 20.64693,
+      "calculated_peak_pa": 17.429511636452943,
+      "peak_relative_error": 0.15583035170589804,
+      "peak_position_difference_m": -0.009999999999999787
+    }
+  ],
+  "spatial_pressure_max_abs_error_pa": 3.2377426330158876,
+  "maximum_peak_relative_error": 0.15583035170589804,
+  "relative_max_profile_error": 0.15681472417525935,
+  "maximum_peak_position_absolute_difference_m": 0.010000000000000675,
+  "conservation_relative_initial_volume": 1.380449080496318e-16,
+  "steps": 6247,
+  "wall_seconds": 422.0044285999902,
+  "viscous_case_status": "NOT_REPRODUCED_DIFFERENT_FRICTION_COEFFICIENT",
+  "profile_csv": "boileau_muscl_ssprk2_2560_profiles.csv",
+  "candidate_pass": false,
+  "numerical_reproduction_status": "ACCURACY_NOT_MET"
+}

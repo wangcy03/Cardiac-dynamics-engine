@@ -1,0 +1,63 @@
+{
+  "scope": "12 s unassisted engineering baseline; compare at equal times 9-12 s; no temporal alignment",
+  "model": "0D prototype; no spatial convergence or physiological validation",
+  "runs": [
+    {
+      "step_us": 250,
+      "max_abs_mass_error_mL": 3.637978807091713e-11,
+      "wall_seconds": 3.044511700005387
+    },
+    {
+      "step_us": 125,
+      "max_abs_mass_error_mL": 5.275069270282984e-11,
+      "wall_seconds": 5.9366758999967715
+    },
+    {
+      "step_us": 50,
+      "max_abs_mass_error_mL": 1.6279955161735415e-10,
+      "wall_seconds": 14.860800900001777
+    }
+  ],
+  "comparisons": [
+    {
+      "step_us": 250,
+      "reference_us": 50,
+      "pressure_max_difference_mmHg": {
+        "p_lv": 0.0007149766956899839,
+        "p_root": 0.003292393186043796,
+        "p_descending": 0.0005818664953238795,
+        "p_la": 1.6400741703392896e-05
+      },
+      "event_max_difference_ms": {
+        "AORTIC_OPEN_05": 0.002,
+        "AORTIC_CLOSE_02": 0.002,
+        "MITRAL_OPEN_05": 0.001,
+        "MITRAL_CLOSE_02": 0.002,
+        "DP_LV_AO_REVERSE": 0.001,
+        "QAO_ZERO": 0.001
+      },
+      "event_topology_match": true,
+      "status": "PASS_0D_BASELINE_TIME_ONLY"
+    },
+    {
+      "step_us": 125,
+      "reference_us": 50,
+      "pressure_max_difference_mmHg": {
+        "p_lv": 0.0001511562225431362,
+        "p_root": 0.0006875505574441831,
+        "p_descending": 0.00012135619124364894,
+        "p_la": 3.850923810944096e-06
+      },
+      "event_max_difference_ms": {
+        "AORTIC_OPEN_05": 0.001,
+        "AORTIC_CLOSE_02": 0.001,
+        "MITRAL_OPEN_05": 0.0,
+        "MITRAL_CLOSE_02": 0.001,
+        "DP_LV_AO_REVERSE": 0.0,
+        "QAO_ZERO": 0.0
+      },
+      "event_topology_match": true,
+      "status": "PASS_0D_BASELINE_TIME_ONLY"
+    }
+  ]
+}

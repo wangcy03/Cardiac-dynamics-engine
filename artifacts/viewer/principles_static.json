@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "status": "PASS_STATIC_ONLY",
+  "root": "D:\\codehub2026\\04_heart_engine_r2",
+  "document": "docs/MATHEMATICAL_PRINCIPLES.html",
+  "checks": {
+    "local_links": 108,
+    "anchors": 26,
+    "mathml": 19,
+    "inline_svg": 4,
+    "stylesheets": 0
+  },
+  "errors": [],
+  "warnings": [
+    {
+      "code": "NARRATIVE_MARKERS_ABSENT",
+      "path": "docs/MATHEMATICAL_PRINCIPLES.html",
+      "line": 0,
+      "message": "Existing document may keep an unmarked manual body"
+    },
+    {
+      "code": "LATEX_SOURCE_TEXT_DIFFERS",
+      "path": "docs/MATHEMATICAL_PRINCIPLES.html",
+      "line": 122,
+      "message": "Annotation and foldout text differ; manually check mathematical consistency"
+    },
+    {
+      "code": "LATEX_SOURCE_TEXT_DIFFERS",
+      "path": "docs/MATHEMATICAL_PRINCIPLES.html",
+      "line": 128,
+      "message": "Annotation and foldout text differ; manually check mathematical consistency"
+    },
+    {
+      "code": "LATEX_SOURCE_TEXT_DIFFERS",
+      "path": "docs/MATHEMATICAL_PRINCIPLES.html",
+      "line": 143,
+      "message": "Annotation and foldout text differ; manually check mathematical consistency"
+    },
+    {
+      "code": "LATEX_SOURCE_TEXT_DIFFERS",
+      "path": "docs/MATHEMATICAL_PRINCIPLES.html",
+      "line": 179,
+      "message": "Annotation and foldout text differ; manually check mathematical consistency"
+    },
+    {
+      "code": "LATEX_SOURCE_TEXT_DIFFERS",
+      "path": "docs/MATHEMATICAL_PRINCIPLES.html",
+      "line": 186,
+      "message": "Annotation and foldout text differ; manually check mathematical consistency"
+    },
+    {
+      "code": "LATEX_SOURCE_TEXT_DIFFERS",
+      "path": "docs/MATHEMATICAL_PRINCIPLES.html",
+      "line": 215,
+      "message": "Annotation and foldout text differ; manually check mathematical consistency"
+    },
+    {
+      "code": "LATEX_SOURCE_TEXT_DIFFERS",
+      "path": "docs/MATHEMATICAL_PRINCIPLES.html",
+      "line": 231,
+      "message": "Annotation and foldout text differ; manually check mathematical consistency"
+    },
+    {
+      "code": "LATEX_SOURCE_TEXT_DIFFERS",
+      "path": "docs/MATHEMATICAL_PRINCIPLES.html",
+      "line": 243,
+      "message": "Annotation and foldout text differ; manually check mathematical consistency"
+    },
+    {
+      "code": "LATEX_SOURCE_TEXT_DIFFERS",
+      "path": "docs/MATHEMATICAL_PRINCIPLES.html",
+      "line": 250,
+      "message": "Annotation and foldout text differ; manually check mathematical consistency"
+    },
+    {
+      "code": "LATEX_SOURCE_TEXT_DIFFERS",
+      "path": "docs/MATHEMATICAL_PRINCIPLES.html",
+      "line": 255,
+      "message": "Annotation and foldout text differ; manually check mathematical consistency"
+    },
+    {
+      "code": "LATEX_SOURCE_TEXT_DIFFERS",
+      "path": "docs/MATHEMATICAL_PRINCIPLES.html",
+      "line": 272,
+      "message": "Annotation and foldout text differ; manually check mathematical consistency"
+    }
+  ],
+  "inputs_sha256_at_check": {
+    "docs/MATHEMATICAL_PRINCIPLES.html": "e80be3d62cf5aa63f012a5e85989d9534cbab58ed19fec1fb766b875de2af419"
+  },
+  "external_navigation_not_fetched": [
+    "https://cronfa.swan.ac.uk/Record/cronfa22154",
+    "https://onlinelibrary.wiley.com/doi/full/10.1002/cnm.2602"
+  ],
+  "browser_rendering": "NOT_RUN_BY_STATIC_CHECKER",
+  "freshness_and_run_identity": "NOT_ASSESSED_BY_STATIC_CHECKER",
+  "numerical_validation": "NOT_RUN_BY_STATIC_CHECKER",
+  "domain_or_clinical_validation": "NOT_ASSESSED",
+  "scope": "Read-only offline structural checks; not mathematical equivalence, a sanitizer, browser rendering, or model acceptance."
+}

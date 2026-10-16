@@ -1,0 +1,20 @@
+2026-10-15T10:32:08.505220+00:00 [start] case=reflections; argv=['D:\\codehub2026\\04_heart_engine_r2\\tools\\arterial1d_check.py', '--case', 'reflections']; mode=ACTUAL_SOLVER_RUN
+2026-10-15T10:32:08.593738+00:00 [reflection] kind=closed cells=80
+2026-10-15T10:32:09.634897+00:00   gamma=0.94966639, abs_error=0.0503336, pass=False
+2026-10-15T10:32:09.646500+00:00 [reflection] kind=closed cells=160
+2026-10-15T10:32:13.746106+00:00   gamma=0.98645167, abs_error=0.0135483, pass=True
+2026-10-15T10:32:13.760101+00:00 [reflection] kind=closed cells=320
+2026-10-15T10:32:25.868540+00:00   gamma=0.99730068, abs_error=0.00269932, pass=True
+2026-10-15T10:32:25.881545+00:00 [reflection] kind=pressure_release cells=80
+2026-10-15T10:32:26.919751+00:00   gamma=-0.94908023, abs_error=0.0509198, pass=False
+2026-10-15T10:32:26.932782+00:00 [reflection] kind=pressure_release cells=160
+2026-10-15T10:32:30.910809+00:00   gamma=-0.98559739, abs_error=0.0144026, pass=True
+2026-10-15T10:32:30.922782+00:00 [reflection] kind=pressure_release cells=320
+2026-10-15T10:32:43.239075+00:00   gamma=-0.99645232, abs_error=0.00354768, pass=True
+2026-10-15T10:32:43.251075+00:00 [reflection] kind=resistance_2z0 cells=80
+2026-10-15T10:32:44.420363+00:00   gamma=0.31684001, abs_error=0.0164933, pass=True
+2026-10-15T10:32:44.433363+00:00 [reflection] kind=resistance_2z0 cells=160
+2026-10-15T10:32:48.724868+00:00   gamma=0.32886897, abs_error=0.00446436, pass=True
+2026-10-15T10:32:48.740871+00:00 [reflection] kind=resistance_2z0 cells=320
+2026-10-15T10:33:01.372849+00:00   gamma=0.33259617, abs_error=0.00073716, pass=True
+2026-10-15T10:33:01.402937+00:00 [complete] engineering=PASS; public=NOT_RUN; overall=PASS_DECLARED_CHECKS

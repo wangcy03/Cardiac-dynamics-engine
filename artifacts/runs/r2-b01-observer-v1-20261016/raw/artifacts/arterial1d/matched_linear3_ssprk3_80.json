@@ -1,0 +1,74 @@
+{
+  "arrival_definition": "first rising crossing of fixed 10 Pa; no time translation",
+  "arrival_time_s": 0.15997124884407982,
+  "expected_arrival_time_s": 0.16,
+  "arrival_error_ms": 0.028751155920186955,
+  "peak_pressure_pa": 19.07294510549784,
+  "peak_relative_error": 0.046352744725107975,
+  "candidate_pass": false,
+  "case": "engineering_matched_pressure_pulse",
+  "cells": 80,
+  "scheme": "linear3_ssprk3",
+  "cfl": 0.4,
+  "dt_policy": "0.95 * max_stable_dt_s, clipped to observation time",
+  "observation_interval_s": 0.0005,
+  "spatial_pressure_max_abs_error_pa": 1.6321876088137655,
+  "spatiotemporal_pressure_rms_error_pa": 0.2617511666543216,
+  "max_abs_linear_volume_error_m3": 4.990671724806622e-10,
+  "max_abs_conservation_residual_m3": 8.3614476422499e-20,
+  "conservation_relative_initial_volume": 2.7871492140833005e-16,
+  "conservation_pass": true,
+  "minimum_area_m2": 0.0002999925341441347,
+  "steps": 640,
+  "wall_seconds": 1.1431086999946274,
+  "min_pressure_pa": -0.6594880378285595,
+  "max_pressure_pa": 20.017084514504457,
+  "relative_reference_peak_overshoot": 0.000854225725222868,
+  "relative_reference_peak_undershoot": 0.032974401891427974,
+  "scheme_scope": "smooth small-amplitude only; non-TVD; not a shock test",
+  "trace_csv": "matched_linear3_ssprk3_80_trace.csv",
+  "profile_csv": "matched_linear3_ssprk3_80_profiles.csv",
+  "identity": {
+    "python_executable": "D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe",
+    "python_version": "3.12.9",
+    "source_sha256": {
+      "D:/codehub2026/04_heart_engine_r2/tools/arterial1d_check.py": "a60fa6d721fc9bc63af9c2ff18917a7fc46df68c92bcb472c8cb41a474f0e635",
+      "iabp/arterial1d/__init__.py": "793796aa44e076d7450f860a96da4e9e7ca81447e2e4213817cd042b113c780f",
+      "iabp/arterial1d/boundaries.py": "131d46cca8e20573b7daae9fc2686bacb19785fbf53e76e3236c695786ad408d",
+      "iabp/arterial1d/physics.py": "f7455b4f9fac8b52d8cedd43389d162e58aa551bc5db28e0826c1fb233c88761",
+      "iabp/arterial1d/solver.py": "8d70b1192ed64efe05a5702415e642ba850040ae094c6e0dfbcb8a7d99c7455b"
+    },
+    "source_snapshot_manifest": "history/source_5a00d0421e14c051/manifest.json"
+  },
+  "parameters": {
+    "length_m": 1.0,
+    "cells": 80,
+    "scheme": "linear3_ssprk3",
+    "reference_area_m2": 0.0003,
+    "density_kg_m3": 1060.0,
+    "beta_pa": 53000.0,
+    "reference_pressure_pa": 0.0,
+    "initial_flow_m3_s": 0.0,
+    "kinematic_viscosity_m2_s": 0.0,
+    "cfl": 0.4,
+    "inlet": {
+      "quantity": "pressure_pa",
+      "amplitude_pa": 20.0,
+      "start_s": 0.05,
+      "end_s": 0.09,
+      "shape": "sine_squared; zero otherwise"
+    }
+  },
+  "source_unchanged_during_run": true,
+  "run_log_path": "run_logs/linear3_matched_bab289e7db74.log",
+  "csv_artifacts": [
+    {
+      "path": "matched_linear3_ssprk3_80_trace.csv",
+      "sha256": "f97a5e4fa9b57c8481c5f5d354123197893ede46341d9fdf59c532d7db811733"
+    },
+    {
+      "path": "matched_linear3_ssprk3_80_profiles.csv",
+      "sha256": "e3e0882ffa8782e56d20d6a53c5ad0c660470c9e39a205f71eca93518fe3f29a"
+    }
+  ]
+}

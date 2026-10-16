@@ -5,17 +5,17 @@
     {
       "step_us": 250,
       "max_abs_mass_error_mL": 3.637978807091713e-11,
-      "wall_seconds": 3.044511700005387
+      "wall_seconds": 3.086834599991562
     },
     {
       "step_us": 125,
       "max_abs_mass_error_mL": 5.275069270282984e-11,
-      "wall_seconds": 5.9366758999967715
+      "wall_seconds": 5.96191430001636
     },
     {
       "step_us": 50,
       "max_abs_mass_error_mL": 1.6279955161735415e-10,
-      "wall_seconds": 14.860800900001777
+      "wall_seconds": 14.568982500000857
     }
   ],
   "comparisons": [

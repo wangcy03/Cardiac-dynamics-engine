@@ -1,0 +1,78 @@
+{
+  "schema": "cardiac-observer-frozen-run/v1",
+  "status": "FROZEN_RECORDED_EXPORTS",
+  "run_id": "r2-original-fc18650-v1",
+  "raw_files": [
+    {
+      "original_path": "artifacts/local_viewer_import/fc18650-original/assisted_commands.json",
+      "path": "raw/artifacts/local_viewer_import/fc18650-original/assisted_commands.json",
+      "sha256": "c7c6c270e2d32c82900fe2ff174fe7bb8934f1ad0cf639e2761d139073b84905",
+      "bytes": 3300
+    },
+    {
+      "original_path": "artifacts/local_viewer_import/fc18650-original/assisted_events.json",
+      "path": "raw/artifacts/local_viewer_import/fc18650-original/assisted_events.json",
+      "sha256": "14327125e4278557f3b1799c768495a3ce7038438b1d741201efca839e04b778",
+      "bytes": 9709
+    },
+    {
+      "original_path": "artifacts/local_viewer_import/fc18650-original/assisted_samples.csv",
+      "path": "raw/artifacts/local_viewer_import/fc18650-original/assisted_samples.csv",
+      "sha256": "332cc76443321eb74131dd64e6f5f7c5dea824d0200bd5ae06e8ca054af6e1e3",
+      "bytes": 851463
+    },
+    {
+      "original_path": "artifacts/local_viewer_import/fc18650-original/assisted_truth.csv",
+      "path": "raw/artifacts/local_viewer_import/fc18650-original/assisted_truth.csv",
+      "sha256": "bbaf9c75c26e10c9c236df7659aba1343e88f56da2c010a1ebfa759ac1d4c411",
+      "bytes": 2435050
+    },
+    {
+      "original_path": "artifacts/local_viewer_import/fc18650-original/baseline_commands.json",
+      "path": "raw/artifacts/local_viewer_import/fc18650-original/baseline_commands.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "bytes": 2
+    },
+    {
+      "original_path": "artifacts/local_viewer_import/fc18650-original/baseline_events.json",
+      "path": "raw/artifacts/local_viewer_import/fc18650-original/baseline_events.json",
+      "sha256": "6dd6d2aa31a1124dad87115209f702c5bf775678b4e41212a2498958af10ea04",
+      "bytes": 9709
+    },
+    {
+      "original_path": "artifacts/local_viewer_import/fc18650-original/baseline_samples.csv",
+      "path": "raw/artifacts/local_viewer_import/fc18650-original/baseline_samples.csv",
+      "sha256": "cba3a9fdfef9c8c1449c374440a4743ea577e7e366bb5ebe0a819b4078fb30e0",
+      "bytes": 848342
+    },
+    {
+      "original_path": "artifacts/local_viewer_import/fc18650-original/baseline_truth.csv",
+      "path": "raw/artifacts/local_viewer_import/fc18650-original/baseline_truth.csv",
+      "sha256": "9990914516fd44ba31bbf0a10eeb49e66c3d934fe6b38cfdcd5c5bb09df343ba",
+      "bytes": 2386834
+    },
+    {
+      "original_path": "artifacts/local_viewer_import/fc18650-original/provenance.json",
+      "path": "raw/artifacts/local_viewer_import/fc18650-original/provenance.json",
+      "sha256": "bbd8a5026ea95aa9d9721ab7ca94e1ad0ec3114bbcaaab5e255a1f6e8229380e",
+      "bytes": 2835
+    },
+    {
+      "original_path": "iabp/model.py",
+      "path": "raw/iabp/model.py",
+      "sha256": "08aa745151b3d9ba142de79718ce15ab6bfb48938a84b21ad34858153699cb3f",
+      "bytes": 9006
+    }
+  ],
+  "observer_implementation_sha256": {
+    "tools/viewer.py": "12120a631d4659e488eb042ded9adcd76947e31a8bf0897c4d7d52fde7b21812",
+    "tools/viewer_data.py": "940bd4fc72ca6d040b75b9745b5413a4584dd2702acb4acf79854944dc2f35c5",
+    "viewer/index.html": "79bbe5a0ef950d1867420678150bac776f8a238d55d1de2d94e3241c9cea9160",
+    "viewer/viewer.js": "afd929be158fa89e53ea60464d9038d76a3a256884edc3bbeca6456e83a38518",
+    "viewer/viewer.css": "698e5720ab9389038caf8589688ea712d0d982f01c63c86af0177dbe4684ee4c"
+  },
+  "bundle": {
+    "path": "viewer_bundle.json",
+    "sha256": "460591c51d8e6bd78d2949d9afc03242222a77e892b3cd19bdd06b09e89e2438"
+  }
+}

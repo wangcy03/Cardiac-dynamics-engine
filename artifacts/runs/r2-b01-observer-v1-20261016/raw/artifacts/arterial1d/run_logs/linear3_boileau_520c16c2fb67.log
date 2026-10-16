@@ -1,0 +1,29 @@
+2026-10-15T10:31:34.270284+00:00 [start] case=linear3_boileau; argv=['D:\\codehub2026\\04_heart_engine_r2\\tools\\arterial1d_check.py', '--case', 'linear3_boileau']; mode=ACTUAL_SOLVER_RUN
+2026-10-15T10:31:34.614044+00:00 [Boileau inviscid] scheme=linear3_ssprk3 cells=640
+2026-10-15T10:31:36.063790+00:00   t=0.1s max_error=1.34218 Pa min=-0.106403 max=19.4948 Pa
+2026-10-15T10:31:38.865261+00:00   t=0.3s max_error=3.60925 Pa min=-0.563602 max=17.1606 Pa
+2026-10-15T10:31:41.657054+00:00   t=0.5s max_error=4.69146 Pa min=-0.751827 max=15.9666 Pa
+2026-10-15T10:31:44.454095+00:00   t=0.7s max_error=5.5877 Pa min=-0.855103 max=15.1581 Pa
+2026-10-15T10:31:47.237598+00:00   t=0.9s max_error=6.07535 Pa min=-0.908556 max=14.5485 Pa
+2026-10-15T10:31:50.086853+00:00   t=1.1s max_error=6.67833 Pa min=-0.931512 max=14.0607 Pa
+2026-10-15T10:31:52.951295+00:00   t=1.3s max_error=6.95352 Pa min=-0.949943 max=13.6553 Pa
+2026-10-15T10:31:55.730507+00:00   t=1.5s max_error=7.42675 Pa min=-0.966505 max=13.3092 Pa
+2026-10-15T10:31:55.862762+00:00 [Boileau inviscid] scheme=linear3_ssprk3 cells=1280
+2026-10-15T10:32:01.609273+00:00   t=0.1s max_error=0.22447 Pa min=-0.0012116 max=20.4182 Pa
+2026-10-15T10:32:13.208251+00:00   t=0.3s max_error=0.891804 Pa min=-0.0481058 max=19.7719 Pa
+2026-10-15T10:32:24.646890+00:00   t=0.5s max_error=1.3374 Pa min=-0.123062 max=19.2723 Pa
+2026-10-15T10:32:36.107055+00:00   t=0.7s max_error=1.82521 Pa min=-0.196993 max=18.8596 Pa
+2026-10-15T10:32:47.827489+00:00   t=0.9s max_error=2.12524 Pa min=-0.263947 max=18.5057 Pa
+2026-10-15T10:32:59.335797+00:00   t=1.1s max_error=2.49262 Pa min=-0.321401 max=18.1948 Pa
+2026-10-15T10:33:11.048230+00:00   t=1.3s max_error=2.73681 Pa min=-0.369299 max=17.9171 Pa
+2026-10-15T10:33:22.384005+00:00   t=1.5s max_error=3.01328 Pa min=-0.418228 max=17.6656 Pa
+2026-10-15T10:33:22.506601+00:00 [Boileau inviscid] scheme=linear3_ssprk3 cells=2560
+2026-10-15T10:33:45.756280+00:00   t=0.1s max_error=0.0310469 Pa min=-5.37446e-07 max=20.5713 Pa
+2026-10-15T10:34:32.610051+00:00   t=0.3s max_error=0.120532 Pa min=-7.59311e-06 max=20.4816 Pa
+2026-10-15T10:35:19.200699+00:00   t=0.5s max_error=0.220982 Pa min=-0.000226624 max=20.3908 Pa
+2026-10-15T10:36:09.254640+00:00   t=0.7s max_error=0.341235 Pa min=-0.00123882 max=20.2992 Pa
+2026-10-15T10:36:55.407090+00:00   t=0.9s max_error=0.403944 Pa min=-0.00350787 max=20.2072 Pa
+2026-10-15T10:37:42.258807+00:00   t=1.1s max_error=0.52385 Pa min=-0.00716158 max=20.1148 Pa
+2026-10-15T10:38:28.069190+00:00   t=1.3s max_error=0.572478 Pa min=-0.0123588 max=20.0411 Pa
+2026-10-15T10:39:14.041306+00:00   t=1.5s max_error=0.676452 Pa min=-0.0189585 max=19.9713 Pa
+2026-10-15T10:39:14.163310+00:00 [complete] engineering=NOT_RUN; public=PASS_DECLARED_ENGINEERING_TOLERANCE; overall=PASS_DECLARED_CHECKS

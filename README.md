@@ -10,25 +10,26 @@
 | 入口 | 内容 |
 |---|---|
 | [数理原理文档](docs/MATHEMATICAL_PRINCIPLES.html) | 第一性原理推导、19 组 LaTeX/离线公式、3 幅浅色框架/时序/控制体图、真实运行证据 |
-| [原型观察器](artifacts/demo/prototype_viewer.html) | 读取核心导出的真实 CSV/JSON，查看同初态配对演示 |
+| [固定观察器](artifacts/demo/prototype_viewer.html) | 三页读取真实心脏/时序、独立 1D 与冻结迭代数据；打开即预载当前包和历史 r2 对照 |
 | [当前状态](docs/STATUS.md) / [任务路线](docs/tasks/BACKLOG.md) | 已完成范围、下一任务及缺口 |
 | [B00 报告](docs/tasks/B00_REPORT.md) / [B01 报告](docs/tasks/B01_REPORT.md) | 冻结复现、数值差异、固定门槛与适用域 |
 | [交付说明](docs/DELIVERY_NOTES.md) | 本轮修改、实际检查、提交顺序与未覆盖风险 |
 | [开发入口](START_HERE.md) / [工作规则](AGENTS.md) | 后续接手约定与验收要求 |
 | [数理文档技能](skills/mathematical-principles/README.md) / [验证记录](artifacts/skills/mathematical-principles/README.md) | 手动创建、局部更新或只读检查数理文档；可用于其他项目 |
-| [固定迭代观察器方案](docs/proposals/ITERATION_VIEWER_PLAN.md) | 已确认心脏/时序、独立 1D、迭代比较三页范围，尚未开始实现 |
+| [固定迭代观察器](docs/viewer/README.md) / [数据合同](docs/viewer/DATA_CONTRACT.md) | 心脏/时序、独立 1D、冻结迭代比较；使用同一界面刷新真实运行数据包 |
 
 克隆后用本地浏览器打开上述 HTML。正文和观察器均可离线使用；GitHub 文件页仅显示 HTML 源文件。
 公式与示意图静态检查已通过，本轮实际浏览器渲染因安全策略限制为 `NOT_RUN_BROWSER_POLICY`。
 
 ## 当前验收
 
-以下为 2026-10-15 在 Windows / Python 3.12.9 下实际完成并保存的记录。
+以下为 Windows / Python 3.12.9 下实际完成并保存的记录：B00/B01 于 2026-10-15，观察器 V1 与最新软件门于 2026-10-16。
 
 | 范围 | 结果 | 证据 |
 |---|---|---|
 | B00 原始复现 | 51 项测试、三档 0D 时间步长、ruff 和 strict mypy 通过；无物理参数调整 | [冻结差异](artifacts/b00/baseline_comparison.json) |
-| 最新软件质量门 | 121 项测试，0 失败/错误/跳过；compileall、0D 数值、ruff、mypy、1D 证据门全部退出 0 | [质量门记录](artifacts/verification_summary.json) |
+| 最新软件质量门 | 171 项测试，0 失败/错误/跳过；compileall、0D 数值、ruff、mypy、1D 证据门全部退出 0 | [质量门记录](artifacts/verification_summary.json) |
+| 固定观察器 V1 | Node 25 项测试通过；33 列真值、采样/事件/命令、28 个 1D 当前/历史对照；实际浏览器渲染未验收 | [核验与测试映射](docs/viewer/ACCEPTANCE.md) |
 | B01 独立传播 | 匹配、三类反射、对称分叉、公开参考共 4 套件、18 个真实 run；各用例三档网格 | [数值汇总](artifacts/arterial1d/benchmark_summary.json) |
 | 工程匹配细档 | linear3 320 格峰差 0.145990%，到达差 0.046681 ms | [B01 报告](docs/tasks/B01_REPORT.md) |
 | Boileau 无黏性细档 | linear3 2560 格八剖面最大压力差 0.676452 Pa，最大归一差 3.27628%，满足预置 5% 门槛 | [来源、许可与配置](docs/benchmarks/BOILEAU_PROVENANCE.md) |

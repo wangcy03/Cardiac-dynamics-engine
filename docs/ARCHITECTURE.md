@@ -16,7 +16,9 @@ sensors.py：独立观测链，包括滤波状态和按通道分离的随机源�
 engine.py：外生事件、命令队列、采样、交付、连续推进、日志和快照。
 scenarios.py：外生节律构造与简单因果控制器。规则示例不作为引擎的正确答案。
 examples/run_demo.py：独立评估环境；只把 Sample 和 now_us 传给控制器。
-tools/viewer.py：显示导出数据，不计算另一份压力波形。
+tools/viewer_data.py：把真实 CSV/JSON/身份记录适配为版本化观察器数据包。
+tools/viewer.py：冻结原始导出，以同一固定模板更新便携观察器，不计算另一份压力波形。
+viewer/：固定的心脏/时序、独立 1D 与迭代比较界面；用法见 viewer/README.md。
 units.py：集中转换独立 1D 的 SI 量与既有 mmHg/mL、整数微秒接口。
 arterial1d/：无心脏、无球囊的独立均匀弹性管有限体积传播器；
 特征边界与共同静压分叉有明确适用域。B04 以前不接入现有 0D 运行链。

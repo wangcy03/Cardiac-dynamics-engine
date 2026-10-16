@@ -1,0 +1,36 @@
+{
+  "schema": "viewer-javascript-check/v1",
+  "checks": {
+    "node_syntax": {
+      "status": "PASS",
+      "command": [
+        "node",
+        "--check",
+        "viewer/viewer.js"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.35258460001205094,
+      "log": "artifacts/viewer/node_syntax.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "node_tests": {
+      "status": "PASS",
+      "command": [
+        "node",
+        "--test",
+        "viewer/viewer.test.js"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.8013695999979973,
+      "log": "artifacts/viewer/node_tests.log",
+      "log_sha256": "d0d2e57542be94c618c297c66b3fc8c8655dbed2c6dea01f27f83fb0d7e33e64"
+    }
+  },
+  "files_sha256": {
+    "viewer/index.html": "6eac7a89f9695bde005ddfa69e5cc746849a3dc0947174b8161a72a252707ecb",
+    "viewer/viewer.css": "698e5720ab9389038caf8589688ea712d0d982f01c63c86af0177dbe4684ee4c",
+    "viewer/viewer.js": "8a49ff85e993dbe0dd3767735fd02c488a173870e063e084f1cb6a7e8462e3cf",
+    "viewer/viewer.test.js": "bc3c090fc69d3283688bfbe79d790c99d27323a469116332c746c885d284d96f"
+  },
+  "browser": "NOT_RUN_BROWSER_POLICY"
+}

@@ -12,7 +12,7 @@ from iabp import __version__
 from iabp.engine import Engine
 from iabp.model import ModelConfig
 from iabp.scenarios import ThresholdDemoController, add_sinus_schedule
-from tools.viewer import write_viewer
+from tools.viewer import refresh_viewer
 
 def record(engine: Engine, end_us: int, assisted: bool) -> dict:
     start = engine.now_us
@@ -54,7 +54,7 @@ def main() -> None:
         (out / f'{name}_commands.json').write_text(json.dumps(case['command_log'], indent=2), encoding='utf-8')
     provenance = {'version': __version__, 'kind': 'ENGINEERING_SIMULATION_NOT_CLINICAL', 'warmup_s': 18, 'note': 'Fixed warmup is NOT proof of periodic steady state.', 'model_config': asdict(e.model.config), 'engine_config': asdict(e.config), 'controller': 'ThresholdDemoController; causal, uncalibrated, not optimized', 'sensors': [asdict(s.config) for s in e._sensors], 'model_source_sha256': hashlib.sha256(Path('iabp/model.py').read_bytes()).hexdigest(), 'metrics': {k: c['metrics'] for k, c in cases.items()}}
     (out / 'provenance.json').write_text(json.dumps(provenance, indent=2), encoding='utf-8')
-    write_viewer(out / 'prototype_viewer.html', cases, provenance)
+    refresh_viewer(Path.cwd(), demo_dir=out, label='当前模型 · 同态分叉 0D 演示与独立 1D')
     print(json.dumps(provenance['metrics'], indent=2))
     print('Created', out / 'prototype_viewer.html')
 if __name__ == '__main__':

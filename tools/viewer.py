@@ -1,29 +1,221 @@
-"""Offline observer of exported state. No browser-side physiological simulation."""
+"""Publish the fixed offline observer from recorded exports, without a solver."""
+from __future__ import annotations
+
+import argparse
+from datetime import datetime, timezone
+from hashlib import sha256
 import json
+import os
 from pathlib import Path
+import re
+import shutil
+import subprocess
+from typing import Any
 
 
-def write_viewer(path: Path, cases: dict, provenance: dict) -> None:
-    keys=['time_us','ecg_ii','p_root','p_descending','p_lv','q_ao','v_lv','v_balloon']
-    payload={name:{'rows':[[round(r[k],6) for k in keys] for r in case['rows']],
-                   'events':case['events'],'metrics':case['metrics'],'commands':case['command_log']}
-             for name,case in cases.items()}
-    html=r'''<!DOCTYPE html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>IABP 连续物理核心 · r2 原型观察器</title>
-<style>
-:root{color-scheme:dark;--bg:#091121;--panel:#111b32;--line:#2b3c55;--muted:#acbdd5;--accent:#7dd3fc}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#e7effd;font:14px/1.65 system-ui,'Microsoft YaHei',sans-serif;height:100vh;display:flex;flex-direction:column;overflow:hidden}header{padding:10px 18px;border-bottom:1px solid var(--line)}h1{font-size:20px;margin:0}h2{font-size:16px;margin:0 0 8px}p{margin:5px 0 10px}.small{font-size:12px;color:var(--muted)}main{display:grid;grid-template-columns:minmax(0,1fr) 370px;gap:12px;padding:12px;min-height:0;flex:1}.panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;min-height:0;overflow:hidden}.plotpanel{display:flex;flex-direction:column}.bar{padding:9px 12px;border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:center;flex-wrap:wrap}button,select{background:#182c45;color:#e9f4ff;border:1px solid #496079;border-radius:6px;padding:5px 8px;font:inherit}button{cursor:pointer}button[aria-pressed=true]{background:#17415a;border-color:#7dd3fc}.canvas{flex:1;min-height:0;overflow:auto;background:#0b1529}svg{display:block;width:100%}.reader{padding:14px;overflow:auto}.note{border:1px solid var(--line);border-radius:8px;background:#0d192c;padding:12px;margin-bottom:12px}.warn{background:#272117;border-color:#715934}.metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px}.metric{padding:8px;background:#14233c;border-radius:6px;font-size:12px}.metric b{font-size:17px;display:block;color:var(--accent)}table{font-size:12px;width:100%;border-collapse:collapse}td{padding:6px;border-bottom:1px solid var(--line)}code{font-size:12px;overflow-wrap:anywhere}.footer{padding:6px 12px;font-size:11px;color:var(--muted)}@media(max-width:960px){main{grid-template-columns:1fr;grid-template-rows:minmax(275px,55%) 1fr;gap:8px;padding:8px}h1{font-size:16px}header .small{display:none}.reader{padding:10px}}
-</style>
-<header><h1>IABP 连续物理核心 <span class="small">r2 · 软件在环原型</span></h1><div class="small">同一快照分叉，实际核心输出。压力增高本身不能证明有效辅助。原 Wiggers 教学页面保留在交接包 legacy/ 中。</div></header>
-<main><section class="panel plotpanel"><div class="bar"><button data-case="baseline" aria-pressed="true">无辅助</button><button data-case="assisted" aria-pressed="false">因果控制器演示</button><label class="small"><input id="overlay" type="checkbox" checked>叠加无辅助参考</label><select id="window"><option value="2">末 2 秒</option><option value="4">完整 4 秒</option></select></div><div class="canvas"><svg id="plot" role="img" aria-label="连续循环实际数值输出"></svg></div><div class="footer">实线：当前分支；虚线：相同初始状态下的无辅助分支。所有压力刻度独立标明，显示不补造切迹。</div></section>
-<aside class="panel reader"><div class="note warn"><h2>当前资格：工程原型</h2>这是 0D 闭环基准，不是最终 0D/1D 引擎，也不是临床校验器。球囊与控制器仅用于接口耦合演示，参数未经过患者或台架校准。</div><div class="note"><h2>当前窗口与事件</h2><div id="metrics" class="metrics"></div><p class="small">指标统计范围为整个 4 秒记录，不是单搏稳态临床值。</p><table id="events"></table></div><div class="note"><h2>因果链已经接通</h2><p>电激活 → 两级张力激活 → 四心腔／有限回流容积 → 动态瓣膜 → 近端／降主动脉网络。</p><p>已交付 ECG 样本 → 演示控制器 → 命令队列 → 负荷相关容积变化 → 反过来影响压力、流量和后续心搏。</p></div><div class="note"><h2>如何读关闭事件</h2><p>压差反向、出流零交叉、有效开口闭合分别记录。有效开口降到 2% 仅为本模型工程定义，不是瓣叶接触金标准。</p><p>右侧时延从最近一次 QRS 起点算起，不能当作 R 峰时延；ECG 是共享激活事件的合成观测，不是实测。</p></div><div class="note"><h2>下一阶段不能省掉</h2><p>一维传播基准；独立高保真生理数据；球囊分布、气动与台架校准；真实多通道参数；完整时序—效果扫描和不确定度。</p></div><div class="note"><h2>交接入口</h2><p>解压项目后先读 <code>START_HERE.md</code>、<code>AGENTS.md</code> 和 <code>docs/STATUS.md</code>。</p><p class="small">本页是离线观察器，不在浏览器里重新求解。通过 <code>python -m examples.run_demo</code> 重新生成全部数据。</p></div></aside></main>
-<script>const DATA=__DATA__;const PROVENANCE=__PROVENANCE__;let selected='baseline';
-const rowspec=[['ECG II（合成）','mV',1,'#74d4ff'],['主动脉根部','mmHg',2,'#93efb2'],['降主动脉','mmHg',3,'#7ee0ca'],['左室压力','mmHg',4,'#ff9eb1'],['主动脉瓣流量','mL/s',5,'#ffd36b'],['左室容积','mL',6,'#ffb76b'],['球囊占据容积','mL',7,'#beabff']];
-const labels={'QRS_ONSET':'QRS 起点','DP_LV_AO_REVERSE':'LV/Ao 压差反向','QAO_ZERO':'主动脉出流零交叉','AORTIC_CLOSE_02':'有效开口关闭 2%','AORTIC_OPEN_05':'有效开口开放 5%'};
-function draw(){const el=document.getElementById('plot'),caseData=DATA[selected],w=Math.max(680,el.parentElement.clientWidth),h=Math.max(630,el.parentElement.clientHeight),left=142,right=w-20,row=(h-46)/7;el.setAttribute('viewBox',`0 0 ${w} ${h}`);el.style.height=h+'px';el.style.minWidth='680px';const end=caseData.rows.at(-1)[0]/1e6,start=end-Number(document.getElementById('window').value),x=t=>left+(t-start)/(end-start)*(right-left);let html='';const showRef=selected==='assisted'&&document.getElementById('overlay').checked;const a=caseData.rows.filter(r=>r[0]/1e6>=start),b=DATA.baseline.rows.filter(r=>r[0]/1e6>=start);
-for(let j=0;j<rowspec.length;j++){const [name,unit,k,col]=rowspec[j];const top=12+j*row,bot=top+row-15;const values=a.map(r=>r[k]).concat(showRef?b.map(r=>r[k]):[]);let min=Math.min(...values),max=Math.max(...values);const pad=Math.max((max-min)*.12,k===1?.08:1);min-=pad;max+=pad;const y=v=>bot-(v-min)/(max-min)*(row-26);html+=`<defs><clipPath id="clip${j}"><rect x="${left}" y="${top}" width="${right-left}" height="${row-12}"/></clipPath></defs><text x="10" y="${top+14}" fill="${col}" font-size="12">${name}</text><text x="10" y="${top+30}" fill="#a4b7d1" font-size="11">${unit}</text>`;for(let v of [min,(min+max)/2,max]){html+=`<line x1="${left}" x2="${right}" y1="${y(v)}" y2="${y(v)}" stroke="#24354c"/><text x="${left-7}" y="${y(v)+4}" text-anchor="end" fill="#b0c1d6" font-size="10">${v.toFixed(k===1?2:0)}</text>`;}function path(arr){return arr.map((r,i)=>(i?'L':'M')+x(r[0]/1e6).toFixed(2)+','+y(r[k]).toFixed(2)).join(' ');}if(showRef)html+=`<path d="${path(b)}" stroke="#abbdd2" stroke-dasharray="5 4" fill="none" opacity=".7" clip-path="url(#clip${j})"/>`;html+=`<path d="${path(a)}" stroke="${col}" stroke-width="1.8" fill="none" clip-path="url(#clip${j})"/>`;for(let t=Math.ceil(start*2)/2;t<=end;t+=.5)html+=`<line x1="${x(t)}" x2="${x(t)}" y1="${top}" y2="${bot}" stroke="#24354c" stroke-dasharray="2 5"/>`;}
-for(let t=Math.ceil(start*2)/2;t<=end;t+=.5)html+=`<text x="${x(t)}" y="${h-13}" fill="#cadcf1" font-size="11" text-anchor="middle">${t.toFixed(1)} s</text>`;el.innerHTML=html;
-const m=caseData.metrics;document.getElementById('metrics').innerHTML=[['根部最高压',m.root_max_mmHg.toFixed(1)+' mmHg'],['根部最低压',m.root_min_mmHg.toFixed(1)+' mmHg'],['最大球囊容积',m.max_balloon_mL.toFixed(1)+' mL'],['4 秒净主动脉出流',m.net_aortic_volume_mL.toFixed(1)+' mL'],['4 秒 LV 净外部功',m.lv_net_external_work_mmHg_mL.toFixed(0)+' mmHg·mL'],['最大血量残差',m.max_mass_error_mL.toExponential(1)+' mL']].map(v=>`<div class="metric"><b>${v[1]}</b>${v[0]}</div>`).join('');const onset=caseData.events.filter(e=>e.name==='QRS_ONSET'&&e.at_us/1e6<end-.5).at(-1);document.getElementById('events').innerHTML=onset?caseData.events.filter(e=>labels[e.name]&&e.at_us>=onset.at_us&&e.at_us<onset.at_us+600000).map(e=>`<tr><td>${labels[e.name]}</td><td>QRS +${((e.at_us-onset.at_us)/1000).toFixed(1)} ms</td></tr>`).join(''):'';}
-document.querySelectorAll('[data-case]').forEach(b=>b.onclick=()=>{selected=b.dataset.case;document.querySelectorAll('[data-case]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));draw();});['overlay','window'].forEach(id=>document.getElementById(id).onchange=draw);new ResizeObserver(draw).observe(document.querySelector('.canvas'));draw();
-</script></html>'''
-    path.write_text(html.replace('__DATA__',json.dumps(payload,separators=(',',':')))
-                   .replace('__PROVENANCE__',json.dumps(provenance,separators=(',',':'))),encoding='utf-8')
+ROOT = Path(__file__).resolve().parents[1]
+SCHEMA = "cardiac-observer/v1"
+IMPLEMENTATION_FILES = (
+    "tools/viewer.py", "tools/viewer_data.py", "viewer/index.html",
+    "viewer/viewer.js", "viewer/viewer.css",
+)
+DEMO_FILES = (
+    "provenance.json", "baseline_truth.csv", "baseline_samples.csv",
+    "baseline_events.json", "baseline_commands.json", "assisted_truth.csv",
+    "assisted_samples.csv", "assisted_events.json", "assisted_commands.json",
+)
+
+
+def encoded_bundle(bundle: dict[str, Any]) -> str:
+    """Preserve numerical precision and prevent closing an HTML script element."""
+    if bundle.get("schema") != SCHEMA:
+        raise ValueError("Unsupported observer schema")
+    if not isinstance(bundle.get("run"), dict) or not bundle["run"].get("id"):
+        raise ValueError("Observer bundle needs a run ID")
+    return (json.dumps(bundle, ensure_ascii=False, allow_nan=False, separators=(",", ":"))
+            .replace("&", "\\u0026").replace("<", "\\u003c").replace(">", "\\u003e")
+            .replace("\u2028", "\\u2028").replace("\u2029", "\\u2029"))
+
+
+def write_viewer(path: Path, bundle: dict[str, Any], *, assets: Path | None = None) -> None:
+    """Inline the one maintained HTML/CSS/JS implementation for a portable copy."""
+    assets = assets or ROOT / "viewer"
+    template = (assets / "index.html").read_text(encoding="utf-8")
+    if 'href="../docs/' in template:
+        docs = assets.resolve().parent / "docs"
+        try:
+            docs_prefix = Path(os.path.relpath(docs, path.resolve().parent)).as_posix()
+        except ValueError:
+            # A user-selected export on another Windows drive cannot be relative.
+            docs_prefix = docs.as_uri()
+        template = template.replace('href="../docs/', f'href="{docs_prefix}/')
+    replacements = {
+        "__BUNDLE__": encoded_bundle(bundle),
+        '<link rel="stylesheet" href="viewer.css">':
+            "<style>\n" + (assets / "viewer.css").read_text(encoding="utf-8") + "\n</style>",
+        '<script src="viewer.js"></script>':
+            "<script>\n" + (assets / "viewer.js").read_text(encoding="utf-8") + "\n</script>",
+    }
+    for marker, replacement in replacements.items():
+        if template.count(marker) != 1:
+            raise ValueError(f"Fixed viewer template needs exactly one {marker!r}")
+        template = template.replace(marker, replacement)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(template, encoding="utf-8")
+
+
+def freeze_bundle(root: Path, bundle: dict[str, Any], run_dir: Path) -> Path:
+    """Save an exclusive, verifiable raw snapshot; an existing run is never replaced."""
+    root = root.resolve()
+    run_dir = run_dir.resolve()
+    if not run_dir.is_relative_to(root / "artifacts/runs"):
+        raise ValueError("Frozen runs must stay within artifacts/runs")
+    if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.-]{0,95}", run_dir.name):
+        raise ValueError("Invalid frozen run directory name")
+    serialized = encoded_bundle(bundle)
+    sources = []
+    for record in bundle["run"].get("files", []):
+        name = record.get("path")
+        if not isinstance(name, str):
+            raise ValueError("Raw snapshot file path is missing")
+        source = (root / name).resolve()
+        if not source.is_relative_to(root) or not source.is_file():
+            raise ValueError(f"Raw source is outside the project or missing: {name}")
+        relative = source.relative_to(root)
+        digest = sha256(source.read_bytes()).hexdigest()
+        if digest != record.get("sha256"):
+            raise ValueError(f"Raw source changed before freeze: {name}")
+        sources.append((source, relative, digest))
+    run_dir.mkdir(parents=True, exist_ok=False)
+    manifest: dict[str, Any] = {
+        "schema": "cardiac-observer-frozen-run/v1", "status": "INCOMPLETE",
+        "run_id": bundle["run"]["id"], "raw_files": [],
+    }
+    implementation = {}
+    for name in IMPLEMENTATION_FILES:
+        source = root / name
+        if source.is_file():
+            raw = source.read_bytes()
+            implementation[name] = (raw, sha256(raw).hexdigest())
+    manifest_path = run_dir / "manifest.json"
+    try:
+        for name, (raw, digest) in implementation.items():
+            target = run_dir / "implementation" / name
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(raw)
+        manifest["observer_implementation_sha256"] = {
+            name: digest for name, (_, digest) in implementation.items()
+        }
+        for source, relative, digest in sources:
+            target = run_dir / "raw" / relative
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(source, target)
+            if sha256(target.read_bytes()).hexdigest() != digest:
+                raise ValueError(f"Raw source changed while copying: {relative}")
+            manifest["raw_files"].append({
+                "original_path": relative.as_posix(),
+                "path": target.relative_to(run_dir).as_posix(), "sha256": digest,
+                "bytes": target.stat().st_size,
+            })
+        data_path = run_dir / "viewer_bundle.json"
+        data_path.write_text(serialized + "\n", encoding="utf-8")
+        manifest["bundle"] = {
+            "path": data_path.name, "sha256": sha256(data_path.read_bytes()).hexdigest(),
+        }
+        manifest["status"] = "FROZEN_RECORDED_EXPORTS"
+    except Exception as error:
+        manifest["error"] = str(error)
+        raise
+    finally:
+        manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
+                                 encoding="utf-8")
+    return run_dir
+
+
+def refresh_viewer(
+    root: Path, *, demo_dir: Path | None = None, arterial_dir: Path | None = None,
+    run_id: str | None = None, label: str = "当前模型 · 真实导出", freeze: bool = True,
+    output: Path | None = None, imported_from_git: dict[str, Any] | None = None,
+    comparison_baseline: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Build a bundle, optionally archive raw inputs, then refresh the familiar entry."""
+    from tools.viewer_data import build_bundle
+
+    root = root.resolve()
+    run_id = run_id or datetime.now(timezone.utc).strftime("run-%Y%m%dT%H%M%S%fZ")
+    demo_dir = demo_dir or root / "artifacts/demo"
+    arterial_dir = arterial_dir or root / "artifacts/arterial1d"
+    bundle = build_bundle(root, demo_dir, arterial_dir, run_id, label)
+    if imported_from_git:
+        bundle["run"]["imported_from_git"] = imported_from_git
+        bundle["warnings"].append(
+            "历史导出从已注明的 Git 提交按原字节提取；该提交是归档位置，不是已记录的运行 Git 身份。"
+        )
+    output = (output or root / "artifacts/demo/prototype_viewer.html").resolve()
+    if output.suffix.lower() != ".html" or output == ROOT / "viewer/index.html":
+        raise ValueError("Portable output must be a separate .html file")
+    if output.is_relative_to(root / "artifacts/runs"):
+        raise ValueError("Observer output must not modify a frozen run directory")
+    protected = {(root / item["path"]).resolve() for item in bundle["run"].get("files", [])}
+    if output in protected or output.parent / "viewer_bundle.json" in protected:
+        raise ValueError("Observer output must not overwrite an input")
+    if freeze:
+        freeze_bundle(root, bundle, root / "artifacts/runs" / run_id)
+    displayed = bundle
+    if comparison_baseline is not None:
+        encoded_bundle(comparison_baseline)
+        displayed = {**bundle, "comparison_baseline": comparison_baseline}
+    write_viewer(output, displayed)
+    (output.parent / "viewer_bundle.json").write_text(encoded_bundle(bundle) + "\n", encoding="utf-8")
+    return bundle
+
+
+def materialize_git_demo(root: Path, ref: str, destination: Path) -> str:
+    """Read only the nine known raw demo files from a local commit; never switch Git."""
+    commit = subprocess.check_output(
+        ["git", "rev-parse", "--verify", ref + "^{commit}"], cwd=root, text=True,
+    ).strip()
+    content = {
+        name: subprocess.check_output(["git", "show", f"{commit}:artifacts/demo/{name}"], cwd=root)
+        for name in DEMO_FILES
+    }
+    destination = destination.resolve()
+    if not destination.is_relative_to(root.resolve() / "artifacts/local_viewer_import"):
+        raise ValueError("Historical import staging must stay inside artifacts/local_viewer_import")
+    destination.mkdir(parents=True, exist_ok=False)
+    for name, raw in content.items():
+        (destination / name).write_bytes(raw)
+    return commit
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--root", type=Path, default=ROOT)
+    parser.add_argument("--demo-dir", type=Path)
+    parser.add_argument("--arterial-dir", type=Path)
+    parser.add_argument("--run-id")
+    parser.add_argument("--label", default="当前模型 · 真实导出")
+    parser.add_argument("--output", type=Path)
+    parser.add_argument("--comparison", type=Path, help="Frozen baseline JSON to preload in the UI")
+    parser.add_argument("--no-freeze", action="store_true", help="Refresh a preview without an archive")
+    args = parser.parse_args()
+    root = args.root.resolve()
+
+    def relative(value: Path | None) -> Path | None:
+        return None if value is None else root / value
+
+    bundle = refresh_viewer(
+        root, demo_dir=relative(args.demo_dir), arterial_dir=relative(args.arterial_dir),
+        run_id=args.run_id, label=args.label, freeze=not args.no_freeze,
+        output=relative(args.output),
+        comparison_baseline=(json.loads((root / args.comparison).read_text(encoding="utf-8"))
+                             if args.comparison else None),
+    )
+    print(json.dumps({"run_id": bundle["run"]["id"], "schema": bundle["schema"],
+                      "heart_cases": list(bundle["heart"]["cases"]),
+                      "arterial_runs": len(bundle["arterial1d"]["runs"]),
+                      "frozen": not args.no_freeze}, ensure_ascii=False))
+
+
+if __name__ == "__main__":
+    main()

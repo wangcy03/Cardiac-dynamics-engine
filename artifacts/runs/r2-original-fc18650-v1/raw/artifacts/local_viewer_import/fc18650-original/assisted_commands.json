@@ -1,0 +1,158 @@
+[
+  {
+    "command_id": "demo-1-i",
+    "status": "accepted",
+    "at_us": 18525000,
+    "reason": ""
+  },
+  {
+    "command_id": "demo-1-d",
+    "status": "accepted",
+    "at_us": 18525000,
+    "reason": ""
+  },
+  {
+    "command_id": "demo-1-i",
+    "status": "started",
+    "at_us": 18830000,
+    "reason": ""
+  },
+  {
+    "command_id": "demo-1-i",
+    "status": "completed",
+    "at_us": 18928250,
+    "reason": "engineering threshold: >=95% nominal capacity or <=0.5 mL; not clinical"
+  },
+  {
+    "command_id": "demo-1-d",
+    "status": "started",
+    "at_us": 19273333,
+    "reason": ""
+  },
+  {
+    "command_id": "demo-1-d",
+    "status": "completed",
+    "at_us": 19346750,
+    "reason": "engineering threshold: >=95% nominal capacity or <=0.5 mL; not clinical"
+  },
+  {
+    "command_id": "demo-2-i",
+    "status": "accepted",
+    "at_us": 19358000,
+    "reason": ""
+  },
+  {
+    "command_id": "demo-2-d",
+    "status": "accepted",
+    "at_us": 19358000,
+    "reason": ""
+  },
+  {
+    "command_id": "demo-2-i",
+    "status": "started",
+    "at_us": 19663000,
+    "reason": ""
+  },
+  {
+    "command_id": "demo-2-i",
+    "status": "completed",
+    "at_us": 19762000,
+    "reason": "engineering threshold: >=95% nominal capacity or <=0.5 mL; not clinical"
+  },
+  {
+    "command_id": "demo-2-d",
+    "status": "started",
+    "at_us": 20106000,
+    "reason": ""
+  },
+  {
+    "command_id": "demo-2-d",
+    "status": "completed",
+    "at_us": 20179000,
+    "reason": "engineering threshold: >=95% nominal capacity or <=0.5 mL; not clinical"
+  },
+  {
+    "command_id": "demo-3-i",
+    "status": "accepted",
+    "at_us": 20192000,
+    "reason": ""
+  },
+  {
+    "command_id": "demo-3-d",
+    "status": "accepted",
+    "at_us": 20192000,
+    "reason": ""
+  },
+  {
+    "command_id": "demo-3-i",
+    "status": "started",
+    "at_us": 20497000,
+    "reason": ""
+  },
+  {
+    "command_id": "demo-3-i",
+    "status": "completed",
+    "at_us": 20596250,
+    "reason": "engineering threshold: >=95% nominal capacity or <=0.5 mL; not clinical"
+  },
+  {
+    "command_id": "demo-3-d",
+    "status": "started",
+    "at_us": 20941000,
+    "reason": ""
+  },
+  {
+    "command_id": "demo-3-d",
+    "status": "completed",
+    "at_us": 21014000,
+    "reason": "engineering threshold: >=95% nominal capacity or <=0.5 mL; not clinical"
+  },
+  {
+    "command_id": "demo-4-i",
+    "status": "accepted",
+    "at_us": 21025000,
+    "reason": ""
+  },
+  {
+    "command_id": "demo-4-d",
+    "status": "accepted",
+    "at_us": 21025000,
+    "reason": ""
+  },
+  {
+    "command_id": "demo-4-i",
+    "status": "started",
+    "at_us": 21330000,
+    "reason": ""
+  },
+  {
+    "command_id": "demo-4-i",
+    "status": "completed",
+    "at_us": 21429500,
+    "reason": "engineering threshold: >=95% nominal capacity or <=0.5 mL; not clinical"
+  },
+  {
+    "command_id": "demo-4-d",
+    "status": "started",
+    "at_us": 21773000,
+    "reason": ""
+  },
+  {
+    "command_id": "demo-4-d",
+    "status": "completed",
+    "at_us": 21845750,
+    "reason": "engineering threshold: >=95% nominal capacity or <=0.5 mL; not clinical"
+  },
+  {
+    "command_id": "demo-5-i",
+    "status": "accepted",
+    "at_us": 21858000,
+    "reason": ""
+  },
+  {
+    "command_id": "demo-5-d",
+    "status": "accepted",
+    "at_us": 21858000,
+    "reason": ""
+  }
+]

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>心脏动力学引擎 · 迭代观察器</title>
+  <link rel="stylesheet" href="viewer.css">
+</head>
+<body>
+<a class="skip" href="#main">跳到观察区</a>
+<header class="app-header">
+  <div><p class="eyebrow">CARDIAC DYNAMICS · EXPORTED DATA</p><h1>心脏动力学 · 迭代观察器</h1><p class="subtitle">固定界面，读取真实运行。保留误差、缺失与失败。</p></div>
+  <div class="header-actions"><label class="file-button">载入当前运行<input id="load-current" type="file" accept=".json,application/json"></label><button id="download-current" type="button" disabled>保存数据包</button><button id="theme" type="button" aria-pressed="false">深色</button></div>
+</header>
+<div id="message" class="message" role="status" aria-live="polite" hidden></div>
+<section class="identity-strip" aria-label="运行身份"><div><span class="dot"></span><strong id="run-label">尚未载入运行</strong><span id="run-id" class="muted"></span></div><button id="identity-toggle" type="button" aria-expanded="false" aria-controls="identity">来源、单位与边界 ↓</button></section>
+<section id="identity" class="identity" hidden><div id="identity-summary"></div><details><summary>源码、原始文件与完整来源</summary><pre id="identity-json"></pre></details></section>
+<nav class="tabs" aria-label="观察视图" role="tablist"><button id="tab-heart" type="button" role="tab" aria-selected="true" aria-controls="panel-heart" tabindex="0" data-tab="heart">01 心脏 / 时序</button><button id="tab-arterial" type="button" role="tab" aria-selected="false" aria-controls="panel-arterial" tabindex="-1" data-tab="arterial">02 独立 1D</button><button id="tab-compare" type="button" role="tab" aria-selected="false" aria-controls="panel-compare" tabindex="-1" data-tab="compare">03 迭代比较</button></nav>
+<main id="main">
+  <section id="panel-heart" class="tab-panel" role="tabpanel" aria-labelledby="tab-heart">
+    <div class="section-heading"><div><h2>连续心脏状态与交付时序</h2><p>0D 桥接演示；独立 1D 尚未耦合，B01 不改变这里的心脏波形。</p></div><span class="badge">原物理时间 · 不平移</span></div>
+    <div id="heart-empty" class="empty">载入 cardiac-observer/v1 数据包后显示。此页面没有浏览器端生理求解器。</div>
+    <div id="heart-content" hidden>
+      <div class="toolbar"><label>分支<select id="heart-case"></select></label><label class="check"><input id="heart-overlay" type="checkbox" checked>叠加无辅助</label><label>时间窗<select id="heart-window"><option value="2">末 2 秒</option><option value="all">完整导出窗</option></select></label><label>起点 / s<input id="heart-start" type="number" step="0.001"></label><label>终点 / s<input id="heart-end" type="number" step="0.001"></label><button id="zoom-in" type="button" title="以当前窗口中心放大">放大 ＋</button><button id="zoom-out" type="button">缩小 －</button><button id="heart-reset" type="button">完整窗</button></div>
+      <div class="toolbar secondary"><label>已交付通道<select id="heart-sample"></select></label><label>样本横轴<select id="heart-clock"><option value="available">交付时刻 t_available_us</option><option value="source">源时刻 source_time_us（如有）</option></select></label><label class="check"><input id="heart-markers" type="checkbox" checked>真实事件 / 命令标记</label><label class="check"><input id="heart-points" type="checkbox">显示原始采样点</label></div>
+      <div id="heart-source" class="callout"></div>
+      <details class="track-picker"><summary>按主题选择真值轨道（33 列，时间列除外）</summary><div id="heart-tracks"></div></details>
+      <div class="plot-shell"><div class="plot-legend"><span><i class="swatch primary"></i>当前分支</span><span><i class="swatch reference"></i>无辅助参考（同坐标）</span><span>点击波形放置游标，数值读取全部原样本</span></div><div class="plot-scroll"><svg id="heart-plot" class="wave-plot" role="img" aria-label="共享物理时间的心脏多轨波形"></svg></div><p class="plot-note" id="heart-plot-note"></p></div>
+      <div class="toolbar cursor-bar"><label>点击放置<select id="cursor-active"><option value="a">游标 A</option><option value="b">游标 B</option></select></label><label>A / s<input id="cursor-a" type="number" step="0.000001"></label><label>B / s<input id="cursor-b" type="number" step="0.000001"></label><strong id="cursor-delta"></strong></div>
+      <details class="card" open><summary>双游标 · 最近的原始样本</summary><div class="table-scroll"><table id="cursor-table"></table></div><p class="muted small">显示原始值及原时刻。不同采样时钟分别就近读取，不插值；游标之间的差不是积分或事件精度。</p></details>
+      <div class="two-columns"><section class="card"><h3>完整导出窗指标</h3><p id="metric-window" class="muted small"></p><div id="heart-metrics" class="metric-grid"></div></section><section class="card"><h3>真实压力 / 容积轨迹</h3><p class="muted small">当前显示窗的 LV 原始 P/V 点；不强制闭合，不将过渡窗口称作稳态 PV 环。</p><svg id="pv-plot" class="pv-plot" role="img" aria-label="左室真实压力与容积轨迹"></svg></section></div>
+      <div class="two-columns"><details class="card" open><summary id="event-heading">事件</summary><p class="muted small">只显示实际记录；缺失的 R 峰、切迹或机械事件不补造。标记使用导出物理时刻。</p><div class="table-scroll tall"><table id="heart-events"></table></div></details><details class="card" open><summary id="command-heading">命令日志</summary><p class="muted small">命令、排队、执行与动作分别解释；日志没有的动作目标保持未提供。</p><div class="table-scroll tall"><table id="heart-commands"></table></div></details></div>
+    </div>
+  </section>
+  <section id="panel-arterial" class="tab-panel" role="tabpanel" aria-labelledby="tab-arterial" hidden>
+    <div class="section-heading"><div><h2>独立一维传播</h2><p>均匀弹性管与声明域内的分叉试验；尚未接入心脏或分布式球囊。</p></div><span class="badge">SI · s / m / Pa / m³·s⁻¹</span></div>
+    <div id="arterial-empty" class="empty">当前包未提供独立 1D 原始运行。</div>
+    <div id="arterial-content" hidden>
+      <div class="toolbar"><label>套件<select id="arterial-suite"></select></label><label>方法<select id="arterial-method"></select></label><label>网格 / run<select id="arterial-run"></select></label><label>量<select id="arterial-field"></select></label></div>
+      <div id="arterial-status" class="callout"></div>
+      <section class="plot-shell"><h3>实际探针时序 <span class="muted small">横轴：s</span></h3><div id="trace-empty" class="empty compact" hidden>此运行未导出探针时间序列。空间剖面不转换为连续时序。</div><div class="plot-scroll"><svg id="arterial-trace" class="wave-plot" role="img" aria-label="独立一维运行实际探针时间序列"></svg></div><p id="trace-note" class="plot-note"></p></section>
+      <section class="plot-shell"><div class="toolbar"><h3>空间剖面</h3><label>真实导出时刻 / s<select id="profile-time"></select></label></div><div id="profile-empty" class="empty compact" hidden>此运行未导出空间剖面。</div><div class="plot-scroll"><svg id="arterial-profile" class="wave-plot" role="img" aria-label="实际导出时刻的一维空间剖面"></svg></div><p id="profile-note" class="plot-note"></p></section>
+      <section class="card"><h3>方法 / 网格原始结果</h3><p class="muted small">失败、粗网格误差和负振铃原样保留。表格为导出记录，不按图形缩放重新计算。</p><div class="table-scroll"><table id="arterial-results"></table></div></section>
+      <details class="card"><summary>当前 run 的原始数值摘要和来源</summary><pre id="arterial-summary"></pre></details>
+    </div>
+  </section>
+  <section id="panel-compare" class="tab-panel" role="tabpanel" aria-labelledby="tab-compare" hidden>
+    <div class="section-heading"><div><h2>冻结运行 A / B</h2><p>叠加原始时间和值，只在相同时间戳计算 B − A；不平移、不归一化、不插值补点。原始 r2 与当前 0D 为复现对照，不代表生理改进。</p></div><span class="badge">比较 ≠ 改进结论</span></div>
+    <div class="two-columns"><section class="drop-card" id="drop-a" data-slot="a"><h3>A · 历史冻结运行</h3><p id="compare-a-label" class="muted">尚未载入；选择或拖入 JSON 数据包</p><label class="file-button">选择 A<input id="load-a" type="file" accept=".json,application/json"></label></section><section class="drop-card" id="drop-b" data-slot="b"><h3>B · 当前运行</h3><p id="compare-b-label" class="muted">使用当前内嵌运行，或载入其他冻结包</p><label class="file-button">选择 B<input id="load-b" type="file" accept=".json,application/json"></label><button id="compare-use-current" type="button">使用当前运行</button></section></div>
+    <div id="compare-empty" class="empty">载入 A 和 B 后比较。完整来源和可比性限制会一同显示。</div>
+    <div id="compare-content" hidden><div class="toolbar"><label>视图<select id="compare-mode"><option value="heart">心脏真值时序</option><option value="trace">独立 1D 探针</option><option value="profile">独立 1D 空间剖面</option></select></label><label id="compare-case-label">分支<select id="compare-case"></select></label><label id="compare-run-a-label" hidden>A run<select id="compare-run-a"></select></label><label id="compare-run-b-label" hidden>B run<select id="compare-run-b"></select></label><label id="compare-time-label" hidden>共有剖面时刻 / s<select id="compare-time"></select></label><label>量<select id="compare-field"></select></label></div>
+      <div id="comparability" class="callout"></div><section class="plot-shell"><div class="plot-legend"><span><i class="swatch reference"></i>A</span><span><i class="swatch primary"></i>B</span></div><div class="plot-scroll"><svg id="compare-plot" class="wave-plot" role="img" aria-label="冻结运行 A 和 B 的原始波形叠加"></svg></div></section><section class="plot-shell"><h3>原始差值 B − A</h3><div class="plot-scroll"><svg id="difference-plot" class="wave-plot" role="img" aria-label="相同导出时间戳的 B 减 A 差值"></svg></div><p id="difference-note" class="plot-note"></p></section><section class="card"><h3>完整记录指标差值</h3><div class="table-scroll"><table id="compare-metrics"></table></div><p class="muted small">只有单位、定义和统计窗一致时显示数值差；配置或初态不同仍须独立解释，不能归因于单项算法改变。</p></section><details class="card"><summary>配置、源码和初态差异</summary><pre id="compare-identity"></pre></details>
+    </div>
+  </section>
+</main>
+<footer class="app-footer"><span>显示会保留局部极值抽样；读数与差值使用全部原始样本。无在线求解。 <a href="../docs/MATHEMATICAL_PRINCIPLES.html#causality">数理原理 / 事件定义</a></span><span>研发 / 软件在环 · 未完成患者、执行器或临床验证</span></footer>
+<noscript><p class="empty">观察器需要 JavaScript 读取已导出的数据；不会调用在线服务。</p></noscript>
+<script id="observer-bundle" type="application/json">__BUNDLE__</script>
+<script src="viewer.js"></script>
+</body>
+</html>

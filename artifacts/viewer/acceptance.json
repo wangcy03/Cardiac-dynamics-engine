@@ -1,0 +1,137 @@
+{
+  "schema": "cardiac-observer-acceptance/v1",
+  "status": "PASS_SOFTWARE_AND_RECORDED_DATA_ONLY",
+  "current_run_id": "r2-b01-observer-v1-20261016",
+  "historical_comparison_id": "r2-original-fc18650-v1",
+  "portable": {
+    "path": "artifacts/demo/prototype_viewer.html",
+    "sha256": "60ee854f0d46f5fa5508b7a0965a68cc11707a4a05ba0c160f43818559d01486",
+    "bytes": 25205013,
+    "unique_dom_ids": 90,
+    "known_static_dom_references": "ALL_PRESENT",
+    "embedded_current_equals_frozen": true,
+    "embedded_comparison_equals_frozen": true,
+    "local_navigation_links": "EXIST",
+    "external_script_dependencies": []
+  },
+  "heart": {
+    "cases": {
+      "baseline": {
+        "truth_rows": 4001,
+        "columns": 33,
+        "samples": 13000,
+        "events": 76,
+        "commands": 0,
+        "metric_window_us": [
+          18000000,
+          22000000
+        ]
+      },
+      "assisted": {
+        "truth_rows": 4001,
+        "columns": 33,
+        "samples": 13000,
+        "events": 76,
+        "commands": 26,
+        "metric_window_us": [
+          18000000,
+          22000000
+        ]
+      }
+    },
+    "source_status": "PARTIAL_RECORDED_SOURCE_MATCH"
+  },
+  "arterial1d": {
+    "runs": 28,
+    "status_counts": {
+      "PASS_DECLARED_CHECKS": 14,
+      "FAIL_DECLARED_CHECKS": 14
+    },
+    "source_counts": {
+      "RECORDED_SOURCE_MATCH": 18,
+      "HISTORICAL_SOURCE": 10
+    },
+    "boileau_profiles_only": true
+  },
+  "frozen_archives": [
+    {
+      "run_id": "r2-b01-observer-v1-20261016",
+      "raw_files_verified": 106,
+      "bundle_sha256": "92af618db732c9509959cf2ef84f905cfe4e11a49f4d882de3db8906fe228615"
+    },
+    {
+      "run_id": "r2-original-fc18650",
+      "raw_files_verified": 10,
+      "bundle_sha256": "587bcae2693039c26dfcad29730b97dccbee10538868291f8f93b50b49f03352"
+    },
+    {
+      "run_id": "r2-original-fc18650-v1",
+      "raw_files_verified": 10,
+      "bundle_sha256": "460591c51d8e6bd78d2949d9afc03242222a77e892b3cd19bdd06b09e89e2438"
+    },
+    {
+      "run_id": "run-20261016T054246179708Z",
+      "raw_files_verified": 106,
+      "bundle_sha256": "08a13599037f9bf3b9bb3c079f62551436c0719be2d0fb69b33b7f9e62d9cdb5"
+    }
+  ],
+  "source_hashes_match": 32,
+  "production_core_hashes_unchanged": 12,
+  "numerical_record_changes": [
+    {
+      "path": "/runs/0/wall_seconds",
+      "before": 3.044511700005387,
+      "after": 3.086834599991562
+    },
+    {
+      "path": "/runs/1/wall_seconds",
+      "before": 5.9366758999967715,
+      "after": 5.96191430001636
+    },
+    {
+      "path": "/runs/2/wall_seconds",
+      "before": 14.860800900001777,
+      "after": 14.568982500000857
+    }
+  ],
+  "gates": {
+    "compile": {
+      "status": "PASS",
+      "exit_code": 0
+    },
+    "pytest": {
+      "status": "PASS",
+      "exit_code": 0
+    },
+    "numerical": {
+      "status": "PASS",
+      "exit_code": 0
+    },
+    "ruff": {
+      "status": "PASS",
+      "exit_code": 0
+    },
+    "mypy": {
+      "status": "PASS",
+      "exit_code": 0
+    },
+    "arterial1d": {
+      "status": "PASS",
+      "exit_code": 0
+    }
+  },
+  "pytest_counts": {
+    "tests": 171,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "javascript_record": "artifacts/viewer/javascript_check.json",
+  "browser_rendering": "NOT_RUN_BROWSER_POLICY",
+  "limits": [
+    "Static DOM/data tests are not browser rendering or interaction acceptance.",
+    "0D and 1D remain separate models.",
+    "Simulation Git/full initial state missing in legacy exports remains unknown.",
+    "No physiological, actuator/sensor calibration, clinical or 5 ms qualification."
+  ]
+}

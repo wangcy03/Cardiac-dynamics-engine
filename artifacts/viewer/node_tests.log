@@ -1,0 +1,33 @@
+✔ a schema-valid record preserves raw numeric precision and negative values (1.6439ms)
+✔ unknown schema, malformed JSON, file size and nonfinite numbers are rejected (0.5144ms)
+✔ duplicate JSON keys, including escaped keys, are rejected before evidence is selected (0.2969ms)
+✔ malformed tables, duplicate columns and noninteger / reversed physical clocks fail (1.1152ms)
+✔ missing table values stay null and unknown channel units remain unknown (0.7264ms)
+✔ a claimed full metric window must match actual exported physical times (0.241ms)
+✔ imported text is escaped in SVG; external markup is never inserted raw (0.2499ms)
+✔ cyclic objects, reserved prototype fields and excessive nesting fail safely (0.2829ms)
+✔ optional preloaded baseline is independently validated and cannot nest indefinitely (0.2863ms)
+✔ delivered and source clocks are distinct; missing source clock does not use available time (0.3942ms)
+✔ negative source clock offsets remain valid alongside positive delivery clocks (0.1838ms)
+✔ double cursor lookup uses raw samples and exposes original timestamps, earliest wins tie (0.1625ms)
+✔ large render sampling preserves global extrema and first / last samples without spread (36.3957ms)
+✔ render sampling never joins retained extrema across omitted missing intervals (1.058ms)
+✔ exact coordinate comparison preserves unmatched / missing gaps and does not interpolate (0.3297ms)
+✔ different units and ambiguous duplicate coordinates prevent numeric differences (0.1968ms)
+✔ spatial profiles select only actual exported times and retain negative ringing (0.1979ms)
+✔ full-window metric differences require equal units, definitions, method and window (0.3826ms)
+✔ same exported first state never proves same hidden cross-iteration initial state (0.215ms)
+✔ canonical configuration comparison is independent of object field ordering (0.0928ms)
+✔ same-grid reflection labels distinguish closed, pressure-release and resistance outlets (0.2325ms)
+✔ same suite does not make different reflection terminals comparable (0.4523ms)
+✔ method / grid / CFL differences are described separately from physical parameter changes (0.2364ms)
+✔ different or unrecorded physical inputs and probe locations prevent automatic differences (0.2168ms)
+✔ public-data comparisons require matching archive, input configuration and reference member (0.2136ms)
+ℹ tests 25
+ℹ suites 0
+ℹ pass 25
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 449.2079

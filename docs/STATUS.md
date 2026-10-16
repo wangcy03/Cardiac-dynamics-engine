@@ -1,6 +1,6 @@
 # 当前状态：B00、B01 已完成声明范围验收；正式原理文档已建立
 
-日期：2026-10-15。用途仍是研发/软件在环。r0/r1 已归档，不覆盖。
+日期：2026-10-16。用途仍是研发/软件在环。r0/r1 已归档，不覆盖。
 
 ## 当前开发接手状态
 
@@ -18,7 +18,7 @@
 - 独立复审发现的反射空覆盖/汇总标志及公开数据身份覆盖缺陷已修复：
   34 项基准工具回归与独立 23 项无求解故障探针通过；旧进程中止记录原样留档。
   最终固定工具已重新实际完成四个数值套件（18 个 run），源码/数据/CSV/日志身份均核验。
-- 最终 `python -m tools.verify_all` 退出 0：121 项测试，0 失败/错误/跳过；
+- B01 完成时（2026-10-15）的 `python -m tools.verify_all` 退出 0：121 项测试，0 失败/错误/跳过；
   compileall、0D 数值、ruff、mypy 和独立 1D 证据门全部 PASS。
   修改后演示已实际运行，保留原有增压但输出略降、做功略升的工程结果。
 - 正式 `MATHEMATICAL_PRINCIPLES.html` 已含 19 组离线 MathML/LaTeX、框架与时序图、
@@ -26,9 +26,12 @@
   静态图表/公式检查已过；浏览器 file: 协议被策略拒绝，实际渲染为 NOT_RUN_BROWSER_POLICY。
 - 数理文档流程已封装为可手动调用的 `mathematical-principles` 技能，版本源在
   `../skills/mathematical-principles/`；22 项静态工具回归与两个合成项目对照记录见
-  `../artifacts/skills/mathematical-principles/README.md`。未改模型或重跑上述心脏数值门。
-- 固定迭代观察器已确认心脏/时序、独立 1D、迭代比较三页范围；
-  `proposals/ITERATION_VIEWER_PLAN.md` 是待实施方案，当前观察器代码和数据未改。
+  `../artifacts/skills/mathematical-principles/README.md`。技能封装时未改模型或重跑上述心脏数值门。
+- 固定迭代观察器已实现心脏/时序、独立 1D、冻结迭代比较三页；兼容 HTML 入口读取
+  33 列真值、采样/事件/命令及 28 个 1D 对照，历史失败和部分源码身份保持可见。
+  UI 固定源码与版本化真实数据包分离，使用与更新见 `viewer/README.md`；
+  本轮六项软件门 PASS、171 项 Python 与 25 项 Node 测试通过；demo 真实重跑后 9 份原始导出字节未变。
+  核验和范围见 `viewer/ACCEPTANCE.md`，浏览器渲染仍未验收。
 - Git 已初始化，分步保留原始导入、B00、独立核心与最终证据；origin 指向
   `https://github.com/wangcy03/Cardiac-dynamics-engine.git`。推送/上游状态以 Git 为准，CI 以远端实际运行为准。
 

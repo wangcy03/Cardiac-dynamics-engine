@@ -1,0 +1,382 @@
+[
+  {
+    "name": "PULMONARY_CLOSE_02",
+    "at_us": 18005677,
+    "definition": "effective opening threshold 0.02; not leaflet truth"
+  },
+  {
+    "name": "TRICUSPID_OPEN_05",
+    "at_us": 18062933,
+    "definition": "effective opening threshold 0.05; not leaflet truth"
+  },
+  {
+    "name": "MITRAL_OPEN_05",
+    "at_us": 18108531,
+    "definition": "effective opening threshold 0.05; not leaflet truth"
+  },
+  {
+    "name": "P_ONSET",
+    "at_us": 18340000,
+    "definition": "external electrical stimulus"
+  },
+  {
+    "name": "ATRIAL_DRIVE_START",
+    "at_us": 18360000,
+    "definition": "uncalibrated effective tension drive"
+  },
+  {
+    "name": "ATRIAL_DRIVE_END",
+    "at_us": 18460000,
+    "definition": "uncalibrated effective tension drive"
+  },
+  {
+    "name": "QRS_ONSET",
+    "at_us": 18500000,
+    "definition": "external electrical stimulus"
+  },
+  {
+    "name": "VENTRICULAR_DRIVE_START",
+    "at_us": 18535000,
+    "definition": "uncalibrated effective tension drive"
+  },
+  {
+    "name": "MITRAL_CLOSE_02",
+    "at_us": 18562219,
+    "definition": "effective opening threshold 0.02; not leaflet truth"
+  },
+  {
+    "name": "PULMONARY_OPEN_05",
+    "at_us": 18580860,
+    "definition": "effective opening threshold 0.05; not leaflet truth"
+  },
+  {
+    "name": "AORTIC_OPEN_05",
+    "at_us": 18583224,
+    "definition": "effective opening threshold 0.05; not leaflet truth"
+  },
+  {
+    "name": "TRICUSPID_CLOSE_02",
+    "at_us": 18588542,
+    "definition": "effective opening threshold 0.02; not leaflet truth"
+  },
+  {
+    "name": "VENTRICULAR_DRIVE_END",
+    "at_us": 18765000,
+    "definition": "uncalibrated effective tension drive"
+  },
+  {
+    "name": "DP_LV_AO_REVERSE",
+    "at_us": 18774325,
+    "definition": "positive-to-negative LV-root pressure difference"
+  },
+  {
+    "name": "QAO_ZERO",
+    "at_us": 18782413,
+    "definition": "forward-to-reverse flow zero crossing"
+  },
+  {
+    "name": "AORTIC_CLOSE_02",
+    "at_us": 18805240,
+    "definition": "effective opening threshold 0.02; not leaflet truth"
+  },
+  {
+    "name": "PULMONARY_CLOSE_02",
+    "at_us": 18839009,
+    "definition": "effective opening threshold 0.02; not leaflet truth"
+  },
+  {
+    "name": "TRICUSPID_OPEN_05",
+    "at_us": 18896265,
+    "definition": "effective opening threshold 0.05; not leaflet truth"
+  },
+  {
+    "name": "MITRAL_OPEN_05",
+    "at_us": 18941863,
+    "definition": "effective opening threshold 0.05; not leaflet truth"
+  },
+  {
+    "name": "P_ONSET",
+    "at_us": 19173333,
+    "definition": "external electrical stimulus"
+  },
+  {
+    "name": "ATRIAL_DRIVE_START",
+    "at_us": 19193333,
+    "definition": "uncalibrated effective tension drive"
+  },
+  {
+    "name": "ATRIAL_DRIVE_END",
+    "at_us": 19293333,
+    "definition": "uncalibrated effective tension drive"
+  },
+  {
+    "name": "QRS_ONSET",
+    "at_us": 19333333,
+    "definition": "external electrical stimulus"
+  },
+  {
+    "name": "VENTRICULAR_DRIVE_START",
+    "at_us": 19368333,
+    "definition": "uncalibrated effective tension drive"
+  },
+  {
+    "name": "MITRAL_CLOSE_02",
+    "at_us": 19395552,
+    "definition": "effective opening threshold 0.02; not leaflet truth"
+  },
+  {
+    "name": "PULMONARY_OPEN_05",
+    "at_us": 19414192,
+    "definition": "effective opening threshold 0.05; not leaflet truth"
+  },
+  {
+    "name": "AORTIC_OPEN_05",
+    "at_us": 19416556,
+    "definition": "effective opening threshold 0.05; not leaflet truth"
+  },
+  {
+    "name": "TRICUSPID_CLOSE_02",
+    "at_us": 19421875,
+    "definition": "effective opening threshold 0.02; not leaflet truth"
+  },
+  {
+    "name": "VENTRICULAR_DRIVE_END",
+    "at_us": 19598333,
+    "definition": "uncalibrated effective tension drive"
+  },
+  {
+    "name": "DP_LV_AO_REVERSE",
+    "at_us": 19607657,
+    "definition": "positive-to-negative LV-root pressure difference"
+  },
+  {
+    "name": "QAO_ZERO",
+    "at_us": 19615746,
+    "definition": "forward-to-reverse flow zero crossing"
+  },
+  {
+    "name": "AORTIC_CLOSE_02",
+    "at_us": 19638574,
+    "definition": "effective opening threshold 0.02; not leaflet truth"
+  },
+  {
+    "name": "PULMONARY_CLOSE_02",
+    "at_us": 19672343,
+    "definition": "effective opening threshold 0.02; not leaflet truth"
+  },
+  {
+    "name": "TRICUSPID_OPEN_05",
+    "at_us": 19729598,
+    "definition": "effective opening threshold 0.05; not leaflet truth"
+  },
+  {
+    "name": "MITRAL_OPEN_05",
+    "at_us": 19775196,
+    "definition": "effective opening threshold 0.05; not leaflet truth"
+  },
+  {
+    "name": "P_ONSET",
+    "at_us": 20006667,
+    "definition": "external electrical stimulus"
+  },
+  {
+    "name": "ATRIAL_DRIVE_START",
+    "at_us": 20026667,
+    "definition": "uncalibrated effective tension drive"
+  },
+  {
+    "name": "ATRIAL_DRIVE_END",
+    "at_us": 20126667,
+    "definition": "uncalibrated effective tension drive"
+  },
+  {
+    "name": "QRS_ONSET",
+    "at_us": 20166667,
+    "definition": "external electrical stimulus"
+  },
+  {
+    "name": "VENTRICULAR_DRIVE_START",
+    "at_us": 20201667,
+    "definition": "uncalibrated effective tension drive"
+  },
+  {
+    "name": "MITRAL_CLOSE_02",
+    "at_us": 20228887,
+    "definition": "effective opening threshold 0.02; not leaflet truth"
+  },
+  {
+    "name": "PULMONARY_OPEN_05",
+    "at_us": 20247527,
+    "definition": "effective opening threshold 0.05; not leaflet truth"
+  },
+  {
+    "name": "AORTIC_OPEN_05",
+    "at_us": 20249891,
+    "definition": "effective opening threshold 0.05; not leaflet truth"
+  },
+  {
+    "name": "TRICUSPID_CLOSE_02",
+    "at_us": 20255209,
+    "definition": "effective opening threshold 0.02; not leaflet truth"
+  },
+  {
+    "name": "VENTRICULAR_DRIVE_END",
+    "at_us": 20431667,
+    "definition": "uncalibrated effective tension drive"
+  },
+  {
+    "name": "DP_LV_AO_REVERSE",
+    "at_us": 20440992,
+    "definition": "positive-to-negative LV-root pressure difference"
+  },
+  {
+    "name": "QAO_ZERO",
+    "at_us": 20449080,
+    "definition": "forward-to-reverse flow zero crossing"
+  },
+  {
+    "name": "AORTIC_CLOSE_02",
+    "at_us": 20471908,
+    "definition": "effective opening threshold 0.02; not leaflet truth"
+  },
+  {
+    "name": "PULMONARY_CLOSE_02",
+    "at_us": 20505677,
+    "definition": "effective opening threshold 0.02; not leaflet truth"
+  },
+  {
+    "name": "TRICUSPID_OPEN_05",
+    "at_us": 20562932,
+    "definition": "effective opening threshold 0.05; not leaflet truth"
+  },
+  {
+    "name": "MITRAL_OPEN_05",
+    "at_us": 20608530,
+    "definition": "effective opening threshold 0.05; not leaflet truth"
+  },
+  {
+    "name": "P_ONSET",
+    "at_us": 20840000,
+    "definition": "external electrical stimulus"
+  },
+  {
+    "name": "ATRIAL_DRIVE_START",
+    "at_us": 20860000,
+    "definition": "uncalibrated effective tension drive"
+  },
+  {
+    "name": "ATRIAL_DRIVE_END",
+    "at_us": 20960000,
+    "definition": "uncalibrated effective tension drive"
+  },
+  {
+    "name": "QRS_ONSET",
+    "at_us": 21000000,
+    "definition": "external electrical stimulus"
+  },
+  {
+    "name": "VENTRICULAR_DRIVE_START",
+    "at_us": 21035000,
+    "definition": "uncalibrated effective tension drive"
+  },
+  {
+    "name": "MITRAL_CLOSE_02",
+    "at_us": 21062219,
+    "definition": "effective opening threshold 0.02; not leaflet truth"
+  },
+  {
+    "name": "PULMONARY_OPEN_05",
+    "at_us": 21080860,
+    "definition": "effective opening threshold 0.05; not leaflet truth"
+  },
+  {
+    "name": "AORTIC_OPEN_05",
+    "at_us": 21083224,
+    "definition": "effective opening threshold 0.05; not leaflet truth"
+  },
+  {
+    "name": "TRICUSPID_CLOSE_02",
+    "at_us": 21088542,
+    "definition": "effective opening threshold 0.02; not leaflet truth"
+  },
+  {
+    "name": "VENTRICULAR_DRIVE_END",
+    "at_us": 21265000,
+    "definition": "uncalibrated effective tension drive"
+  },
+  {
+    "name": "DP_LV_AO_REVERSE",
+    "at_us": 21274325,
+    "definition": "positive-to-negative LV-root pressure difference"
+  },
+  {
+    "name": "QAO_ZERO",
+    "at_us": 21282413,
+    "definition": "forward-to-reverse flow zero crossing"
+  },
+  {
+    "name": "AORTIC_CLOSE_02",
+    "at_us": 21305240,
+    "definition": "effective opening threshold 0.02; not leaflet truth"
+  },
+  {
+    "name": "PULMONARY_CLOSE_02",
+    "at_us": 21339009,
+    "definition": "effective opening threshold 0.02; not leaflet truth"
+  },
+  {
+    "name": "TRICUSPID_OPEN_05",
+    "at_us": 21396265,
+    "definition": "effective opening threshold 0.05; not leaflet truth"
+  },
+  {
+    "name": "MITRAL_OPEN_05",
+    "at_us": 21441862,
+    "definition": "effective opening threshold 0.05; not leaflet truth"
+  },
+  {
+    "name": "P_ONSET",
+    "at_us": 21673333,
+    "definition": "external electrical stimulus"
+  },
+  {
+    "name": "ATRIAL_DRIVE_START",
+    "at_us": 21693333,
+    "definition": "uncalibrated effective tension drive"
+  },
+  {
+    "name": "ATRIAL_DRIVE_END",
+    "at_us": 21793333,
+    "definition": "uncalibrated effective tension drive"
+  },
+  {
+    "name": "QRS_ONSET",
+    "at_us": 21833333,
+    "definition": "external electrical stimulus"
+  },
+  {
+    "name": "VENTRICULAR_DRIVE_START",
+    "at_us": 21868333,
+    "definition": "uncalibrated effective tension drive"
+  },
+  {
+    "name": "MITRAL_CLOSE_02",
+    "at_us": 21895552,
+    "definition": "effective opening threshold 0.02; not leaflet truth"
+  },
+  {
+    "name": "PULMONARY_OPEN_05",
+    "at_us": 21914192,
+    "definition": "effective opening threshold 0.05; not leaflet truth"
+  },
+  {
+    "name": "AORTIC_OPEN_05",
+    "at_us": 21916556,
+    "definition": "effective opening threshold 0.05; not leaflet truth"
+  },
+  {
+    "name": "TRICUSPID_CLOSE_02",
+    "at_us": 21921875,
+    "definition": "effective opening threshold 0.02; not leaflet truth"
+  }
+]

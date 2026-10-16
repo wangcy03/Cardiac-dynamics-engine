@@ -1,0 +1,45 @@
+{
+  "schema": "viewer-demo-refresh/v1",
+  "command": "python -m examples.run_demo",
+  "exit_code": 0,
+  "execution_evidence": "Observed completion in current task; elapsed time not recorded",
+  "raw_files": {
+    "artifacts/demo/provenance.json": {
+      "sha256": "12cb21f6d14c19edcd5b8650ce0f66aba13981c83cb7ce6404b1a6f546c934bd",
+      "equal_to_before_observer": true
+    },
+    "artifacts/demo/baseline_truth.csv": {
+      "sha256": "1788f77e957175dbb7be3021a81af4b2e3cfb5e469518cb03a203a20bb8b866a",
+      "equal_to_before_observer": true
+    },
+    "artifacts/demo/baseline_samples.csv": {
+      "sha256": "70157485b2ba7f3b26504419d0ea5b61def70ca24398fcac779a7f8f5cc06d51",
+      "equal_to_before_observer": true
+    },
+    "artifacts/demo/baseline_events.json": {
+      "sha256": "403f9d0fd68ea0b05aac47f172bec86ba07458cd875def2fe660a330dde3044e",
+      "equal_to_before_observer": true
+    },
+    "artifacts/demo/baseline_commands.json": {
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "equal_to_before_observer": true
+    },
+    "artifacts/demo/assisted_truth.csv": {
+      "sha256": "24ab4f5cb0d6b31956aa186c9d3580e4baed93926f0f31f005251e765f01cce0",
+      "equal_to_before_observer": true
+    },
+    "artifacts/demo/assisted_samples.csv": {
+      "sha256": "62e16685433da1cd0d6076c57a53ccf8324fa61bb6c724c08ee008faccb14b1d",
+      "equal_to_before_observer": true
+    },
+    "artifacts/demo/assisted_events.json": {
+      "sha256": "679a35b556ddf84fe83381395ab2ef2aa1621cc0c0fddb8ffdb2fdf28580dc0f",
+      "equal_to_before_observer": true
+    },
+    "artifacts/demo/assisted_commands.json": {
+      "sha256": "68885071c7f7c1ffed7458a8dd45cdd329ac1253933e3ce7e72d219126ee0924",
+      "equal_to_before_observer": true
+    }
+  },
+  "scope": "Actual 0D demo and observer refresh; does not rerun independent 1D or establish qualification"
+}

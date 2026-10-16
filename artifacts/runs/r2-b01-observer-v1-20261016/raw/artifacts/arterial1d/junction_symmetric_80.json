@@ -1,0 +1,63 @@
+{
+  "case": "symmetric_static_pressure_junction",
+  "cells_per_segment": 80,
+  "scheme": "muscl_ssprk2",
+  "junction_model": "common static pressure; no kinetic/local losses",
+  "parent_integrated_outflow_m3": 2.265290358331065e-08,
+  "child1_integrated_inflow_m3": 1.1326451791655324e-08,
+  "child2_integrated_inflow_m3": 1.1326451791655324e-08,
+  "child1_fraction": 0.5,
+  "child2_fraction": 0.5,
+  "symmetric_split_absolute_error": 0.0,
+  "parent_backward_forward_peak_ratio": 0.0009519289712510242,
+  "max_single_step_interface_volume_mismatch_m3": 0.0,
+  "integrated_interface_volume_mismatch_m3": 0.0,
+  "conservation_relative_initial_volume": 3.364750150369036e-16,
+  "pass": true,
+  "wall_seconds": 5.616829399994458,
+  "trace_csv": "junction_symmetric_80.csv",
+  "max_abs_conservation_residual_m3": 1.0094250451107107e-19,
+  "identity": {
+    "python_executable": "D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe",
+    "python_version": "3.12.9",
+    "source_sha256": {
+      "D:/codehub2026/04_heart_engine_r2/tools/arterial1d_check.py": "a60fa6d721fc9bc63af9c2ff18917a7fc46df68c92bcb472c8cb41a474f0e635",
+      "iabp/arterial1d/__init__.py": "793796aa44e076d7450f860a96da4e9e7ca81447e2e4213817cd042b113c780f",
+      "iabp/arterial1d/boundaries.py": "131d46cca8e20573b7daae9fc2686bacb19785fbf53e76e3236c695786ad408d",
+      "iabp/arterial1d/physics.py": "f7455b4f9fac8b52d8cedd43389d162e58aa551bc5db28e0826c1fb233c88761",
+      "iabp/arterial1d/solver.py": "8d70b1192ed64efe05a5702415e642ba850040ae094c6e0dfbcb8a7d99c7455b"
+    },
+    "source_snapshot_manifest": "history/source_5a00d0421e14c051/manifest.json"
+  },
+  "parameters": {
+    "length_m": 0.5,
+    "cells": 80,
+    "scheme": "muscl_ssprk2",
+    "reference_area_m2": 0.0003,
+    "density_kg_m3": 1060.0,
+    "beta_pa": 53000.0,
+    "reference_pressure_pa": 0.0,
+    "initial_flow_m3_s": 0.0,
+    "kinematic_viscosity_m2_s": 0.0,
+    "cfl": 0.4,
+    "inlet": {
+      "quantity": "pressure_pa",
+      "amplitude_pa": 20.0,
+      "start_s": 0.05,
+      "end_s": 0.09,
+      "shape": "sine_squared; zero otherwise"
+    },
+    "daughter_length_m": 0.5,
+    "daughter_reference_area_m2": 0.00015,
+    "outlets": "two nonreflecting",
+    "junction": "common static pressure"
+  },
+  "source_unchanged_during_run": true,
+  "run_log_path": "run_logs/junction_420d5e7d6de4.log",
+  "csv_artifacts": [
+    {
+      "path": "junction_symmetric_80.csv",
+      "sha256": "412219e0212197122802af66d40ba21585d40a9b5f71c7da3d200fbb3657349e"
+    }
+  ]
+}

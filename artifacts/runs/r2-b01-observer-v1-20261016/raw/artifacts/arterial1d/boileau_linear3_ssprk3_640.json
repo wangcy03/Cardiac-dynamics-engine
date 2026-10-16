@@ -1,0 +1,281 @@
+{
+  "case": "boileau2015_single_pulse_inviscid",
+  "cells": 640,
+  "scheme": "linear3_ssprk3",
+  "cfl": 0.4,
+  "reference_method": "published FVM spatial pressure profiles",
+  "reference_pressure_unit": "kPa converted to Pa",
+  "temporal_alignment": "none",
+  "spatial_comparison": "core linear sampling at original FVM cell centers; no shift",
+  "profiles": [
+    {
+      "time_s": 0.1,
+      "max_abs_error_pa": 1.3421751009495893,
+      "rms_error_pa": 0.09974581692218784,
+      "reference_peak_pa": 20.50066,
+      "calculated_peak_pa": 19.480237677880652,
+      "peak_relative_error": 0.04977509612467833,
+      "peak_position_difference_m": 0.0,
+      "min_pressure_pa": -0.1064030013253614,
+      "max_pressure_pa": 19.494816827219097,
+      "relative_reference_peak_overshoot": 0.0,
+      "relative_reference_peak_undershoot": 0.005190223208685057,
+      "minimum_area_m2": 0.00031415842967231686
+    },
+    {
+      "time_s": 0.3,
+      "max_abs_error_pa": 3.6092536207318062,
+      "rms_error_pa": 0.3020152276784978,
+      "reference_peak_pa": 20.59975,
+      "calculated_peak_pa": 16.990496379268194,
+      "peak_relative_error": 0.1752086127614076,
+      "peak_position_difference_m": 0.0,
+      "min_pressure_pa": -0.5636016180421421,
+      "max_pressure_pa": 17.160605795183415,
+      "relative_reference_peak_overshoot": 0.0,
+      "relative_reference_peak_undershoot": 0.02735963388109769,
+      "minimum_area_m2": 0.0003141548388578148
+    },
+    {
+      "time_s": 0.5,
+      "max_abs_error_pa": 4.691458295808427,
+      "rms_error_pa": 0.4125492388818976,
+      "reference_peak_pa": 20.52204,
+      "calculated_peak_pa": 15.932760337548759,
+      "peak_relative_error": 0.22362687444577836,
+      "peak_position_difference_m": 0.0,
+      "min_pressure_pa": -0.7518269145201373,
+      "max_pressure_pa": 15.966583561510816,
+      "relative_reference_peak_overshoot": 0.0,
+      "relative_reference_peak_undershoot": 0.03663509643876229,
+      "minimum_area_m2": 0.0003141533605519471
+    },
+    {
+      "time_s": 0.7,
+      "max_abs_error_pa": 5.587701271433836,
+      "rms_error_pa": 0.48878907199887334,
+      "reference_peak_pa": 20.620419999999996,
+      "calculated_peak_pa": 15.06288324260083,
+      "peak_relative_error": 0.2695161765569842,
+      "peak_position_difference_m": -0.009999999999999787,
+      "min_pressure_pa": -0.8551026740644119,
+      "max_pressure_pa": 15.15807234065747,
+      "relative_reference_peak_overshoot": 0.0,
+      "relative_reference_peak_undershoot": 0.041468732162798436,
+      "minimum_area_m2": 0.00031415254943417475
+    },
+    {
+      "time_s": 0.9,
+      "max_abs_error_pa": 6.075345837853673,
+      "rms_error_pa": 0.5467487350912056,
+      "reference_peak_pa": 20.518990000000002,
+      "calculated_peak_pa": 14.50762307615001,
+      "peak_relative_error": 0.29296602434379043,
+      "peak_position_difference_m": 0.0,
+      "min_pressure_pa": -0.9085561253741048,
+      "max_pressure_pa": 14.548460270713548,
+      "relative_reference_peak_overshoot": 0.0,
+      "relative_reference_peak_undershoot": 0.044278793711294014,
+      "minimum_area_m2": 0.0003141521296163776
+    },
+    {
+      "time_s": 1.1,
+      "max_abs_error_pa": 6.678331177662933,
+      "rms_error_pa": 0.593308372241542,
+      "reference_peak_pa": 20.63502,
+      "calculated_peak_pa": 14.017742659811805,
+      "peak_relative_error": 0.3206818961255281,
+      "peak_position_difference_m": -0.010000000000000675,
+      "min_pressure_pa": -0.931512205459839,
+      "max_pressure_pa": 14.060709056593623,
+      "relative_reference_peak_overshoot": 0.0,
+      "relative_reference_peak_undershoot": 0.045142297194761094,
+      "minimum_area_m2": 0.0003141519493218197
+    },
+    {
+      "time_s": 1.3,
+      "max_abs_error_pa": 6.953521094892221,
+      "rms_error_pa": 0.6321412863640747,
+      "reference_peak_pa": 20.51911,
+      "calculated_peak_pa": 13.612236125864287,
+      "peak_relative_error": 0.336606893482988,
+      "peak_position_difference_m": 0.0,
+      "min_pressure_pa": -0.9499430035209144,
+      "max_pressure_pa": 13.655301559296618,
+      "relative_reference_peak_overshoot": 0.0,
+      "relative_reference_peak_undershoot": 0.04629552663448436,
+      "minimum_area_m2": 0.0003141518045683724
+    },
+    {
+      "time_s": 1.5,
+      "max_abs_error_pa": 7.42674703142308,
+      "rms_error_pa": 0.6654427197875954,
+      "reference_peak_pa": 20.64693,
+      "calculated_peak_pa": 13.301713527086541,
+      "peak_relative_error": 0.3557534448420884,
+      "peak_position_difference_m": -0.009999999999999787,
+      "min_pressure_pa": -0.966504564861026,
+      "max_pressure_pa": 13.3092232325005,
+      "relative_reference_peak_overshoot": 0.0,
+      "relative_reference_peak_undershoot": 0.046811054469648804,
+      "minimum_area_m2": 0.0003141516744957318
+    }
+  ],
+  "spatial_pressure_max_abs_error_pa": 7.42674703142308,
+  "maximum_peak_relative_error": 0.3557534448420884,
+  "relative_max_profile_error": 0.35970224296895853,
+  "maximum_peak_position_absolute_difference_m": 0.010000000000000675,
+  "conservation_relative_initial_volume": 4.95661456048895e-16,
+  "max_abs_conservation_residual_m3": 1.5571663889908285e-18,
+  "min_pressure_pa": -0.966504564861026,
+  "max_pressure_pa": 19.494816827219097,
+  "relative_reference_peak_overshoot": 0.0,
+  "relative_reference_peak_undershoot": 0.046811054469648804,
+  "scheme_scope": "smooth small-amplitude only; non-TVD; not a shock test",
+  "steps": 1563,
+  "wall_seconds": 21.116845500000636,
+  "viscous_case_status": "NOT_REPRODUCED_DIFFERENT_FRICTION_COEFFICIENT",
+  "profile_csv": "boileau_linear3_ssprk3_640_profiles.csv",
+  "data_identity": {
+    "download_integrity": "PASS",
+    "reference_table_count": 12,
+    "dataset_doi": "10.6084/m9.figshare.1586944.v1",
+    "archive_sha256": "da31f4730aa3236e6dd3a686cc92a9bc19887807122b7b31f73c0ae695a2f86e",
+    "license": {
+      "value": 2,
+      "name": "CC0",
+      "url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    "manifest_sha256": "b82e078b04393ee9552a89d06a7599af5c60a80cc53cf9d327e25a0d3810c4d3",
+    "source_config_sha256": "9b8e8a301ea9e5c7cf76cedc92140110584ab013efa4f4c87179f169b8b15425",
+    "before": {
+      "download_integrity": "PASS",
+      "reference_table_count": 12,
+      "dataset_doi": "10.6084/m9.figshare.1586944.v1",
+      "archive_sha256": "da31f4730aa3236e6dd3a686cc92a9bc19887807122b7b31f73c0ae695a2f86e",
+      "license": {
+        "value": 2,
+        "name": "CC0",
+        "url": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "manifest_sha256": "b82e078b04393ee9552a89d06a7599af5c60a80cc53cf9d327e25a0d3810c4d3",
+      "source_config_sha256": "9b8e8a301ea9e5c7cf76cedc92140110584ab013efa4f4c87179f169b8b15425"
+    },
+    "after": {
+      "download_integrity": "PASS",
+      "reference_table_count": 12,
+      "dataset_doi": "10.6084/m9.figshare.1586944.v1",
+      "archive_sha256": "da31f4730aa3236e6dd3a686cc92a9bc19887807122b7b31f73c0ae695a2f86e",
+      "license": {
+        "value": 2,
+        "name": "CC0",
+        "url": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "manifest_sha256": "b82e078b04393ee9552a89d06a7599af5c60a80cc53cf9d327e25a0d3810c4d3",
+      "source_config_sha256": "9b8e8a301ea9e5c7cf76cedc92140110584ab013efa4f4c87179f169b8b15425"
+    },
+    "unchanged_during_run": true,
+    "reference_archive_member": "Benchmark1_SinglePulseModel/NumData/FVM_inviscid.txt"
+  },
+  "candidate_pass": false,
+  "numerical_reproduction_status": "ACCURACY_NOT_MET",
+  "identity": {
+    "python_executable": "D:\\codehub2026\\04_heart_engine_r2\\.venv\\Scripts\\python.exe",
+    "python_version": "3.12.9",
+    "source_sha256": {
+      "D:/codehub2026/04_heart_engine_r2/tools/arterial1d_check.py": "a60fa6d721fc9bc63af9c2ff18917a7fc46df68c92bcb472c8cb41a474f0e635",
+      "iabp/arterial1d/__init__.py": "793796aa44e076d7450f860a96da4e9e7ca81447e2e4213817cd042b113c780f",
+      "iabp/arterial1d/boundaries.py": "131d46cca8e20573b7daae9fc2686bacb19785fbf53e76e3236c695786ad408d",
+      "iabp/arterial1d/physics.py": "f7455b4f9fac8b52d8cedd43389d162e58aa551bc5db28e0826c1fb233c88761",
+      "iabp/arterial1d/solver.py": "8d70b1192ed64efe05a5702415e642ba850040ae094c6e0dfbcb8a7d99c7455b"
+    },
+    "source_snapshot_manifest": "history/source_5a00d0421e14c051/manifest.json"
+  },
+  "parameters": {
+    "schema": "boileau-case1-source-configuration/v1",
+    "case_id": "boileau2015_single_pulse",
+    "acquisition_date": "2026-10-15",
+    "configuration_origin": "Source transcription from article Table II, equations (3), (14), (15), with explicitly derived SI conversion; not an original downloaded input file.",
+    "source_article_doi": "10.1002/cnm.2732",
+    "source_author_manuscript_url": "https://cronfa.swan.ac.uk/Record/cronfa22154/Download/0022154-24062016154300.pdf",
+    "source_locations": {
+      "table_ii": "author manuscript printed page 18; PDF page 20",
+      "equation_14": "author manuscript printed page 8; PDF page 10",
+      "tube_law_equation_3": "author manuscript printed page 3; PDF page 5"
+    },
+    "length_m": 10.0,
+    "reference_area_m2": 0.0003141592653589793,
+    "density_kg_m3": 1050.0,
+    "wall_thickness_m": 0.0015,
+    "young_modulus_pa": 400000.0,
+    "paper_beta_pa_m": 1417.9630807244125,
+    "module_beta_pa": 80000.0,
+    "reference_pressure_pa": 0.0,
+    "external_pressure_pa": 0.0,
+    "outflow_reference_pressure_pa": 0.0,
+    "initial_area": "reference_area_m2",
+    "initial_flow_m3_s": 0.0,
+    "inlet": {
+      "quantity": "flow_m3_s",
+      "expression": "1e-6 * exp(-10000 * (t_s - 0.05)**2)",
+      "peak_flow_m3_s": 1e-06,
+      "peak_time_s": 0.05,
+      "inverse_width_s2": 10000.0,
+      "starts_at_s": 0.0,
+      "boundary_semantics": "Prescribe one incoming characteristic through flow rate; do not impose pressure simultaneously."
+    },
+    "outlet": {
+      "type": "fully_absorbing",
+      "reflection_coefficient": 0.0
+    },
+    "reference_profile_times_s": [
+      0.1,
+      0.3,
+      0.5,
+      0.7,
+      0.9,
+      1.1,
+      1.3,
+      1.5
+    ],
+    "reference_columns": {
+      "0": "distance_m",
+      "1_to_8": "pressure_kpa at reference_profile_times_s; multiply by 1000 to obtain Pa"
+    },
+    "schemes": [
+      "DCG",
+      "LCG",
+      "FEM",
+      "FVM",
+      "McC",
+      "STM"
+    ],
+    "inviscid_dynamic_viscosity_pa_s": 0.0,
+    "viscous_case": {
+      "dynamic_viscosity_pa_s": 0.004,
+      "kinematic_viscosity_m2_s": 3.8095238095238094e-06,
+      "velocity_profile_order_zeta": 9,
+      "momentum_source": "-2*(zeta+2)*pi*nu*Q/A = -22*pi*nu*Q/A",
+      "compatibility_with_b01_optional_poiseuille_source": "Different from -8*pi*nu*Q/A; requires a declared source coefficient before viscous numerical comparison."
+    },
+    "derived_small_signal": {
+      "wave_speed_m_s": 6.172133998483677,
+      "impedance_pa_s_m3": 20628838.340968665,
+      "linear_peak_pressure_pa": 20.628838340968663
+    },
+    "numerical_reproduction_status": "NOT_RUN",
+    "clinical_validation_status": "NOT_ESTABLISHED",
+    "cells": 640,
+    "scheme": "linear3_ssprk3",
+    "cfl": 0.4,
+    "source_config_sha256": "9b8e8a301ea9e5c7cf76cedc92140110584ab013efa4f4c87179f169b8b15425"
+  },
+  "source_unchanged_during_run": true,
+  "run_log_path": "run_logs/linear3_boileau_520c16c2fb67.log",
+  "csv_artifacts": [
+    {
+      "path": "boileau_linear3_ssprk3_640_profiles.csv",
+      "sha256": "d481afc568b52c5275b41b5dc9bd8dfe99bed1e32f4f094c1e98e7bba3d39fc5"
+    }
+  ]
+}

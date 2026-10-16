@@ -1,0 +1,15 @@
+{
+  "schema": "viewer-final-node-probe/v1",
+  "status": "PASS_DATA_ONLY",
+  "current": "r2-b01-observer-v1-20261016",
+  "baseline": "r2-original-fc18650-v1",
+  "metrics_with_defined_difference": 6,
+  "different_terminal_rejected": true,
+  "grid_comparison_allowed": true,
+  "matched_pressure_points": 4001,
+  "root_pressure_difference_mmHg": [
+    -2.7000623958883807e-13,
+    7.105427357601002e-14
+  ],
+  "browser": "NOT_RUN"
+}
