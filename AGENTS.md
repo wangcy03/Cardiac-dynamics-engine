@@ -1,10 +1,17 @@
 # IABP Engine 工作规则
 
 ## 先读
-1. `START_HERE.md` 与 `docs/STATUS.md`。
-2. `docs/reference/IABP_Engine_Spec_r1.md` 是需求基线，r0 研究原文在 `docs/reference/research_r0/`。
-3. 本次实现范围见 `docs/ARCHITECTURE.md`，下一任务见 `docs/tasks/BACKLOG.md`。
-4. 审查 `artifacts/verification_summary.json`；没有证据就不能改为 PASS。
+1. `START_HERE.md` 与 `docs/STATUS.md`；后者说明实际能力与证据，不是待实现目标。
+2. `ROADMAP.md` 定义长期阶段；`docs/plans/NEXT_ITERATION.md` 定义当前执行顺序。
+3. `docs/tasks/BACKLOG.md` 是逐票状态主源；先领取任务，再读对应 SPEC。不要重复实施已验收的 B00/B01。
+4. `docs/reference/IABP_Engine_Spec_r1.md` 是需求基线，r0 研究原文在 `docs/reference/research_r0/`；当前实现见 `docs/ARCHITECTURE.md`。
+5. 审查 `artifacts/verification_summary.json` 及所选任务原始证据；没有证据就不能改为 PASS。文档职责见 `docs/README.md`。
+
+## 规划与交付文档的职责
+逐票状态只维护在 BACKLOG；当前计划只排序，ROADMAP只定义阶段，STATUS只汇总实际能力。
+SPEC在实现前定义输入、容差和出口；实际结果另写 `docs/tasks/reports/`，使用 `REPORT_TEMPLATE.md`。
+每次实现同步相关方程/接口/参数说明与测试映射，纯文档变更不伪造新的模型测试证据。
+旧报告和 `reference/`、`legacy/` 原文保留；尚无外部数据的工程通过不得升级为生理或5 ms资格。
 
 ## 已决定，不反复询问
 多路 AP（位置、技术、仪器链各自配置）；直接 ECG，先 II 导联，预留十二导联；

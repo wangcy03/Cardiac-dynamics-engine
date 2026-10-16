@@ -11,7 +11,9 @@
 |---|---|
 | [数理原理文档](docs/MATHEMATICAL_PRINCIPLES.html) | 第一性原理推导、19 组 LaTeX/离线公式、3 幅浅色框架/时序/控制体图、真实运行证据 |
 | [固定观察器](artifacts/demo/prototype_viewer.html) | 三页读取真实心脏/时序、独立 1D 与冻结迭代数据；打开即预载当前包和历史 r2 对照 |
-| [当前状态](docs/STATUS.md) / [任务路线](docs/tasks/BACKLOG.md) | 已完成范围、下一任务及缺口 |
+| [总路线图](ROADMAP.md) / [当前迭代计划](docs/plans/NEXT_ITERATION.md) | 长期阶段、依赖、下一轮顺序及出口条件 |
+| [文档地图](docs/README.md) | 各文档的职责、状态主源、读取与更新规则 |
+| [当前状态](docs/STATUS.md) / [任务登记表](docs/tasks/BACKLOG.md) | 已完成能力与证据、逐票状态及缺口 |
 | [B00 报告](docs/tasks/B00_REPORT.md) / [B01 报告](docs/tasks/B01_REPORT.md) | 冻结复现、数值差异、固定门槛与适用域 |
 | [交付说明](docs/DELIVERY_NOTES.md) | 本轮修改、实际检查、提交顺序与未覆盖风险 |
 | [开发入口](START_HERE.md) / [工作规则](AGENTS.md) | 后续接手约定与验收要求 |
@@ -83,7 +85,7 @@ CI 是否通过以 GitHub 实际运行结果为准。
 
 独立 1D 模块提供均匀弹性管守恒方程、特征边界、共同静压分叉、实际面通量账本及 CFL/非法状态显式失败。0D 核心使用 mmHg/mL/s 与整数微秒接口，独立 1D 内部使用 SI，转换集中在 `iabp/units.py`。
 
-下一步为 B02 协议/长运行可靠性与 B03 心脏/瓣膜及能量核验；B04 才进行 0D/1D 联合耦合，B05 引入分布式球囊。
+下一轮顺序与前置门统一维护于 [当前迭代计划](docs/plans/NEXT_ITERATION.md)，任务状态见 [BACKLOG](docs/tasks/BACKLOG.md)。长期保持 B04 双向联合耦合后再接 B05 分布式球囊的路线。
 完整能量账本、真实测量链/执行器校准、患者或动物适用域及临床验证尚未完成。
 演示中辅助峰压虽升高，窗口出流略降、LV 窗口做功略升；不以峰压增加宣称辅助有效。
 
