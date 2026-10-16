@@ -9,36 +9,25 @@
 
 | 入口 | 内容 |
 |---|---|
-| [数理原理文档](docs/MATHEMATICAL_PRINCIPLES.html) | 第一性原理推导、19 组 LaTeX/离线公式、3 幅浅色框架/时序/控制体图、真实运行证据 |
+| [数理原理文档](docs/MATHEMATICAL_PRINCIPLES.html) | 第一性原理推导、离线公式、框架/时序/控制体图与真实运行证据 |
 | [固定观察器](artifacts/demo/prototype_viewer.html) | 三页读取真实心脏/时序、独立 1D 与冻结迭代数据；打开即预载当前包和历史 r2 对照 |
 | [总路线图](ROADMAP.md) / [当前迭代计划](docs/plans/NEXT_ITERATION.md) | 长期阶段、依赖、下一轮顺序及出口条件 |
 | [文档地图](docs/README.md) | 各文档的职责、状态主源、读取与更新规则 |
 | [当前状态](docs/STATUS.md) / [任务登记表](docs/tasks/BACKLOG.md) | 已完成能力与证据、逐票状态及缺口 |
 | [B00 报告](docs/tasks/B00_REPORT.md) / [B01 报告](docs/tasks/B01_REPORT.md) | 冻结复现、数值差异、固定门槛与适用域 |
-| [交付说明](docs/DELIVERY_NOTES.md) | 本轮修改、实际检查、提交顺序与未覆盖风险 |
+| [B00/B01 历史交付摘要](docs/DELIVERY_NOTES.md) | 2026-10-15 的提交、实际检查与未覆盖风险；后续交付看各票报告 |
 | [开发入口](START_HERE.md) / [工作规则](AGENTS.md) | 后续接手约定与验收要求 |
 | [数理文档技能](skills/mathematical-principles/README.md) / [验证记录](artifacts/skills/mathematical-principles/README.md) | 手动创建、局部更新或只读检查数理文档；可用于其他项目 |
 | [固定迭代观察器](docs/viewer/README.md) / [数据合同](docs/viewer/DATA_CONTRACT.md) | 心脏/时序、独立 1D、冻结迭代比较；使用同一界面刷新真实运行数据包 |
 
 克隆后用本地浏览器打开上述 HTML。正文和观察器均可离线使用；GitHub 文件页仅显示 HTML 源文件。
-公式与示意图静态检查已通过，本轮实际浏览器渲染因安全策略限制为 `NOT_RUN_BROWSER_POLICY`。
+公式、图表和观察器的实际核验范围统一见相应维护说明及交付报告。
 
-## 当前验收
+## 能力与证据入口
 
-以下为 Windows / Python 3.12.9 下实际完成并保存的记录：B00/B01 于 2026-10-15，观察器 V1 与最新软件门于 2026-10-16。
-
-| 范围 | 结果 | 证据 |
-|---|---|---|
-| B00 原始复现 | 51 项测试、三档 0D 时间步长、ruff 和 strict mypy 通过；无物理参数调整 | [冻结差异](artifacts/b00/baseline_comparison.json) |
-| 最新软件质量门 | 171 项测试，0 失败/错误/跳过；compileall、0D 数值、ruff、mypy、1D 证据门全部退出 0 | [质量门记录](artifacts/verification_summary.json) |
-| 固定观察器 V1 | Node 25 项测试通过；33 列真值、采样/事件/命令、28 个 1D 当前/历史对照；实际浏览器渲染未验收 | [核验与测试映射](docs/viewer/ACCEPTANCE.md) |
-| B01 独立传播 | 匹配、三类反射、对称分叉、公开参考共 4 套件、18 个真实 run；各用例三档网格 | [数值汇总](artifacts/arterial1d/benchmark_summary.json) |
-| 工程匹配细档 | linear3 320 格峰差 0.145990%，到达差 0.046681 ms | [B01 报告](docs/tasks/B01_REPORT.md) |
-| Boileau 无黏性细档 | linear3 2560 格八剖面最大压力差 0.676452 Pa，最大归一差 3.27628%，满足预置 5% 门槛 | [来源、许可与配置](docs/benchmarks/BOILEAU_PROVENANCE.md) |
-
-默认一阶 Rusanov 及 MUSCL 的精度不足结果、粗网格失败、负振铃和证据门修复中止记录均保留。
-`linear3_ssprk3` 为非 TVD 的光滑小振幅实验方案，通过这些用例不构成强扰动或激波稳定性保证。
-公开 Boileau 对照是数值参考；原黏性案摩擦系数不同，保持未复现。
+当前已实现能力、验证等级和缺口统一维护在 [STATUS](docs/STATUS.md)，逐票状态统一维护在 [BACKLOG](docs/tasks/BACKLOG.md)。
+软件计数与源码身份读取 [质量门记录](artifacts/verification_summary.json)；独立传播结果与历史失败读取 [B01 报告](docs/tasks/B01_REPORT.md) 和 [数值汇总](artifacts/arterial1d/benchmark_summary.json)。
+观察器的实际检查与浏览器限制见 [V1 核验](docs/viewer/ACCEPTANCE.md)。README 不维护第二份结果数字表。
 
 ## 安装与快速运行
 
